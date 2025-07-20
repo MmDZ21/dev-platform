@@ -1,0 +1,147 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id             String   @id @default(cuid())
+  email          String   @unique
+  hashedPassword String?
+  username       String?  @unique
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+  role           String   @default("admin") // <- Add this line
+
+  sessions Session[]
+  // Add more profile fields here if needed
+
+  Book     Book[]
+  posts    Post[]
+  products Product[] // محصولات ثبت‌شده توسط این کاربر
+}
+
+model Session {
+  id        String   @id @default(cuid())
+  userId    String
+  expiresAt DateTime
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+}
+
+model Book {
+  id          String   @id @default(cuid())
+  title       String
+  author      String
+  description String?
+  price       Float?
+  imageUrl    String? // For future file uploads
+  published   Boolean  @default(false)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  // Optional: link to user who submitted the book
+  userId String?
+  user   User?   @relation(fields: [userId], references: [id])
+}
+
+model Post {
+  id              String    @id @default(cuid())
+  title           String
+  slug            String    @unique
+  summary         String?
+  draft           Boolean   @default(false)
+  content         String?
+  published       Boolean   @default(false)
+  imageUrl        String?
+  category        Category? @relation(fields: [categoryId], references: [id])
+  categoryId      String?
+  tags            Tag[]     @relation("PostTags")
+  metaTitle       String?
+  metaDescription String?
+  canonicalUrl    String?
+  ogImage         String?
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+
+  // 👇 این دو خط رو اضافه کن
+  userId String?
+  user   User?   @relation(fields: [userId], references: [id])
+}
+
+model Category {
+  id        String   @id @default(uuid())
+  name      String   @unique
+  slug      String   @unique
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  posts     Post[]
+}
+
+model Tag {
+  id        String   @id @default(uuid())
+  name      String   @unique
+  slug      String   @unique
+  posts     Post[]   @relation("PostTags")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model ProductCategory {
+  id        String            @id @default(uuid())
+  name      String
+  slug      String            @unique
+  parentId  String? // برای زیرشاخه‌ها (در صورت نیاز)
+  parent    ProductCategory?  @relation("Subcategories", fields: [parentId], references: [id])
+  children  ProductCategory[] @relation("Subcategories")
+  products  Product[]
+  order     Int? // ترتیب نمایش
+  createdAt DateTime          @default(now())
+  updatedAt DateTime          @updatedAt
+}
+
+model Product {
+  id           String          @id @default(uuid())
+  name         String
+  slug         String          @unique
+  summary      String?
+  description  String? // توضیح کامل (Rich Text)
+  imageUrls    String[] // گالری عکس
+  datasheetUrl String? // لینک PDF دیتا شیت
+  categoryId   String
+  category     ProductCategory @relation(fields: [categoryId], references: [id])
+  tags         String[]
+  isPublished  Boolean         @default(true)
+  order        Int? // ترتیب در لیست
+  userId       String
+  user         User            @relation(fields: [userId], references: [id])
+  createdAt    DateTime        @default(now())
+  updatedAt    DateTime        @updatedAt
+}
+
+// model Language {
+//   /// ISO code (e.g. "en", "fa"); this is the primary key so that
+//   /// translation tables can reference it easily.
+//   code      String       @id
+//   name      String       // e.g. "English", "Farsi"
+//   isDefault Boolean      @default(false)
+//   createdAt DateTime     @default(now())
+
+//   // Relation back to each translation table:
+//   PostTranslations      PostTranslation[]
+//   CategoryTranslations  CategoryTranslation[]
+//   TagTranslations       TagTranslation[]
+//   // …repeat for any other entity that needs translation
+// }
