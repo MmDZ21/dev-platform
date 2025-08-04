@@ -10,9 +10,11 @@ export const productCategoryMeta = defineAdminModel({
     slug: { type: "text", label: "اسلاگ", required: true },
     parentId: {
       type: "select",
-      label: "دسته‌بندی والد",
+      label: "والد",
+      options: "productCategory",
+      connect: true, // FK است
+      nullable: true, // می‌تواند ریشه‌ای باشد
       required: false,
-      // options: ... (دینامیک)
     },
     summary: { type: "text", label: "خلاصه", required: false },
     description: { type: "richText", label: "توضیحات کامل", required: false },

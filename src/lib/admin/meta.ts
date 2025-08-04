@@ -8,12 +8,20 @@ export type FieldType =
   | "seo"
   | "select"
   | "multi-select"
-    | "multi-image";
+  | "multi-image";
 
 export type FieldSchema = {
   type: FieldType;
   label: string;
   required?: boolean;
+
+  // فقط برای select و multi-select
+  options?: string;
+  valueField?: string;
+  labelField?: string;
+  connect?: boolean; // ← اگر true باشد یعنی این select یک FK است
+  nullable?: boolean; // ← اجازهٔ null (دستهٔ ریشه‌ای)
+  relationName?: string; // ← همین یک خط کافی است
 };
 
 export type AdminModel = {

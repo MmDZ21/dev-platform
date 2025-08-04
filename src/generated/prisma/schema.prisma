@@ -91,44 +91,61 @@ model Category {
 }
 
 model Tag {
-  id        String   @id @default(uuid())
-  name      String   @unique
-  slug      String   @unique
-  posts     Post[]   @relation("PostTags")
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id   String @id @default(uuid())
+  name String @unique
+  slug String @unique
+
+  posts    Post[]    @relation("PostTags")
+  products Product[] @relation("ProductTags")
+
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  Product   Product[]
 }
 
 model ProductCategory {
-  id        String            @id @default(uuid())
-  name      String
-  slug      String            @unique
-  parentId  String? // برای زیرشاخه‌ها (در صورت نیاز)
-  parent    ProductCategory?  @relation("Subcategories", fields: [parentId], references: [id])
-  children  ProductCategory[] @relation("Subcategories")
-  products  Product[]
-  order     Int? // ترتیب نمایش
-  createdAt DateTime          @default(now())
-  updatedAt DateTime          @updatedAt
+  id              String            @id @default(uuid())
+  name            String
+  slug            String            @unique
+  parentId        String? // برای زیرشاخه‌ها (در صورت نیاز)
+  parent          ProductCategory?  @relation("Subcategories", fields: [parentId], references: [id])
+  children        ProductCategory[] @relation("Subcategories")
+  products        Product[]
+  summary         String? // ← جدید
+  description     String? // ← جدید
+  image           String? // ← جدید (URL)
+  order           Int?
+  metaTitle       String? // ← جدید
+  metaDescription String? // ← جدید
+  ogImage         String? // ← جدید (URL)  createdAt DateTime          @default(now())
+  updatedAt       DateTime          @updatedAt
 }
 
 model Product {
-  id           String          @id @default(uuid())
-  name         String
-  slug         String          @unique
-  summary      String?
-  description  String? // توضیح کامل (Rich Text)
-  imageUrls    String[] // گالری عکس
-  datasheetUrl String? // لینک PDF دیتا شیت
-  categoryId   String
-  category     ProductCategory @relation(fields: [categoryId], references: [id])
-  tags         String[]
-  isPublished  Boolean         @default(true)
-  order        Int? // ترتیب در لیست
-  userId       String
-  user         User            @relation(fields: [userId], references: [id])
-  createdAt    DateTime        @default(now())
-  updatedAt    DateTime        @updatedAt
+  id              String          @id @default(cuid())
+  name            String
+  slug            String          @unique
+  summary         String?
+  description     String? // توضیح کامل (Rich Text)
+  imageUrls       String[] // گالری عکس
+  datasheetUrl    String? // لینک PDF دیتا شیت
+  categoryId      String
+  category        ProductCategory @relation(fields: [categoryId], references: [id])
+  tags            Tag[]           @relation("ProductTags")
+  isPublished     Boolean         @default(true)
+  order           Int? // ترتیب در لیست
+  userId          String?
+  user            User?           @relation(fields: [userId], references: [id])
+  metaTitle       String?
+  metaDescription String?
+  canonicalUrl    String?
+  ogImage         String?
+  ogTitle         String?
+  ogDescription   String?
+  createdAt       DateTime        @default(now())
+  updatedAt       DateTime        @updatedAt
+  Tag             Tag?            @relation(fields: [tagId], references: [id])
+  tagId           String?
 }
 
 // model Language {

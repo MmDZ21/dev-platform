@@ -9,7 +9,7 @@ import { productCategoryRouter } from "@/modules/products/productCategoryRouter"
 export const appRouter = router({
   post: postRouter, // ✅ add this
   upload: uploadRouter, // ✅ Add this
-  categories: categoryRouter,
+  category: categoryRouter,
   tags: tagRouter,
   product: productRouter,
   productCategory: productCategoryRouter,

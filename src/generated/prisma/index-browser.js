@@ -20,12 +20,12 @@ exports.Prisma = Prisma
 exports.$Enums = {}
 
 /**
- * Prisma Client JS version: 6.11.1
- * Query Engine version: f40f79ec31188888a2e33acda0ecc8fd10a853a9
+ * Prisma Client JS version: 6.12.0
+ * Query Engine version: 8047c96bbd92db98a2abc7c9323ce77c02c89dbc
  */
 Prisma.prismaVersion = {
-  client: "6.11.1",
-  engine: "f40f79ec31188888a2e33acda0ecc8fd10a853a9"
+  client: "6.12.0",
+  engine: "8047c96bbd92db98a2abc7c9323ce77c02c89dbc"
 }
 
 Prisma.PrismaClientKnownRequestError = () => {
@@ -189,8 +189,13 @@ exports.Prisma.ProductCategoryScalarFieldEnum = {
   name: 'name',
   slug: 'slug',
   parentId: 'parentId',
+  summary: 'summary',
+  description: 'description',
+  image: 'image',
   order: 'order',
-  createdAt: 'createdAt',
+  metaTitle: 'metaTitle',
+  metaDescription: 'metaDescription',
+  ogImage: 'ogImage',
   updatedAt: 'updatedAt'
 };
 
@@ -203,12 +208,18 @@ exports.Prisma.ProductScalarFieldEnum = {
   imageUrls: 'imageUrls',
   datasheetUrl: 'datasheetUrl',
   categoryId: 'categoryId',
-  tags: 'tags',
   isPublished: 'isPublished',
   order: 'order',
   userId: 'userId',
+  metaTitle: 'metaTitle',
+  metaDescription: 'metaDescription',
+  canonicalUrl: 'canonicalUrl',
+  ogImage: 'ogImage',
+  ogTitle: 'ogTitle',
+  ogDescription: 'ogDescription',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  updatedAt: 'updatedAt',
+  tagId: 'tagId'
 };
 
 exports.Prisma.SortOrder = {

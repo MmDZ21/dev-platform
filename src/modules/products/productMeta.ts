@@ -10,8 +10,7 @@ export const productMeta = defineAdminModel({
     slug: { type: "text", label: "اسلاگ", required: true },
     summary: { type: "text", label: "خلاصه" },
     description: { type: "richText", label: "توضیحات کامل" },
-
-    images: {
+    imageUrls: {
       type: "multi-image",
       label: "گالری تصاویر",
       required: false,
@@ -20,6 +19,7 @@ export const productMeta = defineAdminModel({
     categoryId: {
       type: "select",
       label: "دسته‌بندی",
+      options: "productCategory",
       required: true,
     },
     tags: {

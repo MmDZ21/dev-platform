@@ -18,7 +18,7 @@ import {
   UserCircleIcon,
 } from "@/icons";
 import SidebarWidget from "./SidebarWidget";
-import { adminModelRegistry } from "@/modules/registry";
+import { adminModelRegistry, adminMenuGroups} from "@/modules/registry";
 
 type NavItem = {
   name: string;
@@ -37,20 +37,18 @@ const getChildren = (parentKey: string) =>
     ([, meta]) => "parent" in meta && meta.parent === parentKey
   );
 
-const dynamicNavItems: NavItem[] = rootModules.map(([key, meta]) => {
-  const children = getChildren(key);
-  return {
-    name: meta.name,
-    icon: meta.icon ? <meta.icon /> : <BoxCubeIcon />,
-    path: `/admin/${key}`,
-    subItems: children.length
-      ? children.map(([cKey, cMeta]) => ({
-          name: cMeta.name,
-          path: `/admin/${cKey}`,
-        }))
-      : undefined,
-  };
-});
+const dynamicNavItems: NavItem[] = adminMenuGroups.map((group) => ({
+  name: group.name,
+  icon: <group.icon />,
+  // گروه خودش path نداره، فقط زیرمنوها داره
+  subItems: group.children.map((childKey) => {
+    const meta = adminModelRegistry[childKey as keyof typeof adminModelRegistry];
+    return {
+      name: meta.name,
+      path: `/admin/${childKey}`,
+    };
+  }),
+}));
 
 // ==== (در صورت نیاز، آیتم‌های ثابت داشبورد و...) ====
 const staticNavItems: NavItem[] = [

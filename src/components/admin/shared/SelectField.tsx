@@ -1,16 +1,26 @@
 'use client';
-import { trpc } from "@/lib/trpc/client";
+import { useOptionsQuery } from "@/lib/admin/useOptionsQuery";
 
-type Category = { id: string; name: string };
 type SelectFieldProps = {
   value?: string;
   onChange: (val: string) => void;
   label?: string;
   required?: boolean;
+  optionsKey: string;
+  valueField?: string; // پیشفرض "id"
+  labelField?: string; // پیشفرض "name"
 };
 
-export function SelectField({ value, onChange, label, required }: SelectFieldProps) {
-  const { data = [], isLoading } = trpc.categories.getAll.useQuery<Category[]>();
+export function SelectField({
+  value,
+  onChange,
+  label,
+  required,
+  optionsKey,
+  valueField = "id",
+  labelField = "name",
+}: SelectFieldProps) {
+  const { data = [], isLoading } = useOptionsQuery(optionsKey);
 
   return (
     <div className="space-y-1">
@@ -27,9 +37,9 @@ export function SelectField({ value, onChange, label, required }: SelectFieldPro
         disabled={isLoading}
       >
         <option value="">انتخاب کنید...</option>
-        {data.map(cat => (
-          <option key={cat.id} value={cat.id}>
-            {cat.name}
+        {data.map((opt: any) => (
+          <option key={opt[valueField]} value={opt[valueField]}>
+            {opt[labelField]}
           </option>
         ))}
       </select>

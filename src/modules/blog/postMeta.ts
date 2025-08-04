@@ -4,7 +4,7 @@ import { TextIcon } from "lucide-react";
 export const postMeta = defineAdminModel({
   name: "پست‌ها",
   icon: TextIcon,
-    parent: "blog",
+  parent: "blog",
   fields: {
     title: { type: "text", label: "عنوان", required: true },
     slug: { type: "text", label: "اسلاگ", required: true },
@@ -24,6 +24,8 @@ export const postMeta = defineAdminModel({
     categoryId: {
       type: "select",
       label: "دسته‌بندی",
+      options: "category",
+
       required: false,
       // options is no longer needed here—fetched dynamically in the component
     },

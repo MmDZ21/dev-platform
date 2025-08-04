@@ -8,6 +8,7 @@ import { RichTextField } from "./RichTextField";
 import { slugify } from "@/lib/slugify";
 import { SelectField } from "./SelectField";
 import { MultiSelectField } from "./MultiSelectField";
+import MultiImageField from "./MultiImageField";
 
 type AdminFormProps<T extends AdminModel> = {
   model: T;
@@ -37,7 +38,9 @@ function _AdminForm<T extends AdminModel>({
   const [values, setValues] = useState<InferFieldValues<T>>(() => {
     const defaults = Object.entries(model.fields).reduce(
       (acc, [key, field]) => {
-        acc[key as keyof InferFieldValues<T>] = getDefaultValue(field.type) as any;
+        acc[key as keyof InferFieldValues<T>] = getDefaultValue(
+          field.type,
+        ) as any;
         return acc;
       },
       {} as InferFieldValues<T>,
@@ -77,7 +80,11 @@ function _AdminForm<T extends AdminModel>({
     for (const [key, field] of Object.entries(model.fields)) {
       const value = values[key as keyof InferFieldValues<T>];
       if (field.required) {
-        if (field.type === "multi-select" && Array.isArray(value) && value.length === 0) {
+        if (
+          field.type === "multi-select" &&
+          Array.isArray(value) &&
+          value.length === 0
+        ) {
           setError(`${field.label} is required.`);
           return false;
         }
@@ -183,6 +190,14 @@ function _AdminForm<T extends AdminModel>({
                     required={!!field.required}
                   />
                 )}
+                {field.type === "multi-image" && (
+                  <MultiImageField
+                    value={Array.isArray(value) ? value : []} // ← value از state
+                    onChange={(urls) => handleChange(key, urls)} // ← مثل بقیه‌ی فیلدها
+                    label={field.label}
+                    required={!!field.required}
+                  />
+                )}
                 {field.type === "file" && (
                   <FileField
                     value={typeof value === "string" ? value : ""}
@@ -204,7 +219,10 @@ function _AdminForm<T extends AdminModel>({
                     value={typeof value === "string" ? value : ""}
                     onChange={(val) => handleChange(key, val)}
                     label={field.label}
-                    required={!!field.required}
+                    required={!!field.required && !field.nullable}
+                    optionsKey={field.options!}
+                    valueField={field.valueField}
+                    labelField={field.labelField}
                   />
                 )}
                 {field.type === "multi-select" && (
@@ -225,11 +243,7 @@ function _AdminForm<T extends AdminModel>({
         className="rounded bg-blue-600 px-4 py-2 text-white"
         disabled={loading}
       >
-        {loading
-          ? "ذخیره‌سازی..."
-          : initialData?.id
-          ? "به‌روزرسانی"
-          : "ایجاد"}
+        {loading ? "ذخیره‌سازی..." : initialData?.id ? "به‌روزرسانی" : "ایجاد"}
       </button>
     </form>
   );
