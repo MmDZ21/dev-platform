@@ -4,6 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useSidebar } from "@/context/SidebarContext";
+import { useTheme } from "@/components/ThemeProvider";
 import {
   BoxCubeIcon,
   CalenderIcon,
@@ -18,6 +19,7 @@ import {
   UserCircleIcon,
 } from "@/icons";
 import SidebarWidget from "./SidebarWidget";
+import { ThemeToggleButton } from "@/components/admin/layout/common/ThemeToggleButton";
 import { adminModelRegistry, adminMenuGroups} from "@/modules/registry";
 
 type NavItem = {
@@ -78,6 +80,7 @@ const othersItems: NavItem[] = [
 
 const AppSidebar: React.FC = () => {
   const { isExpanded, isMobileOpen, isHovered, setIsHovered } = useSidebar();
+  const { currentTheme, setCurrentTheme } = useTheme();
   const pathname = usePathname();
 
   const renderMenuItems = (
@@ -159,9 +162,9 @@ const AppSidebar: React.FC = () => {
                     : "0px",
               }}
             >
-              <ul className="mt-2 space-y-1 ms-9">
+              <ul className="mt-2 ms-6">
                 {nav.subItems.map((subItem) => (
-                  <li key={subItem.name}>
+                  <li key={subItem.name}  className="border-s border-white/20 px-2 py-1">
                     <Link
                       href={subItem.path}
                       className={`menu-dropdown-item ${
@@ -272,13 +275,14 @@ const AppSidebar: React.FC = () => {
 
   return (
     <aside
-      className={`fixed mt-16 flex flex-col lg:mt-0 top-0 h-screen lg:h-auto lg:inset-y-8 px-5 start-0 lg:start-8 lg:rounded-xl bg-white dark:bg-gray-900 dark:border-gray-800 text-gray-900 transition-all duration-300 ease-in-out z-50 border-e border-gray-200 
+      className={`fixed mt-16 flex flex-col lg:mt-0 top-0 h-screen lg:h-auto lg:inset-y-4 px-5 start-0 lg:start-8 lg:rounded-3xl transition-all duration-300 ease-in-out z-50 border-e
+        ${currentTheme === 'dark' ? 'bg-[var(--panel-bg)] border-[var(--panel-border)] text-[var(--color-gray-100)]' : 'bg-white border-gray-200 text-gray-900'}
         ${
           isExpanded || isMobileOpen
-            ? "w-[290px]"
+            ? "w-[var(--sidebar-expanded-width)]"
             : isHovered
-            ? "w-[290px]"
-            : "w-[90px]"
+            ? "w-[var(--sidebar-expanded-width)]"
+            : "w-[var(--sidebar-collapsed-width)]"
         }
         ${isMobileOpen ? "translate-x-0" : "translate-x-full"}
         lg:translate-x-0`}
@@ -286,7 +290,7 @@ const AppSidebar: React.FC = () => {
       onMouseLeave={() => setIsHovered(false)}
     >
       <div
-        className={`py-8 flex  ${
+        className={`py-8 hidden lg:flex  ${
           !isExpanded && !isHovered ? "lg:justify-center" : "justify-start"
         }`}
       >
@@ -294,14 +298,14 @@ const AppSidebar: React.FC = () => {
           {isExpanded || isHovered || isMobileOpen ? (
             <>
               <Image
-                className="dark:hidden"
+                className={currentTheme === 'light' ? 'block' : 'hidden'}
                 src="/images/logo/logo.svg"
                 alt="Logo"
                 width={150}
                 height={40}
               />
               <Image
-                className="hidden dark:block"
+                className={currentTheme === 'dark' ? 'block' : 'hidden'}
                 src="/images/logo/logo-dark.svg"
                 alt="Logo"
                 width={150}
@@ -318,12 +322,14 @@ const AppSidebar: React.FC = () => {
           )}
         </Link>
       </div>
-      <div className="flex flex-col overflow-y-auto duration-300 ease-linear no-scrollbar">
+      <div className="flex flex-col overflow-y-auto duration-300 ease-linear no-scrollbar pt-8 lg:pt-0">
         <nav className="mb-6">
           <div className="flex flex-col gap-4">
             <div>
               <h2
-                className={`mb-4 text-xs uppercase flex leading-[20px] text-gray-400 ${
+                className={`mb-4 text-xs uppercase flex leading-[20px] ${
+                  currentTheme === 'dark' ? 'text-[var(--color-gray-400)]' : 'text-gray-400'
+                } ${
                   !isExpanded && !isHovered
                     ? "lg:justify-center"
                     : "justify-start"
@@ -335,12 +341,18 @@ const AppSidebar: React.FC = () => {
                   <HorizontaLDots />
                 )}
               </h2>
+              {/* Line tree before menu buttons */}
+              {(isExpanded || isHovered || isMobileOpen) && (
+                <div className="ms-4 mb-2 border-s border-gray-200 dark:border-[var(--panel-border)]" style={{ height: 8 }} />
+              )}
               {renderMenuItems(navItems, "main")}
             </div>
 
             <div className="">
               <h2
-                className={`mb-4 text-xs uppercase flex leading-[20px] text-gray-400 ${
+                className={`mb-4 text-xs uppercase flex leading-[20px] ${
+                  currentTheme === 'dark' ? 'text-[var(--color-gray-400)]' : 'text-gray-400'
+                } ${
                   !isExpanded && !isHovered
                     ? "lg:justify-center"
                     : "justify-start"
@@ -352,10 +364,28 @@ const AppSidebar: React.FC = () => {
                   <HorizontaLDots />
                 )}
               </h2>
+              {(isExpanded || isHovered || isMobileOpen) && (
+                <div className="ms-4 mb-2 border-s border-gray-200 dark:border-[var(--panel-border)]" style={{ height: 8 }} />
+              )}
               {renderMenuItems(othersItems, "others")}
             </div>
           </div>
         </nav>
+        {/* Theme Switcher (icon toggle) */}
+        {(isExpanded || isHovered || isMobileOpen) && (
+          <div className={`mt-auto p-4 border-t ${
+            currentTheme === 'dark' ? 'border-[var(--panel-border)]' : 'border-gray-200'
+          }`}>
+            <div className="flex items-center justify-between">
+              <span className={`text-sm font-medium ${
+                currentTheme === 'dark' ? 'text-[var(--color-gray-300)]' : 'text-gray-600'
+              }`}>
+                Theme
+              </span>
+              <ThemeToggleButton />
+            </div>
+          </div>
+        )}
         {/* {isExpanded || isHovered || isMobileOpen ? <SidebarWidget /> : null} */}
       </div>
     </aside>

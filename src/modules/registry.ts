@@ -4,9 +4,7 @@ import { trpc } from "@/lib/trpc/client";
 import { postMeta } from "./blog";
 import { tagMeta } from "./blog";
 import { categoryMeta } from "./blog";
-import { blogMeta } from "./blog/meta";
 import { productCategoryMeta, productMeta } from "./products";
-import { productsMeta } from "./products/meta";
 import { PenIcon, StoreIcon } from "lucide-react";
 
 // مدل‌هایی که full CRUD دارن

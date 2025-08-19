@@ -1,6 +1,8 @@
 import { TRPCReactProvider } from "@/lib/trpc/provider";
 import "./globals.css"; // 👈 this import is mandatory
 import { DEFAULT_LOCALE, DIRECTION } from "@/settings";
+import { ThemeProvider } from "@/components/ThemeProvider";
+import { iranSans } from "./fonts";
 
 export default function RootLayout({
   children,
@@ -18,8 +20,10 @@ export default function RootLayout({
           href="/rss.xml"
         />
       </head>
-      <body>
-        <TRPCReactProvider>{children}</TRPCReactProvider>
+      <body className={iranSans.variable}>
+        <ThemeProvider>
+          <TRPCReactProvider>{children}</TRPCReactProvider>
+        </ThemeProvider>
       </body>
     </html>
   );

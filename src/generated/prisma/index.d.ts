@@ -15,7 +15,7 @@ export type PrismaPromise<T> = $Public.PrismaPromise<T>
 
 /**
  * Model User
- * 
+ * ───── Core Auth ─────
  */
 export type User = $Result.DefaultSelection<Prisma.$UserPayload>
 /**
@@ -25,17 +25,12 @@ export type User = $Result.DefaultSelection<Prisma.$UserPayload>
 export type Session = $Result.DefaultSelection<Prisma.$SessionPayload>
 /**
  * Model Book
- * 
+ * ───── Demo Book ─────
  */
 export type Book = $Result.DefaultSelection<Prisma.$BookPayload>
 /**
- * Model Post
- * 
- */
-export type Post = $Result.DefaultSelection<Prisma.$PostPayload>
-/**
  * Model Category
- * 
+ * ───── Blog ─────
  */
 export type Category = $Result.DefaultSelection<Prisma.$CategoryPayload>
 /**
@@ -44,8 +39,13 @@ export type Category = $Result.DefaultSelection<Prisma.$CategoryPayload>
  */
 export type Tag = $Result.DefaultSelection<Prisma.$TagPayload>
 /**
- * Model ProductCategory
+ * Model Post
  * 
+ */
+export type Post = $Result.DefaultSelection<Prisma.$PostPayload>
+/**
+ * Model ProductCategory
+ * ───── Product Catalog ─────
  */
 export type ProductCategory = $Result.DefaultSelection<Prisma.$ProductCategoryPayload>
 /**
@@ -53,6 +53,23 @@ export type ProductCategory = $Result.DefaultSelection<Prisma.$ProductCategoryPa
  * 
  */
 export type Product = $Result.DefaultSelection<Prisma.$ProductPayload>
+
+/**
+ * Enums
+ */
+export namespace $Enums {
+  export const Role: {
+  admin: 'admin',
+  user: 'user'
+};
+
+export type Role = (typeof Role)[keyof typeof Role]
+
+}
+
+export type Role = $Enums.Role
+
+export const Role: typeof $Enums.Role
 
 /**
  * ##  Prisma Client ʲˢ
@@ -210,16 +227,6 @@ export class PrismaClient<
   get book(): Prisma.BookDelegate<ExtArgs, ClientOptions>;
 
   /**
-   * `prisma.post`: Exposes CRUD operations for the **Post** model.
-    * Example usage:
-    * ```ts
-    * // Fetch zero or more Posts
-    * const posts = await prisma.post.findMany()
-    * ```
-    */
-  get post(): Prisma.PostDelegate<ExtArgs, ClientOptions>;
-
-  /**
    * `prisma.category`: Exposes CRUD operations for the **Category** model.
     * Example usage:
     * ```ts
@@ -238,6 +245,16 @@ export class PrismaClient<
     * ```
     */
   get tag(): Prisma.TagDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.post`: Exposes CRUD operations for the **Post** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Posts
+    * const posts = await prisma.post.findMany()
+    * ```
+    */
+  get post(): Prisma.PostDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.productCategory`: Exposes CRUD operations for the **ProductCategory** model.
@@ -701,9 +718,9 @@ export namespace Prisma {
     User: 'User',
     Session: 'Session',
     Book: 'Book',
-    Post: 'Post',
     Category: 'Category',
     Tag: 'Tag',
+    Post: 'Post',
     ProductCategory: 'ProductCategory',
     Product: 'Product'
   };
@@ -724,7 +741,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "session" | "book" | "post" | "category" | "tag" | "productCategory" | "product"
+      modelProps: "user" | "session" | "book" | "category" | "tag" | "post" | "productCategory" | "product"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -950,80 +967,6 @@ export namespace Prisma {
           }
         }
       }
-      Post: {
-        payload: Prisma.$PostPayload<ExtArgs>
-        fields: Prisma.PostFieldRefs
-        operations: {
-          findUnique: {
-            args: Prisma.PostFindUniqueArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$PostPayload> | null
-          }
-          findUniqueOrThrow: {
-            args: Prisma.PostFindUniqueOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$PostPayload>
-          }
-          findFirst: {
-            args: Prisma.PostFindFirstArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$PostPayload> | null
-          }
-          findFirstOrThrow: {
-            args: Prisma.PostFindFirstOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$PostPayload>
-          }
-          findMany: {
-            args: Prisma.PostFindManyArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$PostPayload>[]
-          }
-          create: {
-            args: Prisma.PostCreateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$PostPayload>
-          }
-          createMany: {
-            args: Prisma.PostCreateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          createManyAndReturn: {
-            args: Prisma.PostCreateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$PostPayload>[]
-          }
-          delete: {
-            args: Prisma.PostDeleteArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$PostPayload>
-          }
-          update: {
-            args: Prisma.PostUpdateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$PostPayload>
-          }
-          deleteMany: {
-            args: Prisma.PostDeleteManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateMany: {
-            args: Prisma.PostUpdateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateManyAndReturn: {
-            args: Prisma.PostUpdateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$PostPayload>[]
-          }
-          upsert: {
-            args: Prisma.PostUpsertArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$PostPayload>
-          }
-          aggregate: {
-            args: Prisma.PostAggregateArgs<ExtArgs>
-            result: $Utils.Optional<AggregatePost>
-          }
-          groupBy: {
-            args: Prisma.PostGroupByArgs<ExtArgs>
-            result: $Utils.Optional<PostGroupByOutputType>[]
-          }
-          count: {
-            args: Prisma.PostCountArgs<ExtArgs>
-            result: $Utils.Optional<PostCountAggregateOutputType> | number
-          }
-        }
-      }
       Category: {
         payload: Prisma.$CategoryPayload<ExtArgs>
         fields: Prisma.CategoryFieldRefs
@@ -1169,6 +1112,80 @@ export namespace Prisma {
           count: {
             args: Prisma.TagCountArgs<ExtArgs>
             result: $Utils.Optional<TagCountAggregateOutputType> | number
+          }
+        }
+      }
+      Post: {
+        payload: Prisma.$PostPayload<ExtArgs>
+        fields: Prisma.PostFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.PostFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PostPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.PostFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PostPayload>
+          }
+          findFirst: {
+            args: Prisma.PostFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PostPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.PostFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PostPayload>
+          }
+          findMany: {
+            args: Prisma.PostFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PostPayload>[]
+          }
+          create: {
+            args: Prisma.PostCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PostPayload>
+          }
+          createMany: {
+            args: Prisma.PostCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.PostCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PostPayload>[]
+          }
+          delete: {
+            args: Prisma.PostDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PostPayload>
+          }
+          update: {
+            args: Prisma.PostUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PostPayload>
+          }
+          deleteMany: {
+            args: Prisma.PostDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.PostUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.PostUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PostPayload>[]
+          }
+          upsert: {
+            args: Prisma.PostUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PostPayload>
+          }
+          aggregate: {
+            args: Prisma.PostAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregatePost>
+          }
+          groupBy: {
+            args: Prisma.PostGroupByArgs<ExtArgs>
+            result: $Utils.Optional<PostGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.PostCountArgs<ExtArgs>
+            result: $Utils.Optional<PostCountAggregateOutputType> | number
           }
         }
       }
@@ -1407,9 +1424,9 @@ export namespace Prisma {
     user?: UserOmit
     session?: SessionOmit
     book?: BookOmit
-    post?: PostOmit
     category?: CategoryOmit
     tag?: TagOmit
+    post?: PostOmit
     productCategory?: ProductCategoryOmit
     product?: ProductOmit
   }
@@ -1507,14 +1524,14 @@ export namespace Prisma {
 
   export type UserCountOutputType = {
     sessions: number
-    Book: number
+    books: number
     posts: number
     products: number
   }
 
   export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     sessions?: boolean | UserCountOutputTypeCountSessionsArgs
-    Book?: boolean | UserCountOutputTypeCountBookArgs
+    books?: boolean | UserCountOutputTypeCountBooksArgs
     posts?: boolean | UserCountOutputTypeCountPostsArgs
     products?: boolean | UserCountOutputTypeCountProductsArgs
   }
@@ -1540,7 +1557,7 @@ export namespace Prisma {
   /**
    * UserCountOutputType without action
    */
-  export type UserCountOutputTypeCountBookArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type UserCountOutputTypeCountBooksArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: BookWhereInput
   }
 
@@ -1556,37 +1573,6 @@ export namespace Prisma {
    */
   export type UserCountOutputTypeCountProductsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: ProductWhereInput
-  }
-
-
-  /**
-   * Count Type PostCountOutputType
-   */
-
-  export type PostCountOutputType = {
-    tags: number
-  }
-
-  export type PostCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    tags?: boolean | PostCountOutputTypeCountTagsArgs
-  }
-
-  // Custom InputTypes
-  /**
-   * PostCountOutputType without action
-   */
-  export type PostCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the PostCountOutputType
-     */
-    select?: PostCountOutputTypeSelect<ExtArgs> | null
-  }
-
-  /**
-   * PostCountOutputType without action
-   */
-  export type PostCountOutputTypeCountTagsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: TagWhereInput
   }
 
 
@@ -1628,13 +1614,11 @@ export namespace Prisma {
   export type TagCountOutputType = {
     posts: number
     products: number
-    Product: number
   }
 
   export type TagCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     posts?: boolean | TagCountOutputTypeCountPostsArgs
     products?: boolean | TagCountOutputTypeCountProductsArgs
-    Product?: boolean | TagCountOutputTypeCountProductArgs
   }
 
   // Custom InputTypes
@@ -1662,11 +1646,35 @@ export namespace Prisma {
     where?: ProductWhereInput
   }
 
+
   /**
-   * TagCountOutputType without action
+   * Count Type PostCountOutputType
    */
-  export type TagCountOutputTypeCountProductArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: ProductWhereInput
+
+  export type PostCountOutputType = {
+    tags: number
+  }
+
+  export type PostCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    tags?: boolean | PostCountOutputTypeCountTagsArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * PostCountOutputType without action
+   */
+  export type PostCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PostCountOutputType
+     */
+    select?: PostCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * PostCountOutputType without action
+   */
+  export type PostCountOutputTypeCountTagsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: TagWhereInput
   }
 
 
@@ -1760,9 +1768,9 @@ export namespace Prisma {
     email: string | null
     hashedPassword: string | null
     username: string | null
+    role: $Enums.Role | null
     createdAt: Date | null
     updatedAt: Date | null
-    role: string | null
   }
 
   export type UserMaxAggregateOutputType = {
@@ -1770,9 +1778,9 @@ export namespace Prisma {
     email: string | null
     hashedPassword: string | null
     username: string | null
+    role: $Enums.Role | null
     createdAt: Date | null
     updatedAt: Date | null
-    role: string | null
   }
 
   export type UserCountAggregateOutputType = {
@@ -1780,9 +1788,9 @@ export namespace Prisma {
     email: number
     hashedPassword: number
     username: number
+    role: number
     createdAt: number
     updatedAt: number
-    role: number
     _all: number
   }
 
@@ -1792,9 +1800,9 @@ export namespace Prisma {
     email?: true
     hashedPassword?: true
     username?: true
+    role?: true
     createdAt?: true
     updatedAt?: true
-    role?: true
   }
 
   export type UserMaxAggregateInputType = {
@@ -1802,9 +1810,9 @@ export namespace Prisma {
     email?: true
     hashedPassword?: true
     username?: true
+    role?: true
     createdAt?: true
     updatedAt?: true
-    role?: true
   }
 
   export type UserCountAggregateInputType = {
@@ -1812,9 +1820,9 @@ export namespace Prisma {
     email?: true
     hashedPassword?: true
     username?: true
+    role?: true
     createdAt?: true
     updatedAt?: true
-    role?: true
     _all?: true
   }
 
@@ -1895,9 +1903,9 @@ export namespace Prisma {
     email: string
     hashedPassword: string | null
     username: string | null
+    role: $Enums.Role
     createdAt: Date
     updatedAt: Date
-    role: string
     _count: UserCountAggregateOutputType | null
     _min: UserMinAggregateOutputType | null
     _max: UserMaxAggregateOutputType | null
@@ -1922,11 +1930,11 @@ export namespace Prisma {
     email?: boolean
     hashedPassword?: boolean
     username?: boolean
+    role?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    role?: boolean
     sessions?: boolean | User$sessionsArgs<ExtArgs>
-    Book?: boolean | User$BookArgs<ExtArgs>
+    books?: boolean | User$booksArgs<ExtArgs>
     posts?: boolean | User$postsArgs<ExtArgs>
     products?: boolean | User$productsArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
@@ -1937,9 +1945,9 @@ export namespace Prisma {
     email?: boolean
     hashedPassword?: boolean
     username?: boolean
+    role?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    role?: boolean
   }, ExtArgs["result"]["user"]>
 
   export type UserSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -1947,9 +1955,9 @@ export namespace Prisma {
     email?: boolean
     hashedPassword?: boolean
     username?: boolean
+    role?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    role?: boolean
   }, ExtArgs["result"]["user"]>
 
   export type UserSelectScalar = {
@@ -1957,15 +1965,15 @@ export namespace Prisma {
     email?: boolean
     hashedPassword?: boolean
     username?: boolean
+    role?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    role?: boolean
   }
 
-  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "email" | "hashedPassword" | "username" | "createdAt" | "updatedAt" | "role", ExtArgs["result"]["user"]>
+  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "email" | "hashedPassword" | "username" | "role" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     sessions?: boolean | User$sessionsArgs<ExtArgs>
-    Book?: boolean | User$BookArgs<ExtArgs>
+    books?: boolean | User$booksArgs<ExtArgs>
     posts?: boolean | User$postsArgs<ExtArgs>
     products?: boolean | User$productsArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
@@ -1977,7 +1985,7 @@ export namespace Prisma {
     name: "User"
     objects: {
       sessions: Prisma.$SessionPayload<ExtArgs>[]
-      Book: Prisma.$BookPayload<ExtArgs>[]
+      books: Prisma.$BookPayload<ExtArgs>[]
       posts: Prisma.$PostPayload<ExtArgs>[]
       products: Prisma.$ProductPayload<ExtArgs>[]
     }
@@ -1986,9 +1994,9 @@ export namespace Prisma {
       email: string
       hashedPassword: string | null
       username: string | null
+      role: $Enums.Role
       createdAt: Date
       updatedAt: Date
-      role: string
     }, ExtArgs["result"]["user"]>
     composites: {}
   }
@@ -2384,7 +2392,7 @@ export namespace Prisma {
   export interface Prisma__UserClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     sessions<T extends User$sessionsArgs<ExtArgs> = {}>(args?: Subset<T, User$sessionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SessionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    Book<T extends User$BookArgs<ExtArgs> = {}>(args?: Subset<T, User$BookArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BookPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    books<T extends User$booksArgs<ExtArgs> = {}>(args?: Subset<T, User$booksArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BookPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     posts<T extends User$postsArgs<ExtArgs> = {}>(args?: Subset<T, User$postsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PostPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     products<T extends User$productsArgs<ExtArgs> = {}>(args?: Subset<T, User$productsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ProductPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
@@ -2420,9 +2428,9 @@ export namespace Prisma {
     readonly email: FieldRef<"User", 'String'>
     readonly hashedPassword: FieldRef<"User", 'String'>
     readonly username: FieldRef<"User", 'String'>
+    readonly role: FieldRef<"User", 'Role'>
     readonly createdAt: FieldRef<"User", 'DateTime'>
     readonly updatedAt: FieldRef<"User", 'DateTime'>
-    readonly role: FieldRef<"User", 'String'>
   }
     
 
@@ -2835,9 +2843,9 @@ export namespace Prisma {
   }
 
   /**
-   * User.Book
+   * User.books
    */
-  export type User$BookArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type User$booksArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Book
      */
@@ -5134,1283 +5142,6 @@ export namespace Prisma {
 
 
   /**
-   * Model Post
-   */
-
-  export type AggregatePost = {
-    _count: PostCountAggregateOutputType | null
-    _min: PostMinAggregateOutputType | null
-    _max: PostMaxAggregateOutputType | null
-  }
-
-  export type PostMinAggregateOutputType = {
-    id: string | null
-    title: string | null
-    slug: string | null
-    summary: string | null
-    draft: boolean | null
-    content: string | null
-    published: boolean | null
-    imageUrl: string | null
-    categoryId: string | null
-    metaTitle: string | null
-    metaDescription: string | null
-    canonicalUrl: string | null
-    ogImage: string | null
-    createdAt: Date | null
-    updatedAt: Date | null
-    userId: string | null
-  }
-
-  export type PostMaxAggregateOutputType = {
-    id: string | null
-    title: string | null
-    slug: string | null
-    summary: string | null
-    draft: boolean | null
-    content: string | null
-    published: boolean | null
-    imageUrl: string | null
-    categoryId: string | null
-    metaTitle: string | null
-    metaDescription: string | null
-    canonicalUrl: string | null
-    ogImage: string | null
-    createdAt: Date | null
-    updatedAt: Date | null
-    userId: string | null
-  }
-
-  export type PostCountAggregateOutputType = {
-    id: number
-    title: number
-    slug: number
-    summary: number
-    draft: number
-    content: number
-    published: number
-    imageUrl: number
-    categoryId: number
-    metaTitle: number
-    metaDescription: number
-    canonicalUrl: number
-    ogImage: number
-    createdAt: number
-    updatedAt: number
-    userId: number
-    _all: number
-  }
-
-
-  export type PostMinAggregateInputType = {
-    id?: true
-    title?: true
-    slug?: true
-    summary?: true
-    draft?: true
-    content?: true
-    published?: true
-    imageUrl?: true
-    categoryId?: true
-    metaTitle?: true
-    metaDescription?: true
-    canonicalUrl?: true
-    ogImage?: true
-    createdAt?: true
-    updatedAt?: true
-    userId?: true
-  }
-
-  export type PostMaxAggregateInputType = {
-    id?: true
-    title?: true
-    slug?: true
-    summary?: true
-    draft?: true
-    content?: true
-    published?: true
-    imageUrl?: true
-    categoryId?: true
-    metaTitle?: true
-    metaDescription?: true
-    canonicalUrl?: true
-    ogImage?: true
-    createdAt?: true
-    updatedAt?: true
-    userId?: true
-  }
-
-  export type PostCountAggregateInputType = {
-    id?: true
-    title?: true
-    slug?: true
-    summary?: true
-    draft?: true
-    content?: true
-    published?: true
-    imageUrl?: true
-    categoryId?: true
-    metaTitle?: true
-    metaDescription?: true
-    canonicalUrl?: true
-    ogImage?: true
-    createdAt?: true
-    updatedAt?: true
-    userId?: true
-    _all?: true
-  }
-
-  export type PostAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which Post to aggregate.
-     */
-    where?: PostWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of Posts to fetch.
-     */
-    orderBy?: PostOrderByWithRelationInput | PostOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the start position
-     */
-    cursor?: PostWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` Posts from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` Posts.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Count returned Posts
-    **/
-    _count?: true | PostCountAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the minimum value
-    **/
-    _min?: PostMinAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the maximum value
-    **/
-    _max?: PostMaxAggregateInputType
-  }
-
-  export type GetPostAggregateType<T extends PostAggregateArgs> = {
-        [P in keyof T & keyof AggregatePost]: P extends '_count' | 'count'
-      ? T[P] extends true
-        ? number
-        : GetScalarType<T[P], AggregatePost[P]>
-      : GetScalarType<T[P], AggregatePost[P]>
-  }
-
-
-
-
-  export type PostGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: PostWhereInput
-    orderBy?: PostOrderByWithAggregationInput | PostOrderByWithAggregationInput[]
-    by: PostScalarFieldEnum[] | PostScalarFieldEnum
-    having?: PostScalarWhereWithAggregatesInput
-    take?: number
-    skip?: number
-    _count?: PostCountAggregateInputType | true
-    _min?: PostMinAggregateInputType
-    _max?: PostMaxAggregateInputType
-  }
-
-  export type PostGroupByOutputType = {
-    id: string
-    title: string
-    slug: string
-    summary: string | null
-    draft: boolean
-    content: string | null
-    published: boolean
-    imageUrl: string | null
-    categoryId: string | null
-    metaTitle: string | null
-    metaDescription: string | null
-    canonicalUrl: string | null
-    ogImage: string | null
-    createdAt: Date
-    updatedAt: Date
-    userId: string | null
-    _count: PostCountAggregateOutputType | null
-    _min: PostMinAggregateOutputType | null
-    _max: PostMaxAggregateOutputType | null
-  }
-
-  type GetPostGroupByPayload<T extends PostGroupByArgs> = Prisma.PrismaPromise<
-    Array<
-      PickEnumerable<PostGroupByOutputType, T['by']> &
-        {
-          [P in ((keyof T) & (keyof PostGroupByOutputType))]: P extends '_count'
-            ? T[P] extends boolean
-              ? number
-              : GetScalarType<T[P], PostGroupByOutputType[P]>
-            : GetScalarType<T[P], PostGroupByOutputType[P]>
-        }
-      >
-    >
-
-
-  export type PostSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    title?: boolean
-    slug?: boolean
-    summary?: boolean
-    draft?: boolean
-    content?: boolean
-    published?: boolean
-    imageUrl?: boolean
-    categoryId?: boolean
-    metaTitle?: boolean
-    metaDescription?: boolean
-    canonicalUrl?: boolean
-    ogImage?: boolean
-    createdAt?: boolean
-    updatedAt?: boolean
-    userId?: boolean
-    category?: boolean | Post$categoryArgs<ExtArgs>
-    tags?: boolean | Post$tagsArgs<ExtArgs>
-    user?: boolean | Post$userArgs<ExtArgs>
-    _count?: boolean | PostCountOutputTypeDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["post"]>
-
-  export type PostSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    title?: boolean
-    slug?: boolean
-    summary?: boolean
-    draft?: boolean
-    content?: boolean
-    published?: boolean
-    imageUrl?: boolean
-    categoryId?: boolean
-    metaTitle?: boolean
-    metaDescription?: boolean
-    canonicalUrl?: boolean
-    ogImage?: boolean
-    createdAt?: boolean
-    updatedAt?: boolean
-    userId?: boolean
-    category?: boolean | Post$categoryArgs<ExtArgs>
-    user?: boolean | Post$userArgs<ExtArgs>
-  }, ExtArgs["result"]["post"]>
-
-  export type PostSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    title?: boolean
-    slug?: boolean
-    summary?: boolean
-    draft?: boolean
-    content?: boolean
-    published?: boolean
-    imageUrl?: boolean
-    categoryId?: boolean
-    metaTitle?: boolean
-    metaDescription?: boolean
-    canonicalUrl?: boolean
-    ogImage?: boolean
-    createdAt?: boolean
-    updatedAt?: boolean
-    userId?: boolean
-    category?: boolean | Post$categoryArgs<ExtArgs>
-    user?: boolean | Post$userArgs<ExtArgs>
-  }, ExtArgs["result"]["post"]>
-
-  export type PostSelectScalar = {
-    id?: boolean
-    title?: boolean
-    slug?: boolean
-    summary?: boolean
-    draft?: boolean
-    content?: boolean
-    published?: boolean
-    imageUrl?: boolean
-    categoryId?: boolean
-    metaTitle?: boolean
-    metaDescription?: boolean
-    canonicalUrl?: boolean
-    ogImage?: boolean
-    createdAt?: boolean
-    updatedAt?: boolean
-    userId?: boolean
-  }
-
-  export type PostOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "slug" | "summary" | "draft" | "content" | "published" | "imageUrl" | "categoryId" | "metaTitle" | "metaDescription" | "canonicalUrl" | "ogImage" | "createdAt" | "updatedAt" | "userId", ExtArgs["result"]["post"]>
-  export type PostInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    category?: boolean | Post$categoryArgs<ExtArgs>
-    tags?: boolean | Post$tagsArgs<ExtArgs>
-    user?: boolean | Post$userArgs<ExtArgs>
-    _count?: boolean | PostCountOutputTypeDefaultArgs<ExtArgs>
-  }
-  export type PostIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    category?: boolean | Post$categoryArgs<ExtArgs>
-    user?: boolean | Post$userArgs<ExtArgs>
-  }
-  export type PostIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    category?: boolean | Post$categoryArgs<ExtArgs>
-    user?: boolean | Post$userArgs<ExtArgs>
-  }
-
-  export type $PostPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "Post"
-    objects: {
-      category: Prisma.$CategoryPayload<ExtArgs> | null
-      tags: Prisma.$TagPayload<ExtArgs>[]
-      user: Prisma.$UserPayload<ExtArgs> | null
-    }
-    scalars: $Extensions.GetPayloadResult<{
-      id: string
-      title: string
-      slug: string
-      summary: string | null
-      draft: boolean
-      content: string | null
-      published: boolean
-      imageUrl: string | null
-      categoryId: string | null
-      metaTitle: string | null
-      metaDescription: string | null
-      canonicalUrl: string | null
-      ogImage: string | null
-      createdAt: Date
-      updatedAt: Date
-      userId: string | null
-    }, ExtArgs["result"]["post"]>
-    composites: {}
-  }
-
-  type PostGetPayload<S extends boolean | null | undefined | PostDefaultArgs> = $Result.GetResult<Prisma.$PostPayload, S>
-
-  type PostCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    Omit<PostFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
-      select?: PostCountAggregateInputType | true
-    }
-
-  export interface PostDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Post'], meta: { name: 'Post' } }
-    /**
-     * Find zero or one Post that matches the filter.
-     * @param {PostFindUniqueArgs} args - Arguments to find a Post
-     * @example
-     * // Get one Post
-     * const post = await prisma.post.findUnique({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUnique<T extends PostFindUniqueArgs>(args: SelectSubset<T, PostFindUniqueArgs<ExtArgs>>): Prisma__PostClient<$Result.GetResult<Prisma.$PostPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find one Post that matches the filter or throw an error with `error.code='P2025'`
-     * if no matches were found.
-     * @param {PostFindUniqueOrThrowArgs} args - Arguments to find a Post
-     * @example
-     * // Get one Post
-     * const post = await prisma.post.findUniqueOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUniqueOrThrow<T extends PostFindUniqueOrThrowArgs>(args: SelectSubset<T, PostFindUniqueOrThrowArgs<ExtArgs>>): Prisma__PostClient<$Result.GetResult<Prisma.$PostPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first Post that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {PostFindFirstArgs} args - Arguments to find a Post
-     * @example
-     * // Get one Post
-     * const post = await prisma.post.findFirst({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirst<T extends PostFindFirstArgs>(args?: SelectSubset<T, PostFindFirstArgs<ExtArgs>>): Prisma__PostClient<$Result.GetResult<Prisma.$PostPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first Post that matches the filter or
-     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {PostFindFirstOrThrowArgs} args - Arguments to find a Post
-     * @example
-     * // Get one Post
-     * const post = await prisma.post.findFirstOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirstOrThrow<T extends PostFindFirstOrThrowArgs>(args?: SelectSubset<T, PostFindFirstOrThrowArgs<ExtArgs>>): Prisma__PostClient<$Result.GetResult<Prisma.$PostPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find zero or more Posts that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {PostFindManyArgs} args - Arguments to filter and select certain fields only.
-     * @example
-     * // Get all Posts
-     * const posts = await prisma.post.findMany()
-     * 
-     * // Get first 10 Posts
-     * const posts = await prisma.post.findMany({ take: 10 })
-     * 
-     * // Only select the `id`
-     * const postWithIdOnly = await prisma.post.findMany({ select: { id: true } })
-     * 
-     */
-    findMany<T extends PostFindManyArgs>(args?: SelectSubset<T, PostFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PostPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
-
-    /**
-     * Create a Post.
-     * @param {PostCreateArgs} args - Arguments to create a Post.
-     * @example
-     * // Create one Post
-     * const Post = await prisma.post.create({
-     *   data: {
-     *     // ... data to create a Post
-     *   }
-     * })
-     * 
-     */
-    create<T extends PostCreateArgs>(args: SelectSubset<T, PostCreateArgs<ExtArgs>>): Prisma__PostClient<$Result.GetResult<Prisma.$PostPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Create many Posts.
-     * @param {PostCreateManyArgs} args - Arguments to create many Posts.
-     * @example
-     * // Create many Posts
-     * const post = await prisma.post.createMany({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     *     
-     */
-    createMany<T extends PostCreateManyArgs>(args?: SelectSubset<T, PostCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Create many Posts and returns the data saved in the database.
-     * @param {PostCreateManyAndReturnArgs} args - Arguments to create many Posts.
-     * @example
-     * // Create many Posts
-     * const post = await prisma.post.createManyAndReturn({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * 
-     * // Create many Posts and only return the `id`
-     * const postWithIdOnly = await prisma.post.createManyAndReturn({
-     *   select: { id: true },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * 
-     */
-    createManyAndReturn<T extends PostCreateManyAndReturnArgs>(args?: SelectSubset<T, PostCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PostPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
-
-    /**
-     * Delete a Post.
-     * @param {PostDeleteArgs} args - Arguments to delete one Post.
-     * @example
-     * // Delete one Post
-     * const Post = await prisma.post.delete({
-     *   where: {
-     *     // ... filter to delete one Post
-     *   }
-     * })
-     * 
-     */
-    delete<T extends PostDeleteArgs>(args: SelectSubset<T, PostDeleteArgs<ExtArgs>>): Prisma__PostClient<$Result.GetResult<Prisma.$PostPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Update one Post.
-     * @param {PostUpdateArgs} args - Arguments to update one Post.
-     * @example
-     * // Update one Post
-     * const post = await prisma.post.update({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    update<T extends PostUpdateArgs>(args: SelectSubset<T, PostUpdateArgs<ExtArgs>>): Prisma__PostClient<$Result.GetResult<Prisma.$PostPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Delete zero or more Posts.
-     * @param {PostDeleteManyArgs} args - Arguments to filter Posts to delete.
-     * @example
-     * // Delete a few Posts
-     * const { count } = await prisma.post.deleteMany({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     * 
-     */
-    deleteMany<T extends PostDeleteManyArgs>(args?: SelectSubset<T, PostDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more Posts.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {PostUpdateManyArgs} args - Arguments to update one or more rows.
-     * @example
-     * // Update many Posts
-     * const post = await prisma.post.updateMany({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    updateMany<T extends PostUpdateManyArgs>(args: SelectSubset<T, PostUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more Posts and returns the data updated in the database.
-     * @param {PostUpdateManyAndReturnArgs} args - Arguments to update many Posts.
-     * @example
-     * // Update many Posts
-     * const post = await prisma.post.updateManyAndReturn({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * 
-     * // Update zero or more Posts and only return the `id`
-     * const postWithIdOnly = await prisma.post.updateManyAndReturn({
-     *   select: { id: true },
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * 
-     */
-    updateManyAndReturn<T extends PostUpdateManyAndReturnArgs>(args: SelectSubset<T, PostUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PostPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
-
-    /**
-     * Create or update one Post.
-     * @param {PostUpsertArgs} args - Arguments to update or create a Post.
-     * @example
-     * // Update or create a Post
-     * const post = await prisma.post.upsert({
-     *   create: {
-     *     // ... data to create a Post
-     *   },
-     *   update: {
-     *     // ... in case it already exists, update
-     *   },
-     *   where: {
-     *     // ... the filter for the Post we want to update
-     *   }
-     * })
-     */
-    upsert<T extends PostUpsertArgs>(args: SelectSubset<T, PostUpsertArgs<ExtArgs>>): Prisma__PostClient<$Result.GetResult<Prisma.$PostPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-
-    /**
-     * Count the number of Posts.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {PostCountArgs} args - Arguments to filter Posts to count.
-     * @example
-     * // Count the number of Posts
-     * const count = await prisma.post.count({
-     *   where: {
-     *     // ... the filter for the Posts we want to count
-     *   }
-     * })
-    **/
-    count<T extends PostCountArgs>(
-      args?: Subset<T, PostCountArgs>,
-    ): Prisma.PrismaPromise<
-      T extends $Utils.Record<'select', any>
-        ? T['select'] extends true
-          ? number
-          : GetScalarType<T['select'], PostCountAggregateOutputType>
-        : number
-    >
-
-    /**
-     * Allows you to perform aggregations operations on a Post.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {PostAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
-     * @example
-     * // Ordered by age ascending
-     * // Where email contains prisma.io
-     * // Limited to the 10 users
-     * const aggregations = await prisma.user.aggregate({
-     *   _avg: {
-     *     age: true,
-     *   },
-     *   where: {
-     *     email: {
-     *       contains: "prisma.io",
-     *     },
-     *   },
-     *   orderBy: {
-     *     age: "asc",
-     *   },
-     *   take: 10,
-     * })
-    **/
-    aggregate<T extends PostAggregateArgs>(args: Subset<T, PostAggregateArgs>): Prisma.PrismaPromise<GetPostAggregateType<T>>
-
-    /**
-     * Group by Post.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {PostGroupByArgs} args - Group by arguments.
-     * @example
-     * // Group by city, order by createdAt, get count
-     * const result = await prisma.user.groupBy({
-     *   by: ['city', 'createdAt'],
-     *   orderBy: {
-     *     createdAt: true
-     *   },
-     *   _count: {
-     *     _all: true
-     *   },
-     * })
-     * 
-    **/
-    groupBy<
-      T extends PostGroupByArgs,
-      HasSelectOrTake extends Or<
-        Extends<'skip', Keys<T>>,
-        Extends<'take', Keys<T>>
-      >,
-      OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: PostGroupByArgs['orderBy'] }
-        : { orderBy?: PostGroupByArgs['orderBy'] },
-      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
-      ByFields extends MaybeTupleToUnion<T['by']>,
-      ByValid extends Has<ByFields, OrderFields>,
-      HavingFields extends GetHavingFields<T['having']>,
-      HavingValid extends Has<ByFields, HavingFields>,
-      ByEmpty extends T['by'] extends never[] ? True : False,
-      InputErrors extends ByEmpty extends True
-      ? `Error: "by" must not be empty.`
-      : HavingValid extends False
-      ? {
-          [P in HavingFields]: P extends ByFields
-            ? never
-            : P extends string
-            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
-            : [
-                Error,
-                'Field ',
-                P,
-                ` in "having" needs to be provided in "by"`,
-              ]
-        }[HavingFields]
-      : 'take' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "take", you also need to provide "orderBy"'
-      : 'skip' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "skip", you also need to provide "orderBy"'
-      : ByValid extends True
-      ? {}
-      : {
-          [P in OrderFields]: P extends ByFields
-            ? never
-            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-        }[OrderFields]
-    >(args: SubsetIntersection<T, PostGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetPostGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
-  /**
-   * Fields of the Post model
-   */
-  readonly fields: PostFieldRefs;
-  }
-
-  /**
-   * The delegate class that acts as a "Promise-like" for Post.
-   * Why is this prefixed with `Prisma__`?
-   * Because we want to prevent naming conflicts as mentioned in
-   * https://github.com/prisma/prisma-client-js/issues/707
-   */
-  export interface Prisma__PostClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
-    readonly [Symbol.toStringTag]: "PrismaPromise"
-    category<T extends Post$categoryArgs<ExtArgs> = {}>(args?: Subset<T, Post$categoryArgs<ExtArgs>>): Prisma__CategoryClient<$Result.GetResult<Prisma.$CategoryPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-    tags<T extends Post$tagsArgs<ExtArgs> = {}>(args?: Subset<T, Post$tagsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TagPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    user<T extends Post$userArgs<ExtArgs> = {}>(args?: Subset<T, Post$userArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-    /**
-     * Attaches callbacks for the resolution and/or rejection of the Promise.
-     * @param onfulfilled The callback to execute when the Promise is resolved.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of which ever callback is executed.
-     */
-    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
-    /**
-     * Attaches a callback for only the rejection of the Promise.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of the callback.
-     */
-    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
-    /**
-     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
-     * resolved value cannot be modified from the callback.
-     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
-     * @returns A Promise for the completion of the callback.
-     */
-    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
-  }
-
-
-
-
-  /**
-   * Fields of the Post model
-   */
-  interface PostFieldRefs {
-    readonly id: FieldRef<"Post", 'String'>
-    readonly title: FieldRef<"Post", 'String'>
-    readonly slug: FieldRef<"Post", 'String'>
-    readonly summary: FieldRef<"Post", 'String'>
-    readonly draft: FieldRef<"Post", 'Boolean'>
-    readonly content: FieldRef<"Post", 'String'>
-    readonly published: FieldRef<"Post", 'Boolean'>
-    readonly imageUrl: FieldRef<"Post", 'String'>
-    readonly categoryId: FieldRef<"Post", 'String'>
-    readonly metaTitle: FieldRef<"Post", 'String'>
-    readonly metaDescription: FieldRef<"Post", 'String'>
-    readonly canonicalUrl: FieldRef<"Post", 'String'>
-    readonly ogImage: FieldRef<"Post", 'String'>
-    readonly createdAt: FieldRef<"Post", 'DateTime'>
-    readonly updatedAt: FieldRef<"Post", 'DateTime'>
-    readonly userId: FieldRef<"Post", 'String'>
-  }
-    
-
-  // Custom InputTypes
-  /**
-   * Post findUnique
-   */
-  export type PostFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Post
-     */
-    select?: PostSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Post
-     */
-    omit?: PostOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: PostInclude<ExtArgs> | null
-    /**
-     * Filter, which Post to fetch.
-     */
-    where: PostWhereUniqueInput
-  }
-
-  /**
-   * Post findUniqueOrThrow
-   */
-  export type PostFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Post
-     */
-    select?: PostSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Post
-     */
-    omit?: PostOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: PostInclude<ExtArgs> | null
-    /**
-     * Filter, which Post to fetch.
-     */
-    where: PostWhereUniqueInput
-  }
-
-  /**
-   * Post findFirst
-   */
-  export type PostFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Post
-     */
-    select?: PostSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Post
-     */
-    omit?: PostOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: PostInclude<ExtArgs> | null
-    /**
-     * Filter, which Post to fetch.
-     */
-    where?: PostWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of Posts to fetch.
-     */
-    orderBy?: PostOrderByWithRelationInput | PostOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for Posts.
-     */
-    cursor?: PostWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` Posts from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` Posts.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of Posts.
-     */
-    distinct?: PostScalarFieldEnum | PostScalarFieldEnum[]
-  }
-
-  /**
-   * Post findFirstOrThrow
-   */
-  export type PostFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Post
-     */
-    select?: PostSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Post
-     */
-    omit?: PostOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: PostInclude<ExtArgs> | null
-    /**
-     * Filter, which Post to fetch.
-     */
-    where?: PostWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of Posts to fetch.
-     */
-    orderBy?: PostOrderByWithRelationInput | PostOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for Posts.
-     */
-    cursor?: PostWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` Posts from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` Posts.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of Posts.
-     */
-    distinct?: PostScalarFieldEnum | PostScalarFieldEnum[]
-  }
-
-  /**
-   * Post findMany
-   */
-  export type PostFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Post
-     */
-    select?: PostSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Post
-     */
-    omit?: PostOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: PostInclude<ExtArgs> | null
-    /**
-     * Filter, which Posts to fetch.
-     */
-    where?: PostWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of Posts to fetch.
-     */
-    orderBy?: PostOrderByWithRelationInput | PostOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for listing Posts.
-     */
-    cursor?: PostWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` Posts from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` Posts.
-     */
-    skip?: number
-    distinct?: PostScalarFieldEnum | PostScalarFieldEnum[]
-  }
-
-  /**
-   * Post create
-   */
-  export type PostCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Post
-     */
-    select?: PostSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Post
-     */
-    omit?: PostOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: PostInclude<ExtArgs> | null
-    /**
-     * The data needed to create a Post.
-     */
-    data: XOR<PostCreateInput, PostUncheckedCreateInput>
-  }
-
-  /**
-   * Post createMany
-   */
-  export type PostCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to create many Posts.
-     */
-    data: PostCreateManyInput | PostCreateManyInput[]
-    skipDuplicates?: boolean
-  }
-
-  /**
-   * Post createManyAndReturn
-   */
-  export type PostCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Post
-     */
-    select?: PostSelectCreateManyAndReturn<ExtArgs> | null
-    /**
-     * Omit specific fields from the Post
-     */
-    omit?: PostOmit<ExtArgs> | null
-    /**
-     * The data used to create many Posts.
-     */
-    data: PostCreateManyInput | PostCreateManyInput[]
-    skipDuplicates?: boolean
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: PostIncludeCreateManyAndReturn<ExtArgs> | null
-  }
-
-  /**
-   * Post update
-   */
-  export type PostUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Post
-     */
-    select?: PostSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Post
-     */
-    omit?: PostOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: PostInclude<ExtArgs> | null
-    /**
-     * The data needed to update a Post.
-     */
-    data: XOR<PostUpdateInput, PostUncheckedUpdateInput>
-    /**
-     * Choose, which Post to update.
-     */
-    where: PostWhereUniqueInput
-  }
-
-  /**
-   * Post updateMany
-   */
-  export type PostUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to update Posts.
-     */
-    data: XOR<PostUpdateManyMutationInput, PostUncheckedUpdateManyInput>
-    /**
-     * Filter which Posts to update
-     */
-    where?: PostWhereInput
-    /**
-     * Limit how many Posts to update.
-     */
-    limit?: number
-  }
-
-  /**
-   * Post updateManyAndReturn
-   */
-  export type PostUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Post
-     */
-    select?: PostSelectUpdateManyAndReturn<ExtArgs> | null
-    /**
-     * Omit specific fields from the Post
-     */
-    omit?: PostOmit<ExtArgs> | null
-    /**
-     * The data used to update Posts.
-     */
-    data: XOR<PostUpdateManyMutationInput, PostUncheckedUpdateManyInput>
-    /**
-     * Filter which Posts to update
-     */
-    where?: PostWhereInput
-    /**
-     * Limit how many Posts to update.
-     */
-    limit?: number
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: PostIncludeUpdateManyAndReturn<ExtArgs> | null
-  }
-
-  /**
-   * Post upsert
-   */
-  export type PostUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Post
-     */
-    select?: PostSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Post
-     */
-    omit?: PostOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: PostInclude<ExtArgs> | null
-    /**
-     * The filter to search for the Post to update in case it exists.
-     */
-    where: PostWhereUniqueInput
-    /**
-     * In case the Post found by the `where` argument doesn't exist, create a new Post with this data.
-     */
-    create: XOR<PostCreateInput, PostUncheckedCreateInput>
-    /**
-     * In case the Post was found with the provided `where` argument, update it with this data.
-     */
-    update: XOR<PostUpdateInput, PostUncheckedUpdateInput>
-  }
-
-  /**
-   * Post delete
-   */
-  export type PostDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Post
-     */
-    select?: PostSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Post
-     */
-    omit?: PostOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: PostInclude<ExtArgs> | null
-    /**
-     * Filter which Post to delete.
-     */
-    where: PostWhereUniqueInput
-  }
-
-  /**
-   * Post deleteMany
-   */
-  export type PostDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which Posts to delete
-     */
-    where?: PostWhereInput
-    /**
-     * Limit how many Posts to delete.
-     */
-    limit?: number
-  }
-
-  /**
-   * Post.category
-   */
-  export type Post$categoryArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Category
-     */
-    select?: CategorySelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Category
-     */
-    omit?: CategoryOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: CategoryInclude<ExtArgs> | null
-    where?: CategoryWhereInput
-  }
-
-  /**
-   * Post.tags
-   */
-  export type Post$tagsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Tag
-     */
-    select?: TagSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Tag
-     */
-    omit?: TagOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: TagInclude<ExtArgs> | null
-    where?: TagWhereInput
-    orderBy?: TagOrderByWithRelationInput | TagOrderByWithRelationInput[]
-    cursor?: TagWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: TagScalarFieldEnum | TagScalarFieldEnum[]
-  }
-
-  /**
-   * Post.user
-   */
-  export type Post$userArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the User
-     */
-    select?: UserSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the User
-     */
-    omit?: UserOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: UserInclude<ExtArgs> | null
-    where?: UserWhereInput
-  }
-
-  /**
-   * Post without action
-   */
-  export type PostDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Post
-     */
-    select?: PostSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Post
-     */
-    omit?: PostOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: PostInclude<ExtArgs> | null
-  }
-
-
-  /**
    * Model Category
    */
 
@@ -7646,7 +6377,6 @@ export namespace Prisma {
     updatedAt?: boolean
     posts?: boolean | Tag$postsArgs<ExtArgs>
     products?: boolean | Tag$productsArgs<ExtArgs>
-    Product?: boolean | Tag$ProductArgs<ExtArgs>
     _count?: boolean | TagCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["tag"]>
 
@@ -7678,7 +6408,6 @@ export namespace Prisma {
   export type TagInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     posts?: boolean | Tag$postsArgs<ExtArgs>
     products?: boolean | Tag$productsArgs<ExtArgs>
-    Product?: boolean | Tag$ProductArgs<ExtArgs>
     _count?: boolean | TagCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type TagIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -7689,7 +6418,6 @@ export namespace Prisma {
     objects: {
       posts: Prisma.$PostPayload<ExtArgs>[]
       products: Prisma.$ProductPayload<ExtArgs>[]
-      Product: Prisma.$ProductPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -8093,7 +6821,6 @@ export namespace Prisma {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     posts<T extends Tag$postsArgs<ExtArgs> = {}>(args?: Subset<T, Tag$postsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PostPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     products<T extends Tag$productsArgs<ExtArgs> = {}>(args?: Subset<T, Tag$productsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ProductPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    Product<T extends Tag$ProductArgs<ExtArgs> = {}>(args?: Subset<T, Tag$ProductArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ProductPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -8564,30 +7291,6 @@ export namespace Prisma {
   }
 
   /**
-   * Tag.Product
-   */
-  export type Tag$ProductArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Product
-     */
-    select?: ProductSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Product
-     */
-    omit?: ProductOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: ProductInclude<ExtArgs> | null
-    where?: ProductWhereInput
-    orderBy?: ProductOrderByWithRelationInput | ProductOrderByWithRelationInput[]
-    cursor?: ProductWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: ProductScalarFieldEnum | ProductScalarFieldEnum[]
-  }
-
-  /**
    * Tag without action
    */
   export type TagDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -8603,6 +7306,1283 @@ export namespace Prisma {
      * Choose, which related nodes to fetch as well
      */
     include?: TagInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model Post
+   */
+
+  export type AggregatePost = {
+    _count: PostCountAggregateOutputType | null
+    _min: PostMinAggregateOutputType | null
+    _max: PostMaxAggregateOutputType | null
+  }
+
+  export type PostMinAggregateOutputType = {
+    id: string | null
+    title: string | null
+    slug: string | null
+    summary: string | null
+    draft: boolean | null
+    content: string | null
+    published: boolean | null
+    imageUrl: string | null
+    categoryId: string | null
+    metaTitle: string | null
+    metaDescription: string | null
+    canonicalUrl: string | null
+    ogImage: string | null
+    userId: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type PostMaxAggregateOutputType = {
+    id: string | null
+    title: string | null
+    slug: string | null
+    summary: string | null
+    draft: boolean | null
+    content: string | null
+    published: boolean | null
+    imageUrl: string | null
+    categoryId: string | null
+    metaTitle: string | null
+    metaDescription: string | null
+    canonicalUrl: string | null
+    ogImage: string | null
+    userId: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type PostCountAggregateOutputType = {
+    id: number
+    title: number
+    slug: number
+    summary: number
+    draft: number
+    content: number
+    published: number
+    imageUrl: number
+    categoryId: number
+    metaTitle: number
+    metaDescription: number
+    canonicalUrl: number
+    ogImage: number
+    userId: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type PostMinAggregateInputType = {
+    id?: true
+    title?: true
+    slug?: true
+    summary?: true
+    draft?: true
+    content?: true
+    published?: true
+    imageUrl?: true
+    categoryId?: true
+    metaTitle?: true
+    metaDescription?: true
+    canonicalUrl?: true
+    ogImage?: true
+    userId?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type PostMaxAggregateInputType = {
+    id?: true
+    title?: true
+    slug?: true
+    summary?: true
+    draft?: true
+    content?: true
+    published?: true
+    imageUrl?: true
+    categoryId?: true
+    metaTitle?: true
+    metaDescription?: true
+    canonicalUrl?: true
+    ogImage?: true
+    userId?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type PostCountAggregateInputType = {
+    id?: true
+    title?: true
+    slug?: true
+    summary?: true
+    draft?: true
+    content?: true
+    published?: true
+    imageUrl?: true
+    categoryId?: true
+    metaTitle?: true
+    metaDescription?: true
+    canonicalUrl?: true
+    ogImage?: true
+    userId?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type PostAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Post to aggregate.
+     */
+    where?: PostWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Posts to fetch.
+     */
+    orderBy?: PostOrderByWithRelationInput | PostOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: PostWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Posts from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Posts.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Posts
+    **/
+    _count?: true | PostCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: PostMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: PostMaxAggregateInputType
+  }
+
+  export type GetPostAggregateType<T extends PostAggregateArgs> = {
+        [P in keyof T & keyof AggregatePost]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregatePost[P]>
+      : GetScalarType<T[P], AggregatePost[P]>
+  }
+
+
+
+
+  export type PostGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: PostWhereInput
+    orderBy?: PostOrderByWithAggregationInput | PostOrderByWithAggregationInput[]
+    by: PostScalarFieldEnum[] | PostScalarFieldEnum
+    having?: PostScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: PostCountAggregateInputType | true
+    _min?: PostMinAggregateInputType
+    _max?: PostMaxAggregateInputType
+  }
+
+  export type PostGroupByOutputType = {
+    id: string
+    title: string
+    slug: string
+    summary: string | null
+    draft: boolean
+    content: string | null
+    published: boolean
+    imageUrl: string | null
+    categoryId: string | null
+    metaTitle: string | null
+    metaDescription: string | null
+    canonicalUrl: string | null
+    ogImage: string | null
+    userId: string | null
+    createdAt: Date
+    updatedAt: Date
+    _count: PostCountAggregateOutputType | null
+    _min: PostMinAggregateOutputType | null
+    _max: PostMaxAggregateOutputType | null
+  }
+
+  type GetPostGroupByPayload<T extends PostGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<PostGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof PostGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], PostGroupByOutputType[P]>
+            : GetScalarType<T[P], PostGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type PostSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    title?: boolean
+    slug?: boolean
+    summary?: boolean
+    draft?: boolean
+    content?: boolean
+    published?: boolean
+    imageUrl?: boolean
+    categoryId?: boolean
+    metaTitle?: boolean
+    metaDescription?: boolean
+    canonicalUrl?: boolean
+    ogImage?: boolean
+    userId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    category?: boolean | Post$categoryArgs<ExtArgs>
+    tags?: boolean | Post$tagsArgs<ExtArgs>
+    user?: boolean | Post$userArgs<ExtArgs>
+    _count?: boolean | PostCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["post"]>
+
+  export type PostSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    title?: boolean
+    slug?: boolean
+    summary?: boolean
+    draft?: boolean
+    content?: boolean
+    published?: boolean
+    imageUrl?: boolean
+    categoryId?: boolean
+    metaTitle?: boolean
+    metaDescription?: boolean
+    canonicalUrl?: boolean
+    ogImage?: boolean
+    userId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    category?: boolean | Post$categoryArgs<ExtArgs>
+    user?: boolean | Post$userArgs<ExtArgs>
+  }, ExtArgs["result"]["post"]>
+
+  export type PostSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    title?: boolean
+    slug?: boolean
+    summary?: boolean
+    draft?: boolean
+    content?: boolean
+    published?: boolean
+    imageUrl?: boolean
+    categoryId?: boolean
+    metaTitle?: boolean
+    metaDescription?: boolean
+    canonicalUrl?: boolean
+    ogImage?: boolean
+    userId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    category?: boolean | Post$categoryArgs<ExtArgs>
+    user?: boolean | Post$userArgs<ExtArgs>
+  }, ExtArgs["result"]["post"]>
+
+  export type PostSelectScalar = {
+    id?: boolean
+    title?: boolean
+    slug?: boolean
+    summary?: boolean
+    draft?: boolean
+    content?: boolean
+    published?: boolean
+    imageUrl?: boolean
+    categoryId?: boolean
+    metaTitle?: boolean
+    metaDescription?: boolean
+    canonicalUrl?: boolean
+    ogImage?: boolean
+    userId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type PostOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "slug" | "summary" | "draft" | "content" | "published" | "imageUrl" | "categoryId" | "metaTitle" | "metaDescription" | "canonicalUrl" | "ogImage" | "userId" | "createdAt" | "updatedAt", ExtArgs["result"]["post"]>
+  export type PostInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    category?: boolean | Post$categoryArgs<ExtArgs>
+    tags?: boolean | Post$tagsArgs<ExtArgs>
+    user?: boolean | Post$userArgs<ExtArgs>
+    _count?: boolean | PostCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type PostIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    category?: boolean | Post$categoryArgs<ExtArgs>
+    user?: boolean | Post$userArgs<ExtArgs>
+  }
+  export type PostIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    category?: boolean | Post$categoryArgs<ExtArgs>
+    user?: boolean | Post$userArgs<ExtArgs>
+  }
+
+  export type $PostPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Post"
+    objects: {
+      category: Prisma.$CategoryPayload<ExtArgs> | null
+      tags: Prisma.$TagPayload<ExtArgs>[]
+      user: Prisma.$UserPayload<ExtArgs> | null
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      title: string
+      slug: string
+      summary: string | null
+      draft: boolean
+      content: string | null
+      published: boolean
+      imageUrl: string | null
+      categoryId: string | null
+      metaTitle: string | null
+      metaDescription: string | null
+      canonicalUrl: string | null
+      ogImage: string | null
+      userId: string | null
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["post"]>
+    composites: {}
+  }
+
+  type PostGetPayload<S extends boolean | null | undefined | PostDefaultArgs> = $Result.GetResult<Prisma.$PostPayload, S>
+
+  type PostCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<PostFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: PostCountAggregateInputType | true
+    }
+
+  export interface PostDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Post'], meta: { name: 'Post' } }
+    /**
+     * Find zero or one Post that matches the filter.
+     * @param {PostFindUniqueArgs} args - Arguments to find a Post
+     * @example
+     * // Get one Post
+     * const post = await prisma.post.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends PostFindUniqueArgs>(args: SelectSubset<T, PostFindUniqueArgs<ExtArgs>>): Prisma__PostClient<$Result.GetResult<Prisma.$PostPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Post that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {PostFindUniqueOrThrowArgs} args - Arguments to find a Post
+     * @example
+     * // Get one Post
+     * const post = await prisma.post.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends PostFindUniqueOrThrowArgs>(args: SelectSubset<T, PostFindUniqueOrThrowArgs<ExtArgs>>): Prisma__PostClient<$Result.GetResult<Prisma.$PostPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Post that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PostFindFirstArgs} args - Arguments to find a Post
+     * @example
+     * // Get one Post
+     * const post = await prisma.post.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends PostFindFirstArgs>(args?: SelectSubset<T, PostFindFirstArgs<ExtArgs>>): Prisma__PostClient<$Result.GetResult<Prisma.$PostPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Post that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PostFindFirstOrThrowArgs} args - Arguments to find a Post
+     * @example
+     * // Get one Post
+     * const post = await prisma.post.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends PostFindFirstOrThrowArgs>(args?: SelectSubset<T, PostFindFirstOrThrowArgs<ExtArgs>>): Prisma__PostClient<$Result.GetResult<Prisma.$PostPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Posts that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PostFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Posts
+     * const posts = await prisma.post.findMany()
+     * 
+     * // Get first 10 Posts
+     * const posts = await prisma.post.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const postWithIdOnly = await prisma.post.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends PostFindManyArgs>(args?: SelectSubset<T, PostFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PostPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Post.
+     * @param {PostCreateArgs} args - Arguments to create a Post.
+     * @example
+     * // Create one Post
+     * const Post = await prisma.post.create({
+     *   data: {
+     *     // ... data to create a Post
+     *   }
+     * })
+     * 
+     */
+    create<T extends PostCreateArgs>(args: SelectSubset<T, PostCreateArgs<ExtArgs>>): Prisma__PostClient<$Result.GetResult<Prisma.$PostPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Posts.
+     * @param {PostCreateManyArgs} args - Arguments to create many Posts.
+     * @example
+     * // Create many Posts
+     * const post = await prisma.post.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends PostCreateManyArgs>(args?: SelectSubset<T, PostCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Posts and returns the data saved in the database.
+     * @param {PostCreateManyAndReturnArgs} args - Arguments to create many Posts.
+     * @example
+     * // Create many Posts
+     * const post = await prisma.post.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Posts and only return the `id`
+     * const postWithIdOnly = await prisma.post.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends PostCreateManyAndReturnArgs>(args?: SelectSubset<T, PostCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PostPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Post.
+     * @param {PostDeleteArgs} args - Arguments to delete one Post.
+     * @example
+     * // Delete one Post
+     * const Post = await prisma.post.delete({
+     *   where: {
+     *     // ... filter to delete one Post
+     *   }
+     * })
+     * 
+     */
+    delete<T extends PostDeleteArgs>(args: SelectSubset<T, PostDeleteArgs<ExtArgs>>): Prisma__PostClient<$Result.GetResult<Prisma.$PostPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Post.
+     * @param {PostUpdateArgs} args - Arguments to update one Post.
+     * @example
+     * // Update one Post
+     * const post = await prisma.post.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends PostUpdateArgs>(args: SelectSubset<T, PostUpdateArgs<ExtArgs>>): Prisma__PostClient<$Result.GetResult<Prisma.$PostPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Posts.
+     * @param {PostDeleteManyArgs} args - Arguments to filter Posts to delete.
+     * @example
+     * // Delete a few Posts
+     * const { count } = await prisma.post.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends PostDeleteManyArgs>(args?: SelectSubset<T, PostDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Posts.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PostUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Posts
+     * const post = await prisma.post.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends PostUpdateManyArgs>(args: SelectSubset<T, PostUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Posts and returns the data updated in the database.
+     * @param {PostUpdateManyAndReturnArgs} args - Arguments to update many Posts.
+     * @example
+     * // Update many Posts
+     * const post = await prisma.post.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Posts and only return the `id`
+     * const postWithIdOnly = await prisma.post.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends PostUpdateManyAndReturnArgs>(args: SelectSubset<T, PostUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PostPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Post.
+     * @param {PostUpsertArgs} args - Arguments to update or create a Post.
+     * @example
+     * // Update or create a Post
+     * const post = await prisma.post.upsert({
+     *   create: {
+     *     // ... data to create a Post
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Post we want to update
+     *   }
+     * })
+     */
+    upsert<T extends PostUpsertArgs>(args: SelectSubset<T, PostUpsertArgs<ExtArgs>>): Prisma__PostClient<$Result.GetResult<Prisma.$PostPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Posts.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PostCountArgs} args - Arguments to filter Posts to count.
+     * @example
+     * // Count the number of Posts
+     * const count = await prisma.post.count({
+     *   where: {
+     *     // ... the filter for the Posts we want to count
+     *   }
+     * })
+    **/
+    count<T extends PostCountArgs>(
+      args?: Subset<T, PostCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], PostCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Post.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PostAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends PostAggregateArgs>(args: Subset<T, PostAggregateArgs>): Prisma.PrismaPromise<GetPostAggregateType<T>>
+
+    /**
+     * Group by Post.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PostGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends PostGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: PostGroupByArgs['orderBy'] }
+        : { orderBy?: PostGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, PostGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetPostGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Post model
+   */
+  readonly fields: PostFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Post.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__PostClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    category<T extends Post$categoryArgs<ExtArgs> = {}>(args?: Subset<T, Post$categoryArgs<ExtArgs>>): Prisma__CategoryClient<$Result.GetResult<Prisma.$CategoryPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    tags<T extends Post$tagsArgs<ExtArgs> = {}>(args?: Subset<T, Post$tagsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TagPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    user<T extends Post$userArgs<ExtArgs> = {}>(args?: Subset<T, Post$userArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Post model
+   */
+  interface PostFieldRefs {
+    readonly id: FieldRef<"Post", 'String'>
+    readonly title: FieldRef<"Post", 'String'>
+    readonly slug: FieldRef<"Post", 'String'>
+    readonly summary: FieldRef<"Post", 'String'>
+    readonly draft: FieldRef<"Post", 'Boolean'>
+    readonly content: FieldRef<"Post", 'String'>
+    readonly published: FieldRef<"Post", 'Boolean'>
+    readonly imageUrl: FieldRef<"Post", 'String'>
+    readonly categoryId: FieldRef<"Post", 'String'>
+    readonly metaTitle: FieldRef<"Post", 'String'>
+    readonly metaDescription: FieldRef<"Post", 'String'>
+    readonly canonicalUrl: FieldRef<"Post", 'String'>
+    readonly ogImage: FieldRef<"Post", 'String'>
+    readonly userId: FieldRef<"Post", 'String'>
+    readonly createdAt: FieldRef<"Post", 'DateTime'>
+    readonly updatedAt: FieldRef<"Post", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Post findUnique
+   */
+  export type PostFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Post
+     */
+    select?: PostSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Post
+     */
+    omit?: PostOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PostInclude<ExtArgs> | null
+    /**
+     * Filter, which Post to fetch.
+     */
+    where: PostWhereUniqueInput
+  }
+
+  /**
+   * Post findUniqueOrThrow
+   */
+  export type PostFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Post
+     */
+    select?: PostSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Post
+     */
+    omit?: PostOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PostInclude<ExtArgs> | null
+    /**
+     * Filter, which Post to fetch.
+     */
+    where: PostWhereUniqueInput
+  }
+
+  /**
+   * Post findFirst
+   */
+  export type PostFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Post
+     */
+    select?: PostSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Post
+     */
+    omit?: PostOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PostInclude<ExtArgs> | null
+    /**
+     * Filter, which Post to fetch.
+     */
+    where?: PostWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Posts to fetch.
+     */
+    orderBy?: PostOrderByWithRelationInput | PostOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Posts.
+     */
+    cursor?: PostWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Posts from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Posts.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Posts.
+     */
+    distinct?: PostScalarFieldEnum | PostScalarFieldEnum[]
+  }
+
+  /**
+   * Post findFirstOrThrow
+   */
+  export type PostFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Post
+     */
+    select?: PostSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Post
+     */
+    omit?: PostOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PostInclude<ExtArgs> | null
+    /**
+     * Filter, which Post to fetch.
+     */
+    where?: PostWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Posts to fetch.
+     */
+    orderBy?: PostOrderByWithRelationInput | PostOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Posts.
+     */
+    cursor?: PostWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Posts from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Posts.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Posts.
+     */
+    distinct?: PostScalarFieldEnum | PostScalarFieldEnum[]
+  }
+
+  /**
+   * Post findMany
+   */
+  export type PostFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Post
+     */
+    select?: PostSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Post
+     */
+    omit?: PostOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PostInclude<ExtArgs> | null
+    /**
+     * Filter, which Posts to fetch.
+     */
+    where?: PostWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Posts to fetch.
+     */
+    orderBy?: PostOrderByWithRelationInput | PostOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Posts.
+     */
+    cursor?: PostWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Posts from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Posts.
+     */
+    skip?: number
+    distinct?: PostScalarFieldEnum | PostScalarFieldEnum[]
+  }
+
+  /**
+   * Post create
+   */
+  export type PostCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Post
+     */
+    select?: PostSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Post
+     */
+    omit?: PostOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PostInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Post.
+     */
+    data: XOR<PostCreateInput, PostUncheckedCreateInput>
+  }
+
+  /**
+   * Post createMany
+   */
+  export type PostCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Posts.
+     */
+    data: PostCreateManyInput | PostCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Post createManyAndReturn
+   */
+  export type PostCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Post
+     */
+    select?: PostSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Post
+     */
+    omit?: PostOmit<ExtArgs> | null
+    /**
+     * The data used to create many Posts.
+     */
+    data: PostCreateManyInput | PostCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PostIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Post update
+   */
+  export type PostUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Post
+     */
+    select?: PostSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Post
+     */
+    omit?: PostOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PostInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Post.
+     */
+    data: XOR<PostUpdateInput, PostUncheckedUpdateInput>
+    /**
+     * Choose, which Post to update.
+     */
+    where: PostWhereUniqueInput
+  }
+
+  /**
+   * Post updateMany
+   */
+  export type PostUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Posts.
+     */
+    data: XOR<PostUpdateManyMutationInput, PostUncheckedUpdateManyInput>
+    /**
+     * Filter which Posts to update
+     */
+    where?: PostWhereInput
+    /**
+     * Limit how many Posts to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Post updateManyAndReturn
+   */
+  export type PostUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Post
+     */
+    select?: PostSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Post
+     */
+    omit?: PostOmit<ExtArgs> | null
+    /**
+     * The data used to update Posts.
+     */
+    data: XOR<PostUpdateManyMutationInput, PostUncheckedUpdateManyInput>
+    /**
+     * Filter which Posts to update
+     */
+    where?: PostWhereInput
+    /**
+     * Limit how many Posts to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PostIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Post upsert
+   */
+  export type PostUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Post
+     */
+    select?: PostSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Post
+     */
+    omit?: PostOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PostInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Post to update in case it exists.
+     */
+    where: PostWhereUniqueInput
+    /**
+     * In case the Post found by the `where` argument doesn't exist, create a new Post with this data.
+     */
+    create: XOR<PostCreateInput, PostUncheckedCreateInput>
+    /**
+     * In case the Post was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<PostUpdateInput, PostUncheckedUpdateInput>
+  }
+
+  /**
+   * Post delete
+   */
+  export type PostDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Post
+     */
+    select?: PostSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Post
+     */
+    omit?: PostOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PostInclude<ExtArgs> | null
+    /**
+     * Filter which Post to delete.
+     */
+    where: PostWhereUniqueInput
+  }
+
+  /**
+   * Post deleteMany
+   */
+  export type PostDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Posts to delete
+     */
+    where?: PostWhereInput
+    /**
+     * Limit how many Posts to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Post.category
+   */
+  export type Post$categoryArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Category
+     */
+    select?: CategorySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Category
+     */
+    omit?: CategoryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CategoryInclude<ExtArgs> | null
+    where?: CategoryWhereInput
+  }
+
+  /**
+   * Post.tags
+   */
+  export type Post$tagsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Tag
+     */
+    select?: TagSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Tag
+     */
+    omit?: TagOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TagInclude<ExtArgs> | null
+    where?: TagWhereInput
+    orderBy?: TagOrderByWithRelationInput | TagOrderByWithRelationInput[]
+    cursor?: TagWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: TagScalarFieldEnum | TagScalarFieldEnum[]
+  }
+
+  /**
+   * Post.user
+   */
+  export type Post$userArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the User
+     */
+    select?: UserSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the User
+     */
+    omit?: UserOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+    where?: UserWhereInput
+  }
+
+  /**
+   * Post without action
+   */
+  export type PostDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Post
+     */
+    select?: PostSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Post
+     */
+    omit?: PostOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PostInclude<ExtArgs> | null
   }
 
 
@@ -8638,6 +8618,7 @@ export namespace Prisma {
     metaTitle: string | null
     metaDescription: string | null
     ogImage: string | null
+    createdAt: Date | null
     updatedAt: Date | null
   }
 
@@ -8653,6 +8634,7 @@ export namespace Prisma {
     metaTitle: string | null
     metaDescription: string | null
     ogImage: string | null
+    createdAt: Date | null
     updatedAt: Date | null
   }
 
@@ -8668,6 +8650,7 @@ export namespace Prisma {
     metaTitle: number
     metaDescription: number
     ogImage: number
+    createdAt: number
     updatedAt: number
     _all: number
   }
@@ -8693,6 +8676,7 @@ export namespace Prisma {
     metaTitle?: true
     metaDescription?: true
     ogImage?: true
+    createdAt?: true
     updatedAt?: true
   }
 
@@ -8708,6 +8692,7 @@ export namespace Prisma {
     metaTitle?: true
     metaDescription?: true
     ogImage?: true
+    createdAt?: true
     updatedAt?: true
   }
 
@@ -8723,6 +8708,7 @@ export namespace Prisma {
     metaTitle?: true
     metaDescription?: true
     ogImage?: true
+    createdAt?: true
     updatedAt?: true
     _all?: true
   }
@@ -8825,6 +8811,7 @@ export namespace Prisma {
     metaTitle: string | null
     metaDescription: string | null
     ogImage: string | null
+    createdAt: Date
     updatedAt: Date
     _count: ProductCategoryCountAggregateOutputType | null
     _avg: ProductCategoryAvgAggregateOutputType | null
@@ -8859,6 +8846,7 @@ export namespace Prisma {
     metaTitle?: boolean
     metaDescription?: boolean
     ogImage?: boolean
+    createdAt?: boolean
     updatedAt?: boolean
     parent?: boolean | ProductCategory$parentArgs<ExtArgs>
     children?: boolean | ProductCategory$childrenArgs<ExtArgs>
@@ -8878,6 +8866,7 @@ export namespace Prisma {
     metaTitle?: boolean
     metaDescription?: boolean
     ogImage?: boolean
+    createdAt?: boolean
     updatedAt?: boolean
     parent?: boolean | ProductCategory$parentArgs<ExtArgs>
   }, ExtArgs["result"]["productCategory"]>
@@ -8894,6 +8883,7 @@ export namespace Prisma {
     metaTitle?: boolean
     metaDescription?: boolean
     ogImage?: boolean
+    createdAt?: boolean
     updatedAt?: boolean
     parent?: boolean | ProductCategory$parentArgs<ExtArgs>
   }, ExtArgs["result"]["productCategory"]>
@@ -8910,10 +8900,11 @@ export namespace Prisma {
     metaTitle?: boolean
     metaDescription?: boolean
     ogImage?: boolean
+    createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type ProductCategoryOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "slug" | "parentId" | "summary" | "description" | "image" | "order" | "metaTitle" | "metaDescription" | "ogImage" | "updatedAt", ExtArgs["result"]["productCategory"]>
+  export type ProductCategoryOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "slug" | "parentId" | "summary" | "description" | "image" | "order" | "metaTitle" | "metaDescription" | "ogImage" | "createdAt" | "updatedAt", ExtArgs["result"]["productCategory"]>
   export type ProductCategoryInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     parent?: boolean | ProductCategory$parentArgs<ExtArgs>
     children?: boolean | ProductCategory$childrenArgs<ExtArgs>
@@ -8946,6 +8937,7 @@ export namespace Prisma {
       metaTitle: string | null
       metaDescription: string | null
       ogImage: string | null
+      createdAt: Date
       updatedAt: Date
     }, ExtArgs["result"]["productCategory"]>
     composites: {}
@@ -9384,6 +9376,7 @@ export namespace Prisma {
     readonly metaTitle: FieldRef<"ProductCategory", 'String'>
     readonly metaDescription: FieldRef<"ProductCategory", 'String'>
     readonly ogImage: FieldRef<"ProductCategory", 'String'>
+    readonly createdAt: FieldRef<"ProductCategory", 'DateTime'>
     readonly updatedAt: FieldRef<"ProductCategory", 'DateTime'>
   }
     
@@ -9905,7 +9898,6 @@ export namespace Prisma {
     ogDescription: string | null
     createdAt: Date | null
     updatedAt: Date | null
-    tagId: string | null
   }
 
   export type ProductMaxAggregateOutputType = {
@@ -9927,7 +9919,6 @@ export namespace Prisma {
     ogDescription: string | null
     createdAt: Date | null
     updatedAt: Date | null
-    tagId: string | null
   }
 
   export type ProductCountAggregateOutputType = {
@@ -9950,7 +9941,6 @@ export namespace Prisma {
     ogDescription: number
     createdAt: number
     updatedAt: number
-    tagId: number
     _all: number
   }
 
@@ -9982,7 +9972,6 @@ export namespace Prisma {
     ogDescription?: true
     createdAt?: true
     updatedAt?: true
-    tagId?: true
   }
 
   export type ProductMaxAggregateInputType = {
@@ -10004,7 +9993,6 @@ export namespace Prisma {
     ogDescription?: true
     createdAt?: true
     updatedAt?: true
-    tagId?: true
   }
 
   export type ProductCountAggregateInputType = {
@@ -10027,7 +10015,6 @@ export namespace Prisma {
     ogDescription?: true
     createdAt?: true
     updatedAt?: true
-    tagId?: true
     _all?: true
   }
 
@@ -10128,7 +10115,7 @@ export namespace Prisma {
     categoryId: string
     isPublished: boolean
     order: number | null
-    userId: string | null
+    userId: string
     metaTitle: string | null
     metaDescription: string | null
     canonicalUrl: string | null
@@ -10137,7 +10124,6 @@ export namespace Prisma {
     ogDescription: string | null
     createdAt: Date
     updatedAt: Date
-    tagId: string | null
     _count: ProductCountAggregateOutputType | null
     _avg: ProductAvgAggregateOutputType | null
     _sum: ProductSumAggregateOutputType | null
@@ -10179,11 +10165,9 @@ export namespace Prisma {
     ogDescription?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    tagId?: boolean
     category?: boolean | ProductCategoryDefaultArgs<ExtArgs>
     tags?: boolean | Product$tagsArgs<ExtArgs>
-    user?: boolean | Product$userArgs<ExtArgs>
-    Tag?: boolean | Product$TagArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
     _count?: boolean | ProductCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["product"]>
 
@@ -10207,10 +10191,8 @@ export namespace Prisma {
     ogDescription?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    tagId?: boolean
     category?: boolean | ProductCategoryDefaultArgs<ExtArgs>
-    user?: boolean | Product$userArgs<ExtArgs>
-    Tag?: boolean | Product$TagArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["product"]>
 
   export type ProductSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -10233,10 +10215,8 @@ export namespace Prisma {
     ogDescription?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    tagId?: boolean
     category?: boolean | ProductCategoryDefaultArgs<ExtArgs>
-    user?: boolean | Product$userArgs<ExtArgs>
-    Tag?: boolean | Product$TagArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["product"]>
 
   export type ProductSelectScalar = {
@@ -10259,26 +10239,22 @@ export namespace Prisma {
     ogDescription?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    tagId?: boolean
   }
 
-  export type ProductOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "slug" | "summary" | "description" | "imageUrls" | "datasheetUrl" | "categoryId" | "isPublished" | "order" | "userId" | "metaTitle" | "metaDescription" | "canonicalUrl" | "ogImage" | "ogTitle" | "ogDescription" | "createdAt" | "updatedAt" | "tagId", ExtArgs["result"]["product"]>
+  export type ProductOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "slug" | "summary" | "description" | "imageUrls" | "datasheetUrl" | "categoryId" | "isPublished" | "order" | "userId" | "metaTitle" | "metaDescription" | "canonicalUrl" | "ogImage" | "ogTitle" | "ogDescription" | "createdAt" | "updatedAt", ExtArgs["result"]["product"]>
   export type ProductInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     category?: boolean | ProductCategoryDefaultArgs<ExtArgs>
     tags?: boolean | Product$tagsArgs<ExtArgs>
-    user?: boolean | Product$userArgs<ExtArgs>
-    Tag?: boolean | Product$TagArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
     _count?: boolean | ProductCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type ProductIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     category?: boolean | ProductCategoryDefaultArgs<ExtArgs>
-    user?: boolean | Product$userArgs<ExtArgs>
-    Tag?: boolean | Product$TagArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
   }
   export type ProductIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     category?: boolean | ProductCategoryDefaultArgs<ExtArgs>
-    user?: boolean | Product$userArgs<ExtArgs>
-    Tag?: boolean | Product$TagArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
   }
 
   export type $ProductPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -10286,8 +10262,7 @@ export namespace Prisma {
     objects: {
       category: Prisma.$ProductCategoryPayload<ExtArgs>
       tags: Prisma.$TagPayload<ExtArgs>[]
-      user: Prisma.$UserPayload<ExtArgs> | null
-      Tag: Prisma.$TagPayload<ExtArgs> | null
+      user: Prisma.$UserPayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -10300,7 +10275,7 @@ export namespace Prisma {
       categoryId: string
       isPublished: boolean
       order: number | null
-      userId: string | null
+      userId: string
       metaTitle: string | null
       metaDescription: string | null
       canonicalUrl: string | null
@@ -10309,7 +10284,6 @@ export namespace Prisma {
       ogDescription: string | null
       createdAt: Date
       updatedAt: Date
-      tagId: string | null
     }, ExtArgs["result"]["product"]>
     composites: {}
   }
@@ -10706,8 +10680,7 @@ export namespace Prisma {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     category<T extends ProductCategoryDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ProductCategoryDefaultArgs<ExtArgs>>): Prisma__ProductCategoryClient<$Result.GetResult<Prisma.$ProductCategoryPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     tags<T extends Product$tagsArgs<ExtArgs> = {}>(args?: Subset<T, Product$tagsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TagPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    user<T extends Product$userArgs<ExtArgs> = {}>(args?: Subset<T, Product$userArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-    Tag<T extends Product$TagArgs<ExtArgs> = {}>(args?: Subset<T, Product$TagArgs<ExtArgs>>): Prisma__TagClient<$Result.GetResult<Prisma.$TagPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -10756,7 +10729,6 @@ export namespace Prisma {
     readonly ogDescription: FieldRef<"Product", 'String'>
     readonly createdAt: FieldRef<"Product", 'DateTime'>
     readonly updatedAt: FieldRef<"Product", 'DateTime'>
-    readonly tagId: FieldRef<"Product", 'String'>
   }
     
 
@@ -11177,44 +11149,6 @@ export namespace Prisma {
   }
 
   /**
-   * Product.user
-   */
-  export type Product$userArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the User
-     */
-    select?: UserSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the User
-     */
-    omit?: UserOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: UserInclude<ExtArgs> | null
-    where?: UserWhereInput
-  }
-
-  /**
-   * Product.Tag
-   */
-  export type Product$TagArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Tag
-     */
-    select?: TagSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Tag
-     */
-    omit?: TagOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: TagInclude<ExtArgs> | null
-    where?: TagWhereInput
-  }
-
-  /**
    * Product without action
    */
   export type ProductDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -11252,9 +11186,9 @@ export namespace Prisma {
     email: 'email',
     hashedPassword: 'hashedPassword',
     username: 'username',
+    role: 'role',
     createdAt: 'createdAt',
-    updatedAt: 'updatedAt',
-    role: 'role'
+    updatedAt: 'updatedAt'
   };
 
   export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
@@ -11285,28 +11219,6 @@ export namespace Prisma {
   export type BookScalarFieldEnum = (typeof BookScalarFieldEnum)[keyof typeof BookScalarFieldEnum]
 
 
-  export const PostScalarFieldEnum: {
-    id: 'id',
-    title: 'title',
-    slug: 'slug',
-    summary: 'summary',
-    draft: 'draft',
-    content: 'content',
-    published: 'published',
-    imageUrl: 'imageUrl',
-    categoryId: 'categoryId',
-    metaTitle: 'metaTitle',
-    metaDescription: 'metaDescription',
-    canonicalUrl: 'canonicalUrl',
-    ogImage: 'ogImage',
-    createdAt: 'createdAt',
-    updatedAt: 'updatedAt',
-    userId: 'userId'
-  };
-
-  export type PostScalarFieldEnum = (typeof PostScalarFieldEnum)[keyof typeof PostScalarFieldEnum]
-
-
   export const CategoryScalarFieldEnum: {
     id: 'id',
     name: 'name',
@@ -11329,6 +11241,28 @@ export namespace Prisma {
   export type TagScalarFieldEnum = (typeof TagScalarFieldEnum)[keyof typeof TagScalarFieldEnum]
 
 
+  export const PostScalarFieldEnum: {
+    id: 'id',
+    title: 'title',
+    slug: 'slug',
+    summary: 'summary',
+    draft: 'draft',
+    content: 'content',
+    published: 'published',
+    imageUrl: 'imageUrl',
+    categoryId: 'categoryId',
+    metaTitle: 'metaTitle',
+    metaDescription: 'metaDescription',
+    canonicalUrl: 'canonicalUrl',
+    ogImage: 'ogImage',
+    userId: 'userId',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type PostScalarFieldEnum = (typeof PostScalarFieldEnum)[keyof typeof PostScalarFieldEnum]
+
+
   export const ProductCategoryScalarFieldEnum: {
     id: 'id',
     name: 'name',
@@ -11341,6 +11275,7 @@ export namespace Prisma {
     metaTitle: 'metaTitle',
     metaDescription: 'metaDescription',
     ogImage: 'ogImage',
+    createdAt: 'createdAt',
     updatedAt: 'updatedAt'
   };
 
@@ -11366,8 +11301,7 @@ export namespace Prisma {
     ogTitle: 'ogTitle',
     ogDescription: 'ogDescription',
     createdAt: 'createdAt',
-    updatedAt: 'updatedAt',
-    tagId: 'tagId'
+    updatedAt: 'updatedAt'
   };
 
   export type ProductScalarFieldEnum = (typeof ProductScalarFieldEnum)[keyof typeof ProductScalarFieldEnum]
@@ -11413,6 +11347,20 @@ export namespace Prisma {
    * Reference to a field of type 'String[]'
    */
   export type ListStringFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'String[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'Role'
+   */
+  export type EnumRoleFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Role'>
+    
+
+
+  /**
+   * Reference to a field of type 'Role[]'
+   */
+  export type ListEnumRoleFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Role[]'>
     
 
 
@@ -11476,11 +11424,11 @@ export namespace Prisma {
     email?: StringFilter<"User"> | string
     hashedPassword?: StringNullableFilter<"User"> | string | null
     username?: StringNullableFilter<"User"> | string | null
+    role?: EnumRoleFilter<"User"> | $Enums.Role
     createdAt?: DateTimeFilter<"User"> | Date | string
     updatedAt?: DateTimeFilter<"User"> | Date | string
-    role?: StringFilter<"User"> | string
     sessions?: SessionListRelationFilter
-    Book?: BookListRelationFilter
+    books?: BookListRelationFilter
     posts?: PostListRelationFilter
     products?: ProductListRelationFilter
   }
@@ -11490,11 +11438,11 @@ export namespace Prisma {
     email?: SortOrder
     hashedPassword?: SortOrderInput | SortOrder
     username?: SortOrderInput | SortOrder
+    role?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
-    role?: SortOrder
     sessions?: SessionOrderByRelationAggregateInput
-    Book?: BookOrderByRelationAggregateInput
+    books?: BookOrderByRelationAggregateInput
     posts?: PostOrderByRelationAggregateInput
     products?: ProductOrderByRelationAggregateInput
   }
@@ -11507,11 +11455,11 @@ export namespace Prisma {
     OR?: UserWhereInput[]
     NOT?: UserWhereInput | UserWhereInput[]
     hashedPassword?: StringNullableFilter<"User"> | string | null
+    role?: EnumRoleFilter<"User"> | $Enums.Role
     createdAt?: DateTimeFilter<"User"> | Date | string
     updatedAt?: DateTimeFilter<"User"> | Date | string
-    role?: StringFilter<"User"> | string
     sessions?: SessionListRelationFilter
-    Book?: BookListRelationFilter
+    books?: BookListRelationFilter
     posts?: PostListRelationFilter
     products?: ProductListRelationFilter
   }, "id" | "email" | "username">
@@ -11521,9 +11469,9 @@ export namespace Prisma {
     email?: SortOrder
     hashedPassword?: SortOrderInput | SortOrder
     username?: SortOrderInput | SortOrder
+    role?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
-    role?: SortOrder
     _count?: UserCountOrderByAggregateInput
     _max?: UserMaxOrderByAggregateInput
     _min?: UserMinOrderByAggregateInput
@@ -11537,9 +11485,9 @@ export namespace Prisma {
     email?: StringWithAggregatesFilter<"User"> | string
     hashedPassword?: StringNullableWithAggregatesFilter<"User"> | string | null
     username?: StringNullableWithAggregatesFilter<"User"> | string | null
+    role?: EnumRoleWithAggregatesFilter<"User"> | $Enums.Role
     createdAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
-    role?: StringWithAggregatesFilter<"User"> | string
   }
 
   export type SessionWhereInput = {
@@ -11669,122 +11617,6 @@ export namespace Prisma {
     userId?: StringNullableWithAggregatesFilter<"Book"> | string | null
   }
 
-  export type PostWhereInput = {
-    AND?: PostWhereInput | PostWhereInput[]
-    OR?: PostWhereInput[]
-    NOT?: PostWhereInput | PostWhereInput[]
-    id?: StringFilter<"Post"> | string
-    title?: StringFilter<"Post"> | string
-    slug?: StringFilter<"Post"> | string
-    summary?: StringNullableFilter<"Post"> | string | null
-    draft?: BoolFilter<"Post"> | boolean
-    content?: StringNullableFilter<"Post"> | string | null
-    published?: BoolFilter<"Post"> | boolean
-    imageUrl?: StringNullableFilter<"Post"> | string | null
-    categoryId?: StringNullableFilter<"Post"> | string | null
-    metaTitle?: StringNullableFilter<"Post"> | string | null
-    metaDescription?: StringNullableFilter<"Post"> | string | null
-    canonicalUrl?: StringNullableFilter<"Post"> | string | null
-    ogImage?: StringNullableFilter<"Post"> | string | null
-    createdAt?: DateTimeFilter<"Post"> | Date | string
-    updatedAt?: DateTimeFilter<"Post"> | Date | string
-    userId?: StringNullableFilter<"Post"> | string | null
-    category?: XOR<CategoryNullableScalarRelationFilter, CategoryWhereInput> | null
-    tags?: TagListRelationFilter
-    user?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
-  }
-
-  export type PostOrderByWithRelationInput = {
-    id?: SortOrder
-    title?: SortOrder
-    slug?: SortOrder
-    summary?: SortOrderInput | SortOrder
-    draft?: SortOrder
-    content?: SortOrderInput | SortOrder
-    published?: SortOrder
-    imageUrl?: SortOrderInput | SortOrder
-    categoryId?: SortOrderInput | SortOrder
-    metaTitle?: SortOrderInput | SortOrder
-    metaDescription?: SortOrderInput | SortOrder
-    canonicalUrl?: SortOrderInput | SortOrder
-    ogImage?: SortOrderInput | SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-    userId?: SortOrderInput | SortOrder
-    category?: CategoryOrderByWithRelationInput
-    tags?: TagOrderByRelationAggregateInput
-    user?: UserOrderByWithRelationInput
-  }
-
-  export type PostWhereUniqueInput = Prisma.AtLeast<{
-    id?: string
-    slug?: string
-    AND?: PostWhereInput | PostWhereInput[]
-    OR?: PostWhereInput[]
-    NOT?: PostWhereInput | PostWhereInput[]
-    title?: StringFilter<"Post"> | string
-    summary?: StringNullableFilter<"Post"> | string | null
-    draft?: BoolFilter<"Post"> | boolean
-    content?: StringNullableFilter<"Post"> | string | null
-    published?: BoolFilter<"Post"> | boolean
-    imageUrl?: StringNullableFilter<"Post"> | string | null
-    categoryId?: StringNullableFilter<"Post"> | string | null
-    metaTitle?: StringNullableFilter<"Post"> | string | null
-    metaDescription?: StringNullableFilter<"Post"> | string | null
-    canonicalUrl?: StringNullableFilter<"Post"> | string | null
-    ogImage?: StringNullableFilter<"Post"> | string | null
-    createdAt?: DateTimeFilter<"Post"> | Date | string
-    updatedAt?: DateTimeFilter<"Post"> | Date | string
-    userId?: StringNullableFilter<"Post"> | string | null
-    category?: XOR<CategoryNullableScalarRelationFilter, CategoryWhereInput> | null
-    tags?: TagListRelationFilter
-    user?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
-  }, "id" | "slug">
-
-  export type PostOrderByWithAggregationInput = {
-    id?: SortOrder
-    title?: SortOrder
-    slug?: SortOrder
-    summary?: SortOrderInput | SortOrder
-    draft?: SortOrder
-    content?: SortOrderInput | SortOrder
-    published?: SortOrder
-    imageUrl?: SortOrderInput | SortOrder
-    categoryId?: SortOrderInput | SortOrder
-    metaTitle?: SortOrderInput | SortOrder
-    metaDescription?: SortOrderInput | SortOrder
-    canonicalUrl?: SortOrderInput | SortOrder
-    ogImage?: SortOrderInput | SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-    userId?: SortOrderInput | SortOrder
-    _count?: PostCountOrderByAggregateInput
-    _max?: PostMaxOrderByAggregateInput
-    _min?: PostMinOrderByAggregateInput
-  }
-
-  export type PostScalarWhereWithAggregatesInput = {
-    AND?: PostScalarWhereWithAggregatesInput | PostScalarWhereWithAggregatesInput[]
-    OR?: PostScalarWhereWithAggregatesInput[]
-    NOT?: PostScalarWhereWithAggregatesInput | PostScalarWhereWithAggregatesInput[]
-    id?: StringWithAggregatesFilter<"Post"> | string
-    title?: StringWithAggregatesFilter<"Post"> | string
-    slug?: StringWithAggregatesFilter<"Post"> | string
-    summary?: StringNullableWithAggregatesFilter<"Post"> | string | null
-    draft?: BoolWithAggregatesFilter<"Post"> | boolean
-    content?: StringNullableWithAggregatesFilter<"Post"> | string | null
-    published?: BoolWithAggregatesFilter<"Post"> | boolean
-    imageUrl?: StringNullableWithAggregatesFilter<"Post"> | string | null
-    categoryId?: StringNullableWithAggregatesFilter<"Post"> | string | null
-    metaTitle?: StringNullableWithAggregatesFilter<"Post"> | string | null
-    metaDescription?: StringNullableWithAggregatesFilter<"Post"> | string | null
-    canonicalUrl?: StringNullableWithAggregatesFilter<"Post"> | string | null
-    ogImage?: StringNullableWithAggregatesFilter<"Post"> | string | null
-    createdAt?: DateTimeWithAggregatesFilter<"Post"> | Date | string
-    updatedAt?: DateTimeWithAggregatesFilter<"Post"> | Date | string
-    userId?: StringNullableWithAggregatesFilter<"Post"> | string | null
-  }
-
   export type CategoryWhereInput = {
     AND?: CategoryWhereInput | CategoryWhereInput[]
     OR?: CategoryWhereInput[]
@@ -11851,7 +11683,6 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"Tag"> | Date | string
     posts?: PostListRelationFilter
     products?: ProductListRelationFilter
-    Product?: ProductListRelationFilter
   }
 
   export type TagOrderByWithRelationInput = {
@@ -11862,7 +11693,6 @@ export namespace Prisma {
     updatedAt?: SortOrder
     posts?: PostOrderByRelationAggregateInput
     products?: ProductOrderByRelationAggregateInput
-    Product?: ProductOrderByRelationAggregateInput
   }
 
   export type TagWhereUniqueInput = Prisma.AtLeast<{
@@ -11876,7 +11706,6 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"Tag"> | Date | string
     posts?: PostListRelationFilter
     products?: ProductListRelationFilter
-    Product?: ProductListRelationFilter
   }, "id" | "name" | "slug">
 
   export type TagOrderByWithAggregationInput = {
@@ -11901,6 +11730,122 @@ export namespace Prisma {
     updatedAt?: DateTimeWithAggregatesFilter<"Tag"> | Date | string
   }
 
+  export type PostWhereInput = {
+    AND?: PostWhereInput | PostWhereInput[]
+    OR?: PostWhereInput[]
+    NOT?: PostWhereInput | PostWhereInput[]
+    id?: StringFilter<"Post"> | string
+    title?: StringFilter<"Post"> | string
+    slug?: StringFilter<"Post"> | string
+    summary?: StringNullableFilter<"Post"> | string | null
+    draft?: BoolFilter<"Post"> | boolean
+    content?: StringNullableFilter<"Post"> | string | null
+    published?: BoolFilter<"Post"> | boolean
+    imageUrl?: StringNullableFilter<"Post"> | string | null
+    categoryId?: StringNullableFilter<"Post"> | string | null
+    metaTitle?: StringNullableFilter<"Post"> | string | null
+    metaDescription?: StringNullableFilter<"Post"> | string | null
+    canonicalUrl?: StringNullableFilter<"Post"> | string | null
+    ogImage?: StringNullableFilter<"Post"> | string | null
+    userId?: StringNullableFilter<"Post"> | string | null
+    createdAt?: DateTimeFilter<"Post"> | Date | string
+    updatedAt?: DateTimeFilter<"Post"> | Date | string
+    category?: XOR<CategoryNullableScalarRelationFilter, CategoryWhereInput> | null
+    tags?: TagListRelationFilter
+    user?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
+  }
+
+  export type PostOrderByWithRelationInput = {
+    id?: SortOrder
+    title?: SortOrder
+    slug?: SortOrder
+    summary?: SortOrderInput | SortOrder
+    draft?: SortOrder
+    content?: SortOrderInput | SortOrder
+    published?: SortOrder
+    imageUrl?: SortOrderInput | SortOrder
+    categoryId?: SortOrderInput | SortOrder
+    metaTitle?: SortOrderInput | SortOrder
+    metaDescription?: SortOrderInput | SortOrder
+    canonicalUrl?: SortOrderInput | SortOrder
+    ogImage?: SortOrderInput | SortOrder
+    userId?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    category?: CategoryOrderByWithRelationInput
+    tags?: TagOrderByRelationAggregateInput
+    user?: UserOrderByWithRelationInput
+  }
+
+  export type PostWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    slug?: string
+    AND?: PostWhereInput | PostWhereInput[]
+    OR?: PostWhereInput[]
+    NOT?: PostWhereInput | PostWhereInput[]
+    title?: StringFilter<"Post"> | string
+    summary?: StringNullableFilter<"Post"> | string | null
+    draft?: BoolFilter<"Post"> | boolean
+    content?: StringNullableFilter<"Post"> | string | null
+    published?: BoolFilter<"Post"> | boolean
+    imageUrl?: StringNullableFilter<"Post"> | string | null
+    categoryId?: StringNullableFilter<"Post"> | string | null
+    metaTitle?: StringNullableFilter<"Post"> | string | null
+    metaDescription?: StringNullableFilter<"Post"> | string | null
+    canonicalUrl?: StringNullableFilter<"Post"> | string | null
+    ogImage?: StringNullableFilter<"Post"> | string | null
+    userId?: StringNullableFilter<"Post"> | string | null
+    createdAt?: DateTimeFilter<"Post"> | Date | string
+    updatedAt?: DateTimeFilter<"Post"> | Date | string
+    category?: XOR<CategoryNullableScalarRelationFilter, CategoryWhereInput> | null
+    tags?: TagListRelationFilter
+    user?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
+  }, "id" | "slug">
+
+  export type PostOrderByWithAggregationInput = {
+    id?: SortOrder
+    title?: SortOrder
+    slug?: SortOrder
+    summary?: SortOrderInput | SortOrder
+    draft?: SortOrder
+    content?: SortOrderInput | SortOrder
+    published?: SortOrder
+    imageUrl?: SortOrderInput | SortOrder
+    categoryId?: SortOrderInput | SortOrder
+    metaTitle?: SortOrderInput | SortOrder
+    metaDescription?: SortOrderInput | SortOrder
+    canonicalUrl?: SortOrderInput | SortOrder
+    ogImage?: SortOrderInput | SortOrder
+    userId?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: PostCountOrderByAggregateInput
+    _max?: PostMaxOrderByAggregateInput
+    _min?: PostMinOrderByAggregateInput
+  }
+
+  export type PostScalarWhereWithAggregatesInput = {
+    AND?: PostScalarWhereWithAggregatesInput | PostScalarWhereWithAggregatesInput[]
+    OR?: PostScalarWhereWithAggregatesInput[]
+    NOT?: PostScalarWhereWithAggregatesInput | PostScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"Post"> | string
+    title?: StringWithAggregatesFilter<"Post"> | string
+    slug?: StringWithAggregatesFilter<"Post"> | string
+    summary?: StringNullableWithAggregatesFilter<"Post"> | string | null
+    draft?: BoolWithAggregatesFilter<"Post"> | boolean
+    content?: StringNullableWithAggregatesFilter<"Post"> | string | null
+    published?: BoolWithAggregatesFilter<"Post"> | boolean
+    imageUrl?: StringNullableWithAggregatesFilter<"Post"> | string | null
+    categoryId?: StringNullableWithAggregatesFilter<"Post"> | string | null
+    metaTitle?: StringNullableWithAggregatesFilter<"Post"> | string | null
+    metaDescription?: StringNullableWithAggregatesFilter<"Post"> | string | null
+    canonicalUrl?: StringNullableWithAggregatesFilter<"Post"> | string | null
+    ogImage?: StringNullableWithAggregatesFilter<"Post"> | string | null
+    userId?: StringNullableWithAggregatesFilter<"Post"> | string | null
+    createdAt?: DateTimeWithAggregatesFilter<"Post"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"Post"> | Date | string
+  }
+
   export type ProductCategoryWhereInput = {
     AND?: ProductCategoryWhereInput | ProductCategoryWhereInput[]
     OR?: ProductCategoryWhereInput[]
@@ -11916,6 +11861,7 @@ export namespace Prisma {
     metaTitle?: StringNullableFilter<"ProductCategory"> | string | null
     metaDescription?: StringNullableFilter<"ProductCategory"> | string | null
     ogImage?: StringNullableFilter<"ProductCategory"> | string | null
+    createdAt?: DateTimeFilter<"ProductCategory"> | Date | string
     updatedAt?: DateTimeFilter<"ProductCategory"> | Date | string
     parent?: XOR<ProductCategoryNullableScalarRelationFilter, ProductCategoryWhereInput> | null
     children?: ProductCategoryListRelationFilter
@@ -11934,6 +11880,7 @@ export namespace Prisma {
     metaTitle?: SortOrderInput | SortOrder
     metaDescription?: SortOrderInput | SortOrder
     ogImage?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
     updatedAt?: SortOrder
     parent?: ProductCategoryOrderByWithRelationInput
     children?: ProductCategoryOrderByRelationAggregateInput
@@ -11955,6 +11902,7 @@ export namespace Prisma {
     metaTitle?: StringNullableFilter<"ProductCategory"> | string | null
     metaDescription?: StringNullableFilter<"ProductCategory"> | string | null
     ogImage?: StringNullableFilter<"ProductCategory"> | string | null
+    createdAt?: DateTimeFilter<"ProductCategory"> | Date | string
     updatedAt?: DateTimeFilter<"ProductCategory"> | Date | string
     parent?: XOR<ProductCategoryNullableScalarRelationFilter, ProductCategoryWhereInput> | null
     children?: ProductCategoryListRelationFilter
@@ -11973,6 +11921,7 @@ export namespace Prisma {
     metaTitle?: SortOrderInput | SortOrder
     metaDescription?: SortOrderInput | SortOrder
     ogImage?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
     updatedAt?: SortOrder
     _count?: ProductCategoryCountOrderByAggregateInput
     _avg?: ProductCategoryAvgOrderByAggregateInput
@@ -11996,6 +11945,7 @@ export namespace Prisma {
     metaTitle?: StringNullableWithAggregatesFilter<"ProductCategory"> | string | null
     metaDescription?: StringNullableWithAggregatesFilter<"ProductCategory"> | string | null
     ogImage?: StringNullableWithAggregatesFilter<"ProductCategory"> | string | null
+    createdAt?: DateTimeWithAggregatesFilter<"ProductCategory"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"ProductCategory"> | Date | string
   }
 
@@ -12013,7 +11963,7 @@ export namespace Prisma {
     categoryId?: StringFilter<"Product"> | string
     isPublished?: BoolFilter<"Product"> | boolean
     order?: IntNullableFilter<"Product"> | number | null
-    userId?: StringNullableFilter<"Product"> | string | null
+    userId?: StringFilter<"Product"> | string
     metaTitle?: StringNullableFilter<"Product"> | string | null
     metaDescription?: StringNullableFilter<"Product"> | string | null
     canonicalUrl?: StringNullableFilter<"Product"> | string | null
@@ -12022,11 +11972,9 @@ export namespace Prisma {
     ogDescription?: StringNullableFilter<"Product"> | string | null
     createdAt?: DateTimeFilter<"Product"> | Date | string
     updatedAt?: DateTimeFilter<"Product"> | Date | string
-    tagId?: StringNullableFilter<"Product"> | string | null
     category?: XOR<ProductCategoryScalarRelationFilter, ProductCategoryWhereInput>
     tags?: TagListRelationFilter
-    user?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
-    Tag?: XOR<TagNullableScalarRelationFilter, TagWhereInput> | null
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
   }
 
   export type ProductOrderByWithRelationInput = {
@@ -12040,7 +11988,7 @@ export namespace Prisma {
     categoryId?: SortOrder
     isPublished?: SortOrder
     order?: SortOrderInput | SortOrder
-    userId?: SortOrderInput | SortOrder
+    userId?: SortOrder
     metaTitle?: SortOrderInput | SortOrder
     metaDescription?: SortOrderInput | SortOrder
     canonicalUrl?: SortOrderInput | SortOrder
@@ -12049,11 +11997,9 @@ export namespace Prisma {
     ogDescription?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
-    tagId?: SortOrderInput | SortOrder
     category?: ProductCategoryOrderByWithRelationInput
     tags?: TagOrderByRelationAggregateInput
     user?: UserOrderByWithRelationInput
-    Tag?: TagOrderByWithRelationInput
   }
 
   export type ProductWhereUniqueInput = Prisma.AtLeast<{
@@ -12070,7 +12016,7 @@ export namespace Prisma {
     categoryId?: StringFilter<"Product"> | string
     isPublished?: BoolFilter<"Product"> | boolean
     order?: IntNullableFilter<"Product"> | number | null
-    userId?: StringNullableFilter<"Product"> | string | null
+    userId?: StringFilter<"Product"> | string
     metaTitle?: StringNullableFilter<"Product"> | string | null
     metaDescription?: StringNullableFilter<"Product"> | string | null
     canonicalUrl?: StringNullableFilter<"Product"> | string | null
@@ -12079,11 +12025,9 @@ export namespace Prisma {
     ogDescription?: StringNullableFilter<"Product"> | string | null
     createdAt?: DateTimeFilter<"Product"> | Date | string
     updatedAt?: DateTimeFilter<"Product"> | Date | string
-    tagId?: StringNullableFilter<"Product"> | string | null
     category?: XOR<ProductCategoryScalarRelationFilter, ProductCategoryWhereInput>
     tags?: TagListRelationFilter
-    user?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
-    Tag?: XOR<TagNullableScalarRelationFilter, TagWhereInput> | null
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
   }, "id" | "slug">
 
   export type ProductOrderByWithAggregationInput = {
@@ -12097,7 +12041,7 @@ export namespace Prisma {
     categoryId?: SortOrder
     isPublished?: SortOrder
     order?: SortOrderInput | SortOrder
-    userId?: SortOrderInput | SortOrder
+    userId?: SortOrder
     metaTitle?: SortOrderInput | SortOrder
     metaDescription?: SortOrderInput | SortOrder
     canonicalUrl?: SortOrderInput | SortOrder
@@ -12106,7 +12050,6 @@ export namespace Prisma {
     ogDescription?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
-    tagId?: SortOrderInput | SortOrder
     _count?: ProductCountOrderByAggregateInput
     _avg?: ProductAvgOrderByAggregateInput
     _max?: ProductMaxOrderByAggregateInput
@@ -12128,7 +12071,7 @@ export namespace Prisma {
     categoryId?: StringWithAggregatesFilter<"Product"> | string
     isPublished?: BoolWithAggregatesFilter<"Product"> | boolean
     order?: IntNullableWithAggregatesFilter<"Product"> | number | null
-    userId?: StringNullableWithAggregatesFilter<"Product"> | string | null
+    userId?: StringWithAggregatesFilter<"Product"> | string
     metaTitle?: StringNullableWithAggregatesFilter<"Product"> | string | null
     metaDescription?: StringNullableWithAggregatesFilter<"Product"> | string | null
     canonicalUrl?: StringNullableWithAggregatesFilter<"Product"> | string | null
@@ -12137,7 +12080,6 @@ export namespace Prisma {
     ogDescription?: StringNullableWithAggregatesFilter<"Product"> | string | null
     createdAt?: DateTimeWithAggregatesFilter<"Product"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Product"> | Date | string
-    tagId?: StringNullableWithAggregatesFilter<"Product"> | string | null
   }
 
   export type UserCreateInput = {
@@ -12145,11 +12087,11 @@ export namespace Prisma {
     email: string
     hashedPassword?: string | null
     username?: string | null
+    role?: $Enums.Role
     createdAt?: Date | string
     updatedAt?: Date | string
-    role?: string
     sessions?: SessionCreateNestedManyWithoutUserInput
-    Book?: BookCreateNestedManyWithoutUserInput
+    books?: BookCreateNestedManyWithoutUserInput
     posts?: PostCreateNestedManyWithoutUserInput
     products?: ProductCreateNestedManyWithoutUserInput
   }
@@ -12159,11 +12101,11 @@ export namespace Prisma {
     email: string
     hashedPassword?: string | null
     username?: string | null
+    role?: $Enums.Role
     createdAt?: Date | string
     updatedAt?: Date | string
-    role?: string
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
-    Book?: BookUncheckedCreateNestedManyWithoutUserInput
+    books?: BookUncheckedCreateNestedManyWithoutUserInput
     posts?: PostUncheckedCreateNestedManyWithoutUserInput
     products?: ProductUncheckedCreateNestedManyWithoutUserInput
   }
@@ -12173,11 +12115,11 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     hashedPassword?: NullableStringFieldUpdateOperationsInput | string | null
     username?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    role?: StringFieldUpdateOperationsInput | string
     sessions?: SessionUpdateManyWithoutUserNestedInput
-    Book?: BookUpdateManyWithoutUserNestedInput
+    books?: BookUpdateManyWithoutUserNestedInput
     posts?: PostUpdateManyWithoutUserNestedInput
     products?: ProductUpdateManyWithoutUserNestedInput
   }
@@ -12187,11 +12129,11 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     hashedPassword?: NullableStringFieldUpdateOperationsInput | string | null
     username?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    role?: StringFieldUpdateOperationsInput | string
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
-    Book?: BookUncheckedUpdateManyWithoutUserNestedInput
+    books?: BookUncheckedUpdateManyWithoutUserNestedInput
     posts?: PostUncheckedUpdateManyWithoutUserNestedInput
     products?: ProductUncheckedUpdateManyWithoutUserNestedInput
   }
@@ -12201,9 +12143,9 @@ export namespace Prisma {
     email: string
     hashedPassword?: string | null
     username?: string | null
+    role?: $Enums.Role
     createdAt?: Date | string
     updatedAt?: Date | string
-    role?: string
   }
 
   export type UserUpdateManyMutationInput = {
@@ -12211,9 +12153,9 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     hashedPassword?: NullableStringFieldUpdateOperationsInput | string | null
     username?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    role?: StringFieldUpdateOperationsInput | string
   }
 
   export type UserUncheckedUpdateManyInput = {
@@ -12221,9 +12163,9 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     hashedPassword?: NullableStringFieldUpdateOperationsInput | string | null
     username?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    role?: StringFieldUpdateOperationsInput | string
   }
 
   export type SessionCreateInput = {
@@ -12277,7 +12219,7 @@ export namespace Prisma {
     published?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
-    user?: UserCreateNestedOneWithoutBookInput
+    user?: UserCreateNestedOneWithoutBooksInput
   }
 
   export type BookUncheckedCreateInput = {
@@ -12303,7 +12245,7 @@ export namespace Prisma {
     published?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    user?: UserUpdateOneWithoutBookNestedInput
+    user?: UserUpdateOneWithoutBooksNestedInput
   }
 
   export type BookUncheckedUpdateInput = {
@@ -12352,141 +12294,6 @@ export namespace Prisma {
     price?: NullableFloatFieldUpdateOperationsInput | number | null
     imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     published?: BoolFieldUpdateOperationsInput | boolean
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    userId?: NullableStringFieldUpdateOperationsInput | string | null
-  }
-
-  export type PostCreateInput = {
-    id?: string
-    title: string
-    slug: string
-    summary?: string | null
-    draft?: boolean
-    content?: string | null
-    published?: boolean
-    imageUrl?: string | null
-    metaTitle?: string | null
-    metaDescription?: string | null
-    canonicalUrl?: string | null
-    ogImage?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    category?: CategoryCreateNestedOneWithoutPostsInput
-    tags?: TagCreateNestedManyWithoutPostsInput
-    user?: UserCreateNestedOneWithoutPostsInput
-  }
-
-  export type PostUncheckedCreateInput = {
-    id?: string
-    title: string
-    slug: string
-    summary?: string | null
-    draft?: boolean
-    content?: string | null
-    published?: boolean
-    imageUrl?: string | null
-    categoryId?: string | null
-    metaTitle?: string | null
-    metaDescription?: string | null
-    canonicalUrl?: string | null
-    ogImage?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    userId?: string | null
-    tags?: TagUncheckedCreateNestedManyWithoutPostsInput
-  }
-
-  export type PostUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    title?: StringFieldUpdateOperationsInput | string
-    slug?: StringFieldUpdateOperationsInput | string
-    summary?: NullableStringFieldUpdateOperationsInput | string | null
-    draft?: BoolFieldUpdateOperationsInput | boolean
-    content?: NullableStringFieldUpdateOperationsInput | string | null
-    published?: BoolFieldUpdateOperationsInput | boolean
-    imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    metaTitle?: NullableStringFieldUpdateOperationsInput | string | null
-    metaDescription?: NullableStringFieldUpdateOperationsInput | string | null
-    canonicalUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    ogImage?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    category?: CategoryUpdateOneWithoutPostsNestedInput
-    tags?: TagUpdateManyWithoutPostsNestedInput
-    user?: UserUpdateOneWithoutPostsNestedInput
-  }
-
-  export type PostUncheckedUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    title?: StringFieldUpdateOperationsInput | string
-    slug?: StringFieldUpdateOperationsInput | string
-    summary?: NullableStringFieldUpdateOperationsInput | string | null
-    draft?: BoolFieldUpdateOperationsInput | boolean
-    content?: NullableStringFieldUpdateOperationsInput | string | null
-    published?: BoolFieldUpdateOperationsInput | boolean
-    imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    categoryId?: NullableStringFieldUpdateOperationsInput | string | null
-    metaTitle?: NullableStringFieldUpdateOperationsInput | string | null
-    metaDescription?: NullableStringFieldUpdateOperationsInput | string | null
-    canonicalUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    ogImage?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    userId?: NullableStringFieldUpdateOperationsInput | string | null
-    tags?: TagUncheckedUpdateManyWithoutPostsNestedInput
-  }
-
-  export type PostCreateManyInput = {
-    id?: string
-    title: string
-    slug: string
-    summary?: string | null
-    draft?: boolean
-    content?: string | null
-    published?: boolean
-    imageUrl?: string | null
-    categoryId?: string | null
-    metaTitle?: string | null
-    metaDescription?: string | null
-    canonicalUrl?: string | null
-    ogImage?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    userId?: string | null
-  }
-
-  export type PostUpdateManyMutationInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    title?: StringFieldUpdateOperationsInput | string
-    slug?: StringFieldUpdateOperationsInput | string
-    summary?: NullableStringFieldUpdateOperationsInput | string | null
-    draft?: BoolFieldUpdateOperationsInput | boolean
-    content?: NullableStringFieldUpdateOperationsInput | string | null
-    published?: BoolFieldUpdateOperationsInput | boolean
-    imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    metaTitle?: NullableStringFieldUpdateOperationsInput | string | null
-    metaDescription?: NullableStringFieldUpdateOperationsInput | string | null
-    canonicalUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    ogImage?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type PostUncheckedUpdateManyInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    title?: StringFieldUpdateOperationsInput | string
-    slug?: StringFieldUpdateOperationsInput | string
-    summary?: NullableStringFieldUpdateOperationsInput | string | null
-    draft?: BoolFieldUpdateOperationsInput | boolean
-    content?: NullableStringFieldUpdateOperationsInput | string | null
-    published?: BoolFieldUpdateOperationsInput | boolean
-    imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    categoryId?: NullableStringFieldUpdateOperationsInput | string | null
-    metaTitle?: NullableStringFieldUpdateOperationsInput | string | null
-    metaDescription?: NullableStringFieldUpdateOperationsInput | string | null
-    canonicalUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    ogImage?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     userId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -12560,7 +12367,6 @@ export namespace Prisma {
     updatedAt?: Date | string
     posts?: PostCreateNestedManyWithoutTagsInput
     products?: ProductCreateNestedManyWithoutTagsInput
-    Product?: ProductCreateNestedManyWithoutTagInput
   }
 
   export type TagUncheckedCreateInput = {
@@ -12571,7 +12377,6 @@ export namespace Prisma {
     updatedAt?: Date | string
     posts?: PostUncheckedCreateNestedManyWithoutTagsInput
     products?: ProductUncheckedCreateNestedManyWithoutTagsInput
-    Product?: ProductUncheckedCreateNestedManyWithoutTagInput
   }
 
   export type TagUpdateInput = {
@@ -12582,7 +12387,6 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     posts?: PostUpdateManyWithoutTagsNestedInput
     products?: ProductUpdateManyWithoutTagsNestedInput
-    Product?: ProductUpdateManyWithoutTagNestedInput
   }
 
   export type TagUncheckedUpdateInput = {
@@ -12593,7 +12397,6 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     posts?: PostUncheckedUpdateManyWithoutTagsNestedInput
     products?: ProductUncheckedUpdateManyWithoutTagsNestedInput
-    Product?: ProductUncheckedUpdateManyWithoutTagNestedInput
   }
 
   export type TagCreateManyInput = {
@@ -12620,6 +12423,141 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type PostCreateInput = {
+    id?: string
+    title: string
+    slug: string
+    summary?: string | null
+    draft?: boolean
+    content?: string | null
+    published?: boolean
+    imageUrl?: string | null
+    metaTitle?: string | null
+    metaDescription?: string | null
+    canonicalUrl?: string | null
+    ogImage?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    category?: CategoryCreateNestedOneWithoutPostsInput
+    tags?: TagCreateNestedManyWithoutPostsInput
+    user?: UserCreateNestedOneWithoutPostsInput
+  }
+
+  export type PostUncheckedCreateInput = {
+    id?: string
+    title: string
+    slug: string
+    summary?: string | null
+    draft?: boolean
+    content?: string | null
+    published?: boolean
+    imageUrl?: string | null
+    categoryId?: string | null
+    metaTitle?: string | null
+    metaDescription?: string | null
+    canonicalUrl?: string | null
+    ogImage?: string | null
+    userId?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    tags?: TagUncheckedCreateNestedManyWithoutPostsInput
+  }
+
+  export type PostUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    summary?: NullableStringFieldUpdateOperationsInput | string | null
+    draft?: BoolFieldUpdateOperationsInput | boolean
+    content?: NullableStringFieldUpdateOperationsInput | string | null
+    published?: BoolFieldUpdateOperationsInput | boolean
+    imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    metaTitle?: NullableStringFieldUpdateOperationsInput | string | null
+    metaDescription?: NullableStringFieldUpdateOperationsInput | string | null
+    canonicalUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    ogImage?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    category?: CategoryUpdateOneWithoutPostsNestedInput
+    tags?: TagUpdateManyWithoutPostsNestedInput
+    user?: UserUpdateOneWithoutPostsNestedInput
+  }
+
+  export type PostUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    summary?: NullableStringFieldUpdateOperationsInput | string | null
+    draft?: BoolFieldUpdateOperationsInput | boolean
+    content?: NullableStringFieldUpdateOperationsInput | string | null
+    published?: BoolFieldUpdateOperationsInput | boolean
+    imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    categoryId?: NullableStringFieldUpdateOperationsInput | string | null
+    metaTitle?: NullableStringFieldUpdateOperationsInput | string | null
+    metaDescription?: NullableStringFieldUpdateOperationsInput | string | null
+    canonicalUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    ogImage?: NullableStringFieldUpdateOperationsInput | string | null
+    userId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    tags?: TagUncheckedUpdateManyWithoutPostsNestedInput
+  }
+
+  export type PostCreateManyInput = {
+    id?: string
+    title: string
+    slug: string
+    summary?: string | null
+    draft?: boolean
+    content?: string | null
+    published?: boolean
+    imageUrl?: string | null
+    categoryId?: string | null
+    metaTitle?: string | null
+    metaDescription?: string | null
+    canonicalUrl?: string | null
+    ogImage?: string | null
+    userId?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type PostUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    summary?: NullableStringFieldUpdateOperationsInput | string | null
+    draft?: BoolFieldUpdateOperationsInput | boolean
+    content?: NullableStringFieldUpdateOperationsInput | string | null
+    published?: BoolFieldUpdateOperationsInput | boolean
+    imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    metaTitle?: NullableStringFieldUpdateOperationsInput | string | null
+    metaDescription?: NullableStringFieldUpdateOperationsInput | string | null
+    canonicalUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    ogImage?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PostUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    summary?: NullableStringFieldUpdateOperationsInput | string | null
+    draft?: BoolFieldUpdateOperationsInput | boolean
+    content?: NullableStringFieldUpdateOperationsInput | string | null
+    published?: BoolFieldUpdateOperationsInput | boolean
+    imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    categoryId?: NullableStringFieldUpdateOperationsInput | string | null
+    metaTitle?: NullableStringFieldUpdateOperationsInput | string | null
+    metaDescription?: NullableStringFieldUpdateOperationsInput | string | null
+    canonicalUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    ogImage?: NullableStringFieldUpdateOperationsInput | string | null
+    userId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type ProductCategoryCreateInput = {
     id?: string
     name: string
@@ -12631,6 +12569,7 @@ export namespace Prisma {
     metaTitle?: string | null
     metaDescription?: string | null
     ogImage?: string | null
+    createdAt?: Date | string
     updatedAt?: Date | string
     parent?: ProductCategoryCreateNestedOneWithoutChildrenInput
     children?: ProductCategoryCreateNestedManyWithoutParentInput
@@ -12649,6 +12588,7 @@ export namespace Prisma {
     metaTitle?: string | null
     metaDescription?: string | null
     ogImage?: string | null
+    createdAt?: Date | string
     updatedAt?: Date | string
     children?: ProductCategoryUncheckedCreateNestedManyWithoutParentInput
     products?: ProductUncheckedCreateNestedManyWithoutCategoryInput
@@ -12665,6 +12605,7 @@ export namespace Prisma {
     metaTitle?: NullableStringFieldUpdateOperationsInput | string | null
     metaDescription?: NullableStringFieldUpdateOperationsInput | string | null
     ogImage?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     parent?: ProductCategoryUpdateOneWithoutChildrenNestedInput
     children?: ProductCategoryUpdateManyWithoutParentNestedInput
@@ -12683,6 +12624,7 @@ export namespace Prisma {
     metaTitle?: NullableStringFieldUpdateOperationsInput | string | null
     metaDescription?: NullableStringFieldUpdateOperationsInput | string | null
     ogImage?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     children?: ProductCategoryUncheckedUpdateManyWithoutParentNestedInput
     products?: ProductUncheckedUpdateManyWithoutCategoryNestedInput
@@ -12700,6 +12642,7 @@ export namespace Prisma {
     metaTitle?: string | null
     metaDescription?: string | null
     ogImage?: string | null
+    createdAt?: Date | string
     updatedAt?: Date | string
   }
 
@@ -12714,6 +12657,7 @@ export namespace Prisma {
     metaTitle?: NullableStringFieldUpdateOperationsInput | string | null
     metaDescription?: NullableStringFieldUpdateOperationsInput | string | null
     ogImage?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -12729,6 +12673,7 @@ export namespace Prisma {
     metaTitle?: NullableStringFieldUpdateOperationsInput | string | null
     metaDescription?: NullableStringFieldUpdateOperationsInput | string | null
     ogImage?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -12752,8 +12697,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     category: ProductCategoryCreateNestedOneWithoutProductsInput
     tags?: TagCreateNestedManyWithoutProductsInput
-    user?: UserCreateNestedOneWithoutProductsInput
-    Tag?: TagCreateNestedOneWithoutProductInput
+    user: UserCreateNestedOneWithoutProductsInput
   }
 
   export type ProductUncheckedCreateInput = {
@@ -12767,7 +12711,7 @@ export namespace Prisma {
     categoryId: string
     isPublished?: boolean
     order?: number | null
-    userId?: string | null
+    userId: string
     metaTitle?: string | null
     metaDescription?: string | null
     canonicalUrl?: string | null
@@ -12776,7 +12720,6 @@ export namespace Prisma {
     ogDescription?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    tagId?: string | null
     tags?: TagUncheckedCreateNestedManyWithoutProductsInput
   }
 
@@ -12800,8 +12743,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     category?: ProductCategoryUpdateOneRequiredWithoutProductsNestedInput
     tags?: TagUpdateManyWithoutProductsNestedInput
-    user?: UserUpdateOneWithoutProductsNestedInput
-    Tag?: TagUpdateOneWithoutProductNestedInput
+    user?: UserUpdateOneRequiredWithoutProductsNestedInput
   }
 
   export type ProductUncheckedUpdateInput = {
@@ -12815,7 +12757,7 @@ export namespace Prisma {
     categoryId?: StringFieldUpdateOperationsInput | string
     isPublished?: BoolFieldUpdateOperationsInput | boolean
     order?: NullableIntFieldUpdateOperationsInput | number | null
-    userId?: NullableStringFieldUpdateOperationsInput | string | null
+    userId?: StringFieldUpdateOperationsInput | string
     metaTitle?: NullableStringFieldUpdateOperationsInput | string | null
     metaDescription?: NullableStringFieldUpdateOperationsInput | string | null
     canonicalUrl?: NullableStringFieldUpdateOperationsInput | string | null
@@ -12824,7 +12766,6 @@ export namespace Prisma {
     ogDescription?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    tagId?: NullableStringFieldUpdateOperationsInput | string | null
     tags?: TagUncheckedUpdateManyWithoutProductsNestedInput
   }
 
@@ -12839,7 +12780,7 @@ export namespace Prisma {
     categoryId: string
     isPublished?: boolean
     order?: number | null
-    userId?: string | null
+    userId: string
     metaTitle?: string | null
     metaDescription?: string | null
     canonicalUrl?: string | null
@@ -12848,7 +12789,6 @@ export namespace Prisma {
     ogDescription?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    tagId?: string | null
   }
 
   export type ProductUpdateManyMutationInput = {
@@ -12882,7 +12822,7 @@ export namespace Prisma {
     categoryId?: StringFieldUpdateOperationsInput | string
     isPublished?: BoolFieldUpdateOperationsInput | boolean
     order?: NullableIntFieldUpdateOperationsInput | number | null
-    userId?: NullableStringFieldUpdateOperationsInput | string | null
+    userId?: StringFieldUpdateOperationsInput | string
     metaTitle?: NullableStringFieldUpdateOperationsInput | string | null
     metaDescription?: NullableStringFieldUpdateOperationsInput | string | null
     canonicalUrl?: NullableStringFieldUpdateOperationsInput | string | null
@@ -12891,7 +12831,6 @@ export namespace Prisma {
     ogDescription?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    tagId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type StringFilter<$PrismaModel = never> = {
@@ -12922,6 +12861,13 @@ export namespace Prisma {
     endsWith?: string | StringFieldRefInput<$PrismaModel>
     mode?: QueryMode
     not?: NestedStringNullableFilter<$PrismaModel> | string | null
+  }
+
+  export type EnumRoleFilter<$PrismaModel = never> = {
+    equals?: $Enums.Role | EnumRoleFieldRefInput<$PrismaModel>
+    in?: $Enums.Role[] | ListEnumRoleFieldRefInput<$PrismaModel>
+    notIn?: $Enums.Role[] | ListEnumRoleFieldRefInput<$PrismaModel>
+    not?: NestedEnumRoleFilter<$PrismaModel> | $Enums.Role
   }
 
   export type DateTimeFilter<$PrismaModel = never> = {
@@ -12985,9 +12931,9 @@ export namespace Prisma {
     email?: SortOrder
     hashedPassword?: SortOrder
     username?: SortOrder
+    role?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
-    role?: SortOrder
   }
 
   export type UserMaxOrderByAggregateInput = {
@@ -12995,9 +12941,9 @@ export namespace Prisma {
     email?: SortOrder
     hashedPassword?: SortOrder
     username?: SortOrder
+    role?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
-    role?: SortOrder
   }
 
   export type UserMinOrderByAggregateInput = {
@@ -13005,9 +12951,9 @@ export namespace Prisma {
     email?: SortOrder
     hashedPassword?: SortOrder
     username?: SortOrder
+    role?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
-    role?: SortOrder
   }
 
   export type StringWithAggregatesFilter<$PrismaModel = never> = {
@@ -13044,6 +12990,16 @@ export namespace Prisma {
     _count?: NestedIntNullableFilter<$PrismaModel>
     _min?: NestedStringNullableFilter<$PrismaModel>
     _max?: NestedStringNullableFilter<$PrismaModel>
+  }
+
+  export type EnumRoleWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.Role | EnumRoleFieldRefInput<$PrismaModel>
+    in?: $Enums.Role[] | ListEnumRoleFieldRefInput<$PrismaModel>
+    notIn?: $Enums.Role[] | ListEnumRoleFieldRefInput<$PrismaModel>
+    not?: NestedEnumRoleWithAggregatesFilter<$PrismaModel> | $Enums.Role
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumRoleFilter<$PrismaModel>
+    _max?: NestedEnumRoleFilter<$PrismaModel>
   }
 
   export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
@@ -13175,78 +13131,6 @@ export namespace Prisma {
     _max?: NestedBoolFilter<$PrismaModel>
   }
 
-  export type CategoryNullableScalarRelationFilter = {
-    is?: CategoryWhereInput | null
-    isNot?: CategoryWhereInput | null
-  }
-
-  export type TagListRelationFilter = {
-    every?: TagWhereInput
-    some?: TagWhereInput
-    none?: TagWhereInput
-  }
-
-  export type TagOrderByRelationAggregateInput = {
-    _count?: SortOrder
-  }
-
-  export type PostCountOrderByAggregateInput = {
-    id?: SortOrder
-    title?: SortOrder
-    slug?: SortOrder
-    summary?: SortOrder
-    draft?: SortOrder
-    content?: SortOrder
-    published?: SortOrder
-    imageUrl?: SortOrder
-    categoryId?: SortOrder
-    metaTitle?: SortOrder
-    metaDescription?: SortOrder
-    canonicalUrl?: SortOrder
-    ogImage?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-    userId?: SortOrder
-  }
-
-  export type PostMaxOrderByAggregateInput = {
-    id?: SortOrder
-    title?: SortOrder
-    slug?: SortOrder
-    summary?: SortOrder
-    draft?: SortOrder
-    content?: SortOrder
-    published?: SortOrder
-    imageUrl?: SortOrder
-    categoryId?: SortOrder
-    metaTitle?: SortOrder
-    metaDescription?: SortOrder
-    canonicalUrl?: SortOrder
-    ogImage?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-    userId?: SortOrder
-  }
-
-  export type PostMinOrderByAggregateInput = {
-    id?: SortOrder
-    title?: SortOrder
-    slug?: SortOrder
-    summary?: SortOrder
-    draft?: SortOrder
-    content?: SortOrder
-    published?: SortOrder
-    imageUrl?: SortOrder
-    categoryId?: SortOrder
-    metaTitle?: SortOrder
-    metaDescription?: SortOrder
-    canonicalUrl?: SortOrder
-    ogImage?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-    userId?: SortOrder
-  }
-
   export type CategoryCountOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
@@ -13295,6 +13179,78 @@ export namespace Prisma {
     updatedAt?: SortOrder
   }
 
+  export type CategoryNullableScalarRelationFilter = {
+    is?: CategoryWhereInput | null
+    isNot?: CategoryWhereInput | null
+  }
+
+  export type TagListRelationFilter = {
+    every?: TagWhereInput
+    some?: TagWhereInput
+    none?: TagWhereInput
+  }
+
+  export type TagOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type PostCountOrderByAggregateInput = {
+    id?: SortOrder
+    title?: SortOrder
+    slug?: SortOrder
+    summary?: SortOrder
+    draft?: SortOrder
+    content?: SortOrder
+    published?: SortOrder
+    imageUrl?: SortOrder
+    categoryId?: SortOrder
+    metaTitle?: SortOrder
+    metaDescription?: SortOrder
+    canonicalUrl?: SortOrder
+    ogImage?: SortOrder
+    userId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type PostMaxOrderByAggregateInput = {
+    id?: SortOrder
+    title?: SortOrder
+    slug?: SortOrder
+    summary?: SortOrder
+    draft?: SortOrder
+    content?: SortOrder
+    published?: SortOrder
+    imageUrl?: SortOrder
+    categoryId?: SortOrder
+    metaTitle?: SortOrder
+    metaDescription?: SortOrder
+    canonicalUrl?: SortOrder
+    ogImage?: SortOrder
+    userId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type PostMinOrderByAggregateInput = {
+    id?: SortOrder
+    title?: SortOrder
+    slug?: SortOrder
+    summary?: SortOrder
+    draft?: SortOrder
+    content?: SortOrder
+    published?: SortOrder
+    imageUrl?: SortOrder
+    categoryId?: SortOrder
+    metaTitle?: SortOrder
+    metaDescription?: SortOrder
+    canonicalUrl?: SortOrder
+    ogImage?: SortOrder
+    userId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
   export type IntNullableFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel> | null
     in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
@@ -13333,6 +13289,7 @@ export namespace Prisma {
     metaTitle?: SortOrder
     metaDescription?: SortOrder
     ogImage?: SortOrder
+    createdAt?: SortOrder
     updatedAt?: SortOrder
   }
 
@@ -13352,6 +13309,7 @@ export namespace Prisma {
     metaTitle?: SortOrder
     metaDescription?: SortOrder
     ogImage?: SortOrder
+    createdAt?: SortOrder
     updatedAt?: SortOrder
   }
 
@@ -13367,6 +13325,7 @@ export namespace Prisma {
     metaTitle?: SortOrder
     metaDescription?: SortOrder
     ogImage?: SortOrder
+    createdAt?: SortOrder
     updatedAt?: SortOrder
   }
 
@@ -13403,11 +13362,6 @@ export namespace Prisma {
     isNot?: ProductCategoryWhereInput
   }
 
-  export type TagNullableScalarRelationFilter = {
-    is?: TagWhereInput | null
-    isNot?: TagWhereInput | null
-  }
-
   export type ProductCountOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
@@ -13428,7 +13382,6 @@ export namespace Prisma {
     ogDescription?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
-    tagId?: SortOrder
   }
 
   export type ProductAvgOrderByAggregateInput = {
@@ -13454,7 +13407,6 @@ export namespace Prisma {
     ogDescription?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
-    tagId?: SortOrder
   }
 
   export type ProductMinOrderByAggregateInput = {
@@ -13476,7 +13428,6 @@ export namespace Prisma {
     ogDescription?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
-    tagId?: SortOrder
   }
 
   export type ProductSumOrderByAggregateInput = {
@@ -13545,6 +13496,10 @@ export namespace Prisma {
 
   export type NullableStringFieldUpdateOperationsInput = {
     set?: string | null
+  }
+
+  export type EnumRoleFieldUpdateOperationsInput = {
+    set?: $Enums.Role
   }
 
   export type DateTimeFieldUpdateOperationsInput = {
@@ -13677,9 +13632,9 @@ export namespace Prisma {
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutSessionsInput, UserUpdateWithoutSessionsInput>, UserUncheckedUpdateWithoutSessionsInput>
   }
 
-  export type UserCreateNestedOneWithoutBookInput = {
-    create?: XOR<UserCreateWithoutBookInput, UserUncheckedCreateWithoutBookInput>
-    connectOrCreate?: UserCreateOrConnectWithoutBookInput
+  export type UserCreateNestedOneWithoutBooksInput = {
+    create?: XOR<UserCreateWithoutBooksInput, UserUncheckedCreateWithoutBooksInput>
+    connectOrCreate?: UserCreateOrConnectWithoutBooksInput
     connect?: UserWhereUniqueInput
   }
 
@@ -13695,14 +13650,132 @@ export namespace Prisma {
     set?: boolean
   }
 
-  export type UserUpdateOneWithoutBookNestedInput = {
-    create?: XOR<UserCreateWithoutBookInput, UserUncheckedCreateWithoutBookInput>
-    connectOrCreate?: UserCreateOrConnectWithoutBookInput
-    upsert?: UserUpsertWithoutBookInput
+  export type UserUpdateOneWithoutBooksNestedInput = {
+    create?: XOR<UserCreateWithoutBooksInput, UserUncheckedCreateWithoutBooksInput>
+    connectOrCreate?: UserCreateOrConnectWithoutBooksInput
+    upsert?: UserUpsertWithoutBooksInput
     disconnect?: UserWhereInput | boolean
     delete?: UserWhereInput | boolean
     connect?: UserWhereUniqueInput
-    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutBookInput, UserUpdateWithoutBookInput>, UserUncheckedUpdateWithoutBookInput>
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutBooksInput, UserUpdateWithoutBooksInput>, UserUncheckedUpdateWithoutBooksInput>
+  }
+
+  export type PostCreateNestedManyWithoutCategoryInput = {
+    create?: XOR<PostCreateWithoutCategoryInput, PostUncheckedCreateWithoutCategoryInput> | PostCreateWithoutCategoryInput[] | PostUncheckedCreateWithoutCategoryInput[]
+    connectOrCreate?: PostCreateOrConnectWithoutCategoryInput | PostCreateOrConnectWithoutCategoryInput[]
+    createMany?: PostCreateManyCategoryInputEnvelope
+    connect?: PostWhereUniqueInput | PostWhereUniqueInput[]
+  }
+
+  export type PostUncheckedCreateNestedManyWithoutCategoryInput = {
+    create?: XOR<PostCreateWithoutCategoryInput, PostUncheckedCreateWithoutCategoryInput> | PostCreateWithoutCategoryInput[] | PostUncheckedCreateWithoutCategoryInput[]
+    connectOrCreate?: PostCreateOrConnectWithoutCategoryInput | PostCreateOrConnectWithoutCategoryInput[]
+    createMany?: PostCreateManyCategoryInputEnvelope
+    connect?: PostWhereUniqueInput | PostWhereUniqueInput[]
+  }
+
+  export type PostUpdateManyWithoutCategoryNestedInput = {
+    create?: XOR<PostCreateWithoutCategoryInput, PostUncheckedCreateWithoutCategoryInput> | PostCreateWithoutCategoryInput[] | PostUncheckedCreateWithoutCategoryInput[]
+    connectOrCreate?: PostCreateOrConnectWithoutCategoryInput | PostCreateOrConnectWithoutCategoryInput[]
+    upsert?: PostUpsertWithWhereUniqueWithoutCategoryInput | PostUpsertWithWhereUniqueWithoutCategoryInput[]
+    createMany?: PostCreateManyCategoryInputEnvelope
+    set?: PostWhereUniqueInput | PostWhereUniqueInput[]
+    disconnect?: PostWhereUniqueInput | PostWhereUniqueInput[]
+    delete?: PostWhereUniqueInput | PostWhereUniqueInput[]
+    connect?: PostWhereUniqueInput | PostWhereUniqueInput[]
+    update?: PostUpdateWithWhereUniqueWithoutCategoryInput | PostUpdateWithWhereUniqueWithoutCategoryInput[]
+    updateMany?: PostUpdateManyWithWhereWithoutCategoryInput | PostUpdateManyWithWhereWithoutCategoryInput[]
+    deleteMany?: PostScalarWhereInput | PostScalarWhereInput[]
+  }
+
+  export type PostUncheckedUpdateManyWithoutCategoryNestedInput = {
+    create?: XOR<PostCreateWithoutCategoryInput, PostUncheckedCreateWithoutCategoryInput> | PostCreateWithoutCategoryInput[] | PostUncheckedCreateWithoutCategoryInput[]
+    connectOrCreate?: PostCreateOrConnectWithoutCategoryInput | PostCreateOrConnectWithoutCategoryInput[]
+    upsert?: PostUpsertWithWhereUniqueWithoutCategoryInput | PostUpsertWithWhereUniqueWithoutCategoryInput[]
+    createMany?: PostCreateManyCategoryInputEnvelope
+    set?: PostWhereUniqueInput | PostWhereUniqueInput[]
+    disconnect?: PostWhereUniqueInput | PostWhereUniqueInput[]
+    delete?: PostWhereUniqueInput | PostWhereUniqueInput[]
+    connect?: PostWhereUniqueInput | PostWhereUniqueInput[]
+    update?: PostUpdateWithWhereUniqueWithoutCategoryInput | PostUpdateWithWhereUniqueWithoutCategoryInput[]
+    updateMany?: PostUpdateManyWithWhereWithoutCategoryInput | PostUpdateManyWithWhereWithoutCategoryInput[]
+    deleteMany?: PostScalarWhereInput | PostScalarWhereInput[]
+  }
+
+  export type PostCreateNestedManyWithoutTagsInput = {
+    create?: XOR<PostCreateWithoutTagsInput, PostUncheckedCreateWithoutTagsInput> | PostCreateWithoutTagsInput[] | PostUncheckedCreateWithoutTagsInput[]
+    connectOrCreate?: PostCreateOrConnectWithoutTagsInput | PostCreateOrConnectWithoutTagsInput[]
+    connect?: PostWhereUniqueInput | PostWhereUniqueInput[]
+  }
+
+  export type ProductCreateNestedManyWithoutTagsInput = {
+    create?: XOR<ProductCreateWithoutTagsInput, ProductUncheckedCreateWithoutTagsInput> | ProductCreateWithoutTagsInput[] | ProductUncheckedCreateWithoutTagsInput[]
+    connectOrCreate?: ProductCreateOrConnectWithoutTagsInput | ProductCreateOrConnectWithoutTagsInput[]
+    connect?: ProductWhereUniqueInput | ProductWhereUniqueInput[]
+  }
+
+  export type PostUncheckedCreateNestedManyWithoutTagsInput = {
+    create?: XOR<PostCreateWithoutTagsInput, PostUncheckedCreateWithoutTagsInput> | PostCreateWithoutTagsInput[] | PostUncheckedCreateWithoutTagsInput[]
+    connectOrCreate?: PostCreateOrConnectWithoutTagsInput | PostCreateOrConnectWithoutTagsInput[]
+    connect?: PostWhereUniqueInput | PostWhereUniqueInput[]
+  }
+
+  export type ProductUncheckedCreateNestedManyWithoutTagsInput = {
+    create?: XOR<ProductCreateWithoutTagsInput, ProductUncheckedCreateWithoutTagsInput> | ProductCreateWithoutTagsInput[] | ProductUncheckedCreateWithoutTagsInput[]
+    connectOrCreate?: ProductCreateOrConnectWithoutTagsInput | ProductCreateOrConnectWithoutTagsInput[]
+    connect?: ProductWhereUniqueInput | ProductWhereUniqueInput[]
+  }
+
+  export type PostUpdateManyWithoutTagsNestedInput = {
+    create?: XOR<PostCreateWithoutTagsInput, PostUncheckedCreateWithoutTagsInput> | PostCreateWithoutTagsInput[] | PostUncheckedCreateWithoutTagsInput[]
+    connectOrCreate?: PostCreateOrConnectWithoutTagsInput | PostCreateOrConnectWithoutTagsInput[]
+    upsert?: PostUpsertWithWhereUniqueWithoutTagsInput | PostUpsertWithWhereUniqueWithoutTagsInput[]
+    set?: PostWhereUniqueInput | PostWhereUniqueInput[]
+    disconnect?: PostWhereUniqueInput | PostWhereUniqueInput[]
+    delete?: PostWhereUniqueInput | PostWhereUniqueInput[]
+    connect?: PostWhereUniqueInput | PostWhereUniqueInput[]
+    update?: PostUpdateWithWhereUniqueWithoutTagsInput | PostUpdateWithWhereUniqueWithoutTagsInput[]
+    updateMany?: PostUpdateManyWithWhereWithoutTagsInput | PostUpdateManyWithWhereWithoutTagsInput[]
+    deleteMany?: PostScalarWhereInput | PostScalarWhereInput[]
+  }
+
+  export type ProductUpdateManyWithoutTagsNestedInput = {
+    create?: XOR<ProductCreateWithoutTagsInput, ProductUncheckedCreateWithoutTagsInput> | ProductCreateWithoutTagsInput[] | ProductUncheckedCreateWithoutTagsInput[]
+    connectOrCreate?: ProductCreateOrConnectWithoutTagsInput | ProductCreateOrConnectWithoutTagsInput[]
+    upsert?: ProductUpsertWithWhereUniqueWithoutTagsInput | ProductUpsertWithWhereUniqueWithoutTagsInput[]
+    set?: ProductWhereUniqueInput | ProductWhereUniqueInput[]
+    disconnect?: ProductWhereUniqueInput | ProductWhereUniqueInput[]
+    delete?: ProductWhereUniqueInput | ProductWhereUniqueInput[]
+    connect?: ProductWhereUniqueInput | ProductWhereUniqueInput[]
+    update?: ProductUpdateWithWhereUniqueWithoutTagsInput | ProductUpdateWithWhereUniqueWithoutTagsInput[]
+    updateMany?: ProductUpdateManyWithWhereWithoutTagsInput | ProductUpdateManyWithWhereWithoutTagsInput[]
+    deleteMany?: ProductScalarWhereInput | ProductScalarWhereInput[]
+  }
+
+  export type PostUncheckedUpdateManyWithoutTagsNestedInput = {
+    create?: XOR<PostCreateWithoutTagsInput, PostUncheckedCreateWithoutTagsInput> | PostCreateWithoutTagsInput[] | PostUncheckedCreateWithoutTagsInput[]
+    connectOrCreate?: PostCreateOrConnectWithoutTagsInput | PostCreateOrConnectWithoutTagsInput[]
+    upsert?: PostUpsertWithWhereUniqueWithoutTagsInput | PostUpsertWithWhereUniqueWithoutTagsInput[]
+    set?: PostWhereUniqueInput | PostWhereUniqueInput[]
+    disconnect?: PostWhereUniqueInput | PostWhereUniqueInput[]
+    delete?: PostWhereUniqueInput | PostWhereUniqueInput[]
+    connect?: PostWhereUniqueInput | PostWhereUniqueInput[]
+    update?: PostUpdateWithWhereUniqueWithoutTagsInput | PostUpdateWithWhereUniqueWithoutTagsInput[]
+    updateMany?: PostUpdateManyWithWhereWithoutTagsInput | PostUpdateManyWithWhereWithoutTagsInput[]
+    deleteMany?: PostScalarWhereInput | PostScalarWhereInput[]
+  }
+
+  export type ProductUncheckedUpdateManyWithoutTagsNestedInput = {
+    create?: XOR<ProductCreateWithoutTagsInput, ProductUncheckedCreateWithoutTagsInput> | ProductCreateWithoutTagsInput[] | ProductUncheckedCreateWithoutTagsInput[]
+    connectOrCreate?: ProductCreateOrConnectWithoutTagsInput | ProductCreateOrConnectWithoutTagsInput[]
+    upsert?: ProductUpsertWithWhereUniqueWithoutTagsInput | ProductUpsertWithWhereUniqueWithoutTagsInput[]
+    set?: ProductWhereUniqueInput | ProductWhereUniqueInput[]
+    disconnect?: ProductWhereUniqueInput | ProductWhereUniqueInput[]
+    delete?: ProductWhereUniqueInput | ProductWhereUniqueInput[]
+    connect?: ProductWhereUniqueInput | ProductWhereUniqueInput[]
+    update?: ProductUpdateWithWhereUniqueWithoutTagsInput | ProductUpdateWithWhereUniqueWithoutTagsInput[]
+    updateMany?: ProductUpdateManyWithWhereWithoutTagsInput | ProductUpdateManyWithWhereWithoutTagsInput[]
+    deleteMany?: ProductScalarWhereInput | ProductScalarWhereInput[]
   }
 
   export type CategoryCreateNestedOneWithoutPostsInput = {
@@ -13773,166 +13846,6 @@ export namespace Prisma {
     update?: TagUpdateWithWhereUniqueWithoutPostsInput | TagUpdateWithWhereUniqueWithoutPostsInput[]
     updateMany?: TagUpdateManyWithWhereWithoutPostsInput | TagUpdateManyWithWhereWithoutPostsInput[]
     deleteMany?: TagScalarWhereInput | TagScalarWhereInput[]
-  }
-
-  export type PostCreateNestedManyWithoutCategoryInput = {
-    create?: XOR<PostCreateWithoutCategoryInput, PostUncheckedCreateWithoutCategoryInput> | PostCreateWithoutCategoryInput[] | PostUncheckedCreateWithoutCategoryInput[]
-    connectOrCreate?: PostCreateOrConnectWithoutCategoryInput | PostCreateOrConnectWithoutCategoryInput[]
-    createMany?: PostCreateManyCategoryInputEnvelope
-    connect?: PostWhereUniqueInput | PostWhereUniqueInput[]
-  }
-
-  export type PostUncheckedCreateNestedManyWithoutCategoryInput = {
-    create?: XOR<PostCreateWithoutCategoryInput, PostUncheckedCreateWithoutCategoryInput> | PostCreateWithoutCategoryInput[] | PostUncheckedCreateWithoutCategoryInput[]
-    connectOrCreate?: PostCreateOrConnectWithoutCategoryInput | PostCreateOrConnectWithoutCategoryInput[]
-    createMany?: PostCreateManyCategoryInputEnvelope
-    connect?: PostWhereUniqueInput | PostWhereUniqueInput[]
-  }
-
-  export type PostUpdateManyWithoutCategoryNestedInput = {
-    create?: XOR<PostCreateWithoutCategoryInput, PostUncheckedCreateWithoutCategoryInput> | PostCreateWithoutCategoryInput[] | PostUncheckedCreateWithoutCategoryInput[]
-    connectOrCreate?: PostCreateOrConnectWithoutCategoryInput | PostCreateOrConnectWithoutCategoryInput[]
-    upsert?: PostUpsertWithWhereUniqueWithoutCategoryInput | PostUpsertWithWhereUniqueWithoutCategoryInput[]
-    createMany?: PostCreateManyCategoryInputEnvelope
-    set?: PostWhereUniqueInput | PostWhereUniqueInput[]
-    disconnect?: PostWhereUniqueInput | PostWhereUniqueInput[]
-    delete?: PostWhereUniqueInput | PostWhereUniqueInput[]
-    connect?: PostWhereUniqueInput | PostWhereUniqueInput[]
-    update?: PostUpdateWithWhereUniqueWithoutCategoryInput | PostUpdateWithWhereUniqueWithoutCategoryInput[]
-    updateMany?: PostUpdateManyWithWhereWithoutCategoryInput | PostUpdateManyWithWhereWithoutCategoryInput[]
-    deleteMany?: PostScalarWhereInput | PostScalarWhereInput[]
-  }
-
-  export type PostUncheckedUpdateManyWithoutCategoryNestedInput = {
-    create?: XOR<PostCreateWithoutCategoryInput, PostUncheckedCreateWithoutCategoryInput> | PostCreateWithoutCategoryInput[] | PostUncheckedCreateWithoutCategoryInput[]
-    connectOrCreate?: PostCreateOrConnectWithoutCategoryInput | PostCreateOrConnectWithoutCategoryInput[]
-    upsert?: PostUpsertWithWhereUniqueWithoutCategoryInput | PostUpsertWithWhereUniqueWithoutCategoryInput[]
-    createMany?: PostCreateManyCategoryInputEnvelope
-    set?: PostWhereUniqueInput | PostWhereUniqueInput[]
-    disconnect?: PostWhereUniqueInput | PostWhereUniqueInput[]
-    delete?: PostWhereUniqueInput | PostWhereUniqueInput[]
-    connect?: PostWhereUniqueInput | PostWhereUniqueInput[]
-    update?: PostUpdateWithWhereUniqueWithoutCategoryInput | PostUpdateWithWhereUniqueWithoutCategoryInput[]
-    updateMany?: PostUpdateManyWithWhereWithoutCategoryInput | PostUpdateManyWithWhereWithoutCategoryInput[]
-    deleteMany?: PostScalarWhereInput | PostScalarWhereInput[]
-  }
-
-  export type PostCreateNestedManyWithoutTagsInput = {
-    create?: XOR<PostCreateWithoutTagsInput, PostUncheckedCreateWithoutTagsInput> | PostCreateWithoutTagsInput[] | PostUncheckedCreateWithoutTagsInput[]
-    connectOrCreate?: PostCreateOrConnectWithoutTagsInput | PostCreateOrConnectWithoutTagsInput[]
-    connect?: PostWhereUniqueInput | PostWhereUniqueInput[]
-  }
-
-  export type ProductCreateNestedManyWithoutTagsInput = {
-    create?: XOR<ProductCreateWithoutTagsInput, ProductUncheckedCreateWithoutTagsInput> | ProductCreateWithoutTagsInput[] | ProductUncheckedCreateWithoutTagsInput[]
-    connectOrCreate?: ProductCreateOrConnectWithoutTagsInput | ProductCreateOrConnectWithoutTagsInput[]
-    connect?: ProductWhereUniqueInput | ProductWhereUniqueInput[]
-  }
-
-  export type ProductCreateNestedManyWithoutTagInput = {
-    create?: XOR<ProductCreateWithoutTagInput, ProductUncheckedCreateWithoutTagInput> | ProductCreateWithoutTagInput[] | ProductUncheckedCreateWithoutTagInput[]
-    connectOrCreate?: ProductCreateOrConnectWithoutTagInput | ProductCreateOrConnectWithoutTagInput[]
-    createMany?: ProductCreateManyTagInputEnvelope
-    connect?: ProductWhereUniqueInput | ProductWhereUniqueInput[]
-  }
-
-  export type PostUncheckedCreateNestedManyWithoutTagsInput = {
-    create?: XOR<PostCreateWithoutTagsInput, PostUncheckedCreateWithoutTagsInput> | PostCreateWithoutTagsInput[] | PostUncheckedCreateWithoutTagsInput[]
-    connectOrCreate?: PostCreateOrConnectWithoutTagsInput | PostCreateOrConnectWithoutTagsInput[]
-    connect?: PostWhereUniqueInput | PostWhereUniqueInput[]
-  }
-
-  export type ProductUncheckedCreateNestedManyWithoutTagsInput = {
-    create?: XOR<ProductCreateWithoutTagsInput, ProductUncheckedCreateWithoutTagsInput> | ProductCreateWithoutTagsInput[] | ProductUncheckedCreateWithoutTagsInput[]
-    connectOrCreate?: ProductCreateOrConnectWithoutTagsInput | ProductCreateOrConnectWithoutTagsInput[]
-    connect?: ProductWhereUniqueInput | ProductWhereUniqueInput[]
-  }
-
-  export type ProductUncheckedCreateNestedManyWithoutTagInput = {
-    create?: XOR<ProductCreateWithoutTagInput, ProductUncheckedCreateWithoutTagInput> | ProductCreateWithoutTagInput[] | ProductUncheckedCreateWithoutTagInput[]
-    connectOrCreate?: ProductCreateOrConnectWithoutTagInput | ProductCreateOrConnectWithoutTagInput[]
-    createMany?: ProductCreateManyTagInputEnvelope
-    connect?: ProductWhereUniqueInput | ProductWhereUniqueInput[]
-  }
-
-  export type PostUpdateManyWithoutTagsNestedInput = {
-    create?: XOR<PostCreateWithoutTagsInput, PostUncheckedCreateWithoutTagsInput> | PostCreateWithoutTagsInput[] | PostUncheckedCreateWithoutTagsInput[]
-    connectOrCreate?: PostCreateOrConnectWithoutTagsInput | PostCreateOrConnectWithoutTagsInput[]
-    upsert?: PostUpsertWithWhereUniqueWithoutTagsInput | PostUpsertWithWhereUniqueWithoutTagsInput[]
-    set?: PostWhereUniqueInput | PostWhereUniqueInput[]
-    disconnect?: PostWhereUniqueInput | PostWhereUniqueInput[]
-    delete?: PostWhereUniqueInput | PostWhereUniqueInput[]
-    connect?: PostWhereUniqueInput | PostWhereUniqueInput[]
-    update?: PostUpdateWithWhereUniqueWithoutTagsInput | PostUpdateWithWhereUniqueWithoutTagsInput[]
-    updateMany?: PostUpdateManyWithWhereWithoutTagsInput | PostUpdateManyWithWhereWithoutTagsInput[]
-    deleteMany?: PostScalarWhereInput | PostScalarWhereInput[]
-  }
-
-  export type ProductUpdateManyWithoutTagsNestedInput = {
-    create?: XOR<ProductCreateWithoutTagsInput, ProductUncheckedCreateWithoutTagsInput> | ProductCreateWithoutTagsInput[] | ProductUncheckedCreateWithoutTagsInput[]
-    connectOrCreate?: ProductCreateOrConnectWithoutTagsInput | ProductCreateOrConnectWithoutTagsInput[]
-    upsert?: ProductUpsertWithWhereUniqueWithoutTagsInput | ProductUpsertWithWhereUniqueWithoutTagsInput[]
-    set?: ProductWhereUniqueInput | ProductWhereUniqueInput[]
-    disconnect?: ProductWhereUniqueInput | ProductWhereUniqueInput[]
-    delete?: ProductWhereUniqueInput | ProductWhereUniqueInput[]
-    connect?: ProductWhereUniqueInput | ProductWhereUniqueInput[]
-    update?: ProductUpdateWithWhereUniqueWithoutTagsInput | ProductUpdateWithWhereUniqueWithoutTagsInput[]
-    updateMany?: ProductUpdateManyWithWhereWithoutTagsInput | ProductUpdateManyWithWhereWithoutTagsInput[]
-    deleteMany?: ProductScalarWhereInput | ProductScalarWhereInput[]
-  }
-
-  export type ProductUpdateManyWithoutTagNestedInput = {
-    create?: XOR<ProductCreateWithoutTagInput, ProductUncheckedCreateWithoutTagInput> | ProductCreateWithoutTagInput[] | ProductUncheckedCreateWithoutTagInput[]
-    connectOrCreate?: ProductCreateOrConnectWithoutTagInput | ProductCreateOrConnectWithoutTagInput[]
-    upsert?: ProductUpsertWithWhereUniqueWithoutTagInput | ProductUpsertWithWhereUniqueWithoutTagInput[]
-    createMany?: ProductCreateManyTagInputEnvelope
-    set?: ProductWhereUniqueInput | ProductWhereUniqueInput[]
-    disconnect?: ProductWhereUniqueInput | ProductWhereUniqueInput[]
-    delete?: ProductWhereUniqueInput | ProductWhereUniqueInput[]
-    connect?: ProductWhereUniqueInput | ProductWhereUniqueInput[]
-    update?: ProductUpdateWithWhereUniqueWithoutTagInput | ProductUpdateWithWhereUniqueWithoutTagInput[]
-    updateMany?: ProductUpdateManyWithWhereWithoutTagInput | ProductUpdateManyWithWhereWithoutTagInput[]
-    deleteMany?: ProductScalarWhereInput | ProductScalarWhereInput[]
-  }
-
-  export type PostUncheckedUpdateManyWithoutTagsNestedInput = {
-    create?: XOR<PostCreateWithoutTagsInput, PostUncheckedCreateWithoutTagsInput> | PostCreateWithoutTagsInput[] | PostUncheckedCreateWithoutTagsInput[]
-    connectOrCreate?: PostCreateOrConnectWithoutTagsInput | PostCreateOrConnectWithoutTagsInput[]
-    upsert?: PostUpsertWithWhereUniqueWithoutTagsInput | PostUpsertWithWhereUniqueWithoutTagsInput[]
-    set?: PostWhereUniqueInput | PostWhereUniqueInput[]
-    disconnect?: PostWhereUniqueInput | PostWhereUniqueInput[]
-    delete?: PostWhereUniqueInput | PostWhereUniqueInput[]
-    connect?: PostWhereUniqueInput | PostWhereUniqueInput[]
-    update?: PostUpdateWithWhereUniqueWithoutTagsInput | PostUpdateWithWhereUniqueWithoutTagsInput[]
-    updateMany?: PostUpdateManyWithWhereWithoutTagsInput | PostUpdateManyWithWhereWithoutTagsInput[]
-    deleteMany?: PostScalarWhereInput | PostScalarWhereInput[]
-  }
-
-  export type ProductUncheckedUpdateManyWithoutTagsNestedInput = {
-    create?: XOR<ProductCreateWithoutTagsInput, ProductUncheckedCreateWithoutTagsInput> | ProductCreateWithoutTagsInput[] | ProductUncheckedCreateWithoutTagsInput[]
-    connectOrCreate?: ProductCreateOrConnectWithoutTagsInput | ProductCreateOrConnectWithoutTagsInput[]
-    upsert?: ProductUpsertWithWhereUniqueWithoutTagsInput | ProductUpsertWithWhereUniqueWithoutTagsInput[]
-    set?: ProductWhereUniqueInput | ProductWhereUniqueInput[]
-    disconnect?: ProductWhereUniqueInput | ProductWhereUniqueInput[]
-    delete?: ProductWhereUniqueInput | ProductWhereUniqueInput[]
-    connect?: ProductWhereUniqueInput | ProductWhereUniqueInput[]
-    update?: ProductUpdateWithWhereUniqueWithoutTagsInput | ProductUpdateWithWhereUniqueWithoutTagsInput[]
-    updateMany?: ProductUpdateManyWithWhereWithoutTagsInput | ProductUpdateManyWithWhereWithoutTagsInput[]
-    deleteMany?: ProductScalarWhereInput | ProductScalarWhereInput[]
-  }
-
-  export type ProductUncheckedUpdateManyWithoutTagNestedInput = {
-    create?: XOR<ProductCreateWithoutTagInput, ProductUncheckedCreateWithoutTagInput> | ProductCreateWithoutTagInput[] | ProductUncheckedCreateWithoutTagInput[]
-    connectOrCreate?: ProductCreateOrConnectWithoutTagInput | ProductCreateOrConnectWithoutTagInput[]
-    upsert?: ProductUpsertWithWhereUniqueWithoutTagInput | ProductUpsertWithWhereUniqueWithoutTagInput[]
-    createMany?: ProductCreateManyTagInputEnvelope
-    set?: ProductWhereUniqueInput | ProductWhereUniqueInput[]
-    disconnect?: ProductWhereUniqueInput | ProductWhereUniqueInput[]
-    delete?: ProductWhereUniqueInput | ProductWhereUniqueInput[]
-    connect?: ProductWhereUniqueInput | ProductWhereUniqueInput[]
-    update?: ProductUpdateWithWhereUniqueWithoutTagInput | ProductUpdateWithWhereUniqueWithoutTagInput[]
-    updateMany?: ProductUpdateManyWithWhereWithoutTagInput | ProductUpdateManyWithWhereWithoutTagInput[]
-    deleteMany?: ProductScalarWhereInput | ProductScalarWhereInput[]
   }
 
   export type ProductCategoryCreateNestedOneWithoutChildrenInput = {
@@ -14065,12 +13978,6 @@ export namespace Prisma {
     connect?: UserWhereUniqueInput
   }
 
-  export type TagCreateNestedOneWithoutProductInput = {
-    create?: XOR<TagCreateWithoutProductInput, TagUncheckedCreateWithoutProductInput>
-    connectOrCreate?: TagCreateOrConnectWithoutProductInput
-    connect?: TagWhereUniqueInput
-  }
-
   export type TagUncheckedCreateNestedManyWithoutProductsInput = {
     create?: XOR<TagCreateWithoutProductsInput, TagUncheckedCreateWithoutProductsInput> | TagCreateWithoutProductsInput[] | TagUncheckedCreateWithoutProductsInput[]
     connectOrCreate?: TagCreateOrConnectWithoutProductsInput | TagCreateOrConnectWithoutProductsInput[]
@@ -14103,24 +14010,12 @@ export namespace Prisma {
     deleteMany?: TagScalarWhereInput | TagScalarWhereInput[]
   }
 
-  export type UserUpdateOneWithoutProductsNestedInput = {
+  export type UserUpdateOneRequiredWithoutProductsNestedInput = {
     create?: XOR<UserCreateWithoutProductsInput, UserUncheckedCreateWithoutProductsInput>
     connectOrCreate?: UserCreateOrConnectWithoutProductsInput
     upsert?: UserUpsertWithoutProductsInput
-    disconnect?: UserWhereInput | boolean
-    delete?: UserWhereInput | boolean
     connect?: UserWhereUniqueInput
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutProductsInput, UserUpdateWithoutProductsInput>, UserUncheckedUpdateWithoutProductsInput>
-  }
-
-  export type TagUpdateOneWithoutProductNestedInput = {
-    create?: XOR<TagCreateWithoutProductInput, TagUncheckedCreateWithoutProductInput>
-    connectOrCreate?: TagCreateOrConnectWithoutProductInput
-    upsert?: TagUpsertWithoutProductInput
-    disconnect?: TagWhereInput | boolean
-    delete?: TagWhereInput | boolean
-    connect?: TagWhereUniqueInput
-    update?: XOR<XOR<TagUpdateToOneWithWhereWithoutProductInput, TagUpdateWithoutProductInput>, TagUncheckedUpdateWithoutProductInput>
   }
 
   export type TagUncheckedUpdateManyWithoutProductsNestedInput = {
@@ -14162,6 +14057,13 @@ export namespace Prisma {
     startsWith?: string | StringFieldRefInput<$PrismaModel>
     endsWith?: string | StringFieldRefInput<$PrismaModel>
     not?: NestedStringNullableFilter<$PrismaModel> | string | null
+  }
+
+  export type NestedEnumRoleFilter<$PrismaModel = never> = {
+    equals?: $Enums.Role | EnumRoleFieldRefInput<$PrismaModel>
+    in?: $Enums.Role[] | ListEnumRoleFieldRefInput<$PrismaModel>
+    notIn?: $Enums.Role[] | ListEnumRoleFieldRefInput<$PrismaModel>
+    not?: NestedEnumRoleFilter<$PrismaModel> | $Enums.Role
   }
 
   export type NestedDateTimeFilter<$PrismaModel = never> = {
@@ -14229,6 +14131,16 @@ export namespace Prisma {
     gt?: number | IntFieldRefInput<$PrismaModel>
     gte?: number | IntFieldRefInput<$PrismaModel>
     not?: NestedIntNullableFilter<$PrismaModel> | number | null
+  }
+
+  export type NestedEnumRoleWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.Role | EnumRoleFieldRefInput<$PrismaModel>
+    in?: $Enums.Role[] | ListEnumRoleFieldRefInput<$PrismaModel>
+    notIn?: $Enums.Role[] | ListEnumRoleFieldRefInput<$PrismaModel>
+    not?: NestedEnumRoleWithAggregatesFilter<$PrismaModel> | $Enums.Role
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumRoleFilter<$PrismaModel>
+    _max?: NestedEnumRoleFilter<$PrismaModel>
   }
 
   export type NestedDateTimeWithAggregatesFilter<$PrismaModel = never> = {
@@ -14423,7 +14335,6 @@ export namespace Prisma {
     updatedAt?: Date | string
     category: ProductCategoryCreateNestedOneWithoutProductsInput
     tags?: TagCreateNestedManyWithoutProductsInput
-    Tag?: TagCreateNestedOneWithoutProductInput
   }
 
   export type ProductUncheckedCreateWithoutUserInput = {
@@ -14445,7 +14356,6 @@ export namespace Prisma {
     ogDescription?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    tagId?: string | null
     tags?: TagUncheckedCreateNestedManyWithoutProductsInput
   }
 
@@ -14549,9 +14459,9 @@ export namespace Prisma {
     metaDescription?: StringNullableFilter<"Post"> | string | null
     canonicalUrl?: StringNullableFilter<"Post"> | string | null
     ogImage?: StringNullableFilter<"Post"> | string | null
+    userId?: StringNullableFilter<"Post"> | string | null
     createdAt?: DateTimeFilter<"Post"> | Date | string
     updatedAt?: DateTimeFilter<"Post"> | Date | string
-    userId?: StringNullableFilter<"Post"> | string | null
   }
 
   export type ProductUpsertWithWhereUniqueWithoutUserInput = {
@@ -14584,7 +14494,7 @@ export namespace Prisma {
     categoryId?: StringFilter<"Product"> | string
     isPublished?: BoolFilter<"Product"> | boolean
     order?: IntNullableFilter<"Product"> | number | null
-    userId?: StringNullableFilter<"Product"> | string | null
+    userId?: StringFilter<"Product"> | string
     metaTitle?: StringNullableFilter<"Product"> | string | null
     metaDescription?: StringNullableFilter<"Product"> | string | null
     canonicalUrl?: StringNullableFilter<"Product"> | string | null
@@ -14593,7 +14503,6 @@ export namespace Prisma {
     ogDescription?: StringNullableFilter<"Product"> | string | null
     createdAt?: DateTimeFilter<"Product"> | Date | string
     updatedAt?: DateTimeFilter<"Product"> | Date | string
-    tagId?: StringNullableFilter<"Product"> | string | null
   }
 
   export type UserCreateWithoutSessionsInput = {
@@ -14601,10 +14510,10 @@ export namespace Prisma {
     email: string
     hashedPassword?: string | null
     username?: string | null
+    role?: $Enums.Role
     createdAt?: Date | string
     updatedAt?: Date | string
-    role?: string
-    Book?: BookCreateNestedManyWithoutUserInput
+    books?: BookCreateNestedManyWithoutUserInput
     posts?: PostCreateNestedManyWithoutUserInput
     products?: ProductCreateNestedManyWithoutUserInput
   }
@@ -14614,10 +14523,10 @@ export namespace Prisma {
     email: string
     hashedPassword?: string | null
     username?: string | null
+    role?: $Enums.Role
     createdAt?: Date | string
     updatedAt?: Date | string
-    role?: string
-    Book?: BookUncheckedCreateNestedManyWithoutUserInput
+    books?: BookUncheckedCreateNestedManyWithoutUserInput
     posts?: PostUncheckedCreateNestedManyWithoutUserInput
     products?: ProductUncheckedCreateNestedManyWithoutUserInput
   }
@@ -14643,10 +14552,10 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     hashedPassword?: NullableStringFieldUpdateOperationsInput | string | null
     username?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    role?: StringFieldUpdateOperationsInput | string
-    Book?: BookUpdateManyWithoutUserNestedInput
+    books?: BookUpdateManyWithoutUserNestedInput
     posts?: PostUpdateManyWithoutUserNestedInput
     products?: ProductUpdateManyWithoutUserNestedInput
   }
@@ -14656,80 +14565,268 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     hashedPassword?: NullableStringFieldUpdateOperationsInput | string | null
     username?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    role?: StringFieldUpdateOperationsInput | string
-    Book?: BookUncheckedUpdateManyWithoutUserNestedInput
+    books?: BookUncheckedUpdateManyWithoutUserNestedInput
     posts?: PostUncheckedUpdateManyWithoutUserNestedInput
     products?: ProductUncheckedUpdateManyWithoutUserNestedInput
   }
 
-  export type UserCreateWithoutBookInput = {
+  export type UserCreateWithoutBooksInput = {
     id?: string
     email: string
     hashedPassword?: string | null
     username?: string | null
+    role?: $Enums.Role
     createdAt?: Date | string
     updatedAt?: Date | string
-    role?: string
     sessions?: SessionCreateNestedManyWithoutUserInput
     posts?: PostCreateNestedManyWithoutUserInput
     products?: ProductCreateNestedManyWithoutUserInput
   }
 
-  export type UserUncheckedCreateWithoutBookInput = {
+  export type UserUncheckedCreateWithoutBooksInput = {
     id?: string
     email: string
     hashedPassword?: string | null
     username?: string | null
+    role?: $Enums.Role
     createdAt?: Date | string
     updatedAt?: Date | string
-    role?: string
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
     posts?: PostUncheckedCreateNestedManyWithoutUserInput
     products?: ProductUncheckedCreateNestedManyWithoutUserInput
   }
 
-  export type UserCreateOrConnectWithoutBookInput = {
+  export type UserCreateOrConnectWithoutBooksInput = {
     where: UserWhereUniqueInput
-    create: XOR<UserCreateWithoutBookInput, UserUncheckedCreateWithoutBookInput>
+    create: XOR<UserCreateWithoutBooksInput, UserUncheckedCreateWithoutBooksInput>
   }
 
-  export type UserUpsertWithoutBookInput = {
-    update: XOR<UserUpdateWithoutBookInput, UserUncheckedUpdateWithoutBookInput>
-    create: XOR<UserCreateWithoutBookInput, UserUncheckedCreateWithoutBookInput>
+  export type UserUpsertWithoutBooksInput = {
+    update: XOR<UserUpdateWithoutBooksInput, UserUncheckedUpdateWithoutBooksInput>
+    create: XOR<UserCreateWithoutBooksInput, UserUncheckedCreateWithoutBooksInput>
     where?: UserWhereInput
   }
 
-  export type UserUpdateToOneWithWhereWithoutBookInput = {
+  export type UserUpdateToOneWithWhereWithoutBooksInput = {
     where?: UserWhereInput
-    data: XOR<UserUpdateWithoutBookInput, UserUncheckedUpdateWithoutBookInput>
+    data: XOR<UserUpdateWithoutBooksInput, UserUncheckedUpdateWithoutBooksInput>
   }
 
-  export type UserUpdateWithoutBookInput = {
+  export type UserUpdateWithoutBooksInput = {
     id?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     hashedPassword?: NullableStringFieldUpdateOperationsInput | string | null
     username?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    role?: StringFieldUpdateOperationsInput | string
     sessions?: SessionUpdateManyWithoutUserNestedInput
     posts?: PostUpdateManyWithoutUserNestedInput
     products?: ProductUpdateManyWithoutUserNestedInput
   }
 
-  export type UserUncheckedUpdateWithoutBookInput = {
+  export type UserUncheckedUpdateWithoutBooksInput = {
     id?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     hashedPassword?: NullableStringFieldUpdateOperationsInput | string | null
     username?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    role?: StringFieldUpdateOperationsInput | string
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
     posts?: PostUncheckedUpdateManyWithoutUserNestedInput
     products?: ProductUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type PostCreateWithoutCategoryInput = {
+    id?: string
+    title: string
+    slug: string
+    summary?: string | null
+    draft?: boolean
+    content?: string | null
+    published?: boolean
+    imageUrl?: string | null
+    metaTitle?: string | null
+    metaDescription?: string | null
+    canonicalUrl?: string | null
+    ogImage?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    tags?: TagCreateNestedManyWithoutPostsInput
+    user?: UserCreateNestedOneWithoutPostsInput
+  }
+
+  export type PostUncheckedCreateWithoutCategoryInput = {
+    id?: string
+    title: string
+    slug: string
+    summary?: string | null
+    draft?: boolean
+    content?: string | null
+    published?: boolean
+    imageUrl?: string | null
+    metaTitle?: string | null
+    metaDescription?: string | null
+    canonicalUrl?: string | null
+    ogImage?: string | null
+    userId?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    tags?: TagUncheckedCreateNestedManyWithoutPostsInput
+  }
+
+  export type PostCreateOrConnectWithoutCategoryInput = {
+    where: PostWhereUniqueInput
+    create: XOR<PostCreateWithoutCategoryInput, PostUncheckedCreateWithoutCategoryInput>
+  }
+
+  export type PostCreateManyCategoryInputEnvelope = {
+    data: PostCreateManyCategoryInput | PostCreateManyCategoryInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type PostUpsertWithWhereUniqueWithoutCategoryInput = {
+    where: PostWhereUniqueInput
+    update: XOR<PostUpdateWithoutCategoryInput, PostUncheckedUpdateWithoutCategoryInput>
+    create: XOR<PostCreateWithoutCategoryInput, PostUncheckedCreateWithoutCategoryInput>
+  }
+
+  export type PostUpdateWithWhereUniqueWithoutCategoryInput = {
+    where: PostWhereUniqueInput
+    data: XOR<PostUpdateWithoutCategoryInput, PostUncheckedUpdateWithoutCategoryInput>
+  }
+
+  export type PostUpdateManyWithWhereWithoutCategoryInput = {
+    where: PostScalarWhereInput
+    data: XOR<PostUpdateManyMutationInput, PostUncheckedUpdateManyWithoutCategoryInput>
+  }
+
+  export type PostCreateWithoutTagsInput = {
+    id?: string
+    title: string
+    slug: string
+    summary?: string | null
+    draft?: boolean
+    content?: string | null
+    published?: boolean
+    imageUrl?: string | null
+    metaTitle?: string | null
+    metaDescription?: string | null
+    canonicalUrl?: string | null
+    ogImage?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    category?: CategoryCreateNestedOneWithoutPostsInput
+    user?: UserCreateNestedOneWithoutPostsInput
+  }
+
+  export type PostUncheckedCreateWithoutTagsInput = {
+    id?: string
+    title: string
+    slug: string
+    summary?: string | null
+    draft?: boolean
+    content?: string | null
+    published?: boolean
+    imageUrl?: string | null
+    categoryId?: string | null
+    metaTitle?: string | null
+    metaDescription?: string | null
+    canonicalUrl?: string | null
+    ogImage?: string | null
+    userId?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type PostCreateOrConnectWithoutTagsInput = {
+    where: PostWhereUniqueInput
+    create: XOR<PostCreateWithoutTagsInput, PostUncheckedCreateWithoutTagsInput>
+  }
+
+  export type ProductCreateWithoutTagsInput = {
+    id?: string
+    name: string
+    slug: string
+    summary?: string | null
+    description?: string | null
+    imageUrls?: ProductCreateimageUrlsInput | string[]
+    datasheetUrl?: string | null
+    isPublished?: boolean
+    order?: number | null
+    metaTitle?: string | null
+    metaDescription?: string | null
+    canonicalUrl?: string | null
+    ogImage?: string | null
+    ogTitle?: string | null
+    ogDescription?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    category: ProductCategoryCreateNestedOneWithoutProductsInput
+    user: UserCreateNestedOneWithoutProductsInput
+  }
+
+  export type ProductUncheckedCreateWithoutTagsInput = {
+    id?: string
+    name: string
+    slug: string
+    summary?: string | null
+    description?: string | null
+    imageUrls?: ProductCreateimageUrlsInput | string[]
+    datasheetUrl?: string | null
+    categoryId: string
+    isPublished?: boolean
+    order?: number | null
+    userId: string
+    metaTitle?: string | null
+    metaDescription?: string | null
+    canonicalUrl?: string | null
+    ogImage?: string | null
+    ogTitle?: string | null
+    ogDescription?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ProductCreateOrConnectWithoutTagsInput = {
+    where: ProductWhereUniqueInput
+    create: XOR<ProductCreateWithoutTagsInput, ProductUncheckedCreateWithoutTagsInput>
+  }
+
+  export type PostUpsertWithWhereUniqueWithoutTagsInput = {
+    where: PostWhereUniqueInput
+    update: XOR<PostUpdateWithoutTagsInput, PostUncheckedUpdateWithoutTagsInput>
+    create: XOR<PostCreateWithoutTagsInput, PostUncheckedCreateWithoutTagsInput>
+  }
+
+  export type PostUpdateWithWhereUniqueWithoutTagsInput = {
+    where: PostWhereUniqueInput
+    data: XOR<PostUpdateWithoutTagsInput, PostUncheckedUpdateWithoutTagsInput>
+  }
+
+  export type PostUpdateManyWithWhereWithoutTagsInput = {
+    where: PostScalarWhereInput
+    data: XOR<PostUpdateManyMutationInput, PostUncheckedUpdateManyWithoutTagsInput>
+  }
+
+  export type ProductUpsertWithWhereUniqueWithoutTagsInput = {
+    where: ProductWhereUniqueInput
+    update: XOR<ProductUpdateWithoutTagsInput, ProductUncheckedUpdateWithoutTagsInput>
+    create: XOR<ProductCreateWithoutTagsInput, ProductUncheckedCreateWithoutTagsInput>
+  }
+
+  export type ProductUpdateWithWhereUniqueWithoutTagsInput = {
+    where: ProductWhereUniqueInput
+    data: XOR<ProductUpdateWithoutTagsInput, ProductUncheckedUpdateWithoutTagsInput>
+  }
+
+  export type ProductUpdateManyWithWhereWithoutTagsInput = {
+    where: ProductScalarWhereInput
+    data: XOR<ProductUpdateManyMutationInput, ProductUncheckedUpdateManyWithoutTagsInput>
   }
 
   export type CategoryCreateWithoutPostsInput = {
@@ -14760,7 +14857,6 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     products?: ProductCreateNestedManyWithoutTagsInput
-    Product?: ProductCreateNestedManyWithoutTagInput
   }
 
   export type TagUncheckedCreateWithoutPostsInput = {
@@ -14770,7 +14866,6 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     products?: ProductUncheckedCreateNestedManyWithoutTagsInput
-    Product?: ProductUncheckedCreateNestedManyWithoutTagInput
   }
 
   export type TagCreateOrConnectWithoutPostsInput = {
@@ -14783,11 +14878,11 @@ export namespace Prisma {
     email: string
     hashedPassword?: string | null
     username?: string | null
+    role?: $Enums.Role
     createdAt?: Date | string
     updatedAt?: Date | string
-    role?: string
     sessions?: SessionCreateNestedManyWithoutUserInput
-    Book?: BookCreateNestedManyWithoutUserInput
+    books?: BookCreateNestedManyWithoutUserInput
     products?: ProductCreateNestedManyWithoutUserInput
   }
 
@@ -14796,11 +14891,11 @@ export namespace Prisma {
     email: string
     hashedPassword?: string | null
     username?: string | null
+    role?: $Enums.Role
     createdAt?: Date | string
     updatedAt?: Date | string
-    role?: string
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
-    Book?: BookUncheckedCreateNestedManyWithoutUserInput
+    books?: BookUncheckedCreateNestedManyWithoutUserInput
     products?: ProductUncheckedCreateNestedManyWithoutUserInput
   }
 
@@ -14879,11 +14974,11 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     hashedPassword?: NullableStringFieldUpdateOperationsInput | string | null
     username?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    role?: StringFieldUpdateOperationsInput | string
     sessions?: SessionUpdateManyWithoutUserNestedInput
-    Book?: BookUpdateManyWithoutUserNestedInput
+    books?: BookUpdateManyWithoutUserNestedInput
     products?: ProductUpdateManyWithoutUserNestedInput
   }
 
@@ -14892,274 +14987,12 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     hashedPassword?: NullableStringFieldUpdateOperationsInput | string | null
     username?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    role?: StringFieldUpdateOperationsInput | string
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
-    Book?: BookUncheckedUpdateManyWithoutUserNestedInput
+    books?: BookUncheckedUpdateManyWithoutUserNestedInput
     products?: ProductUncheckedUpdateManyWithoutUserNestedInput
-  }
-
-  export type PostCreateWithoutCategoryInput = {
-    id?: string
-    title: string
-    slug: string
-    summary?: string | null
-    draft?: boolean
-    content?: string | null
-    published?: boolean
-    imageUrl?: string | null
-    metaTitle?: string | null
-    metaDescription?: string | null
-    canonicalUrl?: string | null
-    ogImage?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    tags?: TagCreateNestedManyWithoutPostsInput
-    user?: UserCreateNestedOneWithoutPostsInput
-  }
-
-  export type PostUncheckedCreateWithoutCategoryInput = {
-    id?: string
-    title: string
-    slug: string
-    summary?: string | null
-    draft?: boolean
-    content?: string | null
-    published?: boolean
-    imageUrl?: string | null
-    metaTitle?: string | null
-    metaDescription?: string | null
-    canonicalUrl?: string | null
-    ogImage?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    userId?: string | null
-    tags?: TagUncheckedCreateNestedManyWithoutPostsInput
-  }
-
-  export type PostCreateOrConnectWithoutCategoryInput = {
-    where: PostWhereUniqueInput
-    create: XOR<PostCreateWithoutCategoryInput, PostUncheckedCreateWithoutCategoryInput>
-  }
-
-  export type PostCreateManyCategoryInputEnvelope = {
-    data: PostCreateManyCategoryInput | PostCreateManyCategoryInput[]
-    skipDuplicates?: boolean
-  }
-
-  export type PostUpsertWithWhereUniqueWithoutCategoryInput = {
-    where: PostWhereUniqueInput
-    update: XOR<PostUpdateWithoutCategoryInput, PostUncheckedUpdateWithoutCategoryInput>
-    create: XOR<PostCreateWithoutCategoryInput, PostUncheckedCreateWithoutCategoryInput>
-  }
-
-  export type PostUpdateWithWhereUniqueWithoutCategoryInput = {
-    where: PostWhereUniqueInput
-    data: XOR<PostUpdateWithoutCategoryInput, PostUncheckedUpdateWithoutCategoryInput>
-  }
-
-  export type PostUpdateManyWithWhereWithoutCategoryInput = {
-    where: PostScalarWhereInput
-    data: XOR<PostUpdateManyMutationInput, PostUncheckedUpdateManyWithoutCategoryInput>
-  }
-
-  export type PostCreateWithoutTagsInput = {
-    id?: string
-    title: string
-    slug: string
-    summary?: string | null
-    draft?: boolean
-    content?: string | null
-    published?: boolean
-    imageUrl?: string | null
-    metaTitle?: string | null
-    metaDescription?: string | null
-    canonicalUrl?: string | null
-    ogImage?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    category?: CategoryCreateNestedOneWithoutPostsInput
-    user?: UserCreateNestedOneWithoutPostsInput
-  }
-
-  export type PostUncheckedCreateWithoutTagsInput = {
-    id?: string
-    title: string
-    slug: string
-    summary?: string | null
-    draft?: boolean
-    content?: string | null
-    published?: boolean
-    imageUrl?: string | null
-    categoryId?: string | null
-    metaTitle?: string | null
-    metaDescription?: string | null
-    canonicalUrl?: string | null
-    ogImage?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    userId?: string | null
-  }
-
-  export type PostCreateOrConnectWithoutTagsInput = {
-    where: PostWhereUniqueInput
-    create: XOR<PostCreateWithoutTagsInput, PostUncheckedCreateWithoutTagsInput>
-  }
-
-  export type ProductCreateWithoutTagsInput = {
-    id?: string
-    name: string
-    slug: string
-    summary?: string | null
-    description?: string | null
-    imageUrls?: ProductCreateimageUrlsInput | string[]
-    datasheetUrl?: string | null
-    isPublished?: boolean
-    order?: number | null
-    metaTitle?: string | null
-    metaDescription?: string | null
-    canonicalUrl?: string | null
-    ogImage?: string | null
-    ogTitle?: string | null
-    ogDescription?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    category: ProductCategoryCreateNestedOneWithoutProductsInput
-    user?: UserCreateNestedOneWithoutProductsInput
-    Tag?: TagCreateNestedOneWithoutProductInput
-  }
-
-  export type ProductUncheckedCreateWithoutTagsInput = {
-    id?: string
-    name: string
-    slug: string
-    summary?: string | null
-    description?: string | null
-    imageUrls?: ProductCreateimageUrlsInput | string[]
-    datasheetUrl?: string | null
-    categoryId: string
-    isPublished?: boolean
-    order?: number | null
-    userId?: string | null
-    metaTitle?: string | null
-    metaDescription?: string | null
-    canonicalUrl?: string | null
-    ogImage?: string | null
-    ogTitle?: string | null
-    ogDescription?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    tagId?: string | null
-  }
-
-  export type ProductCreateOrConnectWithoutTagsInput = {
-    where: ProductWhereUniqueInput
-    create: XOR<ProductCreateWithoutTagsInput, ProductUncheckedCreateWithoutTagsInput>
-  }
-
-  export type ProductCreateWithoutTagInput = {
-    id?: string
-    name: string
-    slug: string
-    summary?: string | null
-    description?: string | null
-    imageUrls?: ProductCreateimageUrlsInput | string[]
-    datasheetUrl?: string | null
-    isPublished?: boolean
-    order?: number | null
-    metaTitle?: string | null
-    metaDescription?: string | null
-    canonicalUrl?: string | null
-    ogImage?: string | null
-    ogTitle?: string | null
-    ogDescription?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    category: ProductCategoryCreateNestedOneWithoutProductsInput
-    tags?: TagCreateNestedManyWithoutProductsInput
-    user?: UserCreateNestedOneWithoutProductsInput
-  }
-
-  export type ProductUncheckedCreateWithoutTagInput = {
-    id?: string
-    name: string
-    slug: string
-    summary?: string | null
-    description?: string | null
-    imageUrls?: ProductCreateimageUrlsInput | string[]
-    datasheetUrl?: string | null
-    categoryId: string
-    isPublished?: boolean
-    order?: number | null
-    userId?: string | null
-    metaTitle?: string | null
-    metaDescription?: string | null
-    canonicalUrl?: string | null
-    ogImage?: string | null
-    ogTitle?: string | null
-    ogDescription?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    tags?: TagUncheckedCreateNestedManyWithoutProductsInput
-  }
-
-  export type ProductCreateOrConnectWithoutTagInput = {
-    where: ProductWhereUniqueInput
-    create: XOR<ProductCreateWithoutTagInput, ProductUncheckedCreateWithoutTagInput>
-  }
-
-  export type ProductCreateManyTagInputEnvelope = {
-    data: ProductCreateManyTagInput | ProductCreateManyTagInput[]
-    skipDuplicates?: boolean
-  }
-
-  export type PostUpsertWithWhereUniqueWithoutTagsInput = {
-    where: PostWhereUniqueInput
-    update: XOR<PostUpdateWithoutTagsInput, PostUncheckedUpdateWithoutTagsInput>
-    create: XOR<PostCreateWithoutTagsInput, PostUncheckedCreateWithoutTagsInput>
-  }
-
-  export type PostUpdateWithWhereUniqueWithoutTagsInput = {
-    where: PostWhereUniqueInput
-    data: XOR<PostUpdateWithoutTagsInput, PostUncheckedUpdateWithoutTagsInput>
-  }
-
-  export type PostUpdateManyWithWhereWithoutTagsInput = {
-    where: PostScalarWhereInput
-    data: XOR<PostUpdateManyMutationInput, PostUncheckedUpdateManyWithoutTagsInput>
-  }
-
-  export type ProductUpsertWithWhereUniqueWithoutTagsInput = {
-    where: ProductWhereUniqueInput
-    update: XOR<ProductUpdateWithoutTagsInput, ProductUncheckedUpdateWithoutTagsInput>
-    create: XOR<ProductCreateWithoutTagsInput, ProductUncheckedCreateWithoutTagsInput>
-  }
-
-  export type ProductUpdateWithWhereUniqueWithoutTagsInput = {
-    where: ProductWhereUniqueInput
-    data: XOR<ProductUpdateWithoutTagsInput, ProductUncheckedUpdateWithoutTagsInput>
-  }
-
-  export type ProductUpdateManyWithWhereWithoutTagsInput = {
-    where: ProductScalarWhereInput
-    data: XOR<ProductUpdateManyMutationInput, ProductUncheckedUpdateManyWithoutTagsInput>
-  }
-
-  export type ProductUpsertWithWhereUniqueWithoutTagInput = {
-    where: ProductWhereUniqueInput
-    update: XOR<ProductUpdateWithoutTagInput, ProductUncheckedUpdateWithoutTagInput>
-    create: XOR<ProductCreateWithoutTagInput, ProductUncheckedCreateWithoutTagInput>
-  }
-
-  export type ProductUpdateWithWhereUniqueWithoutTagInput = {
-    where: ProductWhereUniqueInput
-    data: XOR<ProductUpdateWithoutTagInput, ProductUncheckedUpdateWithoutTagInput>
-  }
-
-  export type ProductUpdateManyWithWhereWithoutTagInput = {
-    where: ProductScalarWhereInput
-    data: XOR<ProductUpdateManyMutationInput, ProductUncheckedUpdateManyWithoutTagInput>
   }
 
   export type ProductCategoryCreateWithoutChildrenInput = {
@@ -15173,6 +15006,7 @@ export namespace Prisma {
     metaTitle?: string | null
     metaDescription?: string | null
     ogImage?: string | null
+    createdAt?: Date | string
     updatedAt?: Date | string
     parent?: ProductCategoryCreateNestedOneWithoutChildrenInput
     products?: ProductCreateNestedManyWithoutCategoryInput
@@ -15190,6 +15024,7 @@ export namespace Prisma {
     metaTitle?: string | null
     metaDescription?: string | null
     ogImage?: string | null
+    createdAt?: Date | string
     updatedAt?: Date | string
     products?: ProductUncheckedCreateNestedManyWithoutCategoryInput
   }
@@ -15210,6 +15045,7 @@ export namespace Prisma {
     metaTitle?: string | null
     metaDescription?: string | null
     ogImage?: string | null
+    createdAt?: Date | string
     updatedAt?: Date | string
     children?: ProductCategoryCreateNestedManyWithoutParentInput
     products?: ProductCreateNestedManyWithoutCategoryInput
@@ -15226,6 +15062,7 @@ export namespace Prisma {
     metaTitle?: string | null
     metaDescription?: string | null
     ogImage?: string | null
+    createdAt?: Date | string
     updatedAt?: Date | string
     children?: ProductCategoryUncheckedCreateNestedManyWithoutParentInput
     products?: ProductUncheckedCreateNestedManyWithoutCategoryInput
@@ -15260,8 +15097,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     tags?: TagCreateNestedManyWithoutProductsInput
-    user?: UserCreateNestedOneWithoutProductsInput
-    Tag?: TagCreateNestedOneWithoutProductInput
+    user: UserCreateNestedOneWithoutProductsInput
   }
 
   export type ProductUncheckedCreateWithoutCategoryInput = {
@@ -15274,7 +15110,7 @@ export namespace Prisma {
     datasheetUrl?: string | null
     isPublished?: boolean
     order?: number | null
-    userId?: string | null
+    userId: string
     metaTitle?: string | null
     metaDescription?: string | null
     canonicalUrl?: string | null
@@ -15283,7 +15119,6 @@ export namespace Prisma {
     ogDescription?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    tagId?: string | null
     tags?: TagUncheckedCreateNestedManyWithoutProductsInput
   }
 
@@ -15319,6 +15154,7 @@ export namespace Prisma {
     metaTitle?: NullableStringFieldUpdateOperationsInput | string | null
     metaDescription?: NullableStringFieldUpdateOperationsInput | string | null
     ogImage?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     parent?: ProductCategoryUpdateOneWithoutChildrenNestedInput
     products?: ProductUpdateManyWithoutCategoryNestedInput
@@ -15336,6 +15172,7 @@ export namespace Prisma {
     metaTitle?: NullableStringFieldUpdateOperationsInput | string | null
     metaDescription?: NullableStringFieldUpdateOperationsInput | string | null
     ogImage?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     products?: ProductUncheckedUpdateManyWithoutCategoryNestedInput
   }
@@ -15371,6 +15208,7 @@ export namespace Prisma {
     metaTitle?: StringNullableFilter<"ProductCategory"> | string | null
     metaDescription?: StringNullableFilter<"ProductCategory"> | string | null
     ogImage?: StringNullableFilter<"ProductCategory"> | string | null
+    createdAt?: DateTimeFilter<"ProductCategory"> | Date | string
     updatedAt?: DateTimeFilter<"ProductCategory"> | Date | string
   }
 
@@ -15401,6 +15239,7 @@ export namespace Prisma {
     metaTitle?: string | null
     metaDescription?: string | null
     ogImage?: string | null
+    createdAt?: Date | string
     updatedAt?: Date | string
     parent?: ProductCategoryCreateNestedOneWithoutChildrenInput
     children?: ProductCategoryCreateNestedManyWithoutParentInput
@@ -15418,6 +15257,7 @@ export namespace Prisma {
     metaTitle?: string | null
     metaDescription?: string | null
     ogImage?: string | null
+    createdAt?: Date | string
     updatedAt?: Date | string
     children?: ProductCategoryUncheckedCreateNestedManyWithoutParentInput
   }
@@ -15434,7 +15274,6 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     posts?: PostCreateNestedManyWithoutTagsInput
-    Product?: ProductCreateNestedManyWithoutTagInput
   }
 
   export type TagUncheckedCreateWithoutProductsInput = {
@@ -15444,7 +15283,6 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     posts?: PostUncheckedCreateNestedManyWithoutTagsInput
-    Product?: ProductUncheckedCreateNestedManyWithoutTagInput
   }
 
   export type TagCreateOrConnectWithoutProductsInput = {
@@ -15457,11 +15295,11 @@ export namespace Prisma {
     email: string
     hashedPassword?: string | null
     username?: string | null
+    role?: $Enums.Role
     createdAt?: Date | string
     updatedAt?: Date | string
-    role?: string
     sessions?: SessionCreateNestedManyWithoutUserInput
-    Book?: BookCreateNestedManyWithoutUserInput
+    books?: BookCreateNestedManyWithoutUserInput
     posts?: PostCreateNestedManyWithoutUserInput
   }
 
@@ -15470,42 +15308,17 @@ export namespace Prisma {
     email: string
     hashedPassword?: string | null
     username?: string | null
+    role?: $Enums.Role
     createdAt?: Date | string
     updatedAt?: Date | string
-    role?: string
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
-    Book?: BookUncheckedCreateNestedManyWithoutUserInput
+    books?: BookUncheckedCreateNestedManyWithoutUserInput
     posts?: PostUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutProductsInput = {
     where: UserWhereUniqueInput
     create: XOR<UserCreateWithoutProductsInput, UserUncheckedCreateWithoutProductsInput>
-  }
-
-  export type TagCreateWithoutProductInput = {
-    id?: string
-    name: string
-    slug: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    posts?: PostCreateNestedManyWithoutTagsInput
-    products?: ProductCreateNestedManyWithoutTagsInput
-  }
-
-  export type TagUncheckedCreateWithoutProductInput = {
-    id?: string
-    name: string
-    slug: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    posts?: PostUncheckedCreateNestedManyWithoutTagsInput
-    products?: ProductUncheckedCreateNestedManyWithoutTagsInput
-  }
-
-  export type TagCreateOrConnectWithoutProductInput = {
-    where: TagWhereUniqueInput
-    create: XOR<TagCreateWithoutProductInput, TagUncheckedCreateWithoutProductInput>
   }
 
   export type ProductCategoryUpsertWithoutProductsInput = {
@@ -15530,6 +15343,7 @@ export namespace Prisma {
     metaTitle?: NullableStringFieldUpdateOperationsInput | string | null
     metaDescription?: NullableStringFieldUpdateOperationsInput | string | null
     ogImage?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     parent?: ProductCategoryUpdateOneWithoutChildrenNestedInput
     children?: ProductCategoryUpdateManyWithoutParentNestedInput
@@ -15547,6 +15361,7 @@ export namespace Prisma {
     metaTitle?: NullableStringFieldUpdateOperationsInput | string | null
     metaDescription?: NullableStringFieldUpdateOperationsInput | string | null
     ogImage?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     children?: ProductCategoryUncheckedUpdateManyWithoutParentNestedInput
   }
@@ -15583,11 +15398,11 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     hashedPassword?: NullableStringFieldUpdateOperationsInput | string | null
     username?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    role?: StringFieldUpdateOperationsInput | string
     sessions?: SessionUpdateManyWithoutUserNestedInput
-    Book?: BookUpdateManyWithoutUserNestedInput
+    books?: BookUpdateManyWithoutUserNestedInput
     posts?: PostUpdateManyWithoutUserNestedInput
   }
 
@@ -15596,43 +15411,12 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     hashedPassword?: NullableStringFieldUpdateOperationsInput | string | null
     username?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    role?: StringFieldUpdateOperationsInput | string
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
-    Book?: BookUncheckedUpdateManyWithoutUserNestedInput
+    books?: BookUncheckedUpdateManyWithoutUserNestedInput
     posts?: PostUncheckedUpdateManyWithoutUserNestedInput
-  }
-
-  export type TagUpsertWithoutProductInput = {
-    update: XOR<TagUpdateWithoutProductInput, TagUncheckedUpdateWithoutProductInput>
-    create: XOR<TagCreateWithoutProductInput, TagUncheckedCreateWithoutProductInput>
-    where?: TagWhereInput
-  }
-
-  export type TagUpdateToOneWithWhereWithoutProductInput = {
-    where?: TagWhereInput
-    data: XOR<TagUpdateWithoutProductInput, TagUncheckedUpdateWithoutProductInput>
-  }
-
-  export type TagUpdateWithoutProductInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    slug?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    posts?: PostUpdateManyWithoutTagsNestedInput
-    products?: ProductUpdateManyWithoutTagsNestedInput
-  }
-
-  export type TagUncheckedUpdateWithoutProductInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    slug?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    posts?: PostUncheckedUpdateManyWithoutTagsNestedInput
-    products?: ProductUncheckedUpdateManyWithoutTagsNestedInput
   }
 
   export type SessionCreateManyUserInput = {
@@ -15689,7 +15473,6 @@ export namespace Prisma {
     ogDescription?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    tagId?: string | null
   }
 
   export type SessionUpdateWithoutUserInput = {
@@ -15819,7 +15602,6 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     category?: ProductCategoryUpdateOneRequiredWithoutProductsNestedInput
     tags?: TagUpdateManyWithoutProductsNestedInput
-    Tag?: TagUpdateOneWithoutProductNestedInput
   }
 
   export type ProductUncheckedUpdateWithoutUserInput = {
@@ -15841,7 +15623,6 @@ export namespace Prisma {
     ogDescription?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    tagId?: NullableStringFieldUpdateOperationsInput | string | null
     tags?: TagUncheckedUpdateManyWithoutProductsNestedInput
   }
 
@@ -15864,35 +15645,6 @@ export namespace Prisma {
     ogDescription?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    tagId?: NullableStringFieldUpdateOperationsInput | string | null
-  }
-
-  export type TagUpdateWithoutPostsInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    slug?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    products?: ProductUpdateManyWithoutTagsNestedInput
-    Product?: ProductUpdateManyWithoutTagNestedInput
-  }
-
-  export type TagUncheckedUpdateWithoutPostsInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    slug?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    products?: ProductUncheckedUpdateManyWithoutTagsNestedInput
-    Product?: ProductUncheckedUpdateManyWithoutTagNestedInput
-  }
-
-  export type TagUncheckedUpdateManyWithoutPostsInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    slug?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type PostCreateManyCategoryInput = {
@@ -15908,9 +15660,9 @@ export namespace Prisma {
     metaDescription?: string | null
     canonicalUrl?: string | null
     ogImage?: string | null
+    userId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    userId?: string | null
   }
 
   export type PostUpdateWithoutCategoryInput = {
@@ -15945,9 +15697,9 @@ export namespace Prisma {
     metaDescription?: NullableStringFieldUpdateOperationsInput | string | null
     canonicalUrl?: NullableStringFieldUpdateOperationsInput | string | null
     ogImage?: NullableStringFieldUpdateOperationsInput | string | null
+    userId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    userId?: NullableStringFieldUpdateOperationsInput | string | null
     tags?: TagUncheckedUpdateManyWithoutPostsNestedInput
   }
 
@@ -15964,31 +15716,9 @@ export namespace Prisma {
     metaDescription?: NullableStringFieldUpdateOperationsInput | string | null
     canonicalUrl?: NullableStringFieldUpdateOperationsInput | string | null
     ogImage?: NullableStringFieldUpdateOperationsInput | string | null
+    userId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    userId?: NullableStringFieldUpdateOperationsInput | string | null
-  }
-
-  export type ProductCreateManyTagInput = {
-    id?: string
-    name: string
-    slug: string
-    summary?: string | null
-    description?: string | null
-    imageUrls?: ProductCreateimageUrlsInput | string[]
-    datasheetUrl?: string | null
-    categoryId: string
-    isPublished?: boolean
-    order?: number | null
-    userId?: string | null
-    metaTitle?: string | null
-    metaDescription?: string | null
-    canonicalUrl?: string | null
-    ogImage?: string | null
-    ogTitle?: string | null
-    ogDescription?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
   }
 
   export type PostUpdateWithoutTagsInput = {
@@ -16024,9 +15754,9 @@ export namespace Prisma {
     metaDescription?: NullableStringFieldUpdateOperationsInput | string | null
     canonicalUrl?: NullableStringFieldUpdateOperationsInput | string | null
     ogImage?: NullableStringFieldUpdateOperationsInput | string | null
+    userId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    userId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type PostUncheckedUpdateManyWithoutTagsInput = {
@@ -16043,9 +15773,9 @@ export namespace Prisma {
     metaDescription?: NullableStringFieldUpdateOperationsInput | string | null
     canonicalUrl?: NullableStringFieldUpdateOperationsInput | string | null
     ogImage?: NullableStringFieldUpdateOperationsInput | string | null
+    userId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    userId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type ProductUpdateWithoutTagsInput = {
@@ -16067,8 +15797,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     category?: ProductCategoryUpdateOneRequiredWithoutProductsNestedInput
-    user?: UserUpdateOneWithoutProductsNestedInput
-    Tag?: TagUpdateOneWithoutProductNestedInput
+    user?: UserUpdateOneRequiredWithoutProductsNestedInput
   }
 
   export type ProductUncheckedUpdateWithoutTagsInput = {
@@ -16082,7 +15811,7 @@ export namespace Prisma {
     categoryId?: StringFieldUpdateOperationsInput | string
     isPublished?: BoolFieldUpdateOperationsInput | boolean
     order?: NullableIntFieldUpdateOperationsInput | number | null
-    userId?: NullableStringFieldUpdateOperationsInput | string | null
+    userId?: StringFieldUpdateOperationsInput | string
     metaTitle?: NullableStringFieldUpdateOperationsInput | string | null
     metaDescription?: NullableStringFieldUpdateOperationsInput | string | null
     canonicalUrl?: NullableStringFieldUpdateOperationsInput | string | null
@@ -16091,7 +15820,6 @@ export namespace Prisma {
     ogDescription?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    tagId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type ProductUncheckedUpdateManyWithoutTagsInput = {
@@ -16105,7 +15833,7 @@ export namespace Prisma {
     categoryId?: StringFieldUpdateOperationsInput | string
     isPublished?: BoolFieldUpdateOperationsInput | boolean
     order?: NullableIntFieldUpdateOperationsInput | number | null
-    userId?: NullableStringFieldUpdateOperationsInput | string | null
+    userId?: StringFieldUpdateOperationsInput | string
     metaTitle?: NullableStringFieldUpdateOperationsInput | string | null
     metaDescription?: NullableStringFieldUpdateOperationsInput | string | null
     canonicalUrl?: NullableStringFieldUpdateOperationsInput | string | null
@@ -16114,73 +15842,30 @@ export namespace Prisma {
     ogDescription?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    tagId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
-  export type ProductUpdateWithoutTagInput = {
+  export type TagUpdateWithoutPostsInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
-    summary?: NullableStringFieldUpdateOperationsInput | string | null
-    description?: NullableStringFieldUpdateOperationsInput | string | null
-    imageUrls?: ProductUpdateimageUrlsInput | string[]
-    datasheetUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    isPublished?: BoolFieldUpdateOperationsInput | boolean
-    order?: NullableIntFieldUpdateOperationsInput | number | null
-    metaTitle?: NullableStringFieldUpdateOperationsInput | string | null
-    metaDescription?: NullableStringFieldUpdateOperationsInput | string | null
-    canonicalUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    ogImage?: NullableStringFieldUpdateOperationsInput | string | null
-    ogTitle?: NullableStringFieldUpdateOperationsInput | string | null
-    ogDescription?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    category?: ProductCategoryUpdateOneRequiredWithoutProductsNestedInput
-    tags?: TagUpdateManyWithoutProductsNestedInput
-    user?: UserUpdateOneWithoutProductsNestedInput
+    products?: ProductUpdateManyWithoutTagsNestedInput
   }
 
-  export type ProductUncheckedUpdateWithoutTagInput = {
+  export type TagUncheckedUpdateWithoutPostsInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
-    summary?: NullableStringFieldUpdateOperationsInput | string | null
-    description?: NullableStringFieldUpdateOperationsInput | string | null
-    imageUrls?: ProductUpdateimageUrlsInput | string[]
-    datasheetUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    categoryId?: StringFieldUpdateOperationsInput | string
-    isPublished?: BoolFieldUpdateOperationsInput | boolean
-    order?: NullableIntFieldUpdateOperationsInput | number | null
-    userId?: NullableStringFieldUpdateOperationsInput | string | null
-    metaTitle?: NullableStringFieldUpdateOperationsInput | string | null
-    metaDescription?: NullableStringFieldUpdateOperationsInput | string | null
-    canonicalUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    ogImage?: NullableStringFieldUpdateOperationsInput | string | null
-    ogTitle?: NullableStringFieldUpdateOperationsInput | string | null
-    ogDescription?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    tags?: TagUncheckedUpdateManyWithoutProductsNestedInput
+    products?: ProductUncheckedUpdateManyWithoutTagsNestedInput
   }
 
-  export type ProductUncheckedUpdateManyWithoutTagInput = {
+  export type TagUncheckedUpdateManyWithoutPostsInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
-    summary?: NullableStringFieldUpdateOperationsInput | string | null
-    description?: NullableStringFieldUpdateOperationsInput | string | null
-    imageUrls?: ProductUpdateimageUrlsInput | string[]
-    datasheetUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    categoryId?: StringFieldUpdateOperationsInput | string
-    isPublished?: BoolFieldUpdateOperationsInput | boolean
-    order?: NullableIntFieldUpdateOperationsInput | number | null
-    userId?: NullableStringFieldUpdateOperationsInput | string | null
-    metaTitle?: NullableStringFieldUpdateOperationsInput | string | null
-    metaDescription?: NullableStringFieldUpdateOperationsInput | string | null
-    canonicalUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    ogImage?: NullableStringFieldUpdateOperationsInput | string | null
-    ogTitle?: NullableStringFieldUpdateOperationsInput | string | null
-    ogDescription?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -16196,6 +15881,7 @@ export namespace Prisma {
     metaTitle?: string | null
     metaDescription?: string | null
     ogImage?: string | null
+    createdAt?: Date | string
     updatedAt?: Date | string
   }
 
@@ -16209,7 +15895,7 @@ export namespace Prisma {
     datasheetUrl?: string | null
     isPublished?: boolean
     order?: number | null
-    userId?: string | null
+    userId: string
     metaTitle?: string | null
     metaDescription?: string | null
     canonicalUrl?: string | null
@@ -16218,7 +15904,6 @@ export namespace Prisma {
     ogDescription?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    tagId?: string | null
   }
 
   export type ProductCategoryUpdateWithoutParentInput = {
@@ -16232,6 +15917,7 @@ export namespace Prisma {
     metaTitle?: NullableStringFieldUpdateOperationsInput | string | null
     metaDescription?: NullableStringFieldUpdateOperationsInput | string | null
     ogImage?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     children?: ProductCategoryUpdateManyWithoutParentNestedInput
     products?: ProductUpdateManyWithoutCategoryNestedInput
@@ -16248,6 +15934,7 @@ export namespace Prisma {
     metaTitle?: NullableStringFieldUpdateOperationsInput | string | null
     metaDescription?: NullableStringFieldUpdateOperationsInput | string | null
     ogImage?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     children?: ProductCategoryUncheckedUpdateManyWithoutParentNestedInput
     products?: ProductUncheckedUpdateManyWithoutCategoryNestedInput
@@ -16264,6 +15951,7 @@ export namespace Prisma {
     metaTitle?: NullableStringFieldUpdateOperationsInput | string | null
     metaDescription?: NullableStringFieldUpdateOperationsInput | string | null
     ogImage?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -16286,8 +15974,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     tags?: TagUpdateManyWithoutProductsNestedInput
-    user?: UserUpdateOneWithoutProductsNestedInput
-    Tag?: TagUpdateOneWithoutProductNestedInput
+    user?: UserUpdateOneRequiredWithoutProductsNestedInput
   }
 
   export type ProductUncheckedUpdateWithoutCategoryInput = {
@@ -16300,7 +15987,7 @@ export namespace Prisma {
     datasheetUrl?: NullableStringFieldUpdateOperationsInput | string | null
     isPublished?: BoolFieldUpdateOperationsInput | boolean
     order?: NullableIntFieldUpdateOperationsInput | number | null
-    userId?: NullableStringFieldUpdateOperationsInput | string | null
+    userId?: StringFieldUpdateOperationsInput | string
     metaTitle?: NullableStringFieldUpdateOperationsInput | string | null
     metaDescription?: NullableStringFieldUpdateOperationsInput | string | null
     canonicalUrl?: NullableStringFieldUpdateOperationsInput | string | null
@@ -16309,7 +15996,6 @@ export namespace Prisma {
     ogDescription?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    tagId?: NullableStringFieldUpdateOperationsInput | string | null
     tags?: TagUncheckedUpdateManyWithoutProductsNestedInput
   }
 
@@ -16323,7 +16009,7 @@ export namespace Prisma {
     datasheetUrl?: NullableStringFieldUpdateOperationsInput | string | null
     isPublished?: BoolFieldUpdateOperationsInput | boolean
     order?: NullableIntFieldUpdateOperationsInput | number | null
-    userId?: NullableStringFieldUpdateOperationsInput | string | null
+    userId?: StringFieldUpdateOperationsInput | string
     metaTitle?: NullableStringFieldUpdateOperationsInput | string | null
     metaDescription?: NullableStringFieldUpdateOperationsInput | string | null
     canonicalUrl?: NullableStringFieldUpdateOperationsInput | string | null
@@ -16332,7 +16018,6 @@ export namespace Prisma {
     ogDescription?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    tagId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type TagUpdateWithoutProductsInput = {
@@ -16342,7 +16027,6 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     posts?: PostUpdateManyWithoutTagsNestedInput
-    Product?: ProductUpdateManyWithoutTagNestedInput
   }
 
   export type TagUncheckedUpdateWithoutProductsInput = {
@@ -16352,7 +16036,6 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     posts?: PostUncheckedUpdateManyWithoutTagsNestedInput
-    Product?: ProductUncheckedUpdateManyWithoutTagNestedInput
   }
 
   export type TagUncheckedUpdateManyWithoutProductsInput = {

@@ -4,8 +4,8 @@ import ComponentCard from '../../common/ComponentCard';
 import Label from '../Label';
 import Input from '../input/InputField';
 import Select from '../Select';
-import { ChevronDownIcon, EyeCloseIcon, EyeIcon, TimeIcon } from '../../../icons';
-import DatePicker from '@/components/form/date-picker';
+import { ChevronDownIcon, EyeCloseIcon, EyeIcon, TimeIcon } from '@/icons';
+import DatePicker from '../date-picker';
 
 export default function DefaultInputs() {
   const [showPassword, setShowPassword] = useState(false);
@@ -14,9 +14,7 @@ export default function DefaultInputs() {
     { value: "template", label: "Template" },
     { value: "development", label: "Development" },
   ];
-  const handleSelectChange = (value: string) => {
-    console.log("Selected value:", value);
-  };
+  const handleSelectChange = (_value: string) => {};
   return (
     <ComponentCard title="Default Inputs">
       <div className="space-y-6">
@@ -37,7 +35,7 @@ export default function DefaultInputs() {
             onChange={handleSelectChange}
             className="dark:bg-dark-900"
           />
-             <span className="absolute text-gray-500 -translate-y-1/2 pointer-events-none end-3 top-1/2 dark:text-gray-400">
+             <span className="absolute text-gray-600 -translate-y-1/2 pointer-events-none end-3 top-1/2 dark:text-gray-400">
               <ChevronDownIcon/>
             </span>
           </div>
@@ -67,10 +65,7 @@ export default function DefaultInputs() {
             id="date-picker"
             label="Date Picker Input"
             placeholder="Select a date"
-            onChange={(dates, currentDateString) => {
-              // Handle your logic
-              console.log({ dates, currentDateString });
-            }}
+            onChange={(_dates: any, _currentDateString: any) => {}}
           />
         </div>
 
@@ -81,9 +76,9 @@ export default function DefaultInputs() {
               type="time"
               id="tm"
               name="tm"
-              onChange={(e) => console.log(e.target.value)}
+              onChange={() => {}}
             />
-            <span className="absolute text-gray-500 -translate-y-1/2 pointer-events-none end-3 top-1/2 dark:text-gray-400">
+            <span className="absolute text-gray-600 -translate-y-1/2 pointer-events-none end-3 top-1/2 dark:text-gray-400">
               <TimeIcon />
             </span>
           </div>
@@ -104,11 +99,11 @@ export default function DefaultInputs() {
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
               >
-                <circle cx="6.25" cy="10" r="5.625" fill="#E80B26" />
-                <circle cx="13.75" cy="10" r="5.625" fill="#F59D31" />
+                <circle cx="6.25" cy="10" r="5.625" fill="var(--color-error-500)" />
+                <circle cx="13.75" cy="10" r="5.625" fill="var(--color-warning-500)" />
                 <path
                   d="M10 14.1924C11.1508 13.1625 11.875 11.6657 11.875 9.99979C11.875 8.33383 11.1508 6.8371 10 5.80713C8.84918 6.8371 8.125 8.33383 8.125 9.99979C8.125 11.6657 8.84918 13.1625 10 14.1924Z"
-                  fill="#FC6020"
+                  fill="var(--color-warning-500)"
                 />
               </svg>
             </span>

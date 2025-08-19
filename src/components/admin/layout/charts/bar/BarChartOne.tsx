@@ -1,110 +1,84 @@
 "use client";
 import React from "react";
+// Temporarily disabled ApexCharts for testing AdminDataTable
+// import { ApexOptions } from "apexcharts";
+// import dynamic from "next/dynamic";
 
-import { ApexOptions } from "apexcharts";
+// const ReactApexChart = dynamic(() => import("react-apexcharts"), {
+//   ssr: false,
+// });
 
-import dynamic from "next/dynamic";
-// Dynamically import the ReactApexChart component
-const ReactApexChart = dynamic(() => import("react-apexcharts"), {
-  ssr: false,
-});
+const BarChartOne: React.FC = () => {
+  // const chartOptions: ApexOptions = {
+  //   chart: {
+  //     type: "bar",
+  //     height: 350,
+  //     toolbar: {
+  //       show: false,
+  //     },
+  //   },
+  //   plotOptions: {
+  //     bar: {
+  //       horizontal: false,
+  //       columnWidth: "55%",
+  //     },
+  //   },
+  //   dataLabels: {
+  //     enabled: false,
+  //   },
+  //   stroke: {
+  //     show: true,
+  //     width: 2,
+  //     colors: ["transparent"],
+  //   },
+  //   xaxis: {
+  //     categories: ["Jan", "Feb", "Mar", "Apr", "May", "Jun"],
+  //   },
+  //   yaxis: {
+  //     title: {
+  //       text: "$ (thousands)",
+  //     },
+  //   },
+  //   fill: {
+  //     opacity: 1,
+  //   },
+  //   tooltip: {
+  //     y: {
+  //       formatter: function (val) {
+  //         return "$ " + val + " thousands";
+  //       },
+  //     },
+  //   },
+  // };
 
-export default function BarChartOne() {
-  const options: ApexOptions = {
-    colors: ["#465fff"],
-    chart: {
-      fontFamily: "Outfit, sans-serif",
-      type: "bar",
-      height: 180,
-      toolbar: {
-        show: false,
-      },
-    },
-    plotOptions: {
-      bar: {
-        horizontal: false,
-        columnWidth: "39%",
-        borderRadius: 5,
-        borderRadiusApplication: "end",
-      },
-    },
-    dataLabels: {
-      enabled: false,
-    },
-    stroke: {
-      show: true,
-      width: 4,
-      colors: ["transparent"],
-    },
-    xaxis: {
-      categories: [
-        "Jan",
-        "Feb",
-        "Mar",
-        "Apr",
-        "May",
-        "Jun",
-        "Jul",
-        "Aug",
-        "Sep",
-        "Oct",
-        "Nov",
-        "Dec",
-      ],
-      axisBorder: {
-        show: false,
-      },
-      axisTicks: {
-        show: false,
-      },
-    },
-    legend: {
-      show: true,
-      position: "top",
-      horizontalAlign: "left",
-      fontFamily: "Outfit",
-    },
-    yaxis: {
-      title: {
-        text: undefined,
-      },
-    },
-    grid: {
-      yaxis: {
-        lines: {
-          show: true,
-        },
-      },
-    },
-    fill: {
-      opacity: 1,
-    },
+  // const series = [
+  //   {
+  //     name: "Net Profit",
+  //     data: [44, 55, 57, 56, 61, 58],
+  //   },
+  //   {
+  //     name: "Revenue",
+  //     data: [76, 85, 101, 98, 87, 105],
+  //   },
+  // ];
 
-    tooltip: {
-      x: {
-        show: false,
-      },
-      y: {
-        formatter: (val: number) => `${val}`,
-      },
-    },
-  };
-  const series = [
-    {
-      name: "Sales",
-      data: [168, 385, 201, 298, 187, 195, 291, 110, 215, 390, 280, 112],
-    },
-  ];
   return (
-    <div className="max-w-full overflow-x-auto custom-scrollbar">
-      <div id="chartOne" className="min-w-[1000px]">
-        <ReactApexChart
-          options={options}
-          series={series}
-          type="bar"
-          height={180}
-        />
+    <div className="rounded-lg border border-gray-200 bg-white p-6 dark:border-gray-800 dark:bg-gray-900">
+      <div className="mb-4">
+        <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
+          Bar Chart
+        </h3>
+        <p className="text-sm text-gray-600 dark:text-gray-400">
+          ApexCharts temporarily disabled for AdminDataTable testing.
+        </p>
+      </div>
+      <div className="h-64 flex items-center justify-center bg-gray-50 dark:bg-gray-800 rounded">
+        <p className="text-gray-500 dark:text-gray-400">
+          Chart component disabled
+        </p>
       </div>
     </div>
   );
-}
+};
+
+export default BarChartOne;

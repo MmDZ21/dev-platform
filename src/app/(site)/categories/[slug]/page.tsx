@@ -13,19 +13,21 @@ export async function generateStaticParams() {
 }
 
 // Dynamic SEO for each category page
-export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
-  const category = await prisma.category.findUnique({ where: { slug: params.slug } });
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+  const { slug } = await params;
+  const category = await prisma.category.findUnique({ where: { slug } });
   if (!category) return { title: "دسته‌بندی پیدا نشد" };
   return {
     title: `مطالب دسته ${category.name}`,
     description: `تمام مطالب در دسته «${category.name}» را اینجا ببینید.`,
-    alternates: { canonical: `/categories/${params.slug}` },
+    alternates: { canonical: `/categories/${slug}` },
   };
 }
 
-export default async function CategoryPage({ params }: { params: { slug: string } }) {
+export default async function CategoryPage({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
   const category = await prisma.category.findUnique({
-    where: { slug: params.slug },
+    where: { slug },
     select: { id: true, name: true, posts: {
       select: {
         id: true, title: true, slug: true, imageUrl: true, metaDescription: true, createdAt: true,

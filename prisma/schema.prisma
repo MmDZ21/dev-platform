@@ -1,9 +1,4 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
+// prisma/schema.prisma
 generator client {
   provider = "prisma-client-js"
   output   = "../src/generated/prisma"
@@ -14,21 +9,27 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+/* ───── Enums ───── */
+enum Role {
+  admin
+  user
+}
+
+/* ───── Core Auth ───── */
 model User {
   id             String   @id @default(cuid())
   email          String   @unique
   hashedPassword String?
   username       String?  @unique
-  createdAt      DateTime @default(now())
-  updatedAt      DateTime @updatedAt
-  role           String   @default("admin") // <- Add this line
+  role           Role     @default(admin)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   sessions Session[]
-  // Add more profile fields here if needed
-
-  Book     Book[]
+  books    Book[]
   posts    Post[]
-  products Product[] // محصولات ثبت‌شده توسط این کاربر
+  products Product[]
 }
 
 model Session {
@@ -41,124 +42,131 @@ model Session {
   @@index([userId])
 }
 
+/* ───── Demo Book ───── */
 model Book {
-  id          String   @id @default(cuid())
-  title       String
-  author      String
+  id        String  @id @default(cuid())
+  title     String
+  author    String
   description String?
-  price       Float?
-  imageUrl    String? // For future file uploads
-  published   Boolean  @default(false)
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  price     Float?
+  imageUrl  String?
+  published Boolean @default(false)
 
-  // Optional: link to user who submitted the book
-  userId String?
-  user   User?   @relation(fields: [userId], references: [id])
-}
-
-model Post {
-  id              String    @id @default(cuid())
-  title           String
-  slug            String    @unique
-  summary         String?
-  draft           Boolean   @default(false)
-  content         String?
-  published       Boolean   @default(false)
-  imageUrl        String?
-  category        Category? @relation(fields: [categoryId], references: [id])
-  categoryId      String?
-  tags            Tag[]     @relation("PostTags")
-  metaTitle       String?
-  metaDescription String?
-  canonicalUrl    String?
-  ogImage         String?
-  createdAt       DateTime  @default(now())
-  updatedAt       DateTime  @updatedAt
-
-  // 👇 این دو خط رو اضافه کن
-  userId String?
-  user   User?   @relation(fields: [userId], references: [id])
-}
-
-model Category {
-  id        String   @id @default(uuid())
-  name      String   @unique
-  slug      String   @unique
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+
+  userId String?
+  user   User? @relation(fields: [userId], references: [id])
+}
+
+/* ───── Blog ───── */
+model Category {
+  id   String @id @default(uuid())
+  name String @unique
+  slug String @unique @db.VarChar(256)
+
   posts     Post[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 model Tag {
-  id   String @id @default(uuid())
-  name String @unique
-  slug String @unique
+  id      String  @id @default(uuid())
+  name    String  @unique
+  slug    String  @unique
 
   posts    Post[]    @relation("PostTags")
   products Product[] @relation("ProductTags")
 
-  createdAt DateTime  @default(now())
-  updatedAt DateTime  @updatedAt
-  Product   Product[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
+model Post {
+  id        String  @id @default(cuid())
+  title     String
+  slug      String  @unique @db.VarChar(256)
+  summary   String?
+  draft     Boolean @default(false)
+  content   String?
+  published Boolean @default(false)
+  imageUrl  String?
+
+  categoryId String?
+  category   Category? @relation(fields: [categoryId], references: [id])
+
+  tags Tag[] @relation("PostTags")
+
+  metaTitle       String?
+  metaDescription String?
+  canonicalUrl    String?
+  ogImage         String?
+
+  userId   String?
+  user     User? @relation(fields: [userId], references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+/* ───── Product Catalog ───── */
 model ProductCategory {
-  id              String            @id @default(uuid())
-  name            String
-  slug            String            @unique
-  parentId        String? // برای زیرشاخه‌ها (در صورت نیاز)
-  parent          ProductCategory?  @relation("Subcategories", fields: [parentId], references: [id])
-  children        ProductCategory[] @relation("Subcategories")
-  products        Product[]
-  summary         String? // ← جدید
-  description     String? // ← جدید
-  image           String? // ← جدید (URL)
+  id       String  @id @default(uuid())
+  name     String
+  slug     String  @unique @db.VarChar(256)
+
+  parentId String?
+  parent   ProductCategory?  @relation("Subcategories", fields: [parentId], references: [id], onDelete: Cascade)
+  children ProductCategory[] @relation("Subcategories")
+
+  products Product[]
+
+  summary         String?
+  description     String?
+  image           String?
   order           Int?
-  metaTitle       String? // ← جدید
-  metaDescription String? // ← جدید
-  ogImage         String? // ← جدید (URL)  createdAt DateTime          @default(now())
-  updatedAt       DateTime          @updatedAt
+  metaTitle       String?
+  metaDescription String?
+  ogImage         String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([parentId])
+  @@index([order])
 }
 
 model Product {
-  id              String          @id @default(cuid())
-  name            String
-  slug            String          @unique
-  summary         String?
-  description     String? // توضیح کامل (Rich Text)
-  imageUrls       String[] // گالری عکس
-  datasheetUrl    String? // لینک PDF دیتا شیت
-  categoryId      String
-  category        ProductCategory @relation(fields: [categoryId], references: [id])
-  tags            Tag[]           @relation("ProductTags")
-  isPublished     Boolean         @default(true)
-  order           Int? // ترتیب در لیست
-  userId          String?
-  user            User?           @relation(fields: [userId], references: [id])
+  id          String  @id @default(cuid())
+  name        String
+  slug        String  @unique @db.VarChar(256)
+  summary     String?
+  description String?
+  imageUrls   String[]
+  datasheetUrl String?
+
+  categoryId String
+  category   ProductCategory @relation(fields: [categoryId], references: [id], onDelete: Restrict)
+
+  tags Tag[] @relation("ProductTags")
+
+  isPublished Boolean @default(true)
+  order       Int?
+
+  userId String      // ← اجباری چون همیشه از سشن می‌آید
+  user   User @relation(fields: [userId], references: [id])
+
   metaTitle       String?
   metaDescription String?
   canonicalUrl    String?
   ogImage         String?
   ogTitle         String?
   ogDescription   String?
-  createdAt       DateTime        @default(now())
-  updatedAt       DateTime        @updatedAt
-  Tag             Tag?            @relation(fields: [tagId], references: [id])
-  tagId           String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([categoryId])
+  @@index([userId])
+  @@index([order])
 }
-
-// model Language {
-//   /// ISO code (e.g. "en", "fa"); this is the primary key so that
-//   /// translation tables can reference it easily.
-//   code      String       @id
-//   name      String       // e.g. "English", "Farsi"
-//   isDefault Boolean      @default(false)
-//   createdAt DateTime     @default(now())
-
-//   // Relation back to each translation table:
-//   PostTranslations      PostTranslation[]
-//   CategoryTranslations  CategoryTranslation[]
-//   TagTranslations       TagTranslation[]
-//   // …repeat for any other entity that needs translation
-// }

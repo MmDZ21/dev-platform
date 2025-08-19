@@ -30,8 +30,8 @@ export function MultiSelectField({ value = [], onChange, label, required }: Mult
         </label>
       )}
       <div className="flex flex-wrap gap-3">
-        {options.map((opt: Option) => (
-          <label key={opt.value} className="flex items-center gap-2 text-sm">
+        {options.map((opt: Option, i: number) => (
+          <label key={i} className="flex items-center gap-2 text-sm">
             <input
               type="checkbox"
               checked={value.includes(opt.value)}

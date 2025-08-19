@@ -14,8 +14,8 @@ export default function AdminMainLayout({
   const mainContentMargin = isMobileOpen
     ? "ms-0"
     : isExpanded || isHovered
-      ? "lg:ms-[330px]"
-      : "lg:ms-[130px]";
+      ? "lg:ms-[var(--sidebar-expanded-width)]"
+      : "lg:ms-[var(--sidebar-collapsed-width)]";
 
   return (
     <div className="h-screen w-full xl:flex z-10">
@@ -25,7 +25,7 @@ export default function AdminMainLayout({
         className={`flex-1 transition-all duration-300 ease-in-out ${mainContentMargin}`}
       >
         <AppHeader />
-        <div className="lg:mx-6 max-w-full rounded-xl p-4 md:p-6 lg:my-8 z-10 bg-white/10 backdrop-blur-sm">
+        <div className="lg:mx-6 max-w-full rounded-xl z-10" style={{ padding: 'var(--container-py) var(--container-px)' }}>
           {children}
         </div>
       </div>

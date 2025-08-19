@@ -14,27 +14,33 @@ const ChartTab: React.FC = () => {
     <div className="flex items-center gap-0.5 rounded-lg bg-gray-100 p-0.5 dark:bg-gray-900">
       <button
         onClick={() => setSelected("optionOne")}
-        className={`px-3 py-2 font-medium w-full rounded-md text-theme-sm hover:text-gray-900   dark:hover:text-white ${getButtonClass(
-          "optionOne"
-        )}`}
+        className={`px-4 py-2 text-sm font-medium rounded-lg cursor-pointer transition-colors ${
+          selected === "optionOne"
+            ? "bg-brand-500 text-white"
+            : "text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-gray-100"
+        }`}
       >
         Monthly
       </button>
 
       <button
         onClick={() => setSelected("optionTwo")}
-        className={`px-3 py-2 font-medium w-full rounded-md text-theme-sm hover:text-gray-900   dark:hover:text-white ${getButtonClass(
-          "optionTwo"
-        )}`}
+        className={`px-4 py-2 text-sm font-medium rounded-lg cursor-pointer transition-colors ${
+          selected === "optionTwo"
+            ? "bg-brand-500 text-white"
+            : "text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-gray-100"
+        }`}
       >
         Quarterly
       </button>
 
       <button
         onClick={() => setSelected("optionThree")}
-        className={`px-3 py-2 font-medium w-full rounded-md text-theme-sm hover:text-gray-900   dark:hover:text-white ${getButtonClass(
-          "optionThree"
-        )}`}
+        className={`px-4 py-2 text-sm font-medium rounded-lg cursor-pointer transition-colors ${
+          selected === "optionThree"
+            ? "bg-brand-500 text-white"
+            : "text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-gray-100"
+        }`}
       >
         Annually
       </button>

@@ -125,9 +125,9 @@ exports.Prisma.UserScalarFieldEnum = {
   email: 'email',
   hashedPassword: 'hashedPassword',
   username: 'username',
+  role: 'role',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt',
-  role: 'role'
+  updatedAt: 'updatedAt'
 };
 
 exports.Prisma.SessionScalarFieldEnum = {
@@ -149,25 +149,6 @@ exports.Prisma.BookScalarFieldEnum = {
   userId: 'userId'
 };
 
-exports.Prisma.PostScalarFieldEnum = {
-  id: 'id',
-  title: 'title',
-  slug: 'slug',
-  summary: 'summary',
-  draft: 'draft',
-  content: 'content',
-  published: 'published',
-  imageUrl: 'imageUrl',
-  categoryId: 'categoryId',
-  metaTitle: 'metaTitle',
-  metaDescription: 'metaDescription',
-  canonicalUrl: 'canonicalUrl',
-  ogImage: 'ogImage',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt',
-  userId: 'userId'
-};
-
 exports.Prisma.CategoryScalarFieldEnum = {
   id: 'id',
   name: 'name',
@@ -184,6 +165,25 @@ exports.Prisma.TagScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.PostScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  slug: 'slug',
+  summary: 'summary',
+  draft: 'draft',
+  content: 'content',
+  published: 'published',
+  imageUrl: 'imageUrl',
+  categoryId: 'categoryId',
+  metaTitle: 'metaTitle',
+  metaDescription: 'metaDescription',
+  canonicalUrl: 'canonicalUrl',
+  ogImage: 'ogImage',
+  userId: 'userId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.ProductCategoryScalarFieldEnum = {
   id: 'id',
   name: 'name',
@@ -196,6 +196,7 @@ exports.Prisma.ProductCategoryScalarFieldEnum = {
   metaTitle: 'metaTitle',
   metaDescription: 'metaDescription',
   ogImage: 'ogImage',
+  createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
 
@@ -218,8 +219,7 @@ exports.Prisma.ProductScalarFieldEnum = {
   ogTitle: 'ogTitle',
   ogDescription: 'ogDescription',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt',
-  tagId: 'tagId'
+  updatedAt: 'updatedAt'
 };
 
 exports.Prisma.SortOrder = {
@@ -236,15 +236,18 @@ exports.Prisma.NullsOrder = {
   first: 'first',
   last: 'last'
 };
-
+exports.Role = exports.$Enums.Role = {
+  admin: 'admin',
+  user: 'user'
+};
 
 exports.Prisma.ModelName = {
   User: 'User',
   Session: 'Session',
   Book: 'Book',
-  Post: 'Post',
   Category: 'Category',
   Tag: 'Tag',
+  Post: 'Post',
   ProductCategory: 'ProductCategory',
   Product: 'Product'
 };

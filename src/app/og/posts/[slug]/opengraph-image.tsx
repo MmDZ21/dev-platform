@@ -24,7 +24,7 @@ export default async function OpengraphImage({ params }: { params: { slug: strin
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          background: "#1e293b",
+          background: "var(--color-gray-800)",
           color: "white",
           fontSize: 48,
           fontWeight: "bold",
@@ -46,7 +46,7 @@ export default async function OpengraphImage({ params }: { params: { slug: strin
         justifyContent: "flex-end",
         background: post.imageUrl
           ? `url(${post.imageUrl}) center/cover no-repeat`
-          : "#1e293b",
+          : "var(--color-gray-800)",
         color: "white",
         padding: 64,
         boxSizing: "border-box",
@@ -57,9 +57,9 @@ export default async function OpengraphImage({ params }: { params: { slug: strin
         style={{
           fontSize: 52,
           fontWeight: 800,
-          textShadow: "0 2px 16px #222",
+          textShadow: "0 2px 16px rgba(0,0,0,0.65)",
           lineHeight: 1.1,
-          background: "rgba(30,41,59,0.7)",
+          background: "color-mix(in oklab, var(--color-gray-800) 70%, transparent)",
           borderRadius: 16,
           padding: "16px 32px",
           maxWidth: "1000px",

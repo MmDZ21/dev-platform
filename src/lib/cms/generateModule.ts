@@ -36,7 +36,28 @@ export function generateModule(meta: AdminModel, prismaModel: any) {
           : z.string();
         break;
       case "multi-select":
-        zodShape[key] = z.array(z.string());
+        {
+          // 1) سه شکل ورودی را می‌پذیریم
+          const base = z
+            .union([
+              z.array(z.string()), // ["id1","id2"]
+              z.array(z.object({ id: z.string() })), // [{id:"id1"}, …]
+              z.null(), // null
+            ])
+            // 2) همه را به string[] تبدیل می‌کنیم
+            .transform((arr: any) => {
+              if (!arr) return []; // null → []
+              if (arr.length && typeof arr[0] === "object") {
+                return arr.map((o: { id: string }) => o.id);
+              }
+              return arr as string[];
+            });
+
+          // 3) اگر required نیست، optional+default
+          zodShape[key] = field.required ? base : base.optional().default([]);
+
+          break;
+        }
         break;
       default:
         throw new Error(`Unknown field type in Zod schema: ${field.type}`);
@@ -44,15 +65,25 @@ export function generateModule(meta: AdminModel, prismaModel: any) {
 
     /* optional fields */
     if (!field.required) {
-      if (field.type === "image" || field.type === "file") {
-        zodShape[key] = zodShape[key].or(z.literal("")).optional();
+      if (["image", "file"].includes(field.type)) {
+        // ✅ می‌پذیرد: "", null, یا URL معتبر
+        zodShape[key] = zodShape[key]
+          .or(z.literal("")) // رشتهٔ خالی
+          .or(z.null())
+          .transform((v: unknown) => v ?? ""); // null → ""
       } else if (
-        field.type === "multi-select" ||
-        field.type === "multi-image"
+        field.type === "multi-image" ||
+        field.type === "multi-select"
       ) {
-        zodShape[key] = zodShape[key].optional().default([]);
+        // ✅ می‌پذیرد: [], null
+        zodShape[key] = zodShape[key]
+          .or(z.null())
+          .transform((v: unknown) => v ?? []); // null → []
       } else {
-        zodShape[key] = zodShape[key].optional();
+        // سایر فیلدهای متنی/عددی
+        zodShape[key] = zodShape[key]
+          .or(z.null())
+          .transform((v: unknown) => v ?? (field.type === "number" ? 0 : ""));
       }
     }
   }
@@ -125,9 +156,6 @@ export function generateModule(meta: AdminModel, prismaModel: any) {
 
     create: publicProcedure.input(inputSchema).mutation(({ ctx, input }) => {
       const { connectData, restData } = splitSelectData(meta, input, false);
-      const payload = { ...restData, ...connectData };
-      console.log("🪵 FINAL PAYLOAD", JSON.stringify(payload, null, 2));
-      console.log("ctx: ", ctx)
       return prismaModel.create({ data: { ...restData, ...connectData } });
     }),
 

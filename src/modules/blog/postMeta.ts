@@ -34,9 +34,9 @@ export const postMeta = defineAdminModel({
       label: "تگ‌ها",
       required: false,
     },
-    metaTitle: { type: "text", label: "عنوان متا" },
-    metaDescription: { type: "text", label: "توضیحات متا" },
-    canonicalUrl: { type: "text", label: "Canonical URL" },
-    ogImage: { type: "image", label: "OpenGraph تصویر" },
+    metaTitle: { type: "text", label: "عنوان متا", required: false },
+    metaDescription: { type: "text", label: "توضیحات متا", required: false },
+    canonicalUrl: { type: "text", label: "Canonical URL", required: false },
+    ogImage: { type: "image", label: "OpenGraph تصویر", required: false },
   },
 });
