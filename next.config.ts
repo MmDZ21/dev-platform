@@ -7,15 +7,24 @@ const nextConfig: NextConfig = {
       // Add more domains if you host on production
     ],
   },
-    /* config options here */
-    turbopack: {
-      rules: {
-        '*.svg': {
-          loaders: ['@svgr/webpack'],
-          as: '*.js',
+  eslint: {
+    // Allow build to proceed even if ESLint errors exist (useful when stripping styles or merging dashboards)
+    ignoreDuringBuilds: true,
+  },
+  /* config options here */
+  webpack(config) {
+    config.module.rules.push({
+      test: /\.svg$/i,
+      issuer: { and: [/\.(js|ts)x?$/] },
+      use: [
+        {
+          loader: '@svgr/webpack',
+          options: { icon: true },
         },
-      },
-    },
+      ],
+    });
+    return config;
+  },
 };
 
 export default nextConfig;

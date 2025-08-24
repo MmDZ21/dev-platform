@@ -41,34 +41,39 @@ async function main() {
   });
 
   // Posts
-  await prisma.post.createMany({
-    data: [
-      {
-        title: "شروع کار با Next.js 15",
-        slug: genSlug("شروع کار با Next.js 15"),
-        summary: "راهنمای مرحله‌به‌مرحله برای تازه‌کارها",
-        content: "محتوای تستی ...",
-        categoryId: "guides",
-        userId: admin.id,
-      },
-      {
-        title: "Prisma 5 چه ویژگی‌هایی دارد؟",
-        slug: genSlug("Prisma 5 چه ویژگی‌هایی دارد"),
-        summary: "نگاهی به امکانات جدید",
-        content: "محتوای تستی ...",
-        categoryId: "news",
-        userId: admin.id,
-      },
-      {
-        title: "Tailwind در پروژه‌های بزرگ",
-        slug: genSlug("Tailwind در پروژه‌های بزرگ"),
-        summary: "Best Practiceها",
-        content: "محتوای تستی ...",
-        categoryId: "guides",
-        userId: admin.id,
-      },
-    ],
-  });
+  const postsData = [
+    {
+      title: "شروع کار با Next.js 15",
+      slug: genSlug("شروع کار با Next.js 15"),
+      summary: "راهنمای مرحله‌به‌مرحله برای تازه‌کارها",
+      content: "محتوای تستی ...",
+      categoryId: "guides",
+      userId: admin.id,
+    },
+    {
+      title: "Prisma 5 چه ویژگی‌هایی دارد؟",
+      slug: genSlug("Prisma 5 چه ویژگی‌هایی دارد"),
+      summary: "نگاهی به امکانات جدید",
+      content: "محتوای تستی ...",
+      categoryId: "news",
+      userId: admin.id,
+    },
+    {
+      title: "Tailwind در پروژه‌های بزرگ",
+      slug: genSlug("Tailwind در پروژه‌های بزرگ"),
+      summary: "Best Practiceها",
+      content: "محتوای تستی ...",
+      categoryId: "guides",
+      userId: admin.id,
+    },
+  ];
+  for (const p of postsData) {
+    await prisma.post.upsert({
+      where: { slug: p.slug },
+      update: {},
+      create: p,
+    });
+  }
 
   // اتصال تگ‌ها به پست اول فقط به‌عنوان نمونه
   const firstPost = await prisma.post.findFirst({ where: { slug: genSlug("شروع کار با Next.js 15") } });
@@ -98,33 +103,41 @@ async function main() {
     create: { name: "اتوماسیون", slug: "automation", order: 2 },
   });
 
-  // Sub-categories
-  const subA1 = await prisma.productCategory.create({
-    data: {
+  // Sub-categories (idempotent via upsert)
+  const subA1 = await prisma.productCategory.upsert({
+    where: { slug: "circuit-breakers" },
+    update: {},
+    create: {
       name: "کلیدهای مینیاتوری",
       slug: "circuit-breakers",
       parentId: rootA.id,
       order: 1,
     },
   });
-  const subA2 = await prisma.productCategory.create({
-    data: {
+  const subA2 = await prisma.productCategory.upsert({
+    where: { slug: "contactors" },
+    update: {},
+    create: {
       name: "کنتاکتور",
       slug: "contactors",
       parentId: rootA.id,
       order: 2,
     },
   });
-  const subB1 = await prisma.productCategory.create({
-    data: {
+  const subB1 = await prisma.productCategory.upsert({
+    where: { slug: "plc" },
+    update: {},
+    create: {
       name: "PLC",
       slug: "plc",
       parentId: rootB.id,
       order: 1,
     },
   });
-  const subB2 = await prisma.productCategory.create({
-    data: {
+  const subB2 = await prisma.productCategory.upsert({
+    where: { slug: "hmi" },
+    update: {},
+    create: {
       name: "HMI",
       slug: "hmi",
       parentId: rootB.id,
@@ -132,43 +145,27 @@ async function main() {
     },
   });
 
-  // Sample products
-  await prisma.product.createMany({
-    data: [
-      {
-        name: "کلید مینیاتوری 10 آمپر",
-        slug: "mcb-10a",
-        categoryId: subA1.id,
+  // Sample products (idempotent via upsert)
+  const productsData = [
+    { name: "کلید مینیاتوری 10 آمپر", slug: "mcb-10a", categoryId: subA1.id },
+    { name: "کنتاکتور 18 آمپر", slug: "contactor-18a", categoryId: subA2.id },
+    { name: "PLC سری S7-1200", slug: "plc-s7-1200", categoryId: subB1.id },
+    { name: "پنل لمسی 7 اینچ", slug: "hmi-7inch", categoryId: subB2.id },
+  ];
+  for (const pd of productsData) {
+    await prisma.product.upsert({
+      where: { slug: pd.slug },
+      update: {},
+      create: {
+        name: pd.name,
+        slug: pd.slug,
+        categoryId: pd.categoryId,
         imageUrls: [],
         isPublished: true,
         userId: admin.id,
       },
-      {
-        name: "کنتاکتور 18 آمپر",
-        slug: "contactor-18a",
-        categoryId: subA2.id,
-        imageUrls: [],
-        isPublished: true,
-        userId: admin.id,
-      },
-      {
-        name: "PLC سری S7-1200",
-        slug: "plc-s7-1200",
-        categoryId: subB1.id,
-        imageUrls: [],
-        isPublished: true,
-        userId: admin.id,
-      },
-      {
-        name: "پنل لمسی 7 اینچ",
-        slug: "hmi-7inch",
-        categoryId: subB2.id,
-        imageUrls: [],
-        isPublished: true,
-        userId: admin.id,
-      },
-    ],
-  });
+    });
+  }
 
   // اتصال تگ‌ها به یکی از محصولات
   const plc = await prisma.product.findUnique({ where: { slug: "plc-s7-1200" } });
@@ -180,6 +177,106 @@ async function main() {
       },
     });
   }
+
+  /* ───────── 4) CMS: Site and Home page ───────── */
+  const siteId = "default";
+  await prisma.siteSetting.upsert({
+    where: { id: siteId },
+    update: {
+      activeTheme: "ranin",
+    },
+    create: {
+      id: siteId,
+      activeTheme: "ranin",
+      defaultLocale: "fa",
+      supportedLocales: ["fa", "en"],
+      directionByLocale: { fa: "rtl", en: "ltr" },
+      baseUrl: "http://localhost:3000",
+      metaTitle: "Canvas Dev Platform",
+      metaDescription: "Developer-First Modular CMS",
+    },
+  });
+
+  // Minimal home page (/) in fa
+  await prisma.page.upsert({
+    where: { locale_path: { locale: "fa", path: "/" } },
+    update: {
+      title: "خانه",
+      layoutKey: "home",
+      slots: {
+        nav: [
+          { type: "ranin.nav", props: { brand: "رانین" } },
+        ],
+        hero: [
+          {
+            type: "ranin.hero",
+            props: {
+              title: "همراه شما در پایداری و کارایی",
+              subtitle: "راهکارهای هوشمند برای مدیریت انرژی و اتوماسیون",
+              ctaLabel: "بیشتر بدانید",
+              ctaHref: "/shop",
+              imageUrl: "/images/carousel/carousel-01.png",
+            },
+          },
+        ],
+        highlights: [
+          {
+            type: "ranin.highlightCards",
+            props: {
+              columns: 3,
+              items: [
+                { title: "پایداری", description: "تسریع پایداری و شمول", href: "/sustainability" },
+                { title: "نرم‌افزار", description: "پرتفوی نرم‌افزار agnostic", href: "/software" },
+                { title: "خدمات", description: "آماده‌سازی برای تحول دیجیتال", href: "/services" },
+              ],
+            },
+          },
+        ],
+        sections: [],
+        footer: [
+          { type: "ranin.footer", props: { note: "© Ranin Theme 2025" } },
+        ]
+      },
+      metaTitle: "صفحه اصلی",
+      metaDescription: "رانین — تم RTL برای صفحه اصلی",
+    },
+    create: {
+      title: "خانه",
+      path: "/",
+      locale: "fa",
+      layoutKey: "home",
+      slots: {
+        hero: [
+          {
+            type: "ranin.hero",
+            props: {
+              title: "همراه شما در پایداری و کارایی",
+              subtitle: "راهکارهای هوشمند برای مدیریت انرژی و اتوماسیون",
+              ctaLabel: "بیشتر بدانید",
+              ctaHref: "/shop",
+              imageUrl: "/images/carousel/carousel-01.png",
+            },
+          },
+        ],
+        highlights: [
+          {
+            type: "ranin.highlightCards",
+            props: {
+              columns: 3,
+              items: [
+                { title: "پایداری", description: "تسریع پایداری و شمول", href: "/sustainability" },
+                { title: "نرم‌افزار", description: "پرتفوی نرم‌افزار agnostic", href: "/software" },
+                { title: "خدمات", description: "آماده‌سازی برای تحول دیجیتال", href: "/services" },
+              ],
+            },
+          },
+        ],
+        sections: [],
+      },
+      metaTitle: "صفحه اصلی",
+      metaDescription: "رانین — تم RTL برای صفحه اصلی",
+    },
+  });
 
   console.log("✅ Seed completed.");
 }

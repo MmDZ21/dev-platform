@@ -1,8 +1,7 @@
-import { TRPCReactProvider } from "@/lib/trpc/provider";
-import "./globals.css"; // 👈 this import is mandatory
 import { DEFAULT_LOCALE, DIRECTION } from "@/settings";
-import { ThemeProvider } from "@/components/ThemeProvider";
-import { iranSans } from "./fonts";
+import "@/themes"; // register themes at startup
+import "./globals.css";
+import { TRPCReactProvider } from "@/lib/trpc/provider";
 
 export default function RootLayout({
   children,
@@ -10,9 +9,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html  lang={DEFAULT_LOCALE} dir={DIRECTION}>
+    <html lang={DEFAULT_LOCALE} dir={DIRECTION}>
       <head>
-        {/* ...other tags... */}
         <link
           rel="alternate"
           type="application/rss+xml"
@@ -20,10 +18,8 @@ export default function RootLayout({
           href="/rss.xml"
         />
       </head>
-      <body className={iranSans.variable}>
-        <ThemeProvider>
-          <TRPCReactProvider>{children}</TRPCReactProvider>
-        </ThemeProvider>
+      <body>
+        <TRPCReactProvider>{children}</TRPCReactProvider>
       </body>
     </html>
   );

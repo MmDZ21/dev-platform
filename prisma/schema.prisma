@@ -170,3 +170,44 @@ model Product {
   @@index([userId])
   @@index([order])
 }
+
+/* ───── CMS: Site Settings & Pages ───── */
+model SiteSetting {
+  id              String   @id
+  activeTheme     String
+  defaultLocale   String
+  supportedLocales String[]
+  directionByLocale Json
+  baseUrl         String?
+  themeSettings   Json?
+
+  metaTitle       String?
+  metaDescription String?
+  ogImage         String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Page {
+  id         String   @id @default(cuid())
+  title      String
+  path       String   @db.VarChar(512)
+  locale     String
+  layoutKey  String   @default("default")
+  slots      Json
+
+  metaTitle       String?
+  metaDescription String?
+  canonicalUrl    String?
+  ogImage         String?
+
+  published Boolean  @default(true)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([locale, path])
+  @@index([locale])
+  @@index([path])
+}

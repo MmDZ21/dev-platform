@@ -222,9 +222,49 @@ exports.Prisma.ProductScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.SiteSettingScalarFieldEnum = {
+  id: 'id',
+  activeTheme: 'activeTheme',
+  defaultLocale: 'defaultLocale',
+  supportedLocales: 'supportedLocales',
+  directionByLocale: 'directionByLocale',
+  baseUrl: 'baseUrl',
+  themeSettings: 'themeSettings',
+  metaTitle: 'metaTitle',
+  metaDescription: 'metaDescription',
+  ogImage: 'ogImage',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.PageScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  path: 'path',
+  locale: 'locale',
+  layoutKey: 'layoutKey',
+  slots: 'slots',
+  metaTitle: 'metaTitle',
+  metaDescription: 'metaDescription',
+  canonicalUrl: 'canonicalUrl',
+  ogImage: 'ogImage',
+  published: 'published',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
+};
+
+exports.Prisma.JsonNullValueInput = {
+  JsonNull: Prisma.JsonNull
+};
+
+exports.Prisma.NullableJsonNullValueInput = {
+  DbNull: Prisma.DbNull,
+  JsonNull: Prisma.JsonNull
 };
 
 exports.Prisma.QueryMode = {
@@ -235,6 +275,12 @@ exports.Prisma.QueryMode = {
 exports.Prisma.NullsOrder = {
   first: 'first',
   last: 'last'
+};
+
+exports.Prisma.JsonNullValueFilter = {
+  DbNull: Prisma.DbNull,
+  JsonNull: Prisma.JsonNull,
+  AnyNull: Prisma.AnyNull
 };
 exports.Role = exports.$Enums.Role = {
   admin: 'admin',
@@ -249,7 +295,9 @@ exports.Prisma.ModelName = {
   Tag: 'Tag',
   Post: 'Post',
   ProductCategory: 'ProductCategory',
-  Product: 'Product'
+  Product: 'Product',
+  SiteSetting: 'SiteSetting',
+  Page: 'Page'
 };
 
 /**
