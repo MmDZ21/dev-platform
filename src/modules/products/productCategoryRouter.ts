@@ -1,6 +1,5 @@
 import { generateModule } from '@/lib/cms/generateModule';
-import { modelPrismaMap } from '@/modules/prismaMap';
-import { productMeta } from './productMeta';
+import { prisma } from '@/lib/db';
 import { productCategoryMeta } from './productCategoryMeta';
 
-export const productCategoryRouter = generateModule(productCategoryMeta, modelPrismaMap.productsCategories);
+export const productCategoryRouter = generateModule(productCategoryMeta, prisma.productCategory);

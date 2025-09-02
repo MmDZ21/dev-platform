@@ -23,7 +23,7 @@ export default function StatisticsChart() {
   );
 
   const options: ApexOptions = {
-    legend: { show: false, position: "top", horizontalAlign: "start" },
+    legend: { show: false, position: "top", horizontalAlign: "left" },
     colors: ["#465FFF", "#9CB9FF"],
     chart: { fontFamily: "Outfit, sans-serif", height: 310, type: "line", toolbar: { show: false } },
     stroke: { curve: "straight", width: [2, 2] },

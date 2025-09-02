@@ -2,7 +2,8 @@
 
 import React from "react";
 import { useRouter, useParams } from "next/navigation";
-import { adminModelRegistry, adminModelRouterMap } from "@/modules/registry";
+import { adminModelRegistry } from "@/modules/registry";
+import { adminModelRouterMap } from "@/modules/adminRouterMap.client";
 import AdminForm from "@/components/admin/AdminForm";
 
 export default function AdminModelNewPage() {
@@ -10,7 +11,7 @@ export default function AdminModelNewPage() {
   const params = useParams<{ model: keyof typeof adminModelRegistry }>();
   const modelKey = params.model;
   const meta = adminModelRegistry[modelKey];
-  const routerApi = adminModelRouterMap[modelKey];
+  const routerApi = adminModelRouterMap[modelKey] as any;
 
   const mutation = routerApi.create.useMutation({
     onSuccess: () => router.push(`/admin/${modelKey}`),

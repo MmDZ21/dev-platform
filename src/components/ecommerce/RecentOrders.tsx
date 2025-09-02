@@ -42,7 +42,7 @@ export default function RecentOrders() {
                       <Image
                         width={50}
                         height={50}
-                        src={product.imageUrls?.[0] || "/images/product/product-01.jpg"}
+                        src={product.imageUrls?.[0] || "/images/relay.png"}
                         className="h-[50px] w-[50px] object-cover"
                         alt={product.name}
                       />

@@ -1,5 +1,6 @@
 import { z } from "zod";
 import { cn } from "@/lib/utils";
+import { Button } from "../design-system";
 
 export const heroSchema = z.object({
   title: z.string().min(1),
@@ -20,15 +21,12 @@ export async function HeroBlock(props: z.infer<typeof heroSchema> & { locale: st
     <div className={cn("flex flex-col gap-4 py-12", alignment)}>
       <h2 className="text-3xl font-extrabold leading-tight">{props.title}</h2>
       {props.subtitle ? (
-        <p className="max-w-2xl text-base text-gray-600">{props.subtitle}</p>
+        <p className="max-w-2xl text-base text-muted-foreground">{props.subtitle}</p>
       ) : null}
       {props.ctaHref && props.ctaLabel ? (
-        <a
-          href={props.ctaHref}
-          className="inline-flex w-max items-center justify-center rounded-md bg-gray-900 px-5 py-2 text-white hover:bg-gray-700"
-        >
+        <Button href={props.ctaHref} variant="primary" className="w-max px-5 py-2">
           {props.ctaLabel}
-        </a>
+        </Button>
       ) : null}
     </div>
   );

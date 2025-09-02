@@ -204,12 +204,21 @@ exports.Prisma.ProductScalarFieldEnum = {
   id: 'id',
   name: 'name',
   slug: 'slug',
+  sku: 'sku',
+  title: 'title',
   summary: 'summary',
+  shortDesc: 'shortDesc',
   description: 'description',
   imageUrls: 'imageUrls',
+  images: 'images',
   datasheetUrl: 'datasheetUrl',
+  datasheets: 'datasheets',
+  brand: 'brand',
+  series: 'series',
+  warrantyMonths: 'warrantyMonths',
   categoryId: 'categoryId',
   isPublished: 'isPublished',
+  isActive: 'isActive',
   order: 'order',
   userId: 'userId',
   metaTitle: 'metaTitle',
@@ -218,6 +227,17 @@ exports.Prisma.ProductScalarFieldEnum = {
   ogImage: 'ogImage',
   ogTitle: 'ogTitle',
   ogDescription: 'ogDescription',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.ProductSpecScalarFieldEnum = {
+  id: 'id',
+  productId: 'productId',
+  key: 'key',
+  value: 'value',
+  unit: 'unit',
+  order: 'order',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -249,6 +269,38 @@ exports.Prisma.PageScalarFieldEnum = {
   canonicalUrl: 'canonicalUrl',
   ogImage: 'ogImage',
   published: 'published',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.LeadScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  phone: 'phone',
+  email: 'email',
+  message: 'message',
+  productId: 'productId',
+  utm: 'utm',
+  ip: 'ip',
+  userAgent: 'userAgent',
+  createdAt: 'createdAt'
+};
+
+exports.Prisma.SearchSynonymScalarFieldEnum = {
+  id: 'id',
+  term: 'term',
+  synonyms: 'synonyms',
+  locale: 'locale',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.RedirectScalarFieldEnum = {
+  id: 'id',
+  source: 'source',
+  destination: 'destination',
+  permanent: 'permanent',
+  locale: 'locale',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -296,8 +348,12 @@ exports.Prisma.ModelName = {
   Post: 'Post',
   ProductCategory: 'ProductCategory',
   Product: 'Product',
+  ProductSpec: 'ProductSpec',
   SiteSetting: 'SiteSetting',
-  Page: 'Page'
+  Page: 'Page',
+  Lead: 'Lead',
+  SearchSynonym: 'SearchSynonym',
+  Redirect: 'Redirect'
 };
 
 /**

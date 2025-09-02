@@ -2,7 +2,7 @@ import { z } from "zod";
 import NavBarClient from "./NavBarClient";
 
 export const navBarSchema = z.object({
-  brand: z.string().default("رانین"),
+  brand: z.string().default("رانین فرایند"),
   items: z.array(z.object({ 
     label: z.string(), 
     href: z.string().optional(),

@@ -3,9 +3,73 @@
  
 @custom-variant dark (&:is(.dark *));
 
+/* Global font faces */
+@font-face {
+  font-family: "IranSans";
+  src: url("/fonts/IranSansRegular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "IranSans";
+  src: url("/fonts/IranSansBold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
 @theme {
   --font-*: initial;
-  --font-outfit: Outfit, sans-serif;
+  --font-outfit: IranSans, sans-serif;
+
+  /* Fallback base tokens (will be overridden by theme classes) */
+  --background: 0 0% 100%;
+  --foreground: 224 71% 4%;
+  --muted: 220 14% 96%;
+  --muted-foreground: 220 9% 46%;
+  --popover: 0 0% 100%;
+  --popover-foreground: 224 71% 4%;
+  --card: 0 0% 100%;
+  --card-foreground: 224 71% 4%;
+  --primary: 219 50% 11%;
+  --primary-foreground: 0 0% 100%;
+  --secondary: 0 0% 100%;
+  --secondary-foreground: 224 71% 4%;
+  --accent: 84 81% 59%;
+  --accent-foreground: 86 80% 14%;
+  --ring: 219 50% 11%;
+  --border: 220 13% 91%;
+
+  /* Map ALL design tokens to Tailwind v4 color utilities */
+  --color-background: hsl(var(--background));
+  --color-foreground: hsl(var(--foreground));
+  --color-muted: hsl(var(--muted));
+  --color-muted-foreground: hsl(var(--muted-foreground));
+  --color-border: hsl(var(--border));
+  
+  /* Component surfaces */
+  --color-card: hsl(var(--card));
+  --color-card-foreground: hsl(var(--card-foreground));
+  --color-popover: hsl(var(--popover));
+  --color-popover-foreground: hsl(var(--popover-foreground));
+  
+  /* Semantic colors */
+  --color-primary: hsl(var(--primary));
+  --color-primary-foreground: hsl(var(--primary-foreground));
+  --color-secondary: hsl(var(--secondary));
+  --color-secondary-foreground: hsl(var(--secondary-foreground));
+  
+  /* Brand colors */
+  --color-brand: hsl(var(--brand));
+  --color-brand-foreground: hsl(var(--brand-foreground));
+  --color-accent: hsl(var(--accent));
+  --color-accent-foreground: hsl(var(--accent-foreground));
+  --color-info: hsl(var(--info));
+  --color-info-foreground: hsl(var(--info-foreground));
+  
+  /* Focus and interaction */
+  --color-ring: hsl(var(--ring));
 
   --breakpoint-*: initial;
   --breakpoint-2xsm: 375px;
@@ -189,7 +253,7 @@
     cursor: pointer;
   }
   body {
-    @apply relative font-normal font-outfit z-1 bg-gray-50 dark:bg-gray-950;
+    @apply relative font-normal font-outfit z-1 bg-background text-foreground;
   }
 }
 

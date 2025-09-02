@@ -1,5 +1,6 @@
 import { z } from "zod";
 import { prisma } from "@/lib/db";
+import Image from "next/image";
 
 export const productGridSchema = z.object({
   title: z.string().optional(),
@@ -28,9 +29,21 @@ export async function ProductGrid(props: z.infer<typeof productGridSchema> & { l
       {props.title ? <h3 className="mb-3 text-lg font-semibold">{props.title}</h3> : null}
       <div className="grid grid-cols-2 gap-5 md:grid-cols-3 lg:grid-cols-4">
         {products.map((p) => (
-          <a key={p.id} href={`/products/${p.slug}`} className="block rounded border p-4 hover:shadow-sm">
-            <div className="font-medium text-gray-900">{p.name}</div>
-            {p.summary ? <div className="text-sm text-gray-600">{p.summary}</div> : null}
+          <a key={p.id} href={`/products/${p.slug}`} className="block rounded border p-4 transition-all duration-200 hover:shadow-md">
+            {/* Product Image */}
+            <div className="mb-3 aspect-square overflow-hidden rounded border bg-gray-50">
+              <Image
+                src="/images/relay.png"
+                alt={p.name}
+                width={200}
+                height={200}
+                className="h-full w-full object-contain p-2"
+              />
+            </div>
+            
+            {/* Product Info */}
+            <div className="font-medium text-foreground">{p.name}</div>
+            {p.summary ? <div className="text-sm text-muted-foreground mt-1">{p.summary}</div> : null}
           </a>
         ))}
       </div>

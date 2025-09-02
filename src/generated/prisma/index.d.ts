@@ -54,6 +54,11 @@ export type ProductCategory = $Result.DefaultSelection<Prisma.$ProductCategoryPa
  */
 export type Product = $Result.DefaultSelection<Prisma.$ProductPayload>
 /**
+ * Model ProductSpec
+ * 
+ */
+export type ProductSpec = $Result.DefaultSelection<Prisma.$ProductSpecPayload>
+/**
  * Model SiteSetting
  * ───── CMS: Site Settings & Pages ─────
  */
@@ -63,6 +68,21 @@ export type SiteSetting = $Result.DefaultSelection<Prisma.$SiteSettingPayload>
  * 
  */
 export type Page = $Result.DefaultSelection<Prisma.$PagePayload>
+/**
+ * Model Lead
+ * 
+ */
+export type Lead = $Result.DefaultSelection<Prisma.$LeadPayload>
+/**
+ * Model SearchSynonym
+ * 
+ */
+export type SearchSynonym = $Result.DefaultSelection<Prisma.$SearchSynonymPayload>
+/**
+ * Model Redirect
+ * 
+ */
+export type Redirect = $Result.DefaultSelection<Prisma.$RedirectPayload>
 
 /**
  * Enums
@@ -287,6 +307,16 @@ export class PrismaClient<
   get product(): Prisma.ProductDelegate<ExtArgs, ClientOptions>;
 
   /**
+   * `prisma.productSpec`: Exposes CRUD operations for the **ProductSpec** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more ProductSpecs
+    * const productSpecs = await prisma.productSpec.findMany()
+    * ```
+    */
+  get productSpec(): Prisma.ProductSpecDelegate<ExtArgs, ClientOptions>;
+
+  /**
    * `prisma.siteSetting`: Exposes CRUD operations for the **SiteSetting** model.
     * Example usage:
     * ```ts
@@ -305,6 +335,36 @@ export class PrismaClient<
     * ```
     */
   get page(): Prisma.PageDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.lead`: Exposes CRUD operations for the **Lead** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Leads
+    * const leads = await prisma.lead.findMany()
+    * ```
+    */
+  get lead(): Prisma.LeadDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.searchSynonym`: Exposes CRUD operations for the **SearchSynonym** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more SearchSynonyms
+    * const searchSynonyms = await prisma.searchSynonym.findMany()
+    * ```
+    */
+  get searchSynonym(): Prisma.SearchSynonymDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.redirect`: Exposes CRUD operations for the **Redirect** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Redirects
+    * const redirects = await prisma.redirect.findMany()
+    * ```
+    */
+  get redirect(): Prisma.RedirectDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -753,8 +813,12 @@ export namespace Prisma {
     Post: 'Post',
     ProductCategory: 'ProductCategory',
     Product: 'Product',
+    ProductSpec: 'ProductSpec',
     SiteSetting: 'SiteSetting',
-    Page: 'Page'
+    Page: 'Page',
+    Lead: 'Lead',
+    SearchSynonym: 'SearchSynonym',
+    Redirect: 'Redirect'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -773,7 +837,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "session" | "book" | "category" | "tag" | "post" | "productCategory" | "product" | "siteSetting" | "page"
+      modelProps: "user" | "session" | "book" | "category" | "tag" | "post" | "productCategory" | "product" | "productSpec" | "siteSetting" | "page" | "lead" | "searchSynonym" | "redirect"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1369,6 +1433,80 @@ export namespace Prisma {
           }
         }
       }
+      ProductSpec: {
+        payload: Prisma.$ProductSpecPayload<ExtArgs>
+        fields: Prisma.ProductSpecFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.ProductSpecFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProductSpecPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.ProductSpecFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProductSpecPayload>
+          }
+          findFirst: {
+            args: Prisma.ProductSpecFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProductSpecPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.ProductSpecFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProductSpecPayload>
+          }
+          findMany: {
+            args: Prisma.ProductSpecFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProductSpecPayload>[]
+          }
+          create: {
+            args: Prisma.ProductSpecCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProductSpecPayload>
+          }
+          createMany: {
+            args: Prisma.ProductSpecCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.ProductSpecCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProductSpecPayload>[]
+          }
+          delete: {
+            args: Prisma.ProductSpecDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProductSpecPayload>
+          }
+          update: {
+            args: Prisma.ProductSpecUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProductSpecPayload>
+          }
+          deleteMany: {
+            args: Prisma.ProductSpecDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.ProductSpecUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.ProductSpecUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProductSpecPayload>[]
+          }
+          upsert: {
+            args: Prisma.ProductSpecUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProductSpecPayload>
+          }
+          aggregate: {
+            args: Prisma.ProductSpecAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateProductSpec>
+          }
+          groupBy: {
+            args: Prisma.ProductSpecGroupByArgs<ExtArgs>
+            result: $Utils.Optional<ProductSpecGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.ProductSpecCountArgs<ExtArgs>
+            result: $Utils.Optional<ProductSpecCountAggregateOutputType> | number
+          }
+        }
+      }
       SiteSetting: {
         payload: Prisma.$SiteSettingPayload<ExtArgs>
         fields: Prisma.SiteSettingFieldRefs
@@ -1517,6 +1655,228 @@ export namespace Prisma {
           }
         }
       }
+      Lead: {
+        payload: Prisma.$LeadPayload<ExtArgs>
+        fields: Prisma.LeadFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.LeadFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LeadPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.LeadFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LeadPayload>
+          }
+          findFirst: {
+            args: Prisma.LeadFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LeadPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.LeadFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LeadPayload>
+          }
+          findMany: {
+            args: Prisma.LeadFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LeadPayload>[]
+          }
+          create: {
+            args: Prisma.LeadCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LeadPayload>
+          }
+          createMany: {
+            args: Prisma.LeadCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.LeadCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LeadPayload>[]
+          }
+          delete: {
+            args: Prisma.LeadDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LeadPayload>
+          }
+          update: {
+            args: Prisma.LeadUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LeadPayload>
+          }
+          deleteMany: {
+            args: Prisma.LeadDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.LeadUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.LeadUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LeadPayload>[]
+          }
+          upsert: {
+            args: Prisma.LeadUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LeadPayload>
+          }
+          aggregate: {
+            args: Prisma.LeadAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateLead>
+          }
+          groupBy: {
+            args: Prisma.LeadGroupByArgs<ExtArgs>
+            result: $Utils.Optional<LeadGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.LeadCountArgs<ExtArgs>
+            result: $Utils.Optional<LeadCountAggregateOutputType> | number
+          }
+        }
+      }
+      SearchSynonym: {
+        payload: Prisma.$SearchSynonymPayload<ExtArgs>
+        fields: Prisma.SearchSynonymFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.SearchSynonymFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SearchSynonymPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.SearchSynonymFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SearchSynonymPayload>
+          }
+          findFirst: {
+            args: Prisma.SearchSynonymFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SearchSynonymPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.SearchSynonymFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SearchSynonymPayload>
+          }
+          findMany: {
+            args: Prisma.SearchSynonymFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SearchSynonymPayload>[]
+          }
+          create: {
+            args: Prisma.SearchSynonymCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SearchSynonymPayload>
+          }
+          createMany: {
+            args: Prisma.SearchSynonymCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.SearchSynonymCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SearchSynonymPayload>[]
+          }
+          delete: {
+            args: Prisma.SearchSynonymDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SearchSynonymPayload>
+          }
+          update: {
+            args: Prisma.SearchSynonymUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SearchSynonymPayload>
+          }
+          deleteMany: {
+            args: Prisma.SearchSynonymDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.SearchSynonymUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.SearchSynonymUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SearchSynonymPayload>[]
+          }
+          upsert: {
+            args: Prisma.SearchSynonymUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SearchSynonymPayload>
+          }
+          aggregate: {
+            args: Prisma.SearchSynonymAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateSearchSynonym>
+          }
+          groupBy: {
+            args: Prisma.SearchSynonymGroupByArgs<ExtArgs>
+            result: $Utils.Optional<SearchSynonymGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.SearchSynonymCountArgs<ExtArgs>
+            result: $Utils.Optional<SearchSynonymCountAggregateOutputType> | number
+          }
+        }
+      }
+      Redirect: {
+        payload: Prisma.$RedirectPayload<ExtArgs>
+        fields: Prisma.RedirectFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.RedirectFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RedirectPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.RedirectFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RedirectPayload>
+          }
+          findFirst: {
+            args: Prisma.RedirectFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RedirectPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.RedirectFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RedirectPayload>
+          }
+          findMany: {
+            args: Prisma.RedirectFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RedirectPayload>[]
+          }
+          create: {
+            args: Prisma.RedirectCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RedirectPayload>
+          }
+          createMany: {
+            args: Prisma.RedirectCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.RedirectCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RedirectPayload>[]
+          }
+          delete: {
+            args: Prisma.RedirectDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RedirectPayload>
+          }
+          update: {
+            args: Prisma.RedirectUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RedirectPayload>
+          }
+          deleteMany: {
+            args: Prisma.RedirectDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.RedirectUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.RedirectUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RedirectPayload>[]
+          }
+          upsert: {
+            args: Prisma.RedirectUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RedirectPayload>
+          }
+          aggregate: {
+            args: Prisma.RedirectAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateRedirect>
+          }
+          groupBy: {
+            args: Prisma.RedirectGroupByArgs<ExtArgs>
+            result: $Utils.Optional<RedirectGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.RedirectCountArgs<ExtArgs>
+            result: $Utils.Optional<RedirectCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -1609,8 +1969,12 @@ export namespace Prisma {
     post?: PostOmit
     productCategory?: ProductCategoryOmit
     product?: ProductOmit
+    productSpec?: ProductSpecOmit
     siteSetting?: SiteSettingOmit
     page?: PageOmit
+    lead?: LeadOmit
+    searchSynonym?: SearchSynonymOmit
+    redirect?: RedirectOmit
   }
 
   /* Types for Logging */
@@ -1906,10 +2270,14 @@ export namespace Prisma {
 
   export type ProductCountOutputType = {
     tags: number
+    specs: number
+    leads: number
   }
 
   export type ProductCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     tags?: boolean | ProductCountOutputTypeCountTagsArgs
+    specs?: boolean | ProductCountOutputTypeCountSpecsArgs
+    leads?: boolean | ProductCountOutputTypeCountLeadsArgs
   }
 
   // Custom InputTypes
@@ -1928,6 +2296,20 @@ export namespace Prisma {
    */
   export type ProductCountOutputTypeCountTagsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: TagWhereInput
+  }
+
+  /**
+   * ProductCountOutputType without action
+   */
+  export type ProductCountOutputTypeCountSpecsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ProductSpecWhereInput
+  }
+
+  /**
+   * ProductCountOutputType without action
+   */
+  export type ProductCountOutputTypeCountLeadsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: LeadWhereInput
   }
 
 
@@ -10054,10 +10436,12 @@ export namespace Prisma {
   }
 
   export type ProductAvgAggregateOutputType = {
+    warrantyMonths: number | null
     order: number | null
   }
 
   export type ProductSumAggregateOutputType = {
+    warrantyMonths: number | null
     order: number | null
   }
 
@@ -10065,11 +10449,18 @@ export namespace Prisma {
     id: string | null
     name: string | null
     slug: string | null
+    sku: string | null
+    title: string | null
     summary: string | null
+    shortDesc: string | null
     description: string | null
     datasheetUrl: string | null
+    brand: string | null
+    series: string | null
+    warrantyMonths: number | null
     categoryId: string | null
     isPublished: boolean | null
+    isActive: boolean | null
     order: number | null
     userId: string | null
     metaTitle: string | null
@@ -10086,11 +10477,18 @@ export namespace Prisma {
     id: string | null
     name: string | null
     slug: string | null
+    sku: string | null
+    title: string | null
     summary: string | null
+    shortDesc: string | null
     description: string | null
     datasheetUrl: string | null
+    brand: string | null
+    series: string | null
+    warrantyMonths: number | null
     categoryId: string | null
     isPublished: boolean | null
+    isActive: boolean | null
     order: number | null
     userId: string | null
     metaTitle: string | null
@@ -10107,12 +10505,21 @@ export namespace Prisma {
     id: number
     name: number
     slug: number
+    sku: number
+    title: number
     summary: number
+    shortDesc: number
     description: number
     imageUrls: number
+    images: number
     datasheetUrl: number
+    datasheets: number
+    brand: number
+    series: number
+    warrantyMonths: number
     categoryId: number
     isPublished: number
+    isActive: number
     order: number
     userId: number
     metaTitle: number
@@ -10128,10 +10535,12 @@ export namespace Prisma {
 
 
   export type ProductAvgAggregateInputType = {
+    warrantyMonths?: true
     order?: true
   }
 
   export type ProductSumAggregateInputType = {
+    warrantyMonths?: true
     order?: true
   }
 
@@ -10139,11 +10548,18 @@ export namespace Prisma {
     id?: true
     name?: true
     slug?: true
+    sku?: true
+    title?: true
     summary?: true
+    shortDesc?: true
     description?: true
     datasheetUrl?: true
+    brand?: true
+    series?: true
+    warrantyMonths?: true
     categoryId?: true
     isPublished?: true
+    isActive?: true
     order?: true
     userId?: true
     metaTitle?: true
@@ -10160,11 +10576,18 @@ export namespace Prisma {
     id?: true
     name?: true
     slug?: true
+    sku?: true
+    title?: true
     summary?: true
+    shortDesc?: true
     description?: true
     datasheetUrl?: true
+    brand?: true
+    series?: true
+    warrantyMonths?: true
     categoryId?: true
     isPublished?: true
+    isActive?: true
     order?: true
     userId?: true
     metaTitle?: true
@@ -10181,12 +10604,21 @@ export namespace Prisma {
     id?: true
     name?: true
     slug?: true
+    sku?: true
+    title?: true
     summary?: true
+    shortDesc?: true
     description?: true
     imageUrls?: true
+    images?: true
     datasheetUrl?: true
+    datasheets?: true
+    brand?: true
+    series?: true
+    warrantyMonths?: true
     categoryId?: true
     isPublished?: true
+    isActive?: true
     order?: true
     userId?: true
     metaTitle?: true
@@ -10290,12 +10722,21 @@ export namespace Prisma {
     id: string
     name: string
     slug: string
+    sku: string | null
+    title: string | null
     summary: string | null
+    shortDesc: string | null
     description: string | null
     imageUrls: string[]
+    images: string[]
     datasheetUrl: string | null
+    datasheets: string[]
+    brand: string | null
+    series: string | null
+    warrantyMonths: number | null
     categoryId: string
     isPublished: boolean
+    isActive: boolean
     order: number | null
     userId: string
     metaTitle: string | null
@@ -10331,12 +10772,21 @@ export namespace Prisma {
     id?: boolean
     name?: boolean
     slug?: boolean
+    sku?: boolean
+    title?: boolean
     summary?: boolean
+    shortDesc?: boolean
     description?: boolean
     imageUrls?: boolean
+    images?: boolean
     datasheetUrl?: boolean
+    datasheets?: boolean
+    brand?: boolean
+    series?: boolean
+    warrantyMonths?: boolean
     categoryId?: boolean
     isPublished?: boolean
+    isActive?: boolean
     order?: boolean
     userId?: boolean
     metaTitle?: boolean
@@ -10350,6 +10800,8 @@ export namespace Prisma {
     category?: boolean | ProductCategoryDefaultArgs<ExtArgs>
     tags?: boolean | Product$tagsArgs<ExtArgs>
     user?: boolean | UserDefaultArgs<ExtArgs>
+    specs?: boolean | Product$specsArgs<ExtArgs>
+    leads?: boolean | Product$leadsArgs<ExtArgs>
     _count?: boolean | ProductCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["product"]>
 
@@ -10357,12 +10809,21 @@ export namespace Prisma {
     id?: boolean
     name?: boolean
     slug?: boolean
+    sku?: boolean
+    title?: boolean
     summary?: boolean
+    shortDesc?: boolean
     description?: boolean
     imageUrls?: boolean
+    images?: boolean
     datasheetUrl?: boolean
+    datasheets?: boolean
+    brand?: boolean
+    series?: boolean
+    warrantyMonths?: boolean
     categoryId?: boolean
     isPublished?: boolean
+    isActive?: boolean
     order?: boolean
     userId?: boolean
     metaTitle?: boolean
@@ -10381,12 +10842,21 @@ export namespace Prisma {
     id?: boolean
     name?: boolean
     slug?: boolean
+    sku?: boolean
+    title?: boolean
     summary?: boolean
+    shortDesc?: boolean
     description?: boolean
     imageUrls?: boolean
+    images?: boolean
     datasheetUrl?: boolean
+    datasheets?: boolean
+    brand?: boolean
+    series?: boolean
+    warrantyMonths?: boolean
     categoryId?: boolean
     isPublished?: boolean
+    isActive?: boolean
     order?: boolean
     userId?: boolean
     metaTitle?: boolean
@@ -10405,12 +10875,21 @@ export namespace Prisma {
     id?: boolean
     name?: boolean
     slug?: boolean
+    sku?: boolean
+    title?: boolean
     summary?: boolean
+    shortDesc?: boolean
     description?: boolean
     imageUrls?: boolean
+    images?: boolean
     datasheetUrl?: boolean
+    datasheets?: boolean
+    brand?: boolean
+    series?: boolean
+    warrantyMonths?: boolean
     categoryId?: boolean
     isPublished?: boolean
+    isActive?: boolean
     order?: boolean
     userId?: boolean
     metaTitle?: boolean
@@ -10423,11 +10902,13 @@ export namespace Prisma {
     updatedAt?: boolean
   }
 
-  export type ProductOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "slug" | "summary" | "description" | "imageUrls" | "datasheetUrl" | "categoryId" | "isPublished" | "order" | "userId" | "metaTitle" | "metaDescription" | "canonicalUrl" | "ogImage" | "ogTitle" | "ogDescription" | "createdAt" | "updatedAt", ExtArgs["result"]["product"]>
+  export type ProductOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "slug" | "sku" | "title" | "summary" | "shortDesc" | "description" | "imageUrls" | "images" | "datasheetUrl" | "datasheets" | "brand" | "series" | "warrantyMonths" | "categoryId" | "isPublished" | "isActive" | "order" | "userId" | "metaTitle" | "metaDescription" | "canonicalUrl" | "ogImage" | "ogTitle" | "ogDescription" | "createdAt" | "updatedAt", ExtArgs["result"]["product"]>
   export type ProductInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     category?: boolean | ProductCategoryDefaultArgs<ExtArgs>
     tags?: boolean | Product$tagsArgs<ExtArgs>
     user?: boolean | UserDefaultArgs<ExtArgs>
+    specs?: boolean | Product$specsArgs<ExtArgs>
+    leads?: boolean | Product$leadsArgs<ExtArgs>
     _count?: boolean | ProductCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type ProductIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -10445,17 +10926,28 @@ export namespace Prisma {
       category: Prisma.$ProductCategoryPayload<ExtArgs>
       tags: Prisma.$TagPayload<ExtArgs>[]
       user: Prisma.$UserPayload<ExtArgs>
+      specs: Prisma.$ProductSpecPayload<ExtArgs>[]
+      leads: Prisma.$LeadPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
       name: string
       slug: string
+      sku: string | null
+      title: string | null
       summary: string | null
+      shortDesc: string | null
       description: string | null
       imageUrls: string[]
+      images: string[]
       datasheetUrl: string | null
+      datasheets: string[]
+      brand: string | null
+      series: string | null
+      warrantyMonths: number | null
       categoryId: string
       isPublished: boolean
+      isActive: boolean
       order: number | null
       userId: string
       metaTitle: string | null
@@ -10863,6 +11355,8 @@ export namespace Prisma {
     category<T extends ProductCategoryDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ProductCategoryDefaultArgs<ExtArgs>>): Prisma__ProductCategoryClient<$Result.GetResult<Prisma.$ProductCategoryPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     tags<T extends Product$tagsArgs<ExtArgs> = {}>(args?: Subset<T, Product$tagsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TagPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    specs<T extends Product$specsArgs<ExtArgs> = {}>(args?: Subset<T, Product$specsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ProductSpecPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    leads<T extends Product$leadsArgs<ExtArgs> = {}>(args?: Subset<T, Product$leadsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$LeadPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -10895,12 +11389,21 @@ export namespace Prisma {
     readonly id: FieldRef<"Product", 'String'>
     readonly name: FieldRef<"Product", 'String'>
     readonly slug: FieldRef<"Product", 'String'>
+    readonly sku: FieldRef<"Product", 'String'>
+    readonly title: FieldRef<"Product", 'String'>
     readonly summary: FieldRef<"Product", 'String'>
+    readonly shortDesc: FieldRef<"Product", 'String'>
     readonly description: FieldRef<"Product", 'String'>
     readonly imageUrls: FieldRef<"Product", 'String[]'>
+    readonly images: FieldRef<"Product", 'String[]'>
     readonly datasheetUrl: FieldRef<"Product", 'String'>
+    readonly datasheets: FieldRef<"Product", 'String[]'>
+    readonly brand: FieldRef<"Product", 'String'>
+    readonly series: FieldRef<"Product", 'String'>
+    readonly warrantyMonths: FieldRef<"Product", 'Int'>
     readonly categoryId: FieldRef<"Product", 'String'>
     readonly isPublished: FieldRef<"Product", 'Boolean'>
+    readonly isActive: FieldRef<"Product", 'Boolean'>
     readonly order: FieldRef<"Product", 'Int'>
     readonly userId: FieldRef<"Product", 'String'>
     readonly metaTitle: FieldRef<"Product", 'String'>
@@ -11331,6 +11834,54 @@ export namespace Prisma {
   }
 
   /**
+   * Product.specs
+   */
+  export type Product$specsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ProductSpec
+     */
+    select?: ProductSpecSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ProductSpec
+     */
+    omit?: ProductSpecOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProductSpecInclude<ExtArgs> | null
+    where?: ProductSpecWhereInput
+    orderBy?: ProductSpecOrderByWithRelationInput | ProductSpecOrderByWithRelationInput[]
+    cursor?: ProductSpecWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ProductSpecScalarFieldEnum | ProductSpecScalarFieldEnum[]
+  }
+
+  /**
+   * Product.leads
+   */
+  export type Product$leadsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Lead
+     */
+    select?: LeadSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Lead
+     */
+    omit?: LeadOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LeadInclude<ExtArgs> | null
+    where?: LeadWhereInput
+    orderBy?: LeadOrderByWithRelationInput | LeadOrderByWithRelationInput[]
+    cursor?: LeadWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: LeadScalarFieldEnum | LeadScalarFieldEnum[]
+  }
+
+  /**
    * Product without action
    */
   export type ProductDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -11346,6 +11897,1137 @@ export namespace Prisma {
      * Choose, which related nodes to fetch as well
      */
     include?: ProductInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model ProductSpec
+   */
+
+  export type AggregateProductSpec = {
+    _count: ProductSpecCountAggregateOutputType | null
+    _avg: ProductSpecAvgAggregateOutputType | null
+    _sum: ProductSpecSumAggregateOutputType | null
+    _min: ProductSpecMinAggregateOutputType | null
+    _max: ProductSpecMaxAggregateOutputType | null
+  }
+
+  export type ProductSpecAvgAggregateOutputType = {
+    order: number | null
+  }
+
+  export type ProductSpecSumAggregateOutputType = {
+    order: number | null
+  }
+
+  export type ProductSpecMinAggregateOutputType = {
+    id: string | null
+    productId: string | null
+    key: string | null
+    value: string | null
+    unit: string | null
+    order: number | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type ProductSpecMaxAggregateOutputType = {
+    id: string | null
+    productId: string | null
+    key: string | null
+    value: string | null
+    unit: string | null
+    order: number | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type ProductSpecCountAggregateOutputType = {
+    id: number
+    productId: number
+    key: number
+    value: number
+    unit: number
+    order: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type ProductSpecAvgAggregateInputType = {
+    order?: true
+  }
+
+  export type ProductSpecSumAggregateInputType = {
+    order?: true
+  }
+
+  export type ProductSpecMinAggregateInputType = {
+    id?: true
+    productId?: true
+    key?: true
+    value?: true
+    unit?: true
+    order?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type ProductSpecMaxAggregateInputType = {
+    id?: true
+    productId?: true
+    key?: true
+    value?: true
+    unit?: true
+    order?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type ProductSpecCountAggregateInputType = {
+    id?: true
+    productId?: true
+    key?: true
+    value?: true
+    unit?: true
+    order?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type ProductSpecAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which ProductSpec to aggregate.
+     */
+    where?: ProductSpecWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ProductSpecs to fetch.
+     */
+    orderBy?: ProductSpecOrderByWithRelationInput | ProductSpecOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: ProductSpecWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ProductSpecs from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ProductSpecs.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned ProductSpecs
+    **/
+    _count?: true | ProductSpecCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: ProductSpecAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: ProductSpecSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: ProductSpecMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: ProductSpecMaxAggregateInputType
+  }
+
+  export type GetProductSpecAggregateType<T extends ProductSpecAggregateArgs> = {
+        [P in keyof T & keyof AggregateProductSpec]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateProductSpec[P]>
+      : GetScalarType<T[P], AggregateProductSpec[P]>
+  }
+
+
+
+
+  export type ProductSpecGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ProductSpecWhereInput
+    orderBy?: ProductSpecOrderByWithAggregationInput | ProductSpecOrderByWithAggregationInput[]
+    by: ProductSpecScalarFieldEnum[] | ProductSpecScalarFieldEnum
+    having?: ProductSpecScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: ProductSpecCountAggregateInputType | true
+    _avg?: ProductSpecAvgAggregateInputType
+    _sum?: ProductSpecSumAggregateInputType
+    _min?: ProductSpecMinAggregateInputType
+    _max?: ProductSpecMaxAggregateInputType
+  }
+
+  export type ProductSpecGroupByOutputType = {
+    id: string
+    productId: string
+    key: string
+    value: string
+    unit: string | null
+    order: number | null
+    createdAt: Date
+    updatedAt: Date
+    _count: ProductSpecCountAggregateOutputType | null
+    _avg: ProductSpecAvgAggregateOutputType | null
+    _sum: ProductSpecSumAggregateOutputType | null
+    _min: ProductSpecMinAggregateOutputType | null
+    _max: ProductSpecMaxAggregateOutputType | null
+  }
+
+  type GetProductSpecGroupByPayload<T extends ProductSpecGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<ProductSpecGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof ProductSpecGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], ProductSpecGroupByOutputType[P]>
+            : GetScalarType<T[P], ProductSpecGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type ProductSpecSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    productId?: boolean
+    key?: boolean
+    value?: boolean
+    unit?: boolean
+    order?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    product?: boolean | ProductDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["productSpec"]>
+
+  export type ProductSpecSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    productId?: boolean
+    key?: boolean
+    value?: boolean
+    unit?: boolean
+    order?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    product?: boolean | ProductDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["productSpec"]>
+
+  export type ProductSpecSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    productId?: boolean
+    key?: boolean
+    value?: boolean
+    unit?: boolean
+    order?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    product?: boolean | ProductDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["productSpec"]>
+
+  export type ProductSpecSelectScalar = {
+    id?: boolean
+    productId?: boolean
+    key?: boolean
+    value?: boolean
+    unit?: boolean
+    order?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type ProductSpecOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "productId" | "key" | "value" | "unit" | "order" | "createdAt" | "updatedAt", ExtArgs["result"]["productSpec"]>
+  export type ProductSpecInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    product?: boolean | ProductDefaultArgs<ExtArgs>
+  }
+  export type ProductSpecIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    product?: boolean | ProductDefaultArgs<ExtArgs>
+  }
+  export type ProductSpecIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    product?: boolean | ProductDefaultArgs<ExtArgs>
+  }
+
+  export type $ProductSpecPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "ProductSpec"
+    objects: {
+      product: Prisma.$ProductPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      productId: string
+      key: string
+      value: string
+      unit: string | null
+      order: number | null
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["productSpec"]>
+    composites: {}
+  }
+
+  type ProductSpecGetPayload<S extends boolean | null | undefined | ProductSpecDefaultArgs> = $Result.GetResult<Prisma.$ProductSpecPayload, S>
+
+  type ProductSpecCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<ProductSpecFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: ProductSpecCountAggregateInputType | true
+    }
+
+  export interface ProductSpecDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['ProductSpec'], meta: { name: 'ProductSpec' } }
+    /**
+     * Find zero or one ProductSpec that matches the filter.
+     * @param {ProductSpecFindUniqueArgs} args - Arguments to find a ProductSpec
+     * @example
+     * // Get one ProductSpec
+     * const productSpec = await prisma.productSpec.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends ProductSpecFindUniqueArgs>(args: SelectSubset<T, ProductSpecFindUniqueArgs<ExtArgs>>): Prisma__ProductSpecClient<$Result.GetResult<Prisma.$ProductSpecPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one ProductSpec that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {ProductSpecFindUniqueOrThrowArgs} args - Arguments to find a ProductSpec
+     * @example
+     * // Get one ProductSpec
+     * const productSpec = await prisma.productSpec.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends ProductSpecFindUniqueOrThrowArgs>(args: SelectSubset<T, ProductSpecFindUniqueOrThrowArgs<ExtArgs>>): Prisma__ProductSpecClient<$Result.GetResult<Prisma.$ProductSpecPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first ProductSpec that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ProductSpecFindFirstArgs} args - Arguments to find a ProductSpec
+     * @example
+     * // Get one ProductSpec
+     * const productSpec = await prisma.productSpec.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends ProductSpecFindFirstArgs>(args?: SelectSubset<T, ProductSpecFindFirstArgs<ExtArgs>>): Prisma__ProductSpecClient<$Result.GetResult<Prisma.$ProductSpecPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first ProductSpec that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ProductSpecFindFirstOrThrowArgs} args - Arguments to find a ProductSpec
+     * @example
+     * // Get one ProductSpec
+     * const productSpec = await prisma.productSpec.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends ProductSpecFindFirstOrThrowArgs>(args?: SelectSubset<T, ProductSpecFindFirstOrThrowArgs<ExtArgs>>): Prisma__ProductSpecClient<$Result.GetResult<Prisma.$ProductSpecPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more ProductSpecs that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ProductSpecFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all ProductSpecs
+     * const productSpecs = await prisma.productSpec.findMany()
+     * 
+     * // Get first 10 ProductSpecs
+     * const productSpecs = await prisma.productSpec.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const productSpecWithIdOnly = await prisma.productSpec.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends ProductSpecFindManyArgs>(args?: SelectSubset<T, ProductSpecFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ProductSpecPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a ProductSpec.
+     * @param {ProductSpecCreateArgs} args - Arguments to create a ProductSpec.
+     * @example
+     * // Create one ProductSpec
+     * const ProductSpec = await prisma.productSpec.create({
+     *   data: {
+     *     // ... data to create a ProductSpec
+     *   }
+     * })
+     * 
+     */
+    create<T extends ProductSpecCreateArgs>(args: SelectSubset<T, ProductSpecCreateArgs<ExtArgs>>): Prisma__ProductSpecClient<$Result.GetResult<Prisma.$ProductSpecPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many ProductSpecs.
+     * @param {ProductSpecCreateManyArgs} args - Arguments to create many ProductSpecs.
+     * @example
+     * // Create many ProductSpecs
+     * const productSpec = await prisma.productSpec.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends ProductSpecCreateManyArgs>(args?: SelectSubset<T, ProductSpecCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many ProductSpecs and returns the data saved in the database.
+     * @param {ProductSpecCreateManyAndReturnArgs} args - Arguments to create many ProductSpecs.
+     * @example
+     * // Create many ProductSpecs
+     * const productSpec = await prisma.productSpec.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many ProductSpecs and only return the `id`
+     * const productSpecWithIdOnly = await prisma.productSpec.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends ProductSpecCreateManyAndReturnArgs>(args?: SelectSubset<T, ProductSpecCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ProductSpecPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a ProductSpec.
+     * @param {ProductSpecDeleteArgs} args - Arguments to delete one ProductSpec.
+     * @example
+     * // Delete one ProductSpec
+     * const ProductSpec = await prisma.productSpec.delete({
+     *   where: {
+     *     // ... filter to delete one ProductSpec
+     *   }
+     * })
+     * 
+     */
+    delete<T extends ProductSpecDeleteArgs>(args: SelectSubset<T, ProductSpecDeleteArgs<ExtArgs>>): Prisma__ProductSpecClient<$Result.GetResult<Prisma.$ProductSpecPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one ProductSpec.
+     * @param {ProductSpecUpdateArgs} args - Arguments to update one ProductSpec.
+     * @example
+     * // Update one ProductSpec
+     * const productSpec = await prisma.productSpec.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends ProductSpecUpdateArgs>(args: SelectSubset<T, ProductSpecUpdateArgs<ExtArgs>>): Prisma__ProductSpecClient<$Result.GetResult<Prisma.$ProductSpecPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more ProductSpecs.
+     * @param {ProductSpecDeleteManyArgs} args - Arguments to filter ProductSpecs to delete.
+     * @example
+     * // Delete a few ProductSpecs
+     * const { count } = await prisma.productSpec.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends ProductSpecDeleteManyArgs>(args?: SelectSubset<T, ProductSpecDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more ProductSpecs.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ProductSpecUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many ProductSpecs
+     * const productSpec = await prisma.productSpec.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends ProductSpecUpdateManyArgs>(args: SelectSubset<T, ProductSpecUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more ProductSpecs and returns the data updated in the database.
+     * @param {ProductSpecUpdateManyAndReturnArgs} args - Arguments to update many ProductSpecs.
+     * @example
+     * // Update many ProductSpecs
+     * const productSpec = await prisma.productSpec.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more ProductSpecs and only return the `id`
+     * const productSpecWithIdOnly = await prisma.productSpec.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends ProductSpecUpdateManyAndReturnArgs>(args: SelectSubset<T, ProductSpecUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ProductSpecPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one ProductSpec.
+     * @param {ProductSpecUpsertArgs} args - Arguments to update or create a ProductSpec.
+     * @example
+     * // Update or create a ProductSpec
+     * const productSpec = await prisma.productSpec.upsert({
+     *   create: {
+     *     // ... data to create a ProductSpec
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the ProductSpec we want to update
+     *   }
+     * })
+     */
+    upsert<T extends ProductSpecUpsertArgs>(args: SelectSubset<T, ProductSpecUpsertArgs<ExtArgs>>): Prisma__ProductSpecClient<$Result.GetResult<Prisma.$ProductSpecPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of ProductSpecs.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ProductSpecCountArgs} args - Arguments to filter ProductSpecs to count.
+     * @example
+     * // Count the number of ProductSpecs
+     * const count = await prisma.productSpec.count({
+     *   where: {
+     *     // ... the filter for the ProductSpecs we want to count
+     *   }
+     * })
+    **/
+    count<T extends ProductSpecCountArgs>(
+      args?: Subset<T, ProductSpecCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], ProductSpecCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a ProductSpec.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ProductSpecAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends ProductSpecAggregateArgs>(args: Subset<T, ProductSpecAggregateArgs>): Prisma.PrismaPromise<GetProductSpecAggregateType<T>>
+
+    /**
+     * Group by ProductSpec.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ProductSpecGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends ProductSpecGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: ProductSpecGroupByArgs['orderBy'] }
+        : { orderBy?: ProductSpecGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, ProductSpecGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetProductSpecGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the ProductSpec model
+   */
+  readonly fields: ProductSpecFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for ProductSpec.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__ProductSpecClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    product<T extends ProductDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ProductDefaultArgs<ExtArgs>>): Prisma__ProductClient<$Result.GetResult<Prisma.$ProductPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the ProductSpec model
+   */
+  interface ProductSpecFieldRefs {
+    readonly id: FieldRef<"ProductSpec", 'String'>
+    readonly productId: FieldRef<"ProductSpec", 'String'>
+    readonly key: FieldRef<"ProductSpec", 'String'>
+    readonly value: FieldRef<"ProductSpec", 'String'>
+    readonly unit: FieldRef<"ProductSpec", 'String'>
+    readonly order: FieldRef<"ProductSpec", 'Int'>
+    readonly createdAt: FieldRef<"ProductSpec", 'DateTime'>
+    readonly updatedAt: FieldRef<"ProductSpec", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * ProductSpec findUnique
+   */
+  export type ProductSpecFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ProductSpec
+     */
+    select?: ProductSpecSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ProductSpec
+     */
+    omit?: ProductSpecOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProductSpecInclude<ExtArgs> | null
+    /**
+     * Filter, which ProductSpec to fetch.
+     */
+    where: ProductSpecWhereUniqueInput
+  }
+
+  /**
+   * ProductSpec findUniqueOrThrow
+   */
+  export type ProductSpecFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ProductSpec
+     */
+    select?: ProductSpecSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ProductSpec
+     */
+    omit?: ProductSpecOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProductSpecInclude<ExtArgs> | null
+    /**
+     * Filter, which ProductSpec to fetch.
+     */
+    where: ProductSpecWhereUniqueInput
+  }
+
+  /**
+   * ProductSpec findFirst
+   */
+  export type ProductSpecFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ProductSpec
+     */
+    select?: ProductSpecSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ProductSpec
+     */
+    omit?: ProductSpecOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProductSpecInclude<ExtArgs> | null
+    /**
+     * Filter, which ProductSpec to fetch.
+     */
+    where?: ProductSpecWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ProductSpecs to fetch.
+     */
+    orderBy?: ProductSpecOrderByWithRelationInput | ProductSpecOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for ProductSpecs.
+     */
+    cursor?: ProductSpecWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ProductSpecs from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ProductSpecs.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ProductSpecs.
+     */
+    distinct?: ProductSpecScalarFieldEnum | ProductSpecScalarFieldEnum[]
+  }
+
+  /**
+   * ProductSpec findFirstOrThrow
+   */
+  export type ProductSpecFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ProductSpec
+     */
+    select?: ProductSpecSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ProductSpec
+     */
+    omit?: ProductSpecOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProductSpecInclude<ExtArgs> | null
+    /**
+     * Filter, which ProductSpec to fetch.
+     */
+    where?: ProductSpecWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ProductSpecs to fetch.
+     */
+    orderBy?: ProductSpecOrderByWithRelationInput | ProductSpecOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for ProductSpecs.
+     */
+    cursor?: ProductSpecWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ProductSpecs from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ProductSpecs.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ProductSpecs.
+     */
+    distinct?: ProductSpecScalarFieldEnum | ProductSpecScalarFieldEnum[]
+  }
+
+  /**
+   * ProductSpec findMany
+   */
+  export type ProductSpecFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ProductSpec
+     */
+    select?: ProductSpecSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ProductSpec
+     */
+    omit?: ProductSpecOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProductSpecInclude<ExtArgs> | null
+    /**
+     * Filter, which ProductSpecs to fetch.
+     */
+    where?: ProductSpecWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ProductSpecs to fetch.
+     */
+    orderBy?: ProductSpecOrderByWithRelationInput | ProductSpecOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing ProductSpecs.
+     */
+    cursor?: ProductSpecWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ProductSpecs from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ProductSpecs.
+     */
+    skip?: number
+    distinct?: ProductSpecScalarFieldEnum | ProductSpecScalarFieldEnum[]
+  }
+
+  /**
+   * ProductSpec create
+   */
+  export type ProductSpecCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ProductSpec
+     */
+    select?: ProductSpecSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ProductSpec
+     */
+    omit?: ProductSpecOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProductSpecInclude<ExtArgs> | null
+    /**
+     * The data needed to create a ProductSpec.
+     */
+    data: XOR<ProductSpecCreateInput, ProductSpecUncheckedCreateInput>
+  }
+
+  /**
+   * ProductSpec createMany
+   */
+  export type ProductSpecCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many ProductSpecs.
+     */
+    data: ProductSpecCreateManyInput | ProductSpecCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * ProductSpec createManyAndReturn
+   */
+  export type ProductSpecCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ProductSpec
+     */
+    select?: ProductSpecSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the ProductSpec
+     */
+    omit?: ProductSpecOmit<ExtArgs> | null
+    /**
+     * The data used to create many ProductSpecs.
+     */
+    data: ProductSpecCreateManyInput | ProductSpecCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProductSpecIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * ProductSpec update
+   */
+  export type ProductSpecUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ProductSpec
+     */
+    select?: ProductSpecSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ProductSpec
+     */
+    omit?: ProductSpecOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProductSpecInclude<ExtArgs> | null
+    /**
+     * The data needed to update a ProductSpec.
+     */
+    data: XOR<ProductSpecUpdateInput, ProductSpecUncheckedUpdateInput>
+    /**
+     * Choose, which ProductSpec to update.
+     */
+    where: ProductSpecWhereUniqueInput
+  }
+
+  /**
+   * ProductSpec updateMany
+   */
+  export type ProductSpecUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update ProductSpecs.
+     */
+    data: XOR<ProductSpecUpdateManyMutationInput, ProductSpecUncheckedUpdateManyInput>
+    /**
+     * Filter which ProductSpecs to update
+     */
+    where?: ProductSpecWhereInput
+    /**
+     * Limit how many ProductSpecs to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * ProductSpec updateManyAndReturn
+   */
+  export type ProductSpecUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ProductSpec
+     */
+    select?: ProductSpecSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the ProductSpec
+     */
+    omit?: ProductSpecOmit<ExtArgs> | null
+    /**
+     * The data used to update ProductSpecs.
+     */
+    data: XOR<ProductSpecUpdateManyMutationInput, ProductSpecUncheckedUpdateManyInput>
+    /**
+     * Filter which ProductSpecs to update
+     */
+    where?: ProductSpecWhereInput
+    /**
+     * Limit how many ProductSpecs to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProductSpecIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * ProductSpec upsert
+   */
+  export type ProductSpecUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ProductSpec
+     */
+    select?: ProductSpecSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ProductSpec
+     */
+    omit?: ProductSpecOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProductSpecInclude<ExtArgs> | null
+    /**
+     * The filter to search for the ProductSpec to update in case it exists.
+     */
+    where: ProductSpecWhereUniqueInput
+    /**
+     * In case the ProductSpec found by the `where` argument doesn't exist, create a new ProductSpec with this data.
+     */
+    create: XOR<ProductSpecCreateInput, ProductSpecUncheckedCreateInput>
+    /**
+     * In case the ProductSpec was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<ProductSpecUpdateInput, ProductSpecUncheckedUpdateInput>
+  }
+
+  /**
+   * ProductSpec delete
+   */
+  export type ProductSpecDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ProductSpec
+     */
+    select?: ProductSpecSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ProductSpec
+     */
+    omit?: ProductSpecOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProductSpecInclude<ExtArgs> | null
+    /**
+     * Filter which ProductSpec to delete.
+     */
+    where: ProductSpecWhereUniqueInput
+  }
+
+  /**
+   * ProductSpec deleteMany
+   */
+  export type ProductSpecDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which ProductSpecs to delete
+     */
+    where?: ProductSpecWhereInput
+    /**
+     * Limit how many ProductSpecs to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * ProductSpec without action
+   */
+  export type ProductSpecDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ProductSpec
+     */
+    select?: ProductSpecSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ProductSpec
+     */
+    omit?: ProductSpecOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProductSpecInclude<ExtArgs> | null
   }
 
 
@@ -13519,6 +15201,3169 @@ export namespace Prisma {
 
 
   /**
+   * Model Lead
+   */
+
+  export type AggregateLead = {
+    _count: LeadCountAggregateOutputType | null
+    _min: LeadMinAggregateOutputType | null
+    _max: LeadMaxAggregateOutputType | null
+  }
+
+  export type LeadMinAggregateOutputType = {
+    id: string | null
+    name: string | null
+    phone: string | null
+    email: string | null
+    message: string | null
+    productId: string | null
+    ip: string | null
+    userAgent: string | null
+    createdAt: Date | null
+  }
+
+  export type LeadMaxAggregateOutputType = {
+    id: string | null
+    name: string | null
+    phone: string | null
+    email: string | null
+    message: string | null
+    productId: string | null
+    ip: string | null
+    userAgent: string | null
+    createdAt: Date | null
+  }
+
+  export type LeadCountAggregateOutputType = {
+    id: number
+    name: number
+    phone: number
+    email: number
+    message: number
+    productId: number
+    utm: number
+    ip: number
+    userAgent: number
+    createdAt: number
+    _all: number
+  }
+
+
+  export type LeadMinAggregateInputType = {
+    id?: true
+    name?: true
+    phone?: true
+    email?: true
+    message?: true
+    productId?: true
+    ip?: true
+    userAgent?: true
+    createdAt?: true
+  }
+
+  export type LeadMaxAggregateInputType = {
+    id?: true
+    name?: true
+    phone?: true
+    email?: true
+    message?: true
+    productId?: true
+    ip?: true
+    userAgent?: true
+    createdAt?: true
+  }
+
+  export type LeadCountAggregateInputType = {
+    id?: true
+    name?: true
+    phone?: true
+    email?: true
+    message?: true
+    productId?: true
+    utm?: true
+    ip?: true
+    userAgent?: true
+    createdAt?: true
+    _all?: true
+  }
+
+  export type LeadAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Lead to aggregate.
+     */
+    where?: LeadWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Leads to fetch.
+     */
+    orderBy?: LeadOrderByWithRelationInput | LeadOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: LeadWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Leads from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Leads.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Leads
+    **/
+    _count?: true | LeadCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: LeadMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: LeadMaxAggregateInputType
+  }
+
+  export type GetLeadAggregateType<T extends LeadAggregateArgs> = {
+        [P in keyof T & keyof AggregateLead]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateLead[P]>
+      : GetScalarType<T[P], AggregateLead[P]>
+  }
+
+
+
+
+  export type LeadGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: LeadWhereInput
+    orderBy?: LeadOrderByWithAggregationInput | LeadOrderByWithAggregationInput[]
+    by: LeadScalarFieldEnum[] | LeadScalarFieldEnum
+    having?: LeadScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: LeadCountAggregateInputType | true
+    _min?: LeadMinAggregateInputType
+    _max?: LeadMaxAggregateInputType
+  }
+
+  export type LeadGroupByOutputType = {
+    id: string
+    name: string
+    phone: string
+    email: string | null
+    message: string | null
+    productId: string | null
+    utm: JsonValue | null
+    ip: string | null
+    userAgent: string | null
+    createdAt: Date
+    _count: LeadCountAggregateOutputType | null
+    _min: LeadMinAggregateOutputType | null
+    _max: LeadMaxAggregateOutputType | null
+  }
+
+  type GetLeadGroupByPayload<T extends LeadGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<LeadGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof LeadGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], LeadGroupByOutputType[P]>
+            : GetScalarType<T[P], LeadGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type LeadSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    phone?: boolean
+    email?: boolean
+    message?: boolean
+    productId?: boolean
+    utm?: boolean
+    ip?: boolean
+    userAgent?: boolean
+    createdAt?: boolean
+    product?: boolean | Lead$productArgs<ExtArgs>
+  }, ExtArgs["result"]["lead"]>
+
+  export type LeadSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    phone?: boolean
+    email?: boolean
+    message?: boolean
+    productId?: boolean
+    utm?: boolean
+    ip?: boolean
+    userAgent?: boolean
+    createdAt?: boolean
+    product?: boolean | Lead$productArgs<ExtArgs>
+  }, ExtArgs["result"]["lead"]>
+
+  export type LeadSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    phone?: boolean
+    email?: boolean
+    message?: boolean
+    productId?: boolean
+    utm?: boolean
+    ip?: boolean
+    userAgent?: boolean
+    createdAt?: boolean
+    product?: boolean | Lead$productArgs<ExtArgs>
+  }, ExtArgs["result"]["lead"]>
+
+  export type LeadSelectScalar = {
+    id?: boolean
+    name?: boolean
+    phone?: boolean
+    email?: boolean
+    message?: boolean
+    productId?: boolean
+    utm?: boolean
+    ip?: boolean
+    userAgent?: boolean
+    createdAt?: boolean
+  }
+
+  export type LeadOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "phone" | "email" | "message" | "productId" | "utm" | "ip" | "userAgent" | "createdAt", ExtArgs["result"]["lead"]>
+  export type LeadInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    product?: boolean | Lead$productArgs<ExtArgs>
+  }
+  export type LeadIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    product?: boolean | Lead$productArgs<ExtArgs>
+  }
+  export type LeadIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    product?: boolean | Lead$productArgs<ExtArgs>
+  }
+
+  export type $LeadPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Lead"
+    objects: {
+      product: Prisma.$ProductPayload<ExtArgs> | null
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      name: string
+      phone: string
+      email: string | null
+      message: string | null
+      productId: string | null
+      utm: Prisma.JsonValue | null
+      ip: string | null
+      userAgent: string | null
+      createdAt: Date
+    }, ExtArgs["result"]["lead"]>
+    composites: {}
+  }
+
+  type LeadGetPayload<S extends boolean | null | undefined | LeadDefaultArgs> = $Result.GetResult<Prisma.$LeadPayload, S>
+
+  type LeadCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<LeadFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: LeadCountAggregateInputType | true
+    }
+
+  export interface LeadDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Lead'], meta: { name: 'Lead' } }
+    /**
+     * Find zero or one Lead that matches the filter.
+     * @param {LeadFindUniqueArgs} args - Arguments to find a Lead
+     * @example
+     * // Get one Lead
+     * const lead = await prisma.lead.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends LeadFindUniqueArgs>(args: SelectSubset<T, LeadFindUniqueArgs<ExtArgs>>): Prisma__LeadClient<$Result.GetResult<Prisma.$LeadPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Lead that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {LeadFindUniqueOrThrowArgs} args - Arguments to find a Lead
+     * @example
+     * // Get one Lead
+     * const lead = await prisma.lead.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends LeadFindUniqueOrThrowArgs>(args: SelectSubset<T, LeadFindUniqueOrThrowArgs<ExtArgs>>): Prisma__LeadClient<$Result.GetResult<Prisma.$LeadPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Lead that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {LeadFindFirstArgs} args - Arguments to find a Lead
+     * @example
+     * // Get one Lead
+     * const lead = await prisma.lead.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends LeadFindFirstArgs>(args?: SelectSubset<T, LeadFindFirstArgs<ExtArgs>>): Prisma__LeadClient<$Result.GetResult<Prisma.$LeadPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Lead that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {LeadFindFirstOrThrowArgs} args - Arguments to find a Lead
+     * @example
+     * // Get one Lead
+     * const lead = await prisma.lead.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends LeadFindFirstOrThrowArgs>(args?: SelectSubset<T, LeadFindFirstOrThrowArgs<ExtArgs>>): Prisma__LeadClient<$Result.GetResult<Prisma.$LeadPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Leads that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {LeadFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Leads
+     * const leads = await prisma.lead.findMany()
+     * 
+     * // Get first 10 Leads
+     * const leads = await prisma.lead.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const leadWithIdOnly = await prisma.lead.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends LeadFindManyArgs>(args?: SelectSubset<T, LeadFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$LeadPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Lead.
+     * @param {LeadCreateArgs} args - Arguments to create a Lead.
+     * @example
+     * // Create one Lead
+     * const Lead = await prisma.lead.create({
+     *   data: {
+     *     // ... data to create a Lead
+     *   }
+     * })
+     * 
+     */
+    create<T extends LeadCreateArgs>(args: SelectSubset<T, LeadCreateArgs<ExtArgs>>): Prisma__LeadClient<$Result.GetResult<Prisma.$LeadPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Leads.
+     * @param {LeadCreateManyArgs} args - Arguments to create many Leads.
+     * @example
+     * // Create many Leads
+     * const lead = await prisma.lead.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends LeadCreateManyArgs>(args?: SelectSubset<T, LeadCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Leads and returns the data saved in the database.
+     * @param {LeadCreateManyAndReturnArgs} args - Arguments to create many Leads.
+     * @example
+     * // Create many Leads
+     * const lead = await prisma.lead.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Leads and only return the `id`
+     * const leadWithIdOnly = await prisma.lead.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends LeadCreateManyAndReturnArgs>(args?: SelectSubset<T, LeadCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$LeadPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Lead.
+     * @param {LeadDeleteArgs} args - Arguments to delete one Lead.
+     * @example
+     * // Delete one Lead
+     * const Lead = await prisma.lead.delete({
+     *   where: {
+     *     // ... filter to delete one Lead
+     *   }
+     * })
+     * 
+     */
+    delete<T extends LeadDeleteArgs>(args: SelectSubset<T, LeadDeleteArgs<ExtArgs>>): Prisma__LeadClient<$Result.GetResult<Prisma.$LeadPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Lead.
+     * @param {LeadUpdateArgs} args - Arguments to update one Lead.
+     * @example
+     * // Update one Lead
+     * const lead = await prisma.lead.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends LeadUpdateArgs>(args: SelectSubset<T, LeadUpdateArgs<ExtArgs>>): Prisma__LeadClient<$Result.GetResult<Prisma.$LeadPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Leads.
+     * @param {LeadDeleteManyArgs} args - Arguments to filter Leads to delete.
+     * @example
+     * // Delete a few Leads
+     * const { count } = await prisma.lead.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends LeadDeleteManyArgs>(args?: SelectSubset<T, LeadDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Leads.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {LeadUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Leads
+     * const lead = await prisma.lead.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends LeadUpdateManyArgs>(args: SelectSubset<T, LeadUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Leads and returns the data updated in the database.
+     * @param {LeadUpdateManyAndReturnArgs} args - Arguments to update many Leads.
+     * @example
+     * // Update many Leads
+     * const lead = await prisma.lead.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Leads and only return the `id`
+     * const leadWithIdOnly = await prisma.lead.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends LeadUpdateManyAndReturnArgs>(args: SelectSubset<T, LeadUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$LeadPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Lead.
+     * @param {LeadUpsertArgs} args - Arguments to update or create a Lead.
+     * @example
+     * // Update or create a Lead
+     * const lead = await prisma.lead.upsert({
+     *   create: {
+     *     // ... data to create a Lead
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Lead we want to update
+     *   }
+     * })
+     */
+    upsert<T extends LeadUpsertArgs>(args: SelectSubset<T, LeadUpsertArgs<ExtArgs>>): Prisma__LeadClient<$Result.GetResult<Prisma.$LeadPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Leads.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {LeadCountArgs} args - Arguments to filter Leads to count.
+     * @example
+     * // Count the number of Leads
+     * const count = await prisma.lead.count({
+     *   where: {
+     *     // ... the filter for the Leads we want to count
+     *   }
+     * })
+    **/
+    count<T extends LeadCountArgs>(
+      args?: Subset<T, LeadCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], LeadCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Lead.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {LeadAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends LeadAggregateArgs>(args: Subset<T, LeadAggregateArgs>): Prisma.PrismaPromise<GetLeadAggregateType<T>>
+
+    /**
+     * Group by Lead.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {LeadGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends LeadGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: LeadGroupByArgs['orderBy'] }
+        : { orderBy?: LeadGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, LeadGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetLeadGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Lead model
+   */
+  readonly fields: LeadFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Lead.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__LeadClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    product<T extends Lead$productArgs<ExtArgs> = {}>(args?: Subset<T, Lead$productArgs<ExtArgs>>): Prisma__ProductClient<$Result.GetResult<Prisma.$ProductPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Lead model
+   */
+  interface LeadFieldRefs {
+    readonly id: FieldRef<"Lead", 'String'>
+    readonly name: FieldRef<"Lead", 'String'>
+    readonly phone: FieldRef<"Lead", 'String'>
+    readonly email: FieldRef<"Lead", 'String'>
+    readonly message: FieldRef<"Lead", 'String'>
+    readonly productId: FieldRef<"Lead", 'String'>
+    readonly utm: FieldRef<"Lead", 'Json'>
+    readonly ip: FieldRef<"Lead", 'String'>
+    readonly userAgent: FieldRef<"Lead", 'String'>
+    readonly createdAt: FieldRef<"Lead", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Lead findUnique
+   */
+  export type LeadFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Lead
+     */
+    select?: LeadSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Lead
+     */
+    omit?: LeadOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LeadInclude<ExtArgs> | null
+    /**
+     * Filter, which Lead to fetch.
+     */
+    where: LeadWhereUniqueInput
+  }
+
+  /**
+   * Lead findUniqueOrThrow
+   */
+  export type LeadFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Lead
+     */
+    select?: LeadSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Lead
+     */
+    omit?: LeadOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LeadInclude<ExtArgs> | null
+    /**
+     * Filter, which Lead to fetch.
+     */
+    where: LeadWhereUniqueInput
+  }
+
+  /**
+   * Lead findFirst
+   */
+  export type LeadFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Lead
+     */
+    select?: LeadSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Lead
+     */
+    omit?: LeadOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LeadInclude<ExtArgs> | null
+    /**
+     * Filter, which Lead to fetch.
+     */
+    where?: LeadWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Leads to fetch.
+     */
+    orderBy?: LeadOrderByWithRelationInput | LeadOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Leads.
+     */
+    cursor?: LeadWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Leads from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Leads.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Leads.
+     */
+    distinct?: LeadScalarFieldEnum | LeadScalarFieldEnum[]
+  }
+
+  /**
+   * Lead findFirstOrThrow
+   */
+  export type LeadFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Lead
+     */
+    select?: LeadSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Lead
+     */
+    omit?: LeadOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LeadInclude<ExtArgs> | null
+    /**
+     * Filter, which Lead to fetch.
+     */
+    where?: LeadWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Leads to fetch.
+     */
+    orderBy?: LeadOrderByWithRelationInput | LeadOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Leads.
+     */
+    cursor?: LeadWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Leads from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Leads.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Leads.
+     */
+    distinct?: LeadScalarFieldEnum | LeadScalarFieldEnum[]
+  }
+
+  /**
+   * Lead findMany
+   */
+  export type LeadFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Lead
+     */
+    select?: LeadSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Lead
+     */
+    omit?: LeadOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LeadInclude<ExtArgs> | null
+    /**
+     * Filter, which Leads to fetch.
+     */
+    where?: LeadWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Leads to fetch.
+     */
+    orderBy?: LeadOrderByWithRelationInput | LeadOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Leads.
+     */
+    cursor?: LeadWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Leads from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Leads.
+     */
+    skip?: number
+    distinct?: LeadScalarFieldEnum | LeadScalarFieldEnum[]
+  }
+
+  /**
+   * Lead create
+   */
+  export type LeadCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Lead
+     */
+    select?: LeadSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Lead
+     */
+    omit?: LeadOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LeadInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Lead.
+     */
+    data: XOR<LeadCreateInput, LeadUncheckedCreateInput>
+  }
+
+  /**
+   * Lead createMany
+   */
+  export type LeadCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Leads.
+     */
+    data: LeadCreateManyInput | LeadCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Lead createManyAndReturn
+   */
+  export type LeadCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Lead
+     */
+    select?: LeadSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Lead
+     */
+    omit?: LeadOmit<ExtArgs> | null
+    /**
+     * The data used to create many Leads.
+     */
+    data: LeadCreateManyInput | LeadCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LeadIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Lead update
+   */
+  export type LeadUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Lead
+     */
+    select?: LeadSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Lead
+     */
+    omit?: LeadOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LeadInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Lead.
+     */
+    data: XOR<LeadUpdateInput, LeadUncheckedUpdateInput>
+    /**
+     * Choose, which Lead to update.
+     */
+    where: LeadWhereUniqueInput
+  }
+
+  /**
+   * Lead updateMany
+   */
+  export type LeadUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Leads.
+     */
+    data: XOR<LeadUpdateManyMutationInput, LeadUncheckedUpdateManyInput>
+    /**
+     * Filter which Leads to update
+     */
+    where?: LeadWhereInput
+    /**
+     * Limit how many Leads to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Lead updateManyAndReturn
+   */
+  export type LeadUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Lead
+     */
+    select?: LeadSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Lead
+     */
+    omit?: LeadOmit<ExtArgs> | null
+    /**
+     * The data used to update Leads.
+     */
+    data: XOR<LeadUpdateManyMutationInput, LeadUncheckedUpdateManyInput>
+    /**
+     * Filter which Leads to update
+     */
+    where?: LeadWhereInput
+    /**
+     * Limit how many Leads to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LeadIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Lead upsert
+   */
+  export type LeadUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Lead
+     */
+    select?: LeadSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Lead
+     */
+    omit?: LeadOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LeadInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Lead to update in case it exists.
+     */
+    where: LeadWhereUniqueInput
+    /**
+     * In case the Lead found by the `where` argument doesn't exist, create a new Lead with this data.
+     */
+    create: XOR<LeadCreateInput, LeadUncheckedCreateInput>
+    /**
+     * In case the Lead was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<LeadUpdateInput, LeadUncheckedUpdateInput>
+  }
+
+  /**
+   * Lead delete
+   */
+  export type LeadDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Lead
+     */
+    select?: LeadSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Lead
+     */
+    omit?: LeadOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LeadInclude<ExtArgs> | null
+    /**
+     * Filter which Lead to delete.
+     */
+    where: LeadWhereUniqueInput
+  }
+
+  /**
+   * Lead deleteMany
+   */
+  export type LeadDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Leads to delete
+     */
+    where?: LeadWhereInput
+    /**
+     * Limit how many Leads to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Lead.product
+   */
+  export type Lead$productArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Product
+     */
+    select?: ProductSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Product
+     */
+    omit?: ProductOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProductInclude<ExtArgs> | null
+    where?: ProductWhereInput
+  }
+
+  /**
+   * Lead without action
+   */
+  export type LeadDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Lead
+     */
+    select?: LeadSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Lead
+     */
+    omit?: LeadOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LeadInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model SearchSynonym
+   */
+
+  export type AggregateSearchSynonym = {
+    _count: SearchSynonymCountAggregateOutputType | null
+    _min: SearchSynonymMinAggregateOutputType | null
+    _max: SearchSynonymMaxAggregateOutputType | null
+  }
+
+  export type SearchSynonymMinAggregateOutputType = {
+    id: string | null
+    term: string | null
+    locale: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type SearchSynonymMaxAggregateOutputType = {
+    id: string | null
+    term: string | null
+    locale: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type SearchSynonymCountAggregateOutputType = {
+    id: number
+    term: number
+    synonyms: number
+    locale: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type SearchSynonymMinAggregateInputType = {
+    id?: true
+    term?: true
+    locale?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type SearchSynonymMaxAggregateInputType = {
+    id?: true
+    term?: true
+    locale?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type SearchSynonymCountAggregateInputType = {
+    id?: true
+    term?: true
+    synonyms?: true
+    locale?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type SearchSynonymAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which SearchSynonym to aggregate.
+     */
+    where?: SearchSynonymWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of SearchSynonyms to fetch.
+     */
+    orderBy?: SearchSynonymOrderByWithRelationInput | SearchSynonymOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: SearchSynonymWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` SearchSynonyms from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` SearchSynonyms.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned SearchSynonyms
+    **/
+    _count?: true | SearchSynonymCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: SearchSynonymMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: SearchSynonymMaxAggregateInputType
+  }
+
+  export type GetSearchSynonymAggregateType<T extends SearchSynonymAggregateArgs> = {
+        [P in keyof T & keyof AggregateSearchSynonym]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateSearchSynonym[P]>
+      : GetScalarType<T[P], AggregateSearchSynonym[P]>
+  }
+
+
+
+
+  export type SearchSynonymGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: SearchSynonymWhereInput
+    orderBy?: SearchSynonymOrderByWithAggregationInput | SearchSynonymOrderByWithAggregationInput[]
+    by: SearchSynonymScalarFieldEnum[] | SearchSynonymScalarFieldEnum
+    having?: SearchSynonymScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: SearchSynonymCountAggregateInputType | true
+    _min?: SearchSynonymMinAggregateInputType
+    _max?: SearchSynonymMaxAggregateInputType
+  }
+
+  export type SearchSynonymGroupByOutputType = {
+    id: string
+    term: string
+    synonyms: string[]
+    locale: string | null
+    createdAt: Date
+    updatedAt: Date
+    _count: SearchSynonymCountAggregateOutputType | null
+    _min: SearchSynonymMinAggregateOutputType | null
+    _max: SearchSynonymMaxAggregateOutputType | null
+  }
+
+  type GetSearchSynonymGroupByPayload<T extends SearchSynonymGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<SearchSynonymGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof SearchSynonymGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], SearchSynonymGroupByOutputType[P]>
+            : GetScalarType<T[P], SearchSynonymGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type SearchSynonymSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    term?: boolean
+    synonyms?: boolean
+    locale?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["searchSynonym"]>
+
+  export type SearchSynonymSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    term?: boolean
+    synonyms?: boolean
+    locale?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["searchSynonym"]>
+
+  export type SearchSynonymSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    term?: boolean
+    synonyms?: boolean
+    locale?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["searchSynonym"]>
+
+  export type SearchSynonymSelectScalar = {
+    id?: boolean
+    term?: boolean
+    synonyms?: boolean
+    locale?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type SearchSynonymOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "term" | "synonyms" | "locale" | "createdAt" | "updatedAt", ExtArgs["result"]["searchSynonym"]>
+
+  export type $SearchSynonymPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "SearchSynonym"
+    objects: {}
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      term: string
+      synonyms: string[]
+      locale: string | null
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["searchSynonym"]>
+    composites: {}
+  }
+
+  type SearchSynonymGetPayload<S extends boolean | null | undefined | SearchSynonymDefaultArgs> = $Result.GetResult<Prisma.$SearchSynonymPayload, S>
+
+  type SearchSynonymCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<SearchSynonymFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: SearchSynonymCountAggregateInputType | true
+    }
+
+  export interface SearchSynonymDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['SearchSynonym'], meta: { name: 'SearchSynonym' } }
+    /**
+     * Find zero or one SearchSynonym that matches the filter.
+     * @param {SearchSynonymFindUniqueArgs} args - Arguments to find a SearchSynonym
+     * @example
+     * // Get one SearchSynonym
+     * const searchSynonym = await prisma.searchSynonym.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends SearchSynonymFindUniqueArgs>(args: SelectSubset<T, SearchSynonymFindUniqueArgs<ExtArgs>>): Prisma__SearchSynonymClient<$Result.GetResult<Prisma.$SearchSynonymPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one SearchSynonym that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {SearchSynonymFindUniqueOrThrowArgs} args - Arguments to find a SearchSynonym
+     * @example
+     * // Get one SearchSynonym
+     * const searchSynonym = await prisma.searchSynonym.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends SearchSynonymFindUniqueOrThrowArgs>(args: SelectSubset<T, SearchSynonymFindUniqueOrThrowArgs<ExtArgs>>): Prisma__SearchSynonymClient<$Result.GetResult<Prisma.$SearchSynonymPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first SearchSynonym that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SearchSynonymFindFirstArgs} args - Arguments to find a SearchSynonym
+     * @example
+     * // Get one SearchSynonym
+     * const searchSynonym = await prisma.searchSynonym.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends SearchSynonymFindFirstArgs>(args?: SelectSubset<T, SearchSynonymFindFirstArgs<ExtArgs>>): Prisma__SearchSynonymClient<$Result.GetResult<Prisma.$SearchSynonymPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first SearchSynonym that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SearchSynonymFindFirstOrThrowArgs} args - Arguments to find a SearchSynonym
+     * @example
+     * // Get one SearchSynonym
+     * const searchSynonym = await prisma.searchSynonym.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends SearchSynonymFindFirstOrThrowArgs>(args?: SelectSubset<T, SearchSynonymFindFirstOrThrowArgs<ExtArgs>>): Prisma__SearchSynonymClient<$Result.GetResult<Prisma.$SearchSynonymPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more SearchSynonyms that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SearchSynonymFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all SearchSynonyms
+     * const searchSynonyms = await prisma.searchSynonym.findMany()
+     * 
+     * // Get first 10 SearchSynonyms
+     * const searchSynonyms = await prisma.searchSynonym.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const searchSynonymWithIdOnly = await prisma.searchSynonym.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends SearchSynonymFindManyArgs>(args?: SelectSubset<T, SearchSynonymFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SearchSynonymPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a SearchSynonym.
+     * @param {SearchSynonymCreateArgs} args - Arguments to create a SearchSynonym.
+     * @example
+     * // Create one SearchSynonym
+     * const SearchSynonym = await prisma.searchSynonym.create({
+     *   data: {
+     *     // ... data to create a SearchSynonym
+     *   }
+     * })
+     * 
+     */
+    create<T extends SearchSynonymCreateArgs>(args: SelectSubset<T, SearchSynonymCreateArgs<ExtArgs>>): Prisma__SearchSynonymClient<$Result.GetResult<Prisma.$SearchSynonymPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many SearchSynonyms.
+     * @param {SearchSynonymCreateManyArgs} args - Arguments to create many SearchSynonyms.
+     * @example
+     * // Create many SearchSynonyms
+     * const searchSynonym = await prisma.searchSynonym.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends SearchSynonymCreateManyArgs>(args?: SelectSubset<T, SearchSynonymCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many SearchSynonyms and returns the data saved in the database.
+     * @param {SearchSynonymCreateManyAndReturnArgs} args - Arguments to create many SearchSynonyms.
+     * @example
+     * // Create many SearchSynonyms
+     * const searchSynonym = await prisma.searchSynonym.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many SearchSynonyms and only return the `id`
+     * const searchSynonymWithIdOnly = await prisma.searchSynonym.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends SearchSynonymCreateManyAndReturnArgs>(args?: SelectSubset<T, SearchSynonymCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SearchSynonymPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a SearchSynonym.
+     * @param {SearchSynonymDeleteArgs} args - Arguments to delete one SearchSynonym.
+     * @example
+     * // Delete one SearchSynonym
+     * const SearchSynonym = await prisma.searchSynonym.delete({
+     *   where: {
+     *     // ... filter to delete one SearchSynonym
+     *   }
+     * })
+     * 
+     */
+    delete<T extends SearchSynonymDeleteArgs>(args: SelectSubset<T, SearchSynonymDeleteArgs<ExtArgs>>): Prisma__SearchSynonymClient<$Result.GetResult<Prisma.$SearchSynonymPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one SearchSynonym.
+     * @param {SearchSynonymUpdateArgs} args - Arguments to update one SearchSynonym.
+     * @example
+     * // Update one SearchSynonym
+     * const searchSynonym = await prisma.searchSynonym.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends SearchSynonymUpdateArgs>(args: SelectSubset<T, SearchSynonymUpdateArgs<ExtArgs>>): Prisma__SearchSynonymClient<$Result.GetResult<Prisma.$SearchSynonymPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more SearchSynonyms.
+     * @param {SearchSynonymDeleteManyArgs} args - Arguments to filter SearchSynonyms to delete.
+     * @example
+     * // Delete a few SearchSynonyms
+     * const { count } = await prisma.searchSynonym.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends SearchSynonymDeleteManyArgs>(args?: SelectSubset<T, SearchSynonymDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more SearchSynonyms.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SearchSynonymUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many SearchSynonyms
+     * const searchSynonym = await prisma.searchSynonym.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends SearchSynonymUpdateManyArgs>(args: SelectSubset<T, SearchSynonymUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more SearchSynonyms and returns the data updated in the database.
+     * @param {SearchSynonymUpdateManyAndReturnArgs} args - Arguments to update many SearchSynonyms.
+     * @example
+     * // Update many SearchSynonyms
+     * const searchSynonym = await prisma.searchSynonym.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more SearchSynonyms and only return the `id`
+     * const searchSynonymWithIdOnly = await prisma.searchSynonym.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends SearchSynonymUpdateManyAndReturnArgs>(args: SelectSubset<T, SearchSynonymUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SearchSynonymPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one SearchSynonym.
+     * @param {SearchSynonymUpsertArgs} args - Arguments to update or create a SearchSynonym.
+     * @example
+     * // Update or create a SearchSynonym
+     * const searchSynonym = await prisma.searchSynonym.upsert({
+     *   create: {
+     *     // ... data to create a SearchSynonym
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the SearchSynonym we want to update
+     *   }
+     * })
+     */
+    upsert<T extends SearchSynonymUpsertArgs>(args: SelectSubset<T, SearchSynonymUpsertArgs<ExtArgs>>): Prisma__SearchSynonymClient<$Result.GetResult<Prisma.$SearchSynonymPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of SearchSynonyms.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SearchSynonymCountArgs} args - Arguments to filter SearchSynonyms to count.
+     * @example
+     * // Count the number of SearchSynonyms
+     * const count = await prisma.searchSynonym.count({
+     *   where: {
+     *     // ... the filter for the SearchSynonyms we want to count
+     *   }
+     * })
+    **/
+    count<T extends SearchSynonymCountArgs>(
+      args?: Subset<T, SearchSynonymCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], SearchSynonymCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a SearchSynonym.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SearchSynonymAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends SearchSynonymAggregateArgs>(args: Subset<T, SearchSynonymAggregateArgs>): Prisma.PrismaPromise<GetSearchSynonymAggregateType<T>>
+
+    /**
+     * Group by SearchSynonym.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SearchSynonymGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends SearchSynonymGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: SearchSynonymGroupByArgs['orderBy'] }
+        : { orderBy?: SearchSynonymGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, SearchSynonymGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetSearchSynonymGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the SearchSynonym model
+   */
+  readonly fields: SearchSynonymFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for SearchSynonym.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__SearchSynonymClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the SearchSynonym model
+   */
+  interface SearchSynonymFieldRefs {
+    readonly id: FieldRef<"SearchSynonym", 'String'>
+    readonly term: FieldRef<"SearchSynonym", 'String'>
+    readonly synonyms: FieldRef<"SearchSynonym", 'String[]'>
+    readonly locale: FieldRef<"SearchSynonym", 'String'>
+    readonly createdAt: FieldRef<"SearchSynonym", 'DateTime'>
+    readonly updatedAt: FieldRef<"SearchSynonym", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * SearchSynonym findUnique
+   */
+  export type SearchSynonymFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SearchSynonym
+     */
+    select?: SearchSynonymSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SearchSynonym
+     */
+    omit?: SearchSynonymOmit<ExtArgs> | null
+    /**
+     * Filter, which SearchSynonym to fetch.
+     */
+    where: SearchSynonymWhereUniqueInput
+  }
+
+  /**
+   * SearchSynonym findUniqueOrThrow
+   */
+  export type SearchSynonymFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SearchSynonym
+     */
+    select?: SearchSynonymSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SearchSynonym
+     */
+    omit?: SearchSynonymOmit<ExtArgs> | null
+    /**
+     * Filter, which SearchSynonym to fetch.
+     */
+    where: SearchSynonymWhereUniqueInput
+  }
+
+  /**
+   * SearchSynonym findFirst
+   */
+  export type SearchSynonymFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SearchSynonym
+     */
+    select?: SearchSynonymSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SearchSynonym
+     */
+    omit?: SearchSynonymOmit<ExtArgs> | null
+    /**
+     * Filter, which SearchSynonym to fetch.
+     */
+    where?: SearchSynonymWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of SearchSynonyms to fetch.
+     */
+    orderBy?: SearchSynonymOrderByWithRelationInput | SearchSynonymOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for SearchSynonyms.
+     */
+    cursor?: SearchSynonymWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` SearchSynonyms from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` SearchSynonyms.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of SearchSynonyms.
+     */
+    distinct?: SearchSynonymScalarFieldEnum | SearchSynonymScalarFieldEnum[]
+  }
+
+  /**
+   * SearchSynonym findFirstOrThrow
+   */
+  export type SearchSynonymFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SearchSynonym
+     */
+    select?: SearchSynonymSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SearchSynonym
+     */
+    omit?: SearchSynonymOmit<ExtArgs> | null
+    /**
+     * Filter, which SearchSynonym to fetch.
+     */
+    where?: SearchSynonymWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of SearchSynonyms to fetch.
+     */
+    orderBy?: SearchSynonymOrderByWithRelationInput | SearchSynonymOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for SearchSynonyms.
+     */
+    cursor?: SearchSynonymWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` SearchSynonyms from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` SearchSynonyms.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of SearchSynonyms.
+     */
+    distinct?: SearchSynonymScalarFieldEnum | SearchSynonymScalarFieldEnum[]
+  }
+
+  /**
+   * SearchSynonym findMany
+   */
+  export type SearchSynonymFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SearchSynonym
+     */
+    select?: SearchSynonymSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SearchSynonym
+     */
+    omit?: SearchSynonymOmit<ExtArgs> | null
+    /**
+     * Filter, which SearchSynonyms to fetch.
+     */
+    where?: SearchSynonymWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of SearchSynonyms to fetch.
+     */
+    orderBy?: SearchSynonymOrderByWithRelationInput | SearchSynonymOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing SearchSynonyms.
+     */
+    cursor?: SearchSynonymWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` SearchSynonyms from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` SearchSynonyms.
+     */
+    skip?: number
+    distinct?: SearchSynonymScalarFieldEnum | SearchSynonymScalarFieldEnum[]
+  }
+
+  /**
+   * SearchSynonym create
+   */
+  export type SearchSynonymCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SearchSynonym
+     */
+    select?: SearchSynonymSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SearchSynonym
+     */
+    omit?: SearchSynonymOmit<ExtArgs> | null
+    /**
+     * The data needed to create a SearchSynonym.
+     */
+    data: XOR<SearchSynonymCreateInput, SearchSynonymUncheckedCreateInput>
+  }
+
+  /**
+   * SearchSynonym createMany
+   */
+  export type SearchSynonymCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many SearchSynonyms.
+     */
+    data: SearchSynonymCreateManyInput | SearchSynonymCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * SearchSynonym createManyAndReturn
+   */
+  export type SearchSynonymCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SearchSynonym
+     */
+    select?: SearchSynonymSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the SearchSynonym
+     */
+    omit?: SearchSynonymOmit<ExtArgs> | null
+    /**
+     * The data used to create many SearchSynonyms.
+     */
+    data: SearchSynonymCreateManyInput | SearchSynonymCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * SearchSynonym update
+   */
+  export type SearchSynonymUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SearchSynonym
+     */
+    select?: SearchSynonymSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SearchSynonym
+     */
+    omit?: SearchSynonymOmit<ExtArgs> | null
+    /**
+     * The data needed to update a SearchSynonym.
+     */
+    data: XOR<SearchSynonymUpdateInput, SearchSynonymUncheckedUpdateInput>
+    /**
+     * Choose, which SearchSynonym to update.
+     */
+    where: SearchSynonymWhereUniqueInput
+  }
+
+  /**
+   * SearchSynonym updateMany
+   */
+  export type SearchSynonymUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update SearchSynonyms.
+     */
+    data: XOR<SearchSynonymUpdateManyMutationInput, SearchSynonymUncheckedUpdateManyInput>
+    /**
+     * Filter which SearchSynonyms to update
+     */
+    where?: SearchSynonymWhereInput
+    /**
+     * Limit how many SearchSynonyms to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * SearchSynonym updateManyAndReturn
+   */
+  export type SearchSynonymUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SearchSynonym
+     */
+    select?: SearchSynonymSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the SearchSynonym
+     */
+    omit?: SearchSynonymOmit<ExtArgs> | null
+    /**
+     * The data used to update SearchSynonyms.
+     */
+    data: XOR<SearchSynonymUpdateManyMutationInput, SearchSynonymUncheckedUpdateManyInput>
+    /**
+     * Filter which SearchSynonyms to update
+     */
+    where?: SearchSynonymWhereInput
+    /**
+     * Limit how many SearchSynonyms to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * SearchSynonym upsert
+   */
+  export type SearchSynonymUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SearchSynonym
+     */
+    select?: SearchSynonymSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SearchSynonym
+     */
+    omit?: SearchSynonymOmit<ExtArgs> | null
+    /**
+     * The filter to search for the SearchSynonym to update in case it exists.
+     */
+    where: SearchSynonymWhereUniqueInput
+    /**
+     * In case the SearchSynonym found by the `where` argument doesn't exist, create a new SearchSynonym with this data.
+     */
+    create: XOR<SearchSynonymCreateInput, SearchSynonymUncheckedCreateInput>
+    /**
+     * In case the SearchSynonym was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<SearchSynonymUpdateInput, SearchSynonymUncheckedUpdateInput>
+  }
+
+  /**
+   * SearchSynonym delete
+   */
+  export type SearchSynonymDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SearchSynonym
+     */
+    select?: SearchSynonymSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SearchSynonym
+     */
+    omit?: SearchSynonymOmit<ExtArgs> | null
+    /**
+     * Filter which SearchSynonym to delete.
+     */
+    where: SearchSynonymWhereUniqueInput
+  }
+
+  /**
+   * SearchSynonym deleteMany
+   */
+  export type SearchSynonymDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which SearchSynonyms to delete
+     */
+    where?: SearchSynonymWhereInput
+    /**
+     * Limit how many SearchSynonyms to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * SearchSynonym without action
+   */
+  export type SearchSynonymDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SearchSynonym
+     */
+    select?: SearchSynonymSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SearchSynonym
+     */
+    omit?: SearchSynonymOmit<ExtArgs> | null
+  }
+
+
+  /**
+   * Model Redirect
+   */
+
+  export type AggregateRedirect = {
+    _count: RedirectCountAggregateOutputType | null
+    _min: RedirectMinAggregateOutputType | null
+    _max: RedirectMaxAggregateOutputType | null
+  }
+
+  export type RedirectMinAggregateOutputType = {
+    id: string | null
+    source: string | null
+    destination: string | null
+    permanent: boolean | null
+    locale: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type RedirectMaxAggregateOutputType = {
+    id: string | null
+    source: string | null
+    destination: string | null
+    permanent: boolean | null
+    locale: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type RedirectCountAggregateOutputType = {
+    id: number
+    source: number
+    destination: number
+    permanent: number
+    locale: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type RedirectMinAggregateInputType = {
+    id?: true
+    source?: true
+    destination?: true
+    permanent?: true
+    locale?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type RedirectMaxAggregateInputType = {
+    id?: true
+    source?: true
+    destination?: true
+    permanent?: true
+    locale?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type RedirectCountAggregateInputType = {
+    id?: true
+    source?: true
+    destination?: true
+    permanent?: true
+    locale?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type RedirectAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Redirect to aggregate.
+     */
+    where?: RedirectWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Redirects to fetch.
+     */
+    orderBy?: RedirectOrderByWithRelationInput | RedirectOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: RedirectWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Redirects from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Redirects.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Redirects
+    **/
+    _count?: true | RedirectCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: RedirectMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: RedirectMaxAggregateInputType
+  }
+
+  export type GetRedirectAggregateType<T extends RedirectAggregateArgs> = {
+        [P in keyof T & keyof AggregateRedirect]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateRedirect[P]>
+      : GetScalarType<T[P], AggregateRedirect[P]>
+  }
+
+
+
+
+  export type RedirectGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: RedirectWhereInput
+    orderBy?: RedirectOrderByWithAggregationInput | RedirectOrderByWithAggregationInput[]
+    by: RedirectScalarFieldEnum[] | RedirectScalarFieldEnum
+    having?: RedirectScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: RedirectCountAggregateInputType | true
+    _min?: RedirectMinAggregateInputType
+    _max?: RedirectMaxAggregateInputType
+  }
+
+  export type RedirectGroupByOutputType = {
+    id: string
+    source: string
+    destination: string
+    permanent: boolean
+    locale: string | null
+    createdAt: Date
+    updatedAt: Date
+    _count: RedirectCountAggregateOutputType | null
+    _min: RedirectMinAggregateOutputType | null
+    _max: RedirectMaxAggregateOutputType | null
+  }
+
+  type GetRedirectGroupByPayload<T extends RedirectGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<RedirectGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof RedirectGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], RedirectGroupByOutputType[P]>
+            : GetScalarType<T[P], RedirectGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type RedirectSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    source?: boolean
+    destination?: boolean
+    permanent?: boolean
+    locale?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["redirect"]>
+
+  export type RedirectSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    source?: boolean
+    destination?: boolean
+    permanent?: boolean
+    locale?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["redirect"]>
+
+  export type RedirectSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    source?: boolean
+    destination?: boolean
+    permanent?: boolean
+    locale?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["redirect"]>
+
+  export type RedirectSelectScalar = {
+    id?: boolean
+    source?: boolean
+    destination?: boolean
+    permanent?: boolean
+    locale?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type RedirectOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "source" | "destination" | "permanent" | "locale" | "createdAt" | "updatedAt", ExtArgs["result"]["redirect"]>
+
+  export type $RedirectPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Redirect"
+    objects: {}
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      source: string
+      destination: string
+      permanent: boolean
+      locale: string | null
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["redirect"]>
+    composites: {}
+  }
+
+  type RedirectGetPayload<S extends boolean | null | undefined | RedirectDefaultArgs> = $Result.GetResult<Prisma.$RedirectPayload, S>
+
+  type RedirectCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<RedirectFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: RedirectCountAggregateInputType | true
+    }
+
+  export interface RedirectDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Redirect'], meta: { name: 'Redirect' } }
+    /**
+     * Find zero or one Redirect that matches the filter.
+     * @param {RedirectFindUniqueArgs} args - Arguments to find a Redirect
+     * @example
+     * // Get one Redirect
+     * const redirect = await prisma.redirect.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends RedirectFindUniqueArgs>(args: SelectSubset<T, RedirectFindUniqueArgs<ExtArgs>>): Prisma__RedirectClient<$Result.GetResult<Prisma.$RedirectPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Redirect that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {RedirectFindUniqueOrThrowArgs} args - Arguments to find a Redirect
+     * @example
+     * // Get one Redirect
+     * const redirect = await prisma.redirect.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends RedirectFindUniqueOrThrowArgs>(args: SelectSubset<T, RedirectFindUniqueOrThrowArgs<ExtArgs>>): Prisma__RedirectClient<$Result.GetResult<Prisma.$RedirectPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Redirect that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RedirectFindFirstArgs} args - Arguments to find a Redirect
+     * @example
+     * // Get one Redirect
+     * const redirect = await prisma.redirect.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends RedirectFindFirstArgs>(args?: SelectSubset<T, RedirectFindFirstArgs<ExtArgs>>): Prisma__RedirectClient<$Result.GetResult<Prisma.$RedirectPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Redirect that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RedirectFindFirstOrThrowArgs} args - Arguments to find a Redirect
+     * @example
+     * // Get one Redirect
+     * const redirect = await prisma.redirect.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends RedirectFindFirstOrThrowArgs>(args?: SelectSubset<T, RedirectFindFirstOrThrowArgs<ExtArgs>>): Prisma__RedirectClient<$Result.GetResult<Prisma.$RedirectPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Redirects that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RedirectFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Redirects
+     * const redirects = await prisma.redirect.findMany()
+     * 
+     * // Get first 10 Redirects
+     * const redirects = await prisma.redirect.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const redirectWithIdOnly = await prisma.redirect.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends RedirectFindManyArgs>(args?: SelectSubset<T, RedirectFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RedirectPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Redirect.
+     * @param {RedirectCreateArgs} args - Arguments to create a Redirect.
+     * @example
+     * // Create one Redirect
+     * const Redirect = await prisma.redirect.create({
+     *   data: {
+     *     // ... data to create a Redirect
+     *   }
+     * })
+     * 
+     */
+    create<T extends RedirectCreateArgs>(args: SelectSubset<T, RedirectCreateArgs<ExtArgs>>): Prisma__RedirectClient<$Result.GetResult<Prisma.$RedirectPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Redirects.
+     * @param {RedirectCreateManyArgs} args - Arguments to create many Redirects.
+     * @example
+     * // Create many Redirects
+     * const redirect = await prisma.redirect.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends RedirectCreateManyArgs>(args?: SelectSubset<T, RedirectCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Redirects and returns the data saved in the database.
+     * @param {RedirectCreateManyAndReturnArgs} args - Arguments to create many Redirects.
+     * @example
+     * // Create many Redirects
+     * const redirect = await prisma.redirect.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Redirects and only return the `id`
+     * const redirectWithIdOnly = await prisma.redirect.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends RedirectCreateManyAndReturnArgs>(args?: SelectSubset<T, RedirectCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RedirectPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Redirect.
+     * @param {RedirectDeleteArgs} args - Arguments to delete one Redirect.
+     * @example
+     * // Delete one Redirect
+     * const Redirect = await prisma.redirect.delete({
+     *   where: {
+     *     // ... filter to delete one Redirect
+     *   }
+     * })
+     * 
+     */
+    delete<T extends RedirectDeleteArgs>(args: SelectSubset<T, RedirectDeleteArgs<ExtArgs>>): Prisma__RedirectClient<$Result.GetResult<Prisma.$RedirectPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Redirect.
+     * @param {RedirectUpdateArgs} args - Arguments to update one Redirect.
+     * @example
+     * // Update one Redirect
+     * const redirect = await prisma.redirect.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends RedirectUpdateArgs>(args: SelectSubset<T, RedirectUpdateArgs<ExtArgs>>): Prisma__RedirectClient<$Result.GetResult<Prisma.$RedirectPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Redirects.
+     * @param {RedirectDeleteManyArgs} args - Arguments to filter Redirects to delete.
+     * @example
+     * // Delete a few Redirects
+     * const { count } = await prisma.redirect.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends RedirectDeleteManyArgs>(args?: SelectSubset<T, RedirectDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Redirects.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RedirectUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Redirects
+     * const redirect = await prisma.redirect.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends RedirectUpdateManyArgs>(args: SelectSubset<T, RedirectUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Redirects and returns the data updated in the database.
+     * @param {RedirectUpdateManyAndReturnArgs} args - Arguments to update many Redirects.
+     * @example
+     * // Update many Redirects
+     * const redirect = await prisma.redirect.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Redirects and only return the `id`
+     * const redirectWithIdOnly = await prisma.redirect.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends RedirectUpdateManyAndReturnArgs>(args: SelectSubset<T, RedirectUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RedirectPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Redirect.
+     * @param {RedirectUpsertArgs} args - Arguments to update or create a Redirect.
+     * @example
+     * // Update or create a Redirect
+     * const redirect = await prisma.redirect.upsert({
+     *   create: {
+     *     // ... data to create a Redirect
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Redirect we want to update
+     *   }
+     * })
+     */
+    upsert<T extends RedirectUpsertArgs>(args: SelectSubset<T, RedirectUpsertArgs<ExtArgs>>): Prisma__RedirectClient<$Result.GetResult<Prisma.$RedirectPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Redirects.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RedirectCountArgs} args - Arguments to filter Redirects to count.
+     * @example
+     * // Count the number of Redirects
+     * const count = await prisma.redirect.count({
+     *   where: {
+     *     // ... the filter for the Redirects we want to count
+     *   }
+     * })
+    **/
+    count<T extends RedirectCountArgs>(
+      args?: Subset<T, RedirectCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], RedirectCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Redirect.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RedirectAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends RedirectAggregateArgs>(args: Subset<T, RedirectAggregateArgs>): Prisma.PrismaPromise<GetRedirectAggregateType<T>>
+
+    /**
+     * Group by Redirect.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RedirectGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends RedirectGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: RedirectGroupByArgs['orderBy'] }
+        : { orderBy?: RedirectGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, RedirectGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetRedirectGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Redirect model
+   */
+  readonly fields: RedirectFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Redirect.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__RedirectClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Redirect model
+   */
+  interface RedirectFieldRefs {
+    readonly id: FieldRef<"Redirect", 'String'>
+    readonly source: FieldRef<"Redirect", 'String'>
+    readonly destination: FieldRef<"Redirect", 'String'>
+    readonly permanent: FieldRef<"Redirect", 'Boolean'>
+    readonly locale: FieldRef<"Redirect", 'String'>
+    readonly createdAt: FieldRef<"Redirect", 'DateTime'>
+    readonly updatedAt: FieldRef<"Redirect", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Redirect findUnique
+   */
+  export type RedirectFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Redirect
+     */
+    select?: RedirectSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Redirect
+     */
+    omit?: RedirectOmit<ExtArgs> | null
+    /**
+     * Filter, which Redirect to fetch.
+     */
+    where: RedirectWhereUniqueInput
+  }
+
+  /**
+   * Redirect findUniqueOrThrow
+   */
+  export type RedirectFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Redirect
+     */
+    select?: RedirectSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Redirect
+     */
+    omit?: RedirectOmit<ExtArgs> | null
+    /**
+     * Filter, which Redirect to fetch.
+     */
+    where: RedirectWhereUniqueInput
+  }
+
+  /**
+   * Redirect findFirst
+   */
+  export type RedirectFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Redirect
+     */
+    select?: RedirectSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Redirect
+     */
+    omit?: RedirectOmit<ExtArgs> | null
+    /**
+     * Filter, which Redirect to fetch.
+     */
+    where?: RedirectWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Redirects to fetch.
+     */
+    orderBy?: RedirectOrderByWithRelationInput | RedirectOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Redirects.
+     */
+    cursor?: RedirectWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Redirects from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Redirects.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Redirects.
+     */
+    distinct?: RedirectScalarFieldEnum | RedirectScalarFieldEnum[]
+  }
+
+  /**
+   * Redirect findFirstOrThrow
+   */
+  export type RedirectFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Redirect
+     */
+    select?: RedirectSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Redirect
+     */
+    omit?: RedirectOmit<ExtArgs> | null
+    /**
+     * Filter, which Redirect to fetch.
+     */
+    where?: RedirectWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Redirects to fetch.
+     */
+    orderBy?: RedirectOrderByWithRelationInput | RedirectOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Redirects.
+     */
+    cursor?: RedirectWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Redirects from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Redirects.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Redirects.
+     */
+    distinct?: RedirectScalarFieldEnum | RedirectScalarFieldEnum[]
+  }
+
+  /**
+   * Redirect findMany
+   */
+  export type RedirectFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Redirect
+     */
+    select?: RedirectSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Redirect
+     */
+    omit?: RedirectOmit<ExtArgs> | null
+    /**
+     * Filter, which Redirects to fetch.
+     */
+    where?: RedirectWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Redirects to fetch.
+     */
+    orderBy?: RedirectOrderByWithRelationInput | RedirectOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Redirects.
+     */
+    cursor?: RedirectWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Redirects from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Redirects.
+     */
+    skip?: number
+    distinct?: RedirectScalarFieldEnum | RedirectScalarFieldEnum[]
+  }
+
+  /**
+   * Redirect create
+   */
+  export type RedirectCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Redirect
+     */
+    select?: RedirectSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Redirect
+     */
+    omit?: RedirectOmit<ExtArgs> | null
+    /**
+     * The data needed to create a Redirect.
+     */
+    data: XOR<RedirectCreateInput, RedirectUncheckedCreateInput>
+  }
+
+  /**
+   * Redirect createMany
+   */
+  export type RedirectCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Redirects.
+     */
+    data: RedirectCreateManyInput | RedirectCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Redirect createManyAndReturn
+   */
+  export type RedirectCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Redirect
+     */
+    select?: RedirectSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Redirect
+     */
+    omit?: RedirectOmit<ExtArgs> | null
+    /**
+     * The data used to create many Redirects.
+     */
+    data: RedirectCreateManyInput | RedirectCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Redirect update
+   */
+  export type RedirectUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Redirect
+     */
+    select?: RedirectSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Redirect
+     */
+    omit?: RedirectOmit<ExtArgs> | null
+    /**
+     * The data needed to update a Redirect.
+     */
+    data: XOR<RedirectUpdateInput, RedirectUncheckedUpdateInput>
+    /**
+     * Choose, which Redirect to update.
+     */
+    where: RedirectWhereUniqueInput
+  }
+
+  /**
+   * Redirect updateMany
+   */
+  export type RedirectUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Redirects.
+     */
+    data: XOR<RedirectUpdateManyMutationInput, RedirectUncheckedUpdateManyInput>
+    /**
+     * Filter which Redirects to update
+     */
+    where?: RedirectWhereInput
+    /**
+     * Limit how many Redirects to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Redirect updateManyAndReturn
+   */
+  export type RedirectUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Redirect
+     */
+    select?: RedirectSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Redirect
+     */
+    omit?: RedirectOmit<ExtArgs> | null
+    /**
+     * The data used to update Redirects.
+     */
+    data: XOR<RedirectUpdateManyMutationInput, RedirectUncheckedUpdateManyInput>
+    /**
+     * Filter which Redirects to update
+     */
+    where?: RedirectWhereInput
+    /**
+     * Limit how many Redirects to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Redirect upsert
+   */
+  export type RedirectUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Redirect
+     */
+    select?: RedirectSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Redirect
+     */
+    omit?: RedirectOmit<ExtArgs> | null
+    /**
+     * The filter to search for the Redirect to update in case it exists.
+     */
+    where: RedirectWhereUniqueInput
+    /**
+     * In case the Redirect found by the `where` argument doesn't exist, create a new Redirect with this data.
+     */
+    create: XOR<RedirectCreateInput, RedirectUncheckedCreateInput>
+    /**
+     * In case the Redirect was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<RedirectUpdateInput, RedirectUncheckedUpdateInput>
+  }
+
+  /**
+   * Redirect delete
+   */
+  export type RedirectDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Redirect
+     */
+    select?: RedirectSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Redirect
+     */
+    omit?: RedirectOmit<ExtArgs> | null
+    /**
+     * Filter which Redirect to delete.
+     */
+    where: RedirectWhereUniqueInput
+  }
+
+  /**
+   * Redirect deleteMany
+   */
+  export type RedirectDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Redirects to delete
+     */
+    where?: RedirectWhereInput
+    /**
+     * Limit how many Redirects to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Redirect without action
+   */
+  export type RedirectDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Redirect
+     */
+    select?: RedirectSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Redirect
+     */
+    omit?: RedirectOmit<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -13637,12 +18482,21 @@ export namespace Prisma {
     id: 'id',
     name: 'name',
     slug: 'slug',
+    sku: 'sku',
+    title: 'title',
     summary: 'summary',
+    shortDesc: 'shortDesc',
     description: 'description',
     imageUrls: 'imageUrls',
+    images: 'images',
     datasheetUrl: 'datasheetUrl',
+    datasheets: 'datasheets',
+    brand: 'brand',
+    series: 'series',
+    warrantyMonths: 'warrantyMonths',
     categoryId: 'categoryId',
     isPublished: 'isPublished',
+    isActive: 'isActive',
     order: 'order',
     userId: 'userId',
     metaTitle: 'metaTitle',
@@ -13656,6 +18510,20 @@ export namespace Prisma {
   };
 
   export type ProductScalarFieldEnum = (typeof ProductScalarFieldEnum)[keyof typeof ProductScalarFieldEnum]
+
+
+  export const ProductSpecScalarFieldEnum: {
+    id: 'id',
+    productId: 'productId',
+    key: 'key',
+    value: 'value',
+    unit: 'unit',
+    order: 'order',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type ProductSpecScalarFieldEnum = (typeof ProductSpecScalarFieldEnum)[keyof typeof ProductSpecScalarFieldEnum]
 
 
   export const SiteSettingScalarFieldEnum: {
@@ -13693,6 +18561,47 @@ export namespace Prisma {
   };
 
   export type PageScalarFieldEnum = (typeof PageScalarFieldEnum)[keyof typeof PageScalarFieldEnum]
+
+
+  export const LeadScalarFieldEnum: {
+    id: 'id',
+    name: 'name',
+    phone: 'phone',
+    email: 'email',
+    message: 'message',
+    productId: 'productId',
+    utm: 'utm',
+    ip: 'ip',
+    userAgent: 'userAgent',
+    createdAt: 'createdAt'
+  };
+
+  export type LeadScalarFieldEnum = (typeof LeadScalarFieldEnum)[keyof typeof LeadScalarFieldEnum]
+
+
+  export const SearchSynonymScalarFieldEnum: {
+    id: 'id',
+    term: 'term',
+    synonyms: 'synonyms',
+    locale: 'locale',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type SearchSynonymScalarFieldEnum = (typeof SearchSynonymScalarFieldEnum)[keyof typeof SearchSynonymScalarFieldEnum]
+
+
+  export const RedirectScalarFieldEnum: {
+    id: 'id',
+    source: 'source',
+    destination: 'destination',
+    permanent: 'permanent',
+    locale: 'locale',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type RedirectScalarFieldEnum = (typeof RedirectScalarFieldEnum)[keyof typeof RedirectScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -14382,12 +19291,21 @@ export namespace Prisma {
     id?: StringFilter<"Product"> | string
     name?: StringFilter<"Product"> | string
     slug?: StringFilter<"Product"> | string
+    sku?: StringNullableFilter<"Product"> | string | null
+    title?: StringNullableFilter<"Product"> | string | null
     summary?: StringNullableFilter<"Product"> | string | null
+    shortDesc?: StringNullableFilter<"Product"> | string | null
     description?: StringNullableFilter<"Product"> | string | null
     imageUrls?: StringNullableListFilter<"Product">
+    images?: StringNullableListFilter<"Product">
     datasheetUrl?: StringNullableFilter<"Product"> | string | null
+    datasheets?: StringNullableListFilter<"Product">
+    brand?: StringNullableFilter<"Product"> | string | null
+    series?: StringNullableFilter<"Product"> | string | null
+    warrantyMonths?: IntNullableFilter<"Product"> | number | null
     categoryId?: StringFilter<"Product"> | string
     isPublished?: BoolFilter<"Product"> | boolean
+    isActive?: BoolFilter<"Product"> | boolean
     order?: IntNullableFilter<"Product"> | number | null
     userId?: StringFilter<"Product"> | string
     metaTitle?: StringNullableFilter<"Product"> | string | null
@@ -14401,18 +19319,29 @@ export namespace Prisma {
     category?: XOR<ProductCategoryScalarRelationFilter, ProductCategoryWhereInput>
     tags?: TagListRelationFilter
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    specs?: ProductSpecListRelationFilter
+    leads?: LeadListRelationFilter
   }
 
   export type ProductOrderByWithRelationInput = {
     id?: SortOrder
     name?: SortOrder
     slug?: SortOrder
+    sku?: SortOrderInput | SortOrder
+    title?: SortOrderInput | SortOrder
     summary?: SortOrderInput | SortOrder
+    shortDesc?: SortOrderInput | SortOrder
     description?: SortOrderInput | SortOrder
     imageUrls?: SortOrder
+    images?: SortOrder
     datasheetUrl?: SortOrderInput | SortOrder
+    datasheets?: SortOrder
+    brand?: SortOrderInput | SortOrder
+    series?: SortOrderInput | SortOrder
+    warrantyMonths?: SortOrderInput | SortOrder
     categoryId?: SortOrder
     isPublished?: SortOrder
+    isActive?: SortOrder
     order?: SortOrderInput | SortOrder
     userId?: SortOrder
     metaTitle?: SortOrderInput | SortOrder
@@ -14426,21 +19355,32 @@ export namespace Prisma {
     category?: ProductCategoryOrderByWithRelationInput
     tags?: TagOrderByRelationAggregateInput
     user?: UserOrderByWithRelationInput
+    specs?: ProductSpecOrderByRelationAggregateInput
+    leads?: LeadOrderByRelationAggregateInput
   }
 
   export type ProductWhereUniqueInput = Prisma.AtLeast<{
     id?: string
     slug?: string
+    sku?: string
     AND?: ProductWhereInput | ProductWhereInput[]
     OR?: ProductWhereInput[]
     NOT?: ProductWhereInput | ProductWhereInput[]
     name?: StringFilter<"Product"> | string
+    title?: StringNullableFilter<"Product"> | string | null
     summary?: StringNullableFilter<"Product"> | string | null
+    shortDesc?: StringNullableFilter<"Product"> | string | null
     description?: StringNullableFilter<"Product"> | string | null
     imageUrls?: StringNullableListFilter<"Product">
+    images?: StringNullableListFilter<"Product">
     datasheetUrl?: StringNullableFilter<"Product"> | string | null
+    datasheets?: StringNullableListFilter<"Product">
+    brand?: StringNullableFilter<"Product"> | string | null
+    series?: StringNullableFilter<"Product"> | string | null
+    warrantyMonths?: IntNullableFilter<"Product"> | number | null
     categoryId?: StringFilter<"Product"> | string
     isPublished?: BoolFilter<"Product"> | boolean
+    isActive?: BoolFilter<"Product"> | boolean
     order?: IntNullableFilter<"Product"> | number | null
     userId?: StringFilter<"Product"> | string
     metaTitle?: StringNullableFilter<"Product"> | string | null
@@ -14454,18 +19394,29 @@ export namespace Prisma {
     category?: XOR<ProductCategoryScalarRelationFilter, ProductCategoryWhereInput>
     tags?: TagListRelationFilter
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
-  }, "id" | "slug">
+    specs?: ProductSpecListRelationFilter
+    leads?: LeadListRelationFilter
+  }, "id" | "slug" | "sku">
 
   export type ProductOrderByWithAggregationInput = {
     id?: SortOrder
     name?: SortOrder
     slug?: SortOrder
+    sku?: SortOrderInput | SortOrder
+    title?: SortOrderInput | SortOrder
     summary?: SortOrderInput | SortOrder
+    shortDesc?: SortOrderInput | SortOrder
     description?: SortOrderInput | SortOrder
     imageUrls?: SortOrder
+    images?: SortOrder
     datasheetUrl?: SortOrderInput | SortOrder
+    datasheets?: SortOrder
+    brand?: SortOrderInput | SortOrder
+    series?: SortOrderInput | SortOrder
+    warrantyMonths?: SortOrderInput | SortOrder
     categoryId?: SortOrder
     isPublished?: SortOrder
+    isActive?: SortOrder
     order?: SortOrderInput | SortOrder
     userId?: SortOrder
     metaTitle?: SortOrderInput | SortOrder
@@ -14490,12 +19441,21 @@ export namespace Prisma {
     id?: StringWithAggregatesFilter<"Product"> | string
     name?: StringWithAggregatesFilter<"Product"> | string
     slug?: StringWithAggregatesFilter<"Product"> | string
+    sku?: StringNullableWithAggregatesFilter<"Product"> | string | null
+    title?: StringNullableWithAggregatesFilter<"Product"> | string | null
     summary?: StringNullableWithAggregatesFilter<"Product"> | string | null
+    shortDesc?: StringNullableWithAggregatesFilter<"Product"> | string | null
     description?: StringNullableWithAggregatesFilter<"Product"> | string | null
     imageUrls?: StringNullableListFilter<"Product">
+    images?: StringNullableListFilter<"Product">
     datasheetUrl?: StringNullableWithAggregatesFilter<"Product"> | string | null
+    datasheets?: StringNullableListFilter<"Product">
+    brand?: StringNullableWithAggregatesFilter<"Product"> | string | null
+    series?: StringNullableWithAggregatesFilter<"Product"> | string | null
+    warrantyMonths?: IntNullableWithAggregatesFilter<"Product"> | number | null
     categoryId?: StringWithAggregatesFilter<"Product"> | string
     isPublished?: BoolWithAggregatesFilter<"Product"> | boolean
+    isActive?: BoolWithAggregatesFilter<"Product"> | boolean
     order?: IntNullableWithAggregatesFilter<"Product"> | number | null
     userId?: StringWithAggregatesFilter<"Product"> | string
     metaTitle?: StringNullableWithAggregatesFilter<"Product"> | string | null
@@ -14506,6 +19466,78 @@ export namespace Prisma {
     ogDescription?: StringNullableWithAggregatesFilter<"Product"> | string | null
     createdAt?: DateTimeWithAggregatesFilter<"Product"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Product"> | Date | string
+  }
+
+  export type ProductSpecWhereInput = {
+    AND?: ProductSpecWhereInput | ProductSpecWhereInput[]
+    OR?: ProductSpecWhereInput[]
+    NOT?: ProductSpecWhereInput | ProductSpecWhereInput[]
+    id?: StringFilter<"ProductSpec"> | string
+    productId?: StringFilter<"ProductSpec"> | string
+    key?: StringFilter<"ProductSpec"> | string
+    value?: StringFilter<"ProductSpec"> | string
+    unit?: StringNullableFilter<"ProductSpec"> | string | null
+    order?: IntNullableFilter<"ProductSpec"> | number | null
+    createdAt?: DateTimeFilter<"ProductSpec"> | Date | string
+    updatedAt?: DateTimeFilter<"ProductSpec"> | Date | string
+    product?: XOR<ProductScalarRelationFilter, ProductWhereInput>
+  }
+
+  export type ProductSpecOrderByWithRelationInput = {
+    id?: SortOrder
+    productId?: SortOrder
+    key?: SortOrder
+    value?: SortOrder
+    unit?: SortOrderInput | SortOrder
+    order?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    product?: ProductOrderByWithRelationInput
+  }
+
+  export type ProductSpecWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: ProductSpecWhereInput | ProductSpecWhereInput[]
+    OR?: ProductSpecWhereInput[]
+    NOT?: ProductSpecWhereInput | ProductSpecWhereInput[]
+    productId?: StringFilter<"ProductSpec"> | string
+    key?: StringFilter<"ProductSpec"> | string
+    value?: StringFilter<"ProductSpec"> | string
+    unit?: StringNullableFilter<"ProductSpec"> | string | null
+    order?: IntNullableFilter<"ProductSpec"> | number | null
+    createdAt?: DateTimeFilter<"ProductSpec"> | Date | string
+    updatedAt?: DateTimeFilter<"ProductSpec"> | Date | string
+    product?: XOR<ProductScalarRelationFilter, ProductWhereInput>
+  }, "id">
+
+  export type ProductSpecOrderByWithAggregationInput = {
+    id?: SortOrder
+    productId?: SortOrder
+    key?: SortOrder
+    value?: SortOrder
+    unit?: SortOrderInput | SortOrder
+    order?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: ProductSpecCountOrderByAggregateInput
+    _avg?: ProductSpecAvgOrderByAggregateInput
+    _max?: ProductSpecMaxOrderByAggregateInput
+    _min?: ProductSpecMinOrderByAggregateInput
+    _sum?: ProductSpecSumOrderByAggregateInput
+  }
+
+  export type ProductSpecScalarWhereWithAggregatesInput = {
+    AND?: ProductSpecScalarWhereWithAggregatesInput | ProductSpecScalarWhereWithAggregatesInput[]
+    OR?: ProductSpecScalarWhereWithAggregatesInput[]
+    NOT?: ProductSpecScalarWhereWithAggregatesInput | ProductSpecScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"ProductSpec"> | string
+    productId?: StringWithAggregatesFilter<"ProductSpec"> | string
+    key?: StringWithAggregatesFilter<"ProductSpec"> | string
+    value?: StringWithAggregatesFilter<"ProductSpec"> | string
+    unit?: StringNullableWithAggregatesFilter<"ProductSpec"> | string | null
+    order?: IntNullableWithAggregatesFilter<"ProductSpec"> | number | null
+    createdAt?: DateTimeWithAggregatesFilter<"ProductSpec"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"ProductSpec"> | Date | string
   }
 
   export type SiteSettingWhereInput = {
@@ -14686,6 +19718,205 @@ export namespace Prisma {
     published?: BoolWithAggregatesFilter<"Page"> | boolean
     createdAt?: DateTimeWithAggregatesFilter<"Page"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Page"> | Date | string
+  }
+
+  export type LeadWhereInput = {
+    AND?: LeadWhereInput | LeadWhereInput[]
+    OR?: LeadWhereInput[]
+    NOT?: LeadWhereInput | LeadWhereInput[]
+    id?: StringFilter<"Lead"> | string
+    name?: StringFilter<"Lead"> | string
+    phone?: StringFilter<"Lead"> | string
+    email?: StringNullableFilter<"Lead"> | string | null
+    message?: StringNullableFilter<"Lead"> | string | null
+    productId?: StringNullableFilter<"Lead"> | string | null
+    utm?: JsonNullableFilter<"Lead">
+    ip?: StringNullableFilter<"Lead"> | string | null
+    userAgent?: StringNullableFilter<"Lead"> | string | null
+    createdAt?: DateTimeFilter<"Lead"> | Date | string
+    product?: XOR<ProductNullableScalarRelationFilter, ProductWhereInput> | null
+  }
+
+  export type LeadOrderByWithRelationInput = {
+    id?: SortOrder
+    name?: SortOrder
+    phone?: SortOrder
+    email?: SortOrderInput | SortOrder
+    message?: SortOrderInput | SortOrder
+    productId?: SortOrderInput | SortOrder
+    utm?: SortOrderInput | SortOrder
+    ip?: SortOrderInput | SortOrder
+    userAgent?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    product?: ProductOrderByWithRelationInput
+  }
+
+  export type LeadWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: LeadWhereInput | LeadWhereInput[]
+    OR?: LeadWhereInput[]
+    NOT?: LeadWhereInput | LeadWhereInput[]
+    name?: StringFilter<"Lead"> | string
+    phone?: StringFilter<"Lead"> | string
+    email?: StringNullableFilter<"Lead"> | string | null
+    message?: StringNullableFilter<"Lead"> | string | null
+    productId?: StringNullableFilter<"Lead"> | string | null
+    utm?: JsonNullableFilter<"Lead">
+    ip?: StringNullableFilter<"Lead"> | string | null
+    userAgent?: StringNullableFilter<"Lead"> | string | null
+    createdAt?: DateTimeFilter<"Lead"> | Date | string
+    product?: XOR<ProductNullableScalarRelationFilter, ProductWhereInput> | null
+  }, "id">
+
+  export type LeadOrderByWithAggregationInput = {
+    id?: SortOrder
+    name?: SortOrder
+    phone?: SortOrder
+    email?: SortOrderInput | SortOrder
+    message?: SortOrderInput | SortOrder
+    productId?: SortOrderInput | SortOrder
+    utm?: SortOrderInput | SortOrder
+    ip?: SortOrderInput | SortOrder
+    userAgent?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    _count?: LeadCountOrderByAggregateInput
+    _max?: LeadMaxOrderByAggregateInput
+    _min?: LeadMinOrderByAggregateInput
+  }
+
+  export type LeadScalarWhereWithAggregatesInput = {
+    AND?: LeadScalarWhereWithAggregatesInput | LeadScalarWhereWithAggregatesInput[]
+    OR?: LeadScalarWhereWithAggregatesInput[]
+    NOT?: LeadScalarWhereWithAggregatesInput | LeadScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"Lead"> | string
+    name?: StringWithAggregatesFilter<"Lead"> | string
+    phone?: StringWithAggregatesFilter<"Lead"> | string
+    email?: StringNullableWithAggregatesFilter<"Lead"> | string | null
+    message?: StringNullableWithAggregatesFilter<"Lead"> | string | null
+    productId?: StringNullableWithAggregatesFilter<"Lead"> | string | null
+    utm?: JsonNullableWithAggregatesFilter<"Lead">
+    ip?: StringNullableWithAggregatesFilter<"Lead"> | string | null
+    userAgent?: StringNullableWithAggregatesFilter<"Lead"> | string | null
+    createdAt?: DateTimeWithAggregatesFilter<"Lead"> | Date | string
+  }
+
+  export type SearchSynonymWhereInput = {
+    AND?: SearchSynonymWhereInput | SearchSynonymWhereInput[]
+    OR?: SearchSynonymWhereInput[]
+    NOT?: SearchSynonymWhereInput | SearchSynonymWhereInput[]
+    id?: StringFilter<"SearchSynonym"> | string
+    term?: StringFilter<"SearchSynonym"> | string
+    synonyms?: StringNullableListFilter<"SearchSynonym">
+    locale?: StringNullableFilter<"SearchSynonym"> | string | null
+    createdAt?: DateTimeFilter<"SearchSynonym"> | Date | string
+    updatedAt?: DateTimeFilter<"SearchSynonym"> | Date | string
+  }
+
+  export type SearchSynonymOrderByWithRelationInput = {
+    id?: SortOrder
+    term?: SortOrder
+    synonyms?: SortOrder
+    locale?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type SearchSynonymWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    term?: string
+    AND?: SearchSynonymWhereInput | SearchSynonymWhereInput[]
+    OR?: SearchSynonymWhereInput[]
+    NOT?: SearchSynonymWhereInput | SearchSynonymWhereInput[]
+    synonyms?: StringNullableListFilter<"SearchSynonym">
+    locale?: StringNullableFilter<"SearchSynonym"> | string | null
+    createdAt?: DateTimeFilter<"SearchSynonym"> | Date | string
+    updatedAt?: DateTimeFilter<"SearchSynonym"> | Date | string
+  }, "id" | "term">
+
+  export type SearchSynonymOrderByWithAggregationInput = {
+    id?: SortOrder
+    term?: SortOrder
+    synonyms?: SortOrder
+    locale?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: SearchSynonymCountOrderByAggregateInput
+    _max?: SearchSynonymMaxOrderByAggregateInput
+    _min?: SearchSynonymMinOrderByAggregateInput
+  }
+
+  export type SearchSynonymScalarWhereWithAggregatesInput = {
+    AND?: SearchSynonymScalarWhereWithAggregatesInput | SearchSynonymScalarWhereWithAggregatesInput[]
+    OR?: SearchSynonymScalarWhereWithAggregatesInput[]
+    NOT?: SearchSynonymScalarWhereWithAggregatesInput | SearchSynonymScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"SearchSynonym"> | string
+    term?: StringWithAggregatesFilter<"SearchSynonym"> | string
+    synonyms?: StringNullableListFilter<"SearchSynonym">
+    locale?: StringNullableWithAggregatesFilter<"SearchSynonym"> | string | null
+    createdAt?: DateTimeWithAggregatesFilter<"SearchSynonym"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"SearchSynonym"> | Date | string
+  }
+
+  export type RedirectWhereInput = {
+    AND?: RedirectWhereInput | RedirectWhereInput[]
+    OR?: RedirectWhereInput[]
+    NOT?: RedirectWhereInput | RedirectWhereInput[]
+    id?: StringFilter<"Redirect"> | string
+    source?: StringFilter<"Redirect"> | string
+    destination?: StringFilter<"Redirect"> | string
+    permanent?: BoolFilter<"Redirect"> | boolean
+    locale?: StringNullableFilter<"Redirect"> | string | null
+    createdAt?: DateTimeFilter<"Redirect"> | Date | string
+    updatedAt?: DateTimeFilter<"Redirect"> | Date | string
+  }
+
+  export type RedirectOrderByWithRelationInput = {
+    id?: SortOrder
+    source?: SortOrder
+    destination?: SortOrder
+    permanent?: SortOrder
+    locale?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type RedirectWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    source?: string
+    AND?: RedirectWhereInput | RedirectWhereInput[]
+    OR?: RedirectWhereInput[]
+    NOT?: RedirectWhereInput | RedirectWhereInput[]
+    destination?: StringFilter<"Redirect"> | string
+    permanent?: BoolFilter<"Redirect"> | boolean
+    locale?: StringNullableFilter<"Redirect"> | string | null
+    createdAt?: DateTimeFilter<"Redirect"> | Date | string
+    updatedAt?: DateTimeFilter<"Redirect"> | Date | string
+  }, "id" | "source">
+
+  export type RedirectOrderByWithAggregationInput = {
+    id?: SortOrder
+    source?: SortOrder
+    destination?: SortOrder
+    permanent?: SortOrder
+    locale?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: RedirectCountOrderByAggregateInput
+    _max?: RedirectMaxOrderByAggregateInput
+    _min?: RedirectMinOrderByAggregateInput
+  }
+
+  export type RedirectScalarWhereWithAggregatesInput = {
+    AND?: RedirectScalarWhereWithAggregatesInput | RedirectScalarWhereWithAggregatesInput[]
+    OR?: RedirectScalarWhereWithAggregatesInput[]
+    NOT?: RedirectScalarWhereWithAggregatesInput | RedirectScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"Redirect"> | string
+    source?: StringWithAggregatesFilter<"Redirect"> | string
+    destination?: StringWithAggregatesFilter<"Redirect"> | string
+    permanent?: BoolWithAggregatesFilter<"Redirect"> | boolean
+    locale?: StringNullableWithAggregatesFilter<"Redirect"> | string | null
+    createdAt?: DateTimeWithAggregatesFilter<"Redirect"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"Redirect"> | Date | string
   }
 
   export type UserCreateInput = {
@@ -15287,11 +20518,20 @@ export namespace Prisma {
     id?: string
     name: string
     slug: string
+    sku?: string | null
+    title?: string | null
     summary?: string | null
+    shortDesc?: string | null
     description?: string | null
     imageUrls?: ProductCreateimageUrlsInput | string[]
+    images?: ProductCreateimagesInput | string[]
     datasheetUrl?: string | null
+    datasheets?: ProductCreatedatasheetsInput | string[]
+    brand?: string | null
+    series?: string | null
+    warrantyMonths?: number | null
     isPublished?: boolean
+    isActive?: boolean
     order?: number | null
     metaTitle?: string | null
     metaDescription?: string | null
@@ -15304,18 +20544,29 @@ export namespace Prisma {
     category: ProductCategoryCreateNestedOneWithoutProductsInput
     tags?: TagCreateNestedManyWithoutProductsInput
     user: UserCreateNestedOneWithoutProductsInput
+    specs?: ProductSpecCreateNestedManyWithoutProductInput
+    leads?: LeadCreateNestedManyWithoutProductInput
   }
 
   export type ProductUncheckedCreateInput = {
     id?: string
     name: string
     slug: string
+    sku?: string | null
+    title?: string | null
     summary?: string | null
+    shortDesc?: string | null
     description?: string | null
     imageUrls?: ProductCreateimageUrlsInput | string[]
+    images?: ProductCreateimagesInput | string[]
     datasheetUrl?: string | null
+    datasheets?: ProductCreatedatasheetsInput | string[]
+    brand?: string | null
+    series?: string | null
+    warrantyMonths?: number | null
     categoryId: string
     isPublished?: boolean
+    isActive?: boolean
     order?: number | null
     userId: string
     metaTitle?: string | null
@@ -15327,17 +20578,28 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     tags?: TagUncheckedCreateNestedManyWithoutProductsInput
+    specs?: ProductSpecUncheckedCreateNestedManyWithoutProductInput
+    leads?: LeadUncheckedCreateNestedManyWithoutProductInput
   }
 
   export type ProductUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
+    sku?: NullableStringFieldUpdateOperationsInput | string | null
+    title?: NullableStringFieldUpdateOperationsInput | string | null
     summary?: NullableStringFieldUpdateOperationsInput | string | null
+    shortDesc?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     imageUrls?: ProductUpdateimageUrlsInput | string[]
+    images?: ProductUpdateimagesInput | string[]
     datasheetUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    datasheets?: ProductUpdatedatasheetsInput | string[]
+    brand?: NullableStringFieldUpdateOperationsInput | string | null
+    series?: NullableStringFieldUpdateOperationsInput | string | null
+    warrantyMonths?: NullableIntFieldUpdateOperationsInput | number | null
     isPublished?: BoolFieldUpdateOperationsInput | boolean
+    isActive?: BoolFieldUpdateOperationsInput | boolean
     order?: NullableIntFieldUpdateOperationsInput | number | null
     metaTitle?: NullableStringFieldUpdateOperationsInput | string | null
     metaDescription?: NullableStringFieldUpdateOperationsInput | string | null
@@ -15350,18 +20612,29 @@ export namespace Prisma {
     category?: ProductCategoryUpdateOneRequiredWithoutProductsNestedInput
     tags?: TagUpdateManyWithoutProductsNestedInput
     user?: UserUpdateOneRequiredWithoutProductsNestedInput
+    specs?: ProductSpecUpdateManyWithoutProductNestedInput
+    leads?: LeadUpdateManyWithoutProductNestedInput
   }
 
   export type ProductUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
+    sku?: NullableStringFieldUpdateOperationsInput | string | null
+    title?: NullableStringFieldUpdateOperationsInput | string | null
     summary?: NullableStringFieldUpdateOperationsInput | string | null
+    shortDesc?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     imageUrls?: ProductUpdateimageUrlsInput | string[]
+    images?: ProductUpdateimagesInput | string[]
     datasheetUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    datasheets?: ProductUpdatedatasheetsInput | string[]
+    brand?: NullableStringFieldUpdateOperationsInput | string | null
+    series?: NullableStringFieldUpdateOperationsInput | string | null
+    warrantyMonths?: NullableIntFieldUpdateOperationsInput | number | null
     categoryId?: StringFieldUpdateOperationsInput | string
     isPublished?: BoolFieldUpdateOperationsInput | boolean
+    isActive?: BoolFieldUpdateOperationsInput | boolean
     order?: NullableIntFieldUpdateOperationsInput | number | null
     userId?: StringFieldUpdateOperationsInput | string
     metaTitle?: NullableStringFieldUpdateOperationsInput | string | null
@@ -15373,18 +20646,29 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     tags?: TagUncheckedUpdateManyWithoutProductsNestedInput
+    specs?: ProductSpecUncheckedUpdateManyWithoutProductNestedInput
+    leads?: LeadUncheckedUpdateManyWithoutProductNestedInput
   }
 
   export type ProductCreateManyInput = {
     id?: string
     name: string
     slug: string
+    sku?: string | null
+    title?: string | null
     summary?: string | null
+    shortDesc?: string | null
     description?: string | null
     imageUrls?: ProductCreateimageUrlsInput | string[]
+    images?: ProductCreateimagesInput | string[]
     datasheetUrl?: string | null
+    datasheets?: ProductCreatedatasheetsInput | string[]
+    brand?: string | null
+    series?: string | null
+    warrantyMonths?: number | null
     categoryId: string
     isPublished?: boolean
+    isActive?: boolean
     order?: number | null
     userId: string
     metaTitle?: string | null
@@ -15401,11 +20685,20 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
+    sku?: NullableStringFieldUpdateOperationsInput | string | null
+    title?: NullableStringFieldUpdateOperationsInput | string | null
     summary?: NullableStringFieldUpdateOperationsInput | string | null
+    shortDesc?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     imageUrls?: ProductUpdateimageUrlsInput | string[]
+    images?: ProductUpdateimagesInput | string[]
     datasheetUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    datasheets?: ProductUpdatedatasheetsInput | string[]
+    brand?: NullableStringFieldUpdateOperationsInput | string | null
+    series?: NullableStringFieldUpdateOperationsInput | string | null
+    warrantyMonths?: NullableIntFieldUpdateOperationsInput | number | null
     isPublished?: BoolFieldUpdateOperationsInput | boolean
+    isActive?: BoolFieldUpdateOperationsInput | boolean
     order?: NullableIntFieldUpdateOperationsInput | number | null
     metaTitle?: NullableStringFieldUpdateOperationsInput | string | null
     metaDescription?: NullableStringFieldUpdateOperationsInput | string | null
@@ -15421,12 +20714,21 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
+    sku?: NullableStringFieldUpdateOperationsInput | string | null
+    title?: NullableStringFieldUpdateOperationsInput | string | null
     summary?: NullableStringFieldUpdateOperationsInput | string | null
+    shortDesc?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     imageUrls?: ProductUpdateimageUrlsInput | string[]
+    images?: ProductUpdateimagesInput | string[]
     datasheetUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    datasheets?: ProductUpdatedatasheetsInput | string[]
+    brand?: NullableStringFieldUpdateOperationsInput | string | null
+    series?: NullableStringFieldUpdateOperationsInput | string | null
+    warrantyMonths?: NullableIntFieldUpdateOperationsInput | number | null
     categoryId?: StringFieldUpdateOperationsInput | string
     isPublished?: BoolFieldUpdateOperationsInput | boolean
+    isActive?: BoolFieldUpdateOperationsInput | boolean
     order?: NullableIntFieldUpdateOperationsInput | number | null
     userId?: StringFieldUpdateOperationsInput | string
     metaTitle?: NullableStringFieldUpdateOperationsInput | string | null
@@ -15435,6 +20737,82 @@ export namespace Prisma {
     ogImage?: NullableStringFieldUpdateOperationsInput | string | null
     ogTitle?: NullableStringFieldUpdateOperationsInput | string | null
     ogDescription?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ProductSpecCreateInput = {
+    id?: string
+    key: string
+    value: string
+    unit?: string | null
+    order?: number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    product: ProductCreateNestedOneWithoutSpecsInput
+  }
+
+  export type ProductSpecUncheckedCreateInput = {
+    id?: string
+    productId: string
+    key: string
+    value: string
+    unit?: string | null
+    order?: number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ProductSpecUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    key?: StringFieldUpdateOperationsInput | string
+    value?: StringFieldUpdateOperationsInput | string
+    unit?: NullableStringFieldUpdateOperationsInput | string | null
+    order?: NullableIntFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    product?: ProductUpdateOneRequiredWithoutSpecsNestedInput
+  }
+
+  export type ProductSpecUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    productId?: StringFieldUpdateOperationsInput | string
+    key?: StringFieldUpdateOperationsInput | string
+    value?: StringFieldUpdateOperationsInput | string
+    unit?: NullableStringFieldUpdateOperationsInput | string | null
+    order?: NullableIntFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ProductSpecCreateManyInput = {
+    id?: string
+    productId: string
+    key: string
+    value: string
+    unit?: string | null
+    order?: number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ProductSpecUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    key?: StringFieldUpdateOperationsInput | string
+    value?: StringFieldUpdateOperationsInput | string
+    unit?: NullableStringFieldUpdateOperationsInput | string | null
+    order?: NullableIntFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ProductSpecUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    productId?: StringFieldUpdateOperationsInput | string
+    key?: StringFieldUpdateOperationsInput | string
+    value?: StringFieldUpdateOperationsInput | string
+    unit?: NullableStringFieldUpdateOperationsInput | string | null
+    order?: NullableIntFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -15652,6 +21030,229 @@ export namespace Prisma {
     canonicalUrl?: NullableStringFieldUpdateOperationsInput | string | null
     ogImage?: NullableStringFieldUpdateOperationsInput | string | null
     published?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type LeadCreateInput = {
+    id?: string
+    name: string
+    phone: string
+    email?: string | null
+    message?: string | null
+    utm?: NullableJsonNullValueInput | InputJsonValue
+    ip?: string | null
+    userAgent?: string | null
+    createdAt?: Date | string
+    product?: ProductCreateNestedOneWithoutLeadsInput
+  }
+
+  export type LeadUncheckedCreateInput = {
+    id?: string
+    name: string
+    phone: string
+    email?: string | null
+    message?: string | null
+    productId?: string | null
+    utm?: NullableJsonNullValueInput | InputJsonValue
+    ip?: string | null
+    userAgent?: string | null
+    createdAt?: Date | string
+  }
+
+  export type LeadUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    phone?: StringFieldUpdateOperationsInput | string
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    message?: NullableStringFieldUpdateOperationsInput | string | null
+    utm?: NullableJsonNullValueInput | InputJsonValue
+    ip?: NullableStringFieldUpdateOperationsInput | string | null
+    userAgent?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    product?: ProductUpdateOneWithoutLeadsNestedInput
+  }
+
+  export type LeadUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    phone?: StringFieldUpdateOperationsInput | string
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    message?: NullableStringFieldUpdateOperationsInput | string | null
+    productId?: NullableStringFieldUpdateOperationsInput | string | null
+    utm?: NullableJsonNullValueInput | InputJsonValue
+    ip?: NullableStringFieldUpdateOperationsInput | string | null
+    userAgent?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type LeadCreateManyInput = {
+    id?: string
+    name: string
+    phone: string
+    email?: string | null
+    message?: string | null
+    productId?: string | null
+    utm?: NullableJsonNullValueInput | InputJsonValue
+    ip?: string | null
+    userAgent?: string | null
+    createdAt?: Date | string
+  }
+
+  export type LeadUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    phone?: StringFieldUpdateOperationsInput | string
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    message?: NullableStringFieldUpdateOperationsInput | string | null
+    utm?: NullableJsonNullValueInput | InputJsonValue
+    ip?: NullableStringFieldUpdateOperationsInput | string | null
+    userAgent?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type LeadUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    phone?: StringFieldUpdateOperationsInput | string
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    message?: NullableStringFieldUpdateOperationsInput | string | null
+    productId?: NullableStringFieldUpdateOperationsInput | string | null
+    utm?: NullableJsonNullValueInput | InputJsonValue
+    ip?: NullableStringFieldUpdateOperationsInput | string | null
+    userAgent?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SearchSynonymCreateInput = {
+    id?: string
+    term: string
+    synonyms?: SearchSynonymCreatesynonymsInput | string[]
+    locale?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type SearchSynonymUncheckedCreateInput = {
+    id?: string
+    term: string
+    synonyms?: SearchSynonymCreatesynonymsInput | string[]
+    locale?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type SearchSynonymUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    term?: StringFieldUpdateOperationsInput | string
+    synonyms?: SearchSynonymUpdatesynonymsInput | string[]
+    locale?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SearchSynonymUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    term?: StringFieldUpdateOperationsInput | string
+    synonyms?: SearchSynonymUpdatesynonymsInput | string[]
+    locale?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SearchSynonymCreateManyInput = {
+    id?: string
+    term: string
+    synonyms?: SearchSynonymCreatesynonymsInput | string[]
+    locale?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type SearchSynonymUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    term?: StringFieldUpdateOperationsInput | string
+    synonyms?: SearchSynonymUpdatesynonymsInput | string[]
+    locale?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SearchSynonymUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    term?: StringFieldUpdateOperationsInput | string
+    synonyms?: SearchSynonymUpdatesynonymsInput | string[]
+    locale?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type RedirectCreateInput = {
+    id?: string
+    source: string
+    destination: string
+    permanent?: boolean
+    locale?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type RedirectUncheckedCreateInput = {
+    id?: string
+    source: string
+    destination: string
+    permanent?: boolean
+    locale?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type RedirectUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    source?: StringFieldUpdateOperationsInput | string
+    destination?: StringFieldUpdateOperationsInput | string
+    permanent?: BoolFieldUpdateOperationsInput | boolean
+    locale?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type RedirectUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    source?: StringFieldUpdateOperationsInput | string
+    destination?: StringFieldUpdateOperationsInput | string
+    permanent?: BoolFieldUpdateOperationsInput | boolean
+    locale?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type RedirectCreateManyInput = {
+    id?: string
+    source: string
+    destination: string
+    permanent?: boolean
+    locale?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type RedirectUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    source?: StringFieldUpdateOperationsInput | string
+    destination?: StringFieldUpdateOperationsInput | string
+    permanent?: BoolFieldUpdateOperationsInput | boolean
+    locale?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type RedirectUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    source?: StringFieldUpdateOperationsInput | string
+    destination?: StringFieldUpdateOperationsInput | string
+    permanent?: BoolFieldUpdateOperationsInput | boolean
+    locale?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -16185,16 +21786,45 @@ export namespace Prisma {
     isNot?: ProductCategoryWhereInput
   }
 
+  export type ProductSpecListRelationFilter = {
+    every?: ProductSpecWhereInput
+    some?: ProductSpecWhereInput
+    none?: ProductSpecWhereInput
+  }
+
+  export type LeadListRelationFilter = {
+    every?: LeadWhereInput
+    some?: LeadWhereInput
+    none?: LeadWhereInput
+  }
+
+  export type ProductSpecOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type LeadOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
   export type ProductCountOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
     slug?: SortOrder
+    sku?: SortOrder
+    title?: SortOrder
     summary?: SortOrder
+    shortDesc?: SortOrder
     description?: SortOrder
     imageUrls?: SortOrder
+    images?: SortOrder
     datasheetUrl?: SortOrder
+    datasheets?: SortOrder
+    brand?: SortOrder
+    series?: SortOrder
+    warrantyMonths?: SortOrder
     categoryId?: SortOrder
     isPublished?: SortOrder
+    isActive?: SortOrder
     order?: SortOrder
     userId?: SortOrder
     metaTitle?: SortOrder
@@ -16208,6 +21838,7 @@ export namespace Prisma {
   }
 
   export type ProductAvgOrderByAggregateInput = {
+    warrantyMonths?: SortOrder
     order?: SortOrder
   }
 
@@ -16215,11 +21846,18 @@ export namespace Prisma {
     id?: SortOrder
     name?: SortOrder
     slug?: SortOrder
+    sku?: SortOrder
+    title?: SortOrder
     summary?: SortOrder
+    shortDesc?: SortOrder
     description?: SortOrder
     datasheetUrl?: SortOrder
+    brand?: SortOrder
+    series?: SortOrder
+    warrantyMonths?: SortOrder
     categoryId?: SortOrder
     isPublished?: SortOrder
+    isActive?: SortOrder
     order?: SortOrder
     userId?: SortOrder
     metaTitle?: SortOrder
@@ -16236,11 +21874,18 @@ export namespace Prisma {
     id?: SortOrder
     name?: SortOrder
     slug?: SortOrder
+    sku?: SortOrder
+    title?: SortOrder
     summary?: SortOrder
+    shortDesc?: SortOrder
     description?: SortOrder
     datasheetUrl?: SortOrder
+    brand?: SortOrder
+    series?: SortOrder
+    warrantyMonths?: SortOrder
     categoryId?: SortOrder
     isPublished?: SortOrder
+    isActive?: SortOrder
     order?: SortOrder
     userId?: SortOrder
     metaTitle?: SortOrder
@@ -16254,6 +21899,53 @@ export namespace Prisma {
   }
 
   export type ProductSumOrderByAggregateInput = {
+    warrantyMonths?: SortOrder
+    order?: SortOrder
+  }
+
+  export type ProductScalarRelationFilter = {
+    is?: ProductWhereInput
+    isNot?: ProductWhereInput
+  }
+
+  export type ProductSpecCountOrderByAggregateInput = {
+    id?: SortOrder
+    productId?: SortOrder
+    key?: SortOrder
+    value?: SortOrder
+    unit?: SortOrder
+    order?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type ProductSpecAvgOrderByAggregateInput = {
+    order?: SortOrder
+  }
+
+  export type ProductSpecMaxOrderByAggregateInput = {
+    id?: SortOrder
+    productId?: SortOrder
+    key?: SortOrder
+    value?: SortOrder
+    unit?: SortOrder
+    order?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type ProductSpecMinOrderByAggregateInput = {
+    id?: SortOrder
+    productId?: SortOrder
+    key?: SortOrder
+    value?: SortOrder
+    unit?: SortOrder
+    order?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type ProductSpecSumOrderByAggregateInput = {
     order?: SortOrder
   }
   export type JsonFilter<$PrismaModel = never> =
@@ -16441,6 +22133,103 @@ export namespace Prisma {
     canonicalUrl?: SortOrder
     ogImage?: SortOrder
     published?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type ProductNullableScalarRelationFilter = {
+    is?: ProductWhereInput | null
+    isNot?: ProductWhereInput | null
+  }
+
+  export type LeadCountOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    phone?: SortOrder
+    email?: SortOrder
+    message?: SortOrder
+    productId?: SortOrder
+    utm?: SortOrder
+    ip?: SortOrder
+    userAgent?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type LeadMaxOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    phone?: SortOrder
+    email?: SortOrder
+    message?: SortOrder
+    productId?: SortOrder
+    ip?: SortOrder
+    userAgent?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type LeadMinOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    phone?: SortOrder
+    email?: SortOrder
+    message?: SortOrder
+    productId?: SortOrder
+    ip?: SortOrder
+    userAgent?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type SearchSynonymCountOrderByAggregateInput = {
+    id?: SortOrder
+    term?: SortOrder
+    synonyms?: SortOrder
+    locale?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type SearchSynonymMaxOrderByAggregateInput = {
+    id?: SortOrder
+    term?: SortOrder
+    locale?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type SearchSynonymMinOrderByAggregateInput = {
+    id?: SortOrder
+    term?: SortOrder
+    locale?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type RedirectCountOrderByAggregateInput = {
+    id?: SortOrder
+    source?: SortOrder
+    destination?: SortOrder
+    permanent?: SortOrder
+    locale?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type RedirectMaxOrderByAggregateInput = {
+    id?: SortOrder
+    source?: SortOrder
+    destination?: SortOrder
+    permanent?: SortOrder
+    locale?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type RedirectMinOrderByAggregateInput = {
+    id?: SortOrder
+    source?: SortOrder
+    destination?: SortOrder
+    permanent?: SortOrder
+    locale?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -16971,6 +22760,14 @@ export namespace Prisma {
     set: string[]
   }
 
+  export type ProductCreateimagesInput = {
+    set: string[]
+  }
+
+  export type ProductCreatedatasheetsInput = {
+    set: string[]
+  }
+
   export type ProductCategoryCreateNestedOneWithoutProductsInput = {
     create?: XOR<ProductCategoryCreateWithoutProductsInput, ProductCategoryUncheckedCreateWithoutProductsInput>
     connectOrCreate?: ProductCategoryCreateOrConnectWithoutProductsInput
@@ -16989,13 +22786,51 @@ export namespace Prisma {
     connect?: UserWhereUniqueInput
   }
 
+  export type ProductSpecCreateNestedManyWithoutProductInput = {
+    create?: XOR<ProductSpecCreateWithoutProductInput, ProductSpecUncheckedCreateWithoutProductInput> | ProductSpecCreateWithoutProductInput[] | ProductSpecUncheckedCreateWithoutProductInput[]
+    connectOrCreate?: ProductSpecCreateOrConnectWithoutProductInput | ProductSpecCreateOrConnectWithoutProductInput[]
+    createMany?: ProductSpecCreateManyProductInputEnvelope
+    connect?: ProductSpecWhereUniqueInput | ProductSpecWhereUniqueInput[]
+  }
+
+  export type LeadCreateNestedManyWithoutProductInput = {
+    create?: XOR<LeadCreateWithoutProductInput, LeadUncheckedCreateWithoutProductInput> | LeadCreateWithoutProductInput[] | LeadUncheckedCreateWithoutProductInput[]
+    connectOrCreate?: LeadCreateOrConnectWithoutProductInput | LeadCreateOrConnectWithoutProductInput[]
+    createMany?: LeadCreateManyProductInputEnvelope
+    connect?: LeadWhereUniqueInput | LeadWhereUniqueInput[]
+  }
+
   export type TagUncheckedCreateNestedManyWithoutProductsInput = {
     create?: XOR<TagCreateWithoutProductsInput, TagUncheckedCreateWithoutProductsInput> | TagCreateWithoutProductsInput[] | TagUncheckedCreateWithoutProductsInput[]
     connectOrCreate?: TagCreateOrConnectWithoutProductsInput | TagCreateOrConnectWithoutProductsInput[]
     connect?: TagWhereUniqueInput | TagWhereUniqueInput[]
   }
 
+  export type ProductSpecUncheckedCreateNestedManyWithoutProductInput = {
+    create?: XOR<ProductSpecCreateWithoutProductInput, ProductSpecUncheckedCreateWithoutProductInput> | ProductSpecCreateWithoutProductInput[] | ProductSpecUncheckedCreateWithoutProductInput[]
+    connectOrCreate?: ProductSpecCreateOrConnectWithoutProductInput | ProductSpecCreateOrConnectWithoutProductInput[]
+    createMany?: ProductSpecCreateManyProductInputEnvelope
+    connect?: ProductSpecWhereUniqueInput | ProductSpecWhereUniqueInput[]
+  }
+
+  export type LeadUncheckedCreateNestedManyWithoutProductInput = {
+    create?: XOR<LeadCreateWithoutProductInput, LeadUncheckedCreateWithoutProductInput> | LeadCreateWithoutProductInput[] | LeadUncheckedCreateWithoutProductInput[]
+    connectOrCreate?: LeadCreateOrConnectWithoutProductInput | LeadCreateOrConnectWithoutProductInput[]
+    createMany?: LeadCreateManyProductInputEnvelope
+    connect?: LeadWhereUniqueInput | LeadWhereUniqueInput[]
+  }
+
   export type ProductUpdateimageUrlsInput = {
+    set?: string[]
+    push?: string | string[]
+  }
+
+  export type ProductUpdateimagesInput = {
+    set?: string[]
+    push?: string | string[]
+  }
+
+  export type ProductUpdatedatasheetsInput = {
     set?: string[]
     push?: string | string[]
   }
@@ -17029,6 +22864,34 @@ export namespace Prisma {
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutProductsInput, UserUpdateWithoutProductsInput>, UserUncheckedUpdateWithoutProductsInput>
   }
 
+  export type ProductSpecUpdateManyWithoutProductNestedInput = {
+    create?: XOR<ProductSpecCreateWithoutProductInput, ProductSpecUncheckedCreateWithoutProductInput> | ProductSpecCreateWithoutProductInput[] | ProductSpecUncheckedCreateWithoutProductInput[]
+    connectOrCreate?: ProductSpecCreateOrConnectWithoutProductInput | ProductSpecCreateOrConnectWithoutProductInput[]
+    upsert?: ProductSpecUpsertWithWhereUniqueWithoutProductInput | ProductSpecUpsertWithWhereUniqueWithoutProductInput[]
+    createMany?: ProductSpecCreateManyProductInputEnvelope
+    set?: ProductSpecWhereUniqueInput | ProductSpecWhereUniqueInput[]
+    disconnect?: ProductSpecWhereUniqueInput | ProductSpecWhereUniqueInput[]
+    delete?: ProductSpecWhereUniqueInput | ProductSpecWhereUniqueInput[]
+    connect?: ProductSpecWhereUniqueInput | ProductSpecWhereUniqueInput[]
+    update?: ProductSpecUpdateWithWhereUniqueWithoutProductInput | ProductSpecUpdateWithWhereUniqueWithoutProductInput[]
+    updateMany?: ProductSpecUpdateManyWithWhereWithoutProductInput | ProductSpecUpdateManyWithWhereWithoutProductInput[]
+    deleteMany?: ProductSpecScalarWhereInput | ProductSpecScalarWhereInput[]
+  }
+
+  export type LeadUpdateManyWithoutProductNestedInput = {
+    create?: XOR<LeadCreateWithoutProductInput, LeadUncheckedCreateWithoutProductInput> | LeadCreateWithoutProductInput[] | LeadUncheckedCreateWithoutProductInput[]
+    connectOrCreate?: LeadCreateOrConnectWithoutProductInput | LeadCreateOrConnectWithoutProductInput[]
+    upsert?: LeadUpsertWithWhereUniqueWithoutProductInput | LeadUpsertWithWhereUniqueWithoutProductInput[]
+    createMany?: LeadCreateManyProductInputEnvelope
+    set?: LeadWhereUniqueInput | LeadWhereUniqueInput[]
+    disconnect?: LeadWhereUniqueInput | LeadWhereUniqueInput[]
+    delete?: LeadWhereUniqueInput | LeadWhereUniqueInput[]
+    connect?: LeadWhereUniqueInput | LeadWhereUniqueInput[]
+    update?: LeadUpdateWithWhereUniqueWithoutProductInput | LeadUpdateWithWhereUniqueWithoutProductInput[]
+    updateMany?: LeadUpdateManyWithWhereWithoutProductInput | LeadUpdateManyWithWhereWithoutProductInput[]
+    deleteMany?: LeadScalarWhereInput | LeadScalarWhereInput[]
+  }
+
   export type TagUncheckedUpdateManyWithoutProductsNestedInput = {
     create?: XOR<TagCreateWithoutProductsInput, TagUncheckedCreateWithoutProductsInput> | TagCreateWithoutProductsInput[] | TagUncheckedCreateWithoutProductsInput[]
     connectOrCreate?: TagCreateOrConnectWithoutProductsInput | TagCreateOrConnectWithoutProductsInput[]
@@ -17042,11 +22905,78 @@ export namespace Prisma {
     deleteMany?: TagScalarWhereInput | TagScalarWhereInput[]
   }
 
+  export type ProductSpecUncheckedUpdateManyWithoutProductNestedInput = {
+    create?: XOR<ProductSpecCreateWithoutProductInput, ProductSpecUncheckedCreateWithoutProductInput> | ProductSpecCreateWithoutProductInput[] | ProductSpecUncheckedCreateWithoutProductInput[]
+    connectOrCreate?: ProductSpecCreateOrConnectWithoutProductInput | ProductSpecCreateOrConnectWithoutProductInput[]
+    upsert?: ProductSpecUpsertWithWhereUniqueWithoutProductInput | ProductSpecUpsertWithWhereUniqueWithoutProductInput[]
+    createMany?: ProductSpecCreateManyProductInputEnvelope
+    set?: ProductSpecWhereUniqueInput | ProductSpecWhereUniqueInput[]
+    disconnect?: ProductSpecWhereUniqueInput | ProductSpecWhereUniqueInput[]
+    delete?: ProductSpecWhereUniqueInput | ProductSpecWhereUniqueInput[]
+    connect?: ProductSpecWhereUniqueInput | ProductSpecWhereUniqueInput[]
+    update?: ProductSpecUpdateWithWhereUniqueWithoutProductInput | ProductSpecUpdateWithWhereUniqueWithoutProductInput[]
+    updateMany?: ProductSpecUpdateManyWithWhereWithoutProductInput | ProductSpecUpdateManyWithWhereWithoutProductInput[]
+    deleteMany?: ProductSpecScalarWhereInput | ProductSpecScalarWhereInput[]
+  }
+
+  export type LeadUncheckedUpdateManyWithoutProductNestedInput = {
+    create?: XOR<LeadCreateWithoutProductInput, LeadUncheckedCreateWithoutProductInput> | LeadCreateWithoutProductInput[] | LeadUncheckedCreateWithoutProductInput[]
+    connectOrCreate?: LeadCreateOrConnectWithoutProductInput | LeadCreateOrConnectWithoutProductInput[]
+    upsert?: LeadUpsertWithWhereUniqueWithoutProductInput | LeadUpsertWithWhereUniqueWithoutProductInput[]
+    createMany?: LeadCreateManyProductInputEnvelope
+    set?: LeadWhereUniqueInput | LeadWhereUniqueInput[]
+    disconnect?: LeadWhereUniqueInput | LeadWhereUniqueInput[]
+    delete?: LeadWhereUniqueInput | LeadWhereUniqueInput[]
+    connect?: LeadWhereUniqueInput | LeadWhereUniqueInput[]
+    update?: LeadUpdateWithWhereUniqueWithoutProductInput | LeadUpdateWithWhereUniqueWithoutProductInput[]
+    updateMany?: LeadUpdateManyWithWhereWithoutProductInput | LeadUpdateManyWithWhereWithoutProductInput[]
+    deleteMany?: LeadScalarWhereInput | LeadScalarWhereInput[]
+  }
+
+  export type ProductCreateNestedOneWithoutSpecsInput = {
+    create?: XOR<ProductCreateWithoutSpecsInput, ProductUncheckedCreateWithoutSpecsInput>
+    connectOrCreate?: ProductCreateOrConnectWithoutSpecsInput
+    connect?: ProductWhereUniqueInput
+  }
+
+  export type ProductUpdateOneRequiredWithoutSpecsNestedInput = {
+    create?: XOR<ProductCreateWithoutSpecsInput, ProductUncheckedCreateWithoutSpecsInput>
+    connectOrCreate?: ProductCreateOrConnectWithoutSpecsInput
+    upsert?: ProductUpsertWithoutSpecsInput
+    connect?: ProductWhereUniqueInput
+    update?: XOR<XOR<ProductUpdateToOneWithWhereWithoutSpecsInput, ProductUpdateWithoutSpecsInput>, ProductUncheckedUpdateWithoutSpecsInput>
+  }
+
   export type SiteSettingCreatesupportedLocalesInput = {
     set: string[]
   }
 
   export type SiteSettingUpdatesupportedLocalesInput = {
+    set?: string[]
+    push?: string | string[]
+  }
+
+  export type ProductCreateNestedOneWithoutLeadsInput = {
+    create?: XOR<ProductCreateWithoutLeadsInput, ProductUncheckedCreateWithoutLeadsInput>
+    connectOrCreate?: ProductCreateOrConnectWithoutLeadsInput
+    connect?: ProductWhereUniqueInput
+  }
+
+  export type ProductUpdateOneWithoutLeadsNestedInput = {
+    create?: XOR<ProductCreateWithoutLeadsInput, ProductUncheckedCreateWithoutLeadsInput>
+    connectOrCreate?: ProductCreateOrConnectWithoutLeadsInput
+    upsert?: ProductUpsertWithoutLeadsInput
+    disconnect?: ProductWhereInput | boolean
+    delete?: ProductWhereInput | boolean
+    connect?: ProductWhereUniqueInput
+    update?: XOR<XOR<ProductUpdateToOneWithWhereWithoutLeadsInput, ProductUpdateWithoutLeadsInput>, ProductUncheckedUpdateWithoutLeadsInput>
+  }
+
+  export type SearchSynonymCreatesynonymsInput = {
+    set: string[]
+  }
+
+  export type SearchSynonymUpdatesynonymsInput = {
     set?: string[]
     push?: string | string[]
   }
@@ -17385,11 +23315,20 @@ export namespace Prisma {
     id?: string
     name: string
     slug: string
+    sku?: string | null
+    title?: string | null
     summary?: string | null
+    shortDesc?: string | null
     description?: string | null
     imageUrls?: ProductCreateimageUrlsInput | string[]
+    images?: ProductCreateimagesInput | string[]
     datasheetUrl?: string | null
+    datasheets?: ProductCreatedatasheetsInput | string[]
+    brand?: string | null
+    series?: string | null
+    warrantyMonths?: number | null
     isPublished?: boolean
+    isActive?: boolean
     order?: number | null
     metaTitle?: string | null
     metaDescription?: string | null
@@ -17401,18 +23340,29 @@ export namespace Prisma {
     updatedAt?: Date | string
     category: ProductCategoryCreateNestedOneWithoutProductsInput
     tags?: TagCreateNestedManyWithoutProductsInput
+    specs?: ProductSpecCreateNestedManyWithoutProductInput
+    leads?: LeadCreateNestedManyWithoutProductInput
   }
 
   export type ProductUncheckedCreateWithoutUserInput = {
     id?: string
     name: string
     slug: string
+    sku?: string | null
+    title?: string | null
     summary?: string | null
+    shortDesc?: string | null
     description?: string | null
     imageUrls?: ProductCreateimageUrlsInput | string[]
+    images?: ProductCreateimagesInput | string[]
     datasheetUrl?: string | null
+    datasheets?: ProductCreatedatasheetsInput | string[]
+    brand?: string | null
+    series?: string | null
+    warrantyMonths?: number | null
     categoryId: string
     isPublished?: boolean
+    isActive?: boolean
     order?: number | null
     metaTitle?: string | null
     metaDescription?: string | null
@@ -17423,6 +23373,8 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     tags?: TagUncheckedCreateNestedManyWithoutProductsInput
+    specs?: ProductSpecUncheckedCreateNestedManyWithoutProductInput
+    leads?: LeadUncheckedCreateNestedManyWithoutProductInput
   }
 
   export type ProductCreateOrConnectWithoutUserInput = {
@@ -17553,12 +23505,21 @@ export namespace Prisma {
     id?: StringFilter<"Product"> | string
     name?: StringFilter<"Product"> | string
     slug?: StringFilter<"Product"> | string
+    sku?: StringNullableFilter<"Product"> | string | null
+    title?: StringNullableFilter<"Product"> | string | null
     summary?: StringNullableFilter<"Product"> | string | null
+    shortDesc?: StringNullableFilter<"Product"> | string | null
     description?: StringNullableFilter<"Product"> | string | null
     imageUrls?: StringNullableListFilter<"Product">
+    images?: StringNullableListFilter<"Product">
     datasheetUrl?: StringNullableFilter<"Product"> | string | null
+    datasheets?: StringNullableListFilter<"Product">
+    brand?: StringNullableFilter<"Product"> | string | null
+    series?: StringNullableFilter<"Product"> | string | null
+    warrantyMonths?: IntNullableFilter<"Product"> | number | null
     categoryId?: StringFilter<"Product"> | string
     isPublished?: BoolFilter<"Product"> | boolean
+    isActive?: BoolFilter<"Product"> | boolean
     order?: IntNullableFilter<"Product"> | number | null
     userId?: StringFilter<"Product"> | string
     metaTitle?: StringNullableFilter<"Product"> | string | null
@@ -17818,11 +23779,20 @@ export namespace Prisma {
     id?: string
     name: string
     slug: string
+    sku?: string | null
+    title?: string | null
     summary?: string | null
+    shortDesc?: string | null
     description?: string | null
     imageUrls?: ProductCreateimageUrlsInput | string[]
+    images?: ProductCreateimagesInput | string[]
     datasheetUrl?: string | null
+    datasheets?: ProductCreatedatasheetsInput | string[]
+    brand?: string | null
+    series?: string | null
+    warrantyMonths?: number | null
     isPublished?: boolean
+    isActive?: boolean
     order?: number | null
     metaTitle?: string | null
     metaDescription?: string | null
@@ -17834,18 +23804,29 @@ export namespace Prisma {
     updatedAt?: Date | string
     category: ProductCategoryCreateNestedOneWithoutProductsInput
     user: UserCreateNestedOneWithoutProductsInput
+    specs?: ProductSpecCreateNestedManyWithoutProductInput
+    leads?: LeadCreateNestedManyWithoutProductInput
   }
 
   export type ProductUncheckedCreateWithoutTagsInput = {
     id?: string
     name: string
     slug: string
+    sku?: string | null
+    title?: string | null
     summary?: string | null
+    shortDesc?: string | null
     description?: string | null
     imageUrls?: ProductCreateimageUrlsInput | string[]
+    images?: ProductCreateimagesInput | string[]
     datasheetUrl?: string | null
+    datasheets?: ProductCreatedatasheetsInput | string[]
+    brand?: string | null
+    series?: string | null
+    warrantyMonths?: number | null
     categoryId: string
     isPublished?: boolean
+    isActive?: boolean
     order?: number | null
     userId: string
     metaTitle?: string | null
@@ -17856,6 +23837,8 @@ export namespace Prisma {
     ogDescription?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    specs?: ProductSpecUncheckedCreateNestedManyWithoutProductInput
+    leads?: LeadUncheckedCreateNestedManyWithoutProductInput
   }
 
   export type ProductCreateOrConnectWithoutTagsInput = {
@@ -18148,11 +24131,20 @@ export namespace Prisma {
     id?: string
     name: string
     slug: string
+    sku?: string | null
+    title?: string | null
     summary?: string | null
+    shortDesc?: string | null
     description?: string | null
     imageUrls?: ProductCreateimageUrlsInput | string[]
+    images?: ProductCreateimagesInput | string[]
     datasheetUrl?: string | null
+    datasheets?: ProductCreatedatasheetsInput | string[]
+    brand?: string | null
+    series?: string | null
+    warrantyMonths?: number | null
     isPublished?: boolean
+    isActive?: boolean
     order?: number | null
     metaTitle?: string | null
     metaDescription?: string | null
@@ -18164,17 +24156,28 @@ export namespace Prisma {
     updatedAt?: Date | string
     tags?: TagCreateNestedManyWithoutProductsInput
     user: UserCreateNestedOneWithoutProductsInput
+    specs?: ProductSpecCreateNestedManyWithoutProductInput
+    leads?: LeadCreateNestedManyWithoutProductInput
   }
 
   export type ProductUncheckedCreateWithoutCategoryInput = {
     id?: string
     name: string
     slug: string
+    sku?: string | null
+    title?: string | null
     summary?: string | null
+    shortDesc?: string | null
     description?: string | null
     imageUrls?: ProductCreateimageUrlsInput | string[]
+    images?: ProductCreateimagesInput | string[]
     datasheetUrl?: string | null
+    datasheets?: ProductCreatedatasheetsInput | string[]
+    brand?: string | null
+    series?: string | null
+    warrantyMonths?: number | null
     isPublished?: boolean
+    isActive?: boolean
     order?: number | null
     userId: string
     metaTitle?: string | null
@@ -18186,6 +24189,8 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     tags?: TagUncheckedCreateNestedManyWithoutProductsInput
+    specs?: ProductSpecUncheckedCreateNestedManyWithoutProductInput
+    leads?: LeadUncheckedCreateNestedManyWithoutProductInput
   }
 
   export type ProductCreateOrConnectWithoutCategoryInput = {
@@ -18387,6 +24392,70 @@ export namespace Prisma {
     create: XOR<UserCreateWithoutProductsInput, UserUncheckedCreateWithoutProductsInput>
   }
 
+  export type ProductSpecCreateWithoutProductInput = {
+    id?: string
+    key: string
+    value: string
+    unit?: string | null
+    order?: number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ProductSpecUncheckedCreateWithoutProductInput = {
+    id?: string
+    key: string
+    value: string
+    unit?: string | null
+    order?: number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ProductSpecCreateOrConnectWithoutProductInput = {
+    where: ProductSpecWhereUniqueInput
+    create: XOR<ProductSpecCreateWithoutProductInput, ProductSpecUncheckedCreateWithoutProductInput>
+  }
+
+  export type ProductSpecCreateManyProductInputEnvelope = {
+    data: ProductSpecCreateManyProductInput | ProductSpecCreateManyProductInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type LeadCreateWithoutProductInput = {
+    id?: string
+    name: string
+    phone: string
+    email?: string | null
+    message?: string | null
+    utm?: NullableJsonNullValueInput | InputJsonValue
+    ip?: string | null
+    userAgent?: string | null
+    createdAt?: Date | string
+  }
+
+  export type LeadUncheckedCreateWithoutProductInput = {
+    id?: string
+    name: string
+    phone: string
+    email?: string | null
+    message?: string | null
+    utm?: NullableJsonNullValueInput | InputJsonValue
+    ip?: string | null
+    userAgent?: string | null
+    createdAt?: Date | string
+  }
+
+  export type LeadCreateOrConnectWithoutProductInput = {
+    where: LeadWhereUniqueInput
+    create: XOR<LeadCreateWithoutProductInput, LeadUncheckedCreateWithoutProductInput>
+  }
+
+  export type LeadCreateManyProductInputEnvelope = {
+    data: LeadCreateManyProductInput | LeadCreateManyProductInput[]
+    skipDuplicates?: boolean
+  }
+
   export type ProductCategoryUpsertWithoutProductsInput = {
     update: XOR<ProductCategoryUpdateWithoutProductsInput, ProductCategoryUncheckedUpdateWithoutProductsInput>
     create: XOR<ProductCategoryCreateWithoutProductsInput, ProductCategoryUncheckedCreateWithoutProductsInput>
@@ -18485,6 +24554,364 @@ export namespace Prisma {
     posts?: PostUncheckedUpdateManyWithoutUserNestedInput
   }
 
+  export type ProductSpecUpsertWithWhereUniqueWithoutProductInput = {
+    where: ProductSpecWhereUniqueInput
+    update: XOR<ProductSpecUpdateWithoutProductInput, ProductSpecUncheckedUpdateWithoutProductInput>
+    create: XOR<ProductSpecCreateWithoutProductInput, ProductSpecUncheckedCreateWithoutProductInput>
+  }
+
+  export type ProductSpecUpdateWithWhereUniqueWithoutProductInput = {
+    where: ProductSpecWhereUniqueInput
+    data: XOR<ProductSpecUpdateWithoutProductInput, ProductSpecUncheckedUpdateWithoutProductInput>
+  }
+
+  export type ProductSpecUpdateManyWithWhereWithoutProductInput = {
+    where: ProductSpecScalarWhereInput
+    data: XOR<ProductSpecUpdateManyMutationInput, ProductSpecUncheckedUpdateManyWithoutProductInput>
+  }
+
+  export type ProductSpecScalarWhereInput = {
+    AND?: ProductSpecScalarWhereInput | ProductSpecScalarWhereInput[]
+    OR?: ProductSpecScalarWhereInput[]
+    NOT?: ProductSpecScalarWhereInput | ProductSpecScalarWhereInput[]
+    id?: StringFilter<"ProductSpec"> | string
+    productId?: StringFilter<"ProductSpec"> | string
+    key?: StringFilter<"ProductSpec"> | string
+    value?: StringFilter<"ProductSpec"> | string
+    unit?: StringNullableFilter<"ProductSpec"> | string | null
+    order?: IntNullableFilter<"ProductSpec"> | number | null
+    createdAt?: DateTimeFilter<"ProductSpec"> | Date | string
+    updatedAt?: DateTimeFilter<"ProductSpec"> | Date | string
+  }
+
+  export type LeadUpsertWithWhereUniqueWithoutProductInput = {
+    where: LeadWhereUniqueInput
+    update: XOR<LeadUpdateWithoutProductInput, LeadUncheckedUpdateWithoutProductInput>
+    create: XOR<LeadCreateWithoutProductInput, LeadUncheckedCreateWithoutProductInput>
+  }
+
+  export type LeadUpdateWithWhereUniqueWithoutProductInput = {
+    where: LeadWhereUniqueInput
+    data: XOR<LeadUpdateWithoutProductInput, LeadUncheckedUpdateWithoutProductInput>
+  }
+
+  export type LeadUpdateManyWithWhereWithoutProductInput = {
+    where: LeadScalarWhereInput
+    data: XOR<LeadUpdateManyMutationInput, LeadUncheckedUpdateManyWithoutProductInput>
+  }
+
+  export type LeadScalarWhereInput = {
+    AND?: LeadScalarWhereInput | LeadScalarWhereInput[]
+    OR?: LeadScalarWhereInput[]
+    NOT?: LeadScalarWhereInput | LeadScalarWhereInput[]
+    id?: StringFilter<"Lead"> | string
+    name?: StringFilter<"Lead"> | string
+    phone?: StringFilter<"Lead"> | string
+    email?: StringNullableFilter<"Lead"> | string | null
+    message?: StringNullableFilter<"Lead"> | string | null
+    productId?: StringNullableFilter<"Lead"> | string | null
+    utm?: JsonNullableFilter<"Lead">
+    ip?: StringNullableFilter<"Lead"> | string | null
+    userAgent?: StringNullableFilter<"Lead"> | string | null
+    createdAt?: DateTimeFilter<"Lead"> | Date | string
+  }
+
+  export type ProductCreateWithoutSpecsInput = {
+    id?: string
+    name: string
+    slug: string
+    sku?: string | null
+    title?: string | null
+    summary?: string | null
+    shortDesc?: string | null
+    description?: string | null
+    imageUrls?: ProductCreateimageUrlsInput | string[]
+    images?: ProductCreateimagesInput | string[]
+    datasheetUrl?: string | null
+    datasheets?: ProductCreatedatasheetsInput | string[]
+    brand?: string | null
+    series?: string | null
+    warrantyMonths?: number | null
+    isPublished?: boolean
+    isActive?: boolean
+    order?: number | null
+    metaTitle?: string | null
+    metaDescription?: string | null
+    canonicalUrl?: string | null
+    ogImage?: string | null
+    ogTitle?: string | null
+    ogDescription?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    category: ProductCategoryCreateNestedOneWithoutProductsInput
+    tags?: TagCreateNestedManyWithoutProductsInput
+    user: UserCreateNestedOneWithoutProductsInput
+    leads?: LeadCreateNestedManyWithoutProductInput
+  }
+
+  export type ProductUncheckedCreateWithoutSpecsInput = {
+    id?: string
+    name: string
+    slug: string
+    sku?: string | null
+    title?: string | null
+    summary?: string | null
+    shortDesc?: string | null
+    description?: string | null
+    imageUrls?: ProductCreateimageUrlsInput | string[]
+    images?: ProductCreateimagesInput | string[]
+    datasheetUrl?: string | null
+    datasheets?: ProductCreatedatasheetsInput | string[]
+    brand?: string | null
+    series?: string | null
+    warrantyMonths?: number | null
+    categoryId: string
+    isPublished?: boolean
+    isActive?: boolean
+    order?: number | null
+    userId: string
+    metaTitle?: string | null
+    metaDescription?: string | null
+    canonicalUrl?: string | null
+    ogImage?: string | null
+    ogTitle?: string | null
+    ogDescription?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    tags?: TagUncheckedCreateNestedManyWithoutProductsInput
+    leads?: LeadUncheckedCreateNestedManyWithoutProductInput
+  }
+
+  export type ProductCreateOrConnectWithoutSpecsInput = {
+    where: ProductWhereUniqueInput
+    create: XOR<ProductCreateWithoutSpecsInput, ProductUncheckedCreateWithoutSpecsInput>
+  }
+
+  export type ProductUpsertWithoutSpecsInput = {
+    update: XOR<ProductUpdateWithoutSpecsInput, ProductUncheckedUpdateWithoutSpecsInput>
+    create: XOR<ProductCreateWithoutSpecsInput, ProductUncheckedCreateWithoutSpecsInput>
+    where?: ProductWhereInput
+  }
+
+  export type ProductUpdateToOneWithWhereWithoutSpecsInput = {
+    where?: ProductWhereInput
+    data: XOR<ProductUpdateWithoutSpecsInput, ProductUncheckedUpdateWithoutSpecsInput>
+  }
+
+  export type ProductUpdateWithoutSpecsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    sku?: NullableStringFieldUpdateOperationsInput | string | null
+    title?: NullableStringFieldUpdateOperationsInput | string | null
+    summary?: NullableStringFieldUpdateOperationsInput | string | null
+    shortDesc?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    imageUrls?: ProductUpdateimageUrlsInput | string[]
+    images?: ProductUpdateimagesInput | string[]
+    datasheetUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    datasheets?: ProductUpdatedatasheetsInput | string[]
+    brand?: NullableStringFieldUpdateOperationsInput | string | null
+    series?: NullableStringFieldUpdateOperationsInput | string | null
+    warrantyMonths?: NullableIntFieldUpdateOperationsInput | number | null
+    isPublished?: BoolFieldUpdateOperationsInput | boolean
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    order?: NullableIntFieldUpdateOperationsInput | number | null
+    metaTitle?: NullableStringFieldUpdateOperationsInput | string | null
+    metaDescription?: NullableStringFieldUpdateOperationsInput | string | null
+    canonicalUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    ogImage?: NullableStringFieldUpdateOperationsInput | string | null
+    ogTitle?: NullableStringFieldUpdateOperationsInput | string | null
+    ogDescription?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    category?: ProductCategoryUpdateOneRequiredWithoutProductsNestedInput
+    tags?: TagUpdateManyWithoutProductsNestedInput
+    user?: UserUpdateOneRequiredWithoutProductsNestedInput
+    leads?: LeadUpdateManyWithoutProductNestedInput
+  }
+
+  export type ProductUncheckedUpdateWithoutSpecsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    sku?: NullableStringFieldUpdateOperationsInput | string | null
+    title?: NullableStringFieldUpdateOperationsInput | string | null
+    summary?: NullableStringFieldUpdateOperationsInput | string | null
+    shortDesc?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    imageUrls?: ProductUpdateimageUrlsInput | string[]
+    images?: ProductUpdateimagesInput | string[]
+    datasheetUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    datasheets?: ProductUpdatedatasheetsInput | string[]
+    brand?: NullableStringFieldUpdateOperationsInput | string | null
+    series?: NullableStringFieldUpdateOperationsInput | string | null
+    warrantyMonths?: NullableIntFieldUpdateOperationsInput | number | null
+    categoryId?: StringFieldUpdateOperationsInput | string
+    isPublished?: BoolFieldUpdateOperationsInput | boolean
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    order?: NullableIntFieldUpdateOperationsInput | number | null
+    userId?: StringFieldUpdateOperationsInput | string
+    metaTitle?: NullableStringFieldUpdateOperationsInput | string | null
+    metaDescription?: NullableStringFieldUpdateOperationsInput | string | null
+    canonicalUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    ogImage?: NullableStringFieldUpdateOperationsInput | string | null
+    ogTitle?: NullableStringFieldUpdateOperationsInput | string | null
+    ogDescription?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    tags?: TagUncheckedUpdateManyWithoutProductsNestedInput
+    leads?: LeadUncheckedUpdateManyWithoutProductNestedInput
+  }
+
+  export type ProductCreateWithoutLeadsInput = {
+    id?: string
+    name: string
+    slug: string
+    sku?: string | null
+    title?: string | null
+    summary?: string | null
+    shortDesc?: string | null
+    description?: string | null
+    imageUrls?: ProductCreateimageUrlsInput | string[]
+    images?: ProductCreateimagesInput | string[]
+    datasheetUrl?: string | null
+    datasheets?: ProductCreatedatasheetsInput | string[]
+    brand?: string | null
+    series?: string | null
+    warrantyMonths?: number | null
+    isPublished?: boolean
+    isActive?: boolean
+    order?: number | null
+    metaTitle?: string | null
+    metaDescription?: string | null
+    canonicalUrl?: string | null
+    ogImage?: string | null
+    ogTitle?: string | null
+    ogDescription?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    category: ProductCategoryCreateNestedOneWithoutProductsInput
+    tags?: TagCreateNestedManyWithoutProductsInput
+    user: UserCreateNestedOneWithoutProductsInput
+    specs?: ProductSpecCreateNestedManyWithoutProductInput
+  }
+
+  export type ProductUncheckedCreateWithoutLeadsInput = {
+    id?: string
+    name: string
+    slug: string
+    sku?: string | null
+    title?: string | null
+    summary?: string | null
+    shortDesc?: string | null
+    description?: string | null
+    imageUrls?: ProductCreateimageUrlsInput | string[]
+    images?: ProductCreateimagesInput | string[]
+    datasheetUrl?: string | null
+    datasheets?: ProductCreatedatasheetsInput | string[]
+    brand?: string | null
+    series?: string | null
+    warrantyMonths?: number | null
+    categoryId: string
+    isPublished?: boolean
+    isActive?: boolean
+    order?: number | null
+    userId: string
+    metaTitle?: string | null
+    metaDescription?: string | null
+    canonicalUrl?: string | null
+    ogImage?: string | null
+    ogTitle?: string | null
+    ogDescription?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    tags?: TagUncheckedCreateNestedManyWithoutProductsInput
+    specs?: ProductSpecUncheckedCreateNestedManyWithoutProductInput
+  }
+
+  export type ProductCreateOrConnectWithoutLeadsInput = {
+    where: ProductWhereUniqueInput
+    create: XOR<ProductCreateWithoutLeadsInput, ProductUncheckedCreateWithoutLeadsInput>
+  }
+
+  export type ProductUpsertWithoutLeadsInput = {
+    update: XOR<ProductUpdateWithoutLeadsInput, ProductUncheckedUpdateWithoutLeadsInput>
+    create: XOR<ProductCreateWithoutLeadsInput, ProductUncheckedCreateWithoutLeadsInput>
+    where?: ProductWhereInput
+  }
+
+  export type ProductUpdateToOneWithWhereWithoutLeadsInput = {
+    where?: ProductWhereInput
+    data: XOR<ProductUpdateWithoutLeadsInput, ProductUncheckedUpdateWithoutLeadsInput>
+  }
+
+  export type ProductUpdateWithoutLeadsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    sku?: NullableStringFieldUpdateOperationsInput | string | null
+    title?: NullableStringFieldUpdateOperationsInput | string | null
+    summary?: NullableStringFieldUpdateOperationsInput | string | null
+    shortDesc?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    imageUrls?: ProductUpdateimageUrlsInput | string[]
+    images?: ProductUpdateimagesInput | string[]
+    datasheetUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    datasheets?: ProductUpdatedatasheetsInput | string[]
+    brand?: NullableStringFieldUpdateOperationsInput | string | null
+    series?: NullableStringFieldUpdateOperationsInput | string | null
+    warrantyMonths?: NullableIntFieldUpdateOperationsInput | number | null
+    isPublished?: BoolFieldUpdateOperationsInput | boolean
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    order?: NullableIntFieldUpdateOperationsInput | number | null
+    metaTitle?: NullableStringFieldUpdateOperationsInput | string | null
+    metaDescription?: NullableStringFieldUpdateOperationsInput | string | null
+    canonicalUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    ogImage?: NullableStringFieldUpdateOperationsInput | string | null
+    ogTitle?: NullableStringFieldUpdateOperationsInput | string | null
+    ogDescription?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    category?: ProductCategoryUpdateOneRequiredWithoutProductsNestedInput
+    tags?: TagUpdateManyWithoutProductsNestedInput
+    user?: UserUpdateOneRequiredWithoutProductsNestedInput
+    specs?: ProductSpecUpdateManyWithoutProductNestedInput
+  }
+
+  export type ProductUncheckedUpdateWithoutLeadsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    sku?: NullableStringFieldUpdateOperationsInput | string | null
+    title?: NullableStringFieldUpdateOperationsInput | string | null
+    summary?: NullableStringFieldUpdateOperationsInput | string | null
+    shortDesc?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    imageUrls?: ProductUpdateimageUrlsInput | string[]
+    images?: ProductUpdateimagesInput | string[]
+    datasheetUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    datasheets?: ProductUpdatedatasheetsInput | string[]
+    brand?: NullableStringFieldUpdateOperationsInput | string | null
+    series?: NullableStringFieldUpdateOperationsInput | string | null
+    warrantyMonths?: NullableIntFieldUpdateOperationsInput | number | null
+    categoryId?: StringFieldUpdateOperationsInput | string
+    isPublished?: BoolFieldUpdateOperationsInput | boolean
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    order?: NullableIntFieldUpdateOperationsInput | number | null
+    userId?: StringFieldUpdateOperationsInput | string
+    metaTitle?: NullableStringFieldUpdateOperationsInput | string | null
+    metaDescription?: NullableStringFieldUpdateOperationsInput | string | null
+    canonicalUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    ogImage?: NullableStringFieldUpdateOperationsInput | string | null
+    ogTitle?: NullableStringFieldUpdateOperationsInput | string | null
+    ogDescription?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    tags?: TagUncheckedUpdateManyWithoutProductsNestedInput
+    specs?: ProductSpecUncheckedUpdateManyWithoutProductNestedInput
+  }
+
   export type SessionCreateManyUserInput = {
     id?: string
     expiresAt: Date | string
@@ -18524,12 +24951,21 @@ export namespace Prisma {
     id?: string
     name: string
     slug: string
+    sku?: string | null
+    title?: string | null
     summary?: string | null
+    shortDesc?: string | null
     description?: string | null
     imageUrls?: ProductCreateimageUrlsInput | string[]
+    images?: ProductCreateimagesInput | string[]
     datasheetUrl?: string | null
+    datasheets?: ProductCreatedatasheetsInput | string[]
+    brand?: string | null
+    series?: string | null
+    warrantyMonths?: number | null
     categoryId: string
     isPublished?: boolean
+    isActive?: boolean
     order?: number | null
     metaTitle?: string | null
     metaDescription?: string | null
@@ -18652,11 +25088,20 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
+    sku?: NullableStringFieldUpdateOperationsInput | string | null
+    title?: NullableStringFieldUpdateOperationsInput | string | null
     summary?: NullableStringFieldUpdateOperationsInput | string | null
+    shortDesc?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     imageUrls?: ProductUpdateimageUrlsInput | string[]
+    images?: ProductUpdateimagesInput | string[]
     datasheetUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    datasheets?: ProductUpdatedatasheetsInput | string[]
+    brand?: NullableStringFieldUpdateOperationsInput | string | null
+    series?: NullableStringFieldUpdateOperationsInput | string | null
+    warrantyMonths?: NullableIntFieldUpdateOperationsInput | number | null
     isPublished?: BoolFieldUpdateOperationsInput | boolean
+    isActive?: BoolFieldUpdateOperationsInput | boolean
     order?: NullableIntFieldUpdateOperationsInput | number | null
     metaTitle?: NullableStringFieldUpdateOperationsInput | string | null
     metaDescription?: NullableStringFieldUpdateOperationsInput | string | null
@@ -18668,18 +25113,29 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     category?: ProductCategoryUpdateOneRequiredWithoutProductsNestedInput
     tags?: TagUpdateManyWithoutProductsNestedInput
+    specs?: ProductSpecUpdateManyWithoutProductNestedInput
+    leads?: LeadUpdateManyWithoutProductNestedInput
   }
 
   export type ProductUncheckedUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
+    sku?: NullableStringFieldUpdateOperationsInput | string | null
+    title?: NullableStringFieldUpdateOperationsInput | string | null
     summary?: NullableStringFieldUpdateOperationsInput | string | null
+    shortDesc?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     imageUrls?: ProductUpdateimageUrlsInput | string[]
+    images?: ProductUpdateimagesInput | string[]
     datasheetUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    datasheets?: ProductUpdatedatasheetsInput | string[]
+    brand?: NullableStringFieldUpdateOperationsInput | string | null
+    series?: NullableStringFieldUpdateOperationsInput | string | null
+    warrantyMonths?: NullableIntFieldUpdateOperationsInput | number | null
     categoryId?: StringFieldUpdateOperationsInput | string
     isPublished?: BoolFieldUpdateOperationsInput | boolean
+    isActive?: BoolFieldUpdateOperationsInput | boolean
     order?: NullableIntFieldUpdateOperationsInput | number | null
     metaTitle?: NullableStringFieldUpdateOperationsInput | string | null
     metaDescription?: NullableStringFieldUpdateOperationsInput | string | null
@@ -18690,18 +25146,29 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     tags?: TagUncheckedUpdateManyWithoutProductsNestedInput
+    specs?: ProductSpecUncheckedUpdateManyWithoutProductNestedInput
+    leads?: LeadUncheckedUpdateManyWithoutProductNestedInput
   }
 
   export type ProductUncheckedUpdateManyWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
+    sku?: NullableStringFieldUpdateOperationsInput | string | null
+    title?: NullableStringFieldUpdateOperationsInput | string | null
     summary?: NullableStringFieldUpdateOperationsInput | string | null
+    shortDesc?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     imageUrls?: ProductUpdateimageUrlsInput | string[]
+    images?: ProductUpdateimagesInput | string[]
     datasheetUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    datasheets?: ProductUpdatedatasheetsInput | string[]
+    brand?: NullableStringFieldUpdateOperationsInput | string | null
+    series?: NullableStringFieldUpdateOperationsInput | string | null
+    warrantyMonths?: NullableIntFieldUpdateOperationsInput | number | null
     categoryId?: StringFieldUpdateOperationsInput | string
     isPublished?: BoolFieldUpdateOperationsInput | boolean
+    isActive?: BoolFieldUpdateOperationsInput | boolean
     order?: NullableIntFieldUpdateOperationsInput | number | null
     metaTitle?: NullableStringFieldUpdateOperationsInput | string | null
     metaDescription?: NullableStringFieldUpdateOperationsInput | string | null
@@ -18848,11 +25315,20 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
+    sku?: NullableStringFieldUpdateOperationsInput | string | null
+    title?: NullableStringFieldUpdateOperationsInput | string | null
     summary?: NullableStringFieldUpdateOperationsInput | string | null
+    shortDesc?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     imageUrls?: ProductUpdateimageUrlsInput | string[]
+    images?: ProductUpdateimagesInput | string[]
     datasheetUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    datasheets?: ProductUpdatedatasheetsInput | string[]
+    brand?: NullableStringFieldUpdateOperationsInput | string | null
+    series?: NullableStringFieldUpdateOperationsInput | string | null
+    warrantyMonths?: NullableIntFieldUpdateOperationsInput | number | null
     isPublished?: BoolFieldUpdateOperationsInput | boolean
+    isActive?: BoolFieldUpdateOperationsInput | boolean
     order?: NullableIntFieldUpdateOperationsInput | number | null
     metaTitle?: NullableStringFieldUpdateOperationsInput | string | null
     metaDescription?: NullableStringFieldUpdateOperationsInput | string | null
@@ -18864,18 +25340,29 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     category?: ProductCategoryUpdateOneRequiredWithoutProductsNestedInput
     user?: UserUpdateOneRequiredWithoutProductsNestedInput
+    specs?: ProductSpecUpdateManyWithoutProductNestedInput
+    leads?: LeadUpdateManyWithoutProductNestedInput
   }
 
   export type ProductUncheckedUpdateWithoutTagsInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
+    sku?: NullableStringFieldUpdateOperationsInput | string | null
+    title?: NullableStringFieldUpdateOperationsInput | string | null
     summary?: NullableStringFieldUpdateOperationsInput | string | null
+    shortDesc?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     imageUrls?: ProductUpdateimageUrlsInput | string[]
+    images?: ProductUpdateimagesInput | string[]
     datasheetUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    datasheets?: ProductUpdatedatasheetsInput | string[]
+    brand?: NullableStringFieldUpdateOperationsInput | string | null
+    series?: NullableStringFieldUpdateOperationsInput | string | null
+    warrantyMonths?: NullableIntFieldUpdateOperationsInput | number | null
     categoryId?: StringFieldUpdateOperationsInput | string
     isPublished?: BoolFieldUpdateOperationsInput | boolean
+    isActive?: BoolFieldUpdateOperationsInput | boolean
     order?: NullableIntFieldUpdateOperationsInput | number | null
     userId?: StringFieldUpdateOperationsInput | string
     metaTitle?: NullableStringFieldUpdateOperationsInput | string | null
@@ -18886,18 +25373,29 @@ export namespace Prisma {
     ogDescription?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    specs?: ProductSpecUncheckedUpdateManyWithoutProductNestedInput
+    leads?: LeadUncheckedUpdateManyWithoutProductNestedInput
   }
 
   export type ProductUncheckedUpdateManyWithoutTagsInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
+    sku?: NullableStringFieldUpdateOperationsInput | string | null
+    title?: NullableStringFieldUpdateOperationsInput | string | null
     summary?: NullableStringFieldUpdateOperationsInput | string | null
+    shortDesc?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     imageUrls?: ProductUpdateimageUrlsInput | string[]
+    images?: ProductUpdateimagesInput | string[]
     datasheetUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    datasheets?: ProductUpdatedatasheetsInput | string[]
+    brand?: NullableStringFieldUpdateOperationsInput | string | null
+    series?: NullableStringFieldUpdateOperationsInput | string | null
+    warrantyMonths?: NullableIntFieldUpdateOperationsInput | number | null
     categoryId?: StringFieldUpdateOperationsInput | string
     isPublished?: BoolFieldUpdateOperationsInput | boolean
+    isActive?: BoolFieldUpdateOperationsInput | boolean
     order?: NullableIntFieldUpdateOperationsInput | number | null
     userId?: StringFieldUpdateOperationsInput | string
     metaTitle?: NullableStringFieldUpdateOperationsInput | string | null
@@ -18955,11 +25453,20 @@ export namespace Prisma {
     id?: string
     name: string
     slug: string
+    sku?: string | null
+    title?: string | null
     summary?: string | null
+    shortDesc?: string | null
     description?: string | null
     imageUrls?: ProductCreateimageUrlsInput | string[]
+    images?: ProductCreateimagesInput | string[]
     datasheetUrl?: string | null
+    datasheets?: ProductCreatedatasheetsInput | string[]
+    brand?: string | null
+    series?: string | null
+    warrantyMonths?: number | null
     isPublished?: boolean
+    isActive?: boolean
     order?: number | null
     userId: string
     metaTitle?: string | null
@@ -19025,11 +25532,20 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
+    sku?: NullableStringFieldUpdateOperationsInput | string | null
+    title?: NullableStringFieldUpdateOperationsInput | string | null
     summary?: NullableStringFieldUpdateOperationsInput | string | null
+    shortDesc?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     imageUrls?: ProductUpdateimageUrlsInput | string[]
+    images?: ProductUpdateimagesInput | string[]
     datasheetUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    datasheets?: ProductUpdatedatasheetsInput | string[]
+    brand?: NullableStringFieldUpdateOperationsInput | string | null
+    series?: NullableStringFieldUpdateOperationsInput | string | null
+    warrantyMonths?: NullableIntFieldUpdateOperationsInput | number | null
     isPublished?: BoolFieldUpdateOperationsInput | boolean
+    isActive?: BoolFieldUpdateOperationsInput | boolean
     order?: NullableIntFieldUpdateOperationsInput | number | null
     metaTitle?: NullableStringFieldUpdateOperationsInput | string | null
     metaDescription?: NullableStringFieldUpdateOperationsInput | string | null
@@ -19041,17 +25557,28 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     tags?: TagUpdateManyWithoutProductsNestedInput
     user?: UserUpdateOneRequiredWithoutProductsNestedInput
+    specs?: ProductSpecUpdateManyWithoutProductNestedInput
+    leads?: LeadUpdateManyWithoutProductNestedInput
   }
 
   export type ProductUncheckedUpdateWithoutCategoryInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
+    sku?: NullableStringFieldUpdateOperationsInput | string | null
+    title?: NullableStringFieldUpdateOperationsInput | string | null
     summary?: NullableStringFieldUpdateOperationsInput | string | null
+    shortDesc?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     imageUrls?: ProductUpdateimageUrlsInput | string[]
+    images?: ProductUpdateimagesInput | string[]
     datasheetUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    datasheets?: ProductUpdatedatasheetsInput | string[]
+    brand?: NullableStringFieldUpdateOperationsInput | string | null
+    series?: NullableStringFieldUpdateOperationsInput | string | null
+    warrantyMonths?: NullableIntFieldUpdateOperationsInput | number | null
     isPublished?: BoolFieldUpdateOperationsInput | boolean
+    isActive?: BoolFieldUpdateOperationsInput | boolean
     order?: NullableIntFieldUpdateOperationsInput | number | null
     userId?: StringFieldUpdateOperationsInput | string
     metaTitle?: NullableStringFieldUpdateOperationsInput | string | null
@@ -19063,17 +25590,28 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     tags?: TagUncheckedUpdateManyWithoutProductsNestedInput
+    specs?: ProductSpecUncheckedUpdateManyWithoutProductNestedInput
+    leads?: LeadUncheckedUpdateManyWithoutProductNestedInput
   }
 
   export type ProductUncheckedUpdateManyWithoutCategoryInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
+    sku?: NullableStringFieldUpdateOperationsInput | string | null
+    title?: NullableStringFieldUpdateOperationsInput | string | null
     summary?: NullableStringFieldUpdateOperationsInput | string | null
+    shortDesc?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     imageUrls?: ProductUpdateimageUrlsInput | string[]
+    images?: ProductUpdateimagesInput | string[]
     datasheetUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    datasheets?: ProductUpdatedatasheetsInput | string[]
+    brand?: NullableStringFieldUpdateOperationsInput | string | null
+    series?: NullableStringFieldUpdateOperationsInput | string | null
+    warrantyMonths?: NullableIntFieldUpdateOperationsInput | number | null
     isPublished?: BoolFieldUpdateOperationsInput | boolean
+    isActive?: BoolFieldUpdateOperationsInput | boolean
     order?: NullableIntFieldUpdateOperationsInput | number | null
     userId?: StringFieldUpdateOperationsInput | string
     metaTitle?: NullableStringFieldUpdateOperationsInput | string | null
@@ -19084,6 +25622,28 @@ export namespace Prisma {
     ogDescription?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ProductSpecCreateManyProductInput = {
+    id?: string
+    key: string
+    value: string
+    unit?: string | null
+    order?: number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type LeadCreateManyProductInput = {
+    id?: string
+    name: string
+    phone: string
+    email?: string | null
+    message?: string | null
+    utm?: NullableJsonNullValueInput | InputJsonValue
+    ip?: string | null
+    userAgent?: string | null
+    createdAt?: Date | string
   }
 
   export type TagUpdateWithoutProductsInput = {
@@ -19110,6 +25670,72 @@ export namespace Prisma {
     slug?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ProductSpecUpdateWithoutProductInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    key?: StringFieldUpdateOperationsInput | string
+    value?: StringFieldUpdateOperationsInput | string
+    unit?: NullableStringFieldUpdateOperationsInput | string | null
+    order?: NullableIntFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ProductSpecUncheckedUpdateWithoutProductInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    key?: StringFieldUpdateOperationsInput | string
+    value?: StringFieldUpdateOperationsInput | string
+    unit?: NullableStringFieldUpdateOperationsInput | string | null
+    order?: NullableIntFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ProductSpecUncheckedUpdateManyWithoutProductInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    key?: StringFieldUpdateOperationsInput | string
+    value?: StringFieldUpdateOperationsInput | string
+    unit?: NullableStringFieldUpdateOperationsInput | string | null
+    order?: NullableIntFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type LeadUpdateWithoutProductInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    phone?: StringFieldUpdateOperationsInput | string
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    message?: NullableStringFieldUpdateOperationsInput | string | null
+    utm?: NullableJsonNullValueInput | InputJsonValue
+    ip?: NullableStringFieldUpdateOperationsInput | string | null
+    userAgent?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type LeadUncheckedUpdateWithoutProductInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    phone?: StringFieldUpdateOperationsInput | string
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    message?: NullableStringFieldUpdateOperationsInput | string | null
+    utm?: NullableJsonNullValueInput | InputJsonValue
+    ip?: NullableStringFieldUpdateOperationsInput | string | null
+    userAgent?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type LeadUncheckedUpdateManyWithoutProductInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    phone?: StringFieldUpdateOperationsInput | string
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    message?: NullableStringFieldUpdateOperationsInput | string | null
+    utm?: NullableJsonNullValueInput | InputJsonValue
+    ip?: NullableStringFieldUpdateOperationsInput | string | null
+    userAgent?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
 

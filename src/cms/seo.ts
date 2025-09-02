@@ -16,4 +16,24 @@ export function buildAlternateLocales(
   return [{ hrefLang: site.defaultLocale, href: canonical }];
 }
 
+export function productJsonLd(input: {
+  name: string;
+  image?: string[];
+  description?: string;
+  sku?: string;
+  brand?: string;
+  url?: string;
+}) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Product',
+    name: input.name,
+    image: input.image,
+    description: input.description,
+    sku: input.sku,
+    brand: input.brand ? { '@type': 'Brand', name: input.brand } : undefined,
+    url: input.url,
+  };
+}
+
 

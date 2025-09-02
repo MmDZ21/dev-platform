@@ -30,6 +30,15 @@ export async function generateMetadata(props: { params: Promise<{ slug?: string[
       title,
       description,
     },
+    other: {
+      // Basic Schema.org Organization; product pages handled in theme
+      'script:ld+json': JSON.stringify({
+        '@context': 'https://schema.org',
+        '@type': 'Organization',
+        'name': site?.metaTitle ?? undefined,
+        'url': site?.baseUrl ?? undefined,
+      })
+    }
   };
 }
 

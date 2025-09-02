@@ -167,6 +167,27 @@ async function main() {
     });
   }
 
+  // Product specs for sample items
+  const mcb = await prisma.product.findUnique({ where: { slug: "mcb-10a" } });
+  const contactor = await prisma.product.findUnique({ where: { slug: "contactor-18a" } });
+  if (mcb) {
+    await prisma.productSpec.createMany({
+      data: [
+        { productId: mcb.id, key: "جریان نامی", value: "10", unit: "A", order: 1 },
+        { productId: mcb.id, key: "تیپ", value: "C", order: 2 },
+      ],
+      skipDuplicates: true,
+    });
+  }
+  if (contactor) {
+    await prisma.productSpec.createMany({
+      data: [
+        { productId: contactor.id, key: "جریان نامی", value: "18", unit: "A", order: 1 },
+      ],
+      skipDuplicates: true,
+    });
+  }
+
   // اتصال تگ‌ها به یکی از محصولات
   const plc = await prisma.product.findUnique({ where: { slug: "plc-s7-1200" } });
   if (plc) {
@@ -177,6 +198,33 @@ async function main() {
       },
     });
   }
+
+  // Search synonyms
+  await prisma.searchSynonym.upsert({
+    where: { term: "mccb" },
+    update: { synonyms: ["کلید اتوماتیک", "اتوماتیک"] },
+    create: { term: "mccb", synonyms: ["کلید اتوماتیک", "اتوماتیک"] },
+  });
+  await prisma.searchSynonym.upsert({
+    where: { term: "contactor" },
+    update: { synonyms: ["کنتاکتور"] },
+    create: { term: "contactor", synonyms: ["کنتاکتور"] },
+  });
+
+  // Redirects
+  await prisma.redirect.upsert({
+    where: { source: "/old-products/plc-s7-1200" },
+    update: { destination: "/products/plc-s7-1200", permanent: true },
+    create: { source: "/old-products/plc-s7-1200", destination: "/products/plc-s7-1200", permanent: true },
+  });
+
+  // Leads
+  await prisma.lead.createMany({
+    data: [
+      { name: "کاربر نمونه", phone: "09120000001", message: "استعلام قیمت", productId: plc?.id ?? null },
+    ],
+    skipDuplicates: true,
+  });
 
   /* ───────── 4) CMS: Site and Home page ───────── */
   const siteId = "default";
@@ -204,8 +252,11 @@ async function main() {
       title: "خانه",
       layoutKey: "home",
       slots: {
+        topbar: [
+          { type: "ranin.topbar", props: {} },
+        ],
         nav: [
-          { type: "ranin.nav", props: { brand: "رانین" } },
+          { type: "ranin.nav", props: { brand: "رانین فرایند" } },
         ],
         hero: [
           {
@@ -232,9 +283,101 @@ async function main() {
             },
           },
         ],
-        sections: [],
+        parallax: [
+          {
+            type: "ranin.parallaxSection",
+            props: {
+              height: "medium",
+              overlay: true,
+              overlayOpacity: 0.7,
+              title: "نوآوری در خدمت آینده",
+              subtitle: "با فناوری‌های پیشرفته و راهکارهای هوشمند، آینده‌ای پایدار و کارآمد برای صنعت خود بسازید.",
+              ctaText: "کشف محصولات",
+              ctaHref: "/products",
+              textAlign: "center",
+              textColor: "white",
+            },
+          },
+        ],
+        stats: [
+          {
+            type: "ranin.statsSection",
+            props: {
+              title: "سازمان ما",
+              stats: [
+                { number: "۱۰+", label: "اعضای تیم" },
+                { number: "۱۰+", label: "سال تجربه" },
+                { number: "۱۵+", label: "محصولات" },
+                { number: "۱", label: "مکان" },
+              ],
+            },
+          },
+        ],
+        sections: [
+          {
+            type: "ranin.productsCarousel",
+            props: {
+              title: "محصولات ما",
+              subtitle: "انواع تجهیزات برق صنعتی و ساختمانی با کیفیت و استاندارد برتر.",
+              ctaText: "مشاهده همه محصولات",
+              ctaHref: "/products",
+              categories: [
+                {
+                  title: "کلیدهای مینیاتوری و اتوماتیک",
+                  description: "انواع کلیدهای MCB، MCCB و کلیدهای اتوماتیک برای حفاظت مدارهای برق.",
+                  icon: "plug",
+                  categoryHref: "/products?category=circuit-breakers",
+                  productCount: "۲۵+ محصول",
+                },
+                {
+                  title: "ترانسفورماتور و تجهیزات قدرت",
+                  description: "ترانسفورماتورهای توزیع، قدرت و کنترل برای صنایع مختلف.",
+                  icon: "lightning",
+                  categoryHref: "/products?category=transformers",
+                  productCount: "۱۸+ محصول",
+                },
+                {
+                  title: "تابلوهای برق و کنترل",
+                  description: "تابلوهای توزیع، کنترل و محافظت برای انواع کاربردهای صنعتی.",
+                  icon: "shield",
+                  categoryHref: "/products?category=control-panels",
+                  productCount: "۳۰+ محصول",
+                },
+              ],
+            },
+          },
+        ],
+        newsletter: [
+          {
+            type: "ranin.newsletterSection",
+            props: {
+              title: "عضویت در خبرنامه و ارتباط با همه اعضا",
+              subtitle: "با عضویت در خبرنامه ما از آخرین محصولات، تخفیف‌های ویژه و اخبار فنی دنیای برق مطلع شوید.",
+              placeholder: "ایمیل خود را وارد کنید",
+              buttonText: "عضویت",
+              backgroundColor: "teal",
+            },
+          },
+        ],
         footer: [
-          { type: "ranin.footer", props: { note: "© Ranin Theme 2025" } },
+          { 
+            type: "ranin.footer", 
+            props: { 
+              logo: "رانین فرایند",
+              quickLinks: [
+                { label: "صفحه اصلی", href: "/" },
+                { label: "درباره ما", href: "/about" },
+                { label: "تماس با ما", href: "/contact" },
+                { label: "تجهیزات برق", href: "/products" },
+              ],
+              services: [
+                { label: "فروش تجهیزات", href: "/services/equipment" },
+                { label: "مشاوره فنی", href: "/services/consulting" },
+              ],
+              contactEmail: "sales@raninfarayand.com",
+              note: "© ۲۰۲۵ رانین فرایند. تمامی حقوق محفوظ است."
+            } 
+          },
         ]
       },
       metaTitle: "صفحه اصلی",
@@ -246,6 +389,12 @@ async function main() {
       locale: "fa",
       layoutKey: "home",
       slots: {
+        topbar: [
+          { type: "ranin.topbar", props: {} },
+        ],
+        nav: [
+          { type: "ranin.nav", props: { brand: "رانین فرایند" } },
+        ],
         hero: [
           {
             type: "ranin.hero",
@@ -271,7 +420,102 @@ async function main() {
             },
           },
         ],
-        sections: [],
+        parallax: [
+          {
+            type: "ranin.parallaxSection",
+            props: {
+              height: "medium",
+              overlay: true,
+              overlayOpacity: 0.7,
+              title: "نوآوری در خدمت آینده",
+              subtitle: "با فناوری‌های پیشرفته و راهکارهای هوشمند، آینده‌ای پایدار و کارآمد برای صنعت خود بسازید.",
+              ctaText: "کشف محصولات",
+              ctaHref: "/products",
+              textAlign: "center",
+              textColor: "white",
+            },
+          },
+        ],
+        stats: [
+          {
+            type: "ranin.statsSection",
+            props: {
+              title: "سازمان ما",
+              stats: [
+                { number: "۱۰+", label: "اعضای تیم" },
+                { number: "۱۰+", label: "سال تجربه" },
+                { number: "۱۵+", label: "محصولات" },
+                { number: "۱", label: "مکان" },
+              ],
+            },
+          },
+        ],
+        sections: [
+          {
+            type: "ranin.productsCarousel",
+            props: {
+              title: "دسته‌بندی محصولات",
+              subtitle: "انواع تجهیزات برق صنعتی و ساختمانی با کیفیت و استاندارد برتر.",
+              ctaText: "مشاهده همه محصولات",
+              ctaHref: "/products",
+              categories: [
+                {
+                  title: "کلیدهای مینیاتوری و اتوماتیک",
+                  description: "انواع کلیدهای MCB، MCCB و کلیدهای اتوماتیک برای حفاظت مدارهای برق.",
+                  icon: "plug",
+                  categoryHref: "/products?category=circuit-breakers",
+                  productCount: "۲۵+ محصول",
+                },
+                {
+                  title: "ترانسفورماتور و تجهیزات قدرت",
+                  description: "ترانسفورماتورهای توزیع، قدرت و کنترل برای صنایع مختلف.",
+                  icon: "lightning",
+                  categoryHref: "/products?category=transformers",
+                  productCount: "۱۸+ محصول",
+                },
+                {
+                  title: "تابلوهای برق و کنترل",
+                  description: "تابلوهای توزیع، کنترل و محافظت برای انواع کاربردهای صنعتی.",
+                  icon: "shield",
+                  categoryHref: "/products?category=control-panels",
+                  productCount: "۳۰+ محصول",
+                },
+              ],
+            },
+          },
+        ],
+        newsletter: [
+          {
+            type: "ranin.newsletterSection",
+            props: {
+              title: "عضویت در خبرنامه و ارتباط با همه اعضا",
+              subtitle: "با عضویت در خبرنامه ما از آخرین محصولات، تخفیف‌های ویژه و اخبار فنی دنیای برق مطلع شوید.",
+              placeholder: "ایمیل خود را وارد کنید",
+              buttonText: "عضویت",
+              backgroundColor: "teal",
+            },
+          },
+        ],
+        footer: [
+          { 
+            type: "ranin.footer", 
+            props: { 
+              logo: "رانین فرایند",
+              quickLinks: [
+                { label: "صفحه اصلی", href: "/" },
+                { label: "درباره ما", href: "/about" },
+                { label: "تماس با ما", href: "/contact" },
+                { label: "تجهیزات برق", href: "/products" },
+              ],
+              services: [
+                { label: "فروش تجهیزات", href: "/services/equipment" },
+                { label: "مشاوره فنی", href: "/services/consulting" },
+              ],
+              contactEmail: "sales@raninfarayand.com",
+              note: "© ۲۰۲۵ رانین فرایند. تمامی حقوق محفوظ است."
+            } 
+          },
+        ]
       },
       metaTitle: "صفحه اصلی",
       metaDescription: "رانین — تم RTL برای صفحه اصلی",

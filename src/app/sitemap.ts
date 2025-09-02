@@ -4,10 +4,11 @@ import type { MetadataRoute } from "next";
 const SITE_URL = process.env.SITE_URL;
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const [posts, categories, tags] = await Promise.all([
+  const [posts, categories, tags, products] = await Promise.all([
     prisma.post.findMany({ where: { published: true }, select: { slug: true, updatedAt: true } }),
     prisma.category.findMany({ select: { slug: true, updatedAt: true } }),
     prisma.tag.findMany({ select: { slug: true, updatedAt: true } }),
+    prisma.product.findMany({ where: { isPublished: true }, select: { slug: true, updatedAt: true } }),
   ]);
 
   const staticPages = [
@@ -39,6 +40,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ...tags.map((tag) => ({
       url: `${SITE_URL}/tags/${tag.slug}`,
       lastModified: tag.updatedAt,
+    })),
+    // Products
+    ...products.map((p) => ({
+      url: `${SITE_URL}/products/${p.slug}`,
+      lastModified: p.updatedAt,
     })),
   ];
 }

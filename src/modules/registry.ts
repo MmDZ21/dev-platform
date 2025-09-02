@@ -1,11 +1,13 @@
 // src/modules/registry.ts
 
-import { trpc } from "@/lib/trpc/client";
 import { postMeta } from "./blog";
 import { tagMeta } from "./blog";
 import { categoryMeta } from "./blog";
-import { productCategoryMeta, productMeta } from "./products";
-import { PenIcon, StoreIcon } from "lucide-react";
+import { productCategoryMeta, productMeta, productSpecMeta } from "./products";
+import { searchSynonymMeta } from "./search/meta";
+import { leadMeta } from "./leads/meta";
+import { redirectMeta } from "./redirects";
+import { Pen as PenIcon, Store as StoreIcon, Search as SearchIcon, Inbox as InboxIcon } from "lucide-react";
 
 // مدل‌هایی که full CRUD دارن
 export const adminModelRegistry = {
@@ -13,18 +15,14 @@ export const adminModelRegistry = {
   category: categoryMeta,
   tag: tagMeta,
   product: productMeta,
-  productCategory: productCategoryMeta
+  productCategory: productCategoryMeta,
+  productSpec: productSpecMeta,
+  searchSynonym: searchSynonymMeta,
+  lead: leadMeta,
+  redirect: redirectMeta
   // هر مدل ادمینی دیگه
 } as const;
 
-export const adminModelRouterMap = {
-  post: trpc.post,
-  category: trpc.category,
-  tag: trpc.tags,
-  product: trpc.product,
-  productCategory: trpc.productCategory
-  // ...
-} as const;
 
 export const adminMenuGroups = [
     {
@@ -38,6 +36,18 @@ export const adminMenuGroups = [
     name: "محصولات",
     icon: StoreIcon,
     children: ["product", "productCategory"],
+  },
+  {
+    key: "leads",
+    name: "درخواست‌ها",
+    icon: InboxIcon,
+    children: ["lead"],
+  },
+  {
+    key: "seo",
+    name: "SEO",
+    icon: SearchIcon,
+    children: ["redirect", "searchSynonym"],
   },
 ]
 // مدل‌های option/select فقط getAll دارن (readonly)

@@ -26,6 +26,8 @@ export type FieldSchema = {
 
 export type AdminModel = {
   name: string;
+  icon?: any;
+  parent?: string;
   fields: Record<string, FieldSchema>;
 };
 

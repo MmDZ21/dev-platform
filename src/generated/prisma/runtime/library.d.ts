@@ -323,7 +323,7 @@ export declare function createParam(name: string): Param<unknown, string>;
  * Cloudflare Workers (with their extensions to `RequestInit` and `Response`).
  * `fetch` is used in both covariant and contravariant positions in
  * `CustomDataProxyFetch`, making it invariant, so we need the exact same type.
- * Even if we removed the argument and start `fetch` in covariant position only,
+ * Even if we removed the argument and left `fetch` in covariant position only,
  * then for an extension-supplied function to be assignable to `customDataProxyFetch`,
  * the platform-specific (or custom) `fetch` function needs to be assignable
  * to our `fetch` definition. This, in turn, requires the third-party `Response`

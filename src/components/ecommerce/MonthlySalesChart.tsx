@@ -36,7 +36,7 @@ export default function MonthlySalesChart() {
     dataLabels: { enabled: false },
     stroke: { show: true, width: 4, colors: ["transparent"] },
     xaxis: { categories, axisBorder: { show: false }, axisTicks: { show: false } },
-    legend: { show: true, position: "top", horizontalAlign: "start", fontFamily: "Outfit" },
+    legend: { show: true, position: "top", horizontalAlign: "left", fontFamily: "Outfit" },
     yaxis: { title: { text: undefined } },
     grid: { yaxis: { lines: { show: true } } },
     fill: { opacity: 1 },

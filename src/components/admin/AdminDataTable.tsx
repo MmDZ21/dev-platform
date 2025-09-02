@@ -147,6 +147,7 @@ export default function AdminDataTable({ modelKey, meta, data, isLoading, onDele
       }
       values.push(toDisplay(row["id"]))
       values.push(toDisplay(row["slug"]))
+      values.push(toDisplay(row["sku"]))
       return values.some((v) => v.toLowerCase().includes(q));
     });
   }, [data, meta.fields, globalFilter]);

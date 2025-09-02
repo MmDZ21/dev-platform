@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { SUPPORTED_LANGUAGES } from "@/settings";
+// Avoid importing Prisma in Edge middleware
 
 export function middleware(request: NextRequest) {
   const session = request.cookies.get("auth_session")?.value;
@@ -19,6 +20,7 @@ export function middleware(request: NextRequest) {
     }
   }
 
+  // Skip DB lookups; handle redirects at app routes instead
   return NextResponse.next();
 }
 

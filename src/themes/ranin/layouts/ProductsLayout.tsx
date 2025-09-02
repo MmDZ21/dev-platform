@@ -1,16 +1,27 @@
 import type { LayoutProps } from "@/cms/types";
+import MainLayout from "./MainLayout";
+import { Container, Section } from "../design-system";
 
 export default function ProductsLayout({ slots, page }: LayoutProps) {
   return (
-    <div className="min-h-screen bg-white text-gray-900" dir="rtl">
-      {slots.nav}
-      <div className="mx-auto w-full max-w-7xl px-4 pt-6 text-2xl font-bold">{page.title}</div>
-      <div className="mx-auto grid w-full max-w-7xl grid-cols-12 gap-8 px-4 py-10">
-        <aside className="col-span-12 md:col-span-3 space-y-6">{slots.filters}</aside>
-        <main className="col-span-12 md:col-span-9 space-y-6">{slots.content}</main>
+    <MainLayout slots={slots} page={page}>
+      {/* Products Page Content */}
+      <div className="space-y-0">
+        {/* Filters */}
+        {slots.filters && slots.filters.length > 0 && (
+          <Section>
+            <Container className="py-6">{slots.filters}</Container>
+          </Section>
+        )}
+
+        {/* Main Content (Product Grid, Product Detail, etc.) */}
+        {slots.content && slots.content.length > 0 && (
+          <Section>
+            <Container className="py-10">{slots.content}</Container>
+          </Section>
+        )}
       </div>
-      <div className="mt-16">{slots.footer}</div>
-    </div>
+    </MainLayout>
   );
 }
 

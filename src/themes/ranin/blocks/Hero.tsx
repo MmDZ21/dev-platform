@@ -1,39 +1,47 @@
 import { z } from "zod";
+import HeroClient from "./HeroClient";
+import slide1 from "../assets/images/slide-1.jpg";
+import slide2 from "../assets/images/slide-2.jpg";
+import slide3 from "../assets/images/slide-3.jpg";
 
 const relativePath = z.string().regex(/^\//, "must start with /");
+
 export const heroSchema = z.object({
-  title: z.string().min(1),
-  subtitle: z.string().optional(),
-  ctaLabel: z.string().optional(),
-  ctaHref: z.union([z.string().url(), relativePath]).optional(),
-  imageUrl: z.union([z.string().url(), relativePath]).optional(),
+  slides: z.array(
+    z.object({
+      image: z.string().min(1),
+      headline: z.string().min(1),
+      sub: z.string().optional(),
+      primaryHref: z.union([z.string().url(), relativePath]).optional(),
+      secondaryHref: z.union([z.string().url(), relativePath]).optional(),
+    }),
+  ).optional(),
 });
 
-export async function Hero(props: z.infer<typeof heroSchema> & { locale: string }) {
-  return (
-    <div className="grid grid-cols-1 items-center gap-8 md:grid-cols-12" dir="rtl">
-      <div className="md:col-span-7">
-        <h1 className="mb-4 text-3xl font-extrabold leading-tight text-gray-900">{props.title}</h1>
-        {props.subtitle ? (
-          <p className="mb-6 text-lg text-gray-700">{props.subtitle}</p>
-        ) : null}
-        {props.ctaHref && props.ctaLabel ? (
-          <a
-            href={props.ctaHref}
-            className="inline-flex items-center justify-center rounded-md bg-emerald-600 px-5 py-2 text-white hover:bg-emerald-700"
-          >
-            {props.ctaLabel}
-          </a>
-        ) : null}
-      </div>
-      <div className="md:col-span-5">
-        {props.imageUrl ? (
-          // eslint-disable-next-line @next/next/no-img-element
-          <img src={props.imageUrl} alt="" className="w-full rounded-lg border border-gray-200" />
-        ) : null}
-      </div>
-    </div>
-  );
+export function Hero(props: z.infer<typeof heroSchema>) {
+  const defaultSlides = [
+    {
+      image: slide1.src,
+      headline: "تجهیزات برق صنعتی و ساختمانی",
+      sub: "ارائه بهترین کلیدها، ترانسفورماتورها و تابلوهای برق با استانداردهای بین‌المللی و کیفیت برتر.",
+      primaryHref: "/products",
+      secondaryHref: "/contact",
+    },
+    {
+      image: slide2.src,
+      headline: "مشاوره تخصصی و خدمات فنی",
+      sub: "تیم مجرب ما آماده ارائه مشاوره رایگان و پشتیبانی کامل در انتخاب بهترین تجهیزات برای پروژه شماست.",
+      primaryHref: "/about",
+      secondaryHref: "/contact",
+    },
+    {
+      image: slide3.src,
+      headline: "سرعت در تحویل و کیفیت مطمئن",
+      sub: "با شبکه توزیع گسترده و انبارداری مدرن، محصولات با سرعت و دقت بالا به دست شما می‌رسد.",
+      primaryHref: "/services",
+      secondaryHref: "/contact",
+    },
+  ];
+  const slides = props.slides ?? defaultSlides;
+  return <HeroClient slides={slides} />;
 }
-
-

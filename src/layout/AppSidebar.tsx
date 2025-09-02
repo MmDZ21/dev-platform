@@ -22,20 +22,20 @@ import { adminMenuGroups, adminModelRegistry } from "@/modules/registry";
 
 type NavItem = {
   name: string;
-  icon: React.ReactNode;
+  icon: React.ComponentType<any>;
   path?: string;
   subItems?: { name: string; path: string; pro?: boolean; new?: boolean }[];
 };
 
 const navItems: NavItem[] = [
   {
-    icon: <GridIcon />,
+    icon: GridIcon,
     name: "داشبورد",
     subItems: [{ name: "Commerce", path: "/admin", pro: false }],
   },
   // Dynamic Admin CMS menus from registry groups
   ...adminMenuGroups.map((group) => ({
-    icon: React.createElement(group.icon),
+    icon: group.icon as unknown as React.ComponentType<any>,
     name: group.name,
     subItems: group.children.map((key) => ({
       name: adminModelRegistry[key as keyof typeof adminModelRegistry].name,
@@ -78,7 +78,7 @@ const AppSidebar: React.FC = () => {
                     : "menu-item-icon-inactive"
                 }`}
               >
-                {nav.icon}
+                {(() => { const Icon = nav.icon; return <Icon /> })()}
               </span>
               {(isExpanded || isHovered || isMobileOpen) && (
                 <span className={`menu-item-text`}>{nav.name}</span>
@@ -109,7 +109,7 @@ const AppSidebar: React.FC = () => {
                       : "menu-item-icon-inactive"
                   }`}
                 >
-                  {nav.icon}
+                  {(() => { const Icon = nav.icon; return <Icon /> })()}
                 </span>
                 {(isExpanded || isHovered || isMobileOpen) && (
                   <span className={`menu-item-text`}>{nav.name}</span>
