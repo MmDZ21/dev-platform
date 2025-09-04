@@ -17,7 +17,6 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import { motion } from "motion/react";
 import { Button, Heading, Text, Container, useEnterAnimation } from "../design-system";
-import seLogo from "../assets/images/se-logo.svg"
 
 type Slide = {
   image: string;
@@ -179,7 +178,7 @@ export default function HeroClient({ slides }: { slides: Slide[] }) {
           <Container>
             <div className="mx-auto flex h-16 w-full max-w-7xl xl:max-w-[1400px] 2xl:max-w-[1600px] items-center justify-center gap-6 md:gap-10">
                 <Image
-                  src={seLogo}
+                  src="/images/se-logo.svg"
                   alt="schneider electric"
                   width={300}
                   height={84}
