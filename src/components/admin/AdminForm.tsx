@@ -4,10 +4,11 @@ import React, { useEffect, useMemo, useState } from "react";
 import { AdminModel, FieldSchema } from "@/lib/admin/meta";
 import { trpc } from "@/lib/trpc/client";
 import { useUploader } from "@/lib/hooks/useUploader";
+import { adminModelRouterMap } from "@/modules/adminRouterMap.client";
 
 type AdminFormProps = {
   meta: AdminModel;
-  modelKey: keyof typeof import("@/modules/adminRouterMap.client").adminModelRouterMap;
+  modelKey: keyof typeof adminModelRouterMap;
   initial?: Record<string, any> | null;
   onSubmit: (values: Record<string, any>) => Promise<void> | void;
   saving?: boolean;
