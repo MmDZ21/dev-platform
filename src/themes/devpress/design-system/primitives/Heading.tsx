@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import React, { ReactNode } from "react";
 import clsx from "clsx";
 
 export interface HeadingProps {
@@ -17,7 +17,7 @@ const levelToClass: Record<number, string> = {
 };
 
 export function Heading({ level = 2, className, children }: HeadingProps) {
-  const Tag = ("h" + level) as keyof JSX.IntrinsicElements;
+  const Tag = ("h" + level) as keyof React.JSX.IntrinsicElements;
   return <Tag className={clsx(levelToClass[level], className)}>{children}</Tag>;
 }
 

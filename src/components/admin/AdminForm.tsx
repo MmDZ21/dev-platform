@@ -7,7 +7,7 @@ import { useUploader } from "@/lib/hooks/useUploader";
 
 type AdminFormProps = {
   meta: AdminModel;
-  modelKey: keyof typeof import("@/modules/registry").adminModelRouterMap;
+  modelKey: keyof typeof import("@/modules/adminRouterMap.client").adminModelRouterMap;
   initial?: Record<string, any> | null;
   onSubmit: (values: Record<string, any>) => Promise<void> | void;
   saving?: boolean;

@@ -41,7 +41,7 @@ export async function renderPageWithTheme(pageData: PageData): Promise<React.Rea
 
         return React.createElement(blockDef.Component, {
           key: `${slotName}-${index}`,
-          ...block.props
+          ...(typeof block.props === 'object' && block.props !== null ? block.props : {})
         });
       })
     );

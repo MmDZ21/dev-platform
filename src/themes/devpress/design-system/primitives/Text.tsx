@@ -1,8 +1,8 @@
-import { ReactNode } from "react";
+import React, { ReactNode } from "react";
 import clsx from "clsx";
 
 export interface TextProps {
-  as?: keyof JSX.IntrinsicElements;
+  as?: keyof React.JSX.IntrinsicElements;
   className?: string;
   children: ReactNode;
 }
