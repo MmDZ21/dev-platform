@@ -1,15 +1,22 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/db";
 
-const SITE_URL = process.env.SITE_URL
+const SITE_URL = process.env.SITE_URL || "https://localhost:3000";
 
 export async function GET() {
-  const posts = await prisma.post.findMany({
-    where: { published: true },
-    orderBy: { createdAt: "desc" },
-    take: 50, // Limit for performance, increase if you want
-    select: { title: true, slug: true, metaDescription: true, content: true, createdAt: true, updatedAt: true },
-  });
+  let posts: any[] = [];
+  
+  try {
+    posts = await prisma.post.findMany({
+      where: { published: true },
+      orderBy: { createdAt: "desc" },
+      take: 50, // Limit for performance, increase if you want
+      select: { title: true, slug: true, metaDescription: true, content: true, createdAt: true, updatedAt: true },
+    });
+  } catch (error) {
+    console.warn("Database not available during RSS generation:", error);
+    // Continue with empty array
+  }
 
   const items = posts.map((post) => `
     <item>

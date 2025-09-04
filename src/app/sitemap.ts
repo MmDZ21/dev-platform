@@ -1,15 +1,26 @@
 import { prisma } from "@/lib/db";
 import type { MetadataRoute } from "next";
 
-const SITE_URL = process.env.SITE_URL;
+const SITE_URL = process.env.SITE_URL || "https://localhost:3000";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const [posts, categories, tags, products] = await Promise.all([
-    prisma.post.findMany({ where: { published: true }, select: { slug: true, updatedAt: true } }),
-    prisma.category.findMany({ select: { slug: true, updatedAt: true } }),
-    prisma.tag.findMany({ select: { slug: true, updatedAt: true } }),
-    prisma.product.findMany({ where: { isPublished: true }, select: { slug: true, updatedAt: true } }),
-  ]);
+  // Handle database connection gracefully during build
+  let posts: any[] = [];
+  let categories: any[] = [];
+  let tags: any[] = [];
+  let products: any[] = [];
+
+  try {
+    [posts, categories, tags, products] = await Promise.all([
+      prisma.post.findMany({ where: { published: true }, select: { slug: true, updatedAt: true } }),
+      prisma.category.findMany({ select: { slug: true, updatedAt: true } }),
+      prisma.tag.findMany({ select: { slug: true, updatedAt: true } }),
+      prisma.product.findMany({ where: { isPublished: true }, select: { slug: true, updatedAt: true } }),
+    ]);
+  } catch (error) {
+    console.warn("Database not available during sitemap generation:", error);
+    // Continue with empty arrays for build-time generation
+  }
 
   const staticPages = [
     "",
