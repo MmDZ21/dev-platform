@@ -6,16 +6,16 @@ export default function DarkToggle() {
   const [isDark, setIsDark] = useState(false);
 
   useEffect(() => {
+    // Force light mode - dark mode temporarily disabled
     if (typeof document === "undefined") return;
     const html = document.documentElement;
-    setIsDark(html.classList.contains("dark"));
+    html.classList.remove("dark");
+    setIsDark(false);
   }, []);
 
   const toggle = () => {
-    const html = document.documentElement;
-    const next = !isDark;
-    setIsDark(next);
-    html.classList.toggle("dark", next);
+    // Dark mode is temporarily disabled
+    console.log("Dark mode is temporarily disabled");
   };
 
   return (

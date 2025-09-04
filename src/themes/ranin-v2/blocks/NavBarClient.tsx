@@ -26,32 +26,17 @@ export default function NavBarClient(props: z.infer<typeof navBarSchema> & { loc
   const [expandedGroups, setExpandedGroups] = useState<Set<string>>(new Set());
   const [isDark, setIsDark] = useState(false);
 
-  // Theme toggle functionality
+  // Theme toggle functionality - DISABLED
   useEffect(() => {
-    // Check for existing theme preference
-    const stored = localStorage.getItem('theme');
-    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    const initialDark = stored === 'dark' || (!stored && prefersDark);
-    
-    setIsDark(initialDark);
-    if (initialDark) {
-      document.documentElement.classList.add('dark');
-    } else {
-      document.documentElement.classList.remove('dark');
-    }
+    // Force light mode - dark mode temporarily disabled
+    setIsDark(false);
+    document.documentElement.classList.remove('dark');
+    localStorage.setItem('theme', 'light');
   }, []);
 
   const toggleTheme = () => {
-    const newDark = !isDark;
-    setIsDark(newDark);
-    
-    if (newDark) {
-      document.documentElement.classList.add('dark');
-      localStorage.setItem('theme', 'dark');
-    } else {
-      document.documentElement.classList.remove('dark');
-      localStorage.setItem('theme', 'light');
-    }
+    // Dark mode is temporarily disabled
+    console.log("Dark mode is temporarily disabled");
   };
 
   const toggleMobileMenu = () => setIsMobileMenuOpen((v) => !v);
