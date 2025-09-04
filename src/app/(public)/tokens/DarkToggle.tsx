@@ -25,7 +25,14 @@ export default function DarkToggle() {
       aria-pressed={isDark}
       title="Toggle dark mode"
     >
-      <span className="inline-block h-2 w-2 rounded-full" style={{ background: isDark ? "#0EA5E9" : "#111827" }} />
+      <span 
+        className="inline-block h-2 w-2 rounded-full" 
+        style={{ 
+          background: isDark 
+            ? `hsl(var(--theme-toggle-dark))` 
+            : `hsl(var(--theme-toggle-light))` 
+        }} 
+      />
       {isDark ? "Dark" : "Light"}
     </button>
   );

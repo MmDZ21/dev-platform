@@ -38,6 +38,8 @@
   --secondary-foreground: 224 71% 4%;
   --accent: 84 81% 59%;
   --accent-foreground: 86 80% 14%;
+  --brand: 139 100% 25%;
+  --brand-foreground: 0 0% 100%;
   --ring: 219 50% 11%;
   --border: 220 13% 91%;
 
@@ -254,6 +256,27 @@
   }
   body {
     @apply relative font-normal font-outfit z-1 bg-background text-foreground;
+  }
+}
+
+/* Dark mode border fixes */
+@layer utilities {
+  .dark .border-gray-200 {
+    border-color: hsl(var(--border));
+  }
+  .dark .border-gray-300 {
+    border-color: hsl(var(--border-strong));
+  }
+  .dark .border-white {
+    border-color: hsl(var(--border));
+  }
+  .dark .bg-white {
+    background-color: hsl(var(--card));
+  }
+  /* Fix specific problematic combinations */
+  .dark .border-gray-200.bg-white {
+    border-color: hsl(var(--border));
+    background-color: hsl(var(--card));
   }
 }
 

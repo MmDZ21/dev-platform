@@ -231,11 +231,11 @@ async function main() {
   await prisma.siteSetting.upsert({
     where: { id: siteId },
     update: {
-      activeTheme: "ranin",
+      activeTheme: "ranin-v2",
     },
     create: {
       id: siteId,
-      activeTheme: "ranin",
+      activeTheme: "ranin-v2",
       defaultLocale: "fa",
       supportedLocales: ["fa", "en"],
       directionByLocale: { fa: "rtl", en: "ltr" },

@@ -1,8 +1,9 @@
 import { ReactNode } from "react";
 import { getSiteSettings } from "@/cms/runtime";
 import { ThemeProvider } from "@/app/theme-provider";
-import "@/themes/ranin/tokens.css";
+// import "@/themes/ranin/tokens.css";
 import "@/themes/devpress/tokens.css";
+import "@/themes/ranin-v2/tokens.css";
 
 export default async function PublicLayout({ children }: { children: ReactNode }) {
   const s = await getSiteSettings();
